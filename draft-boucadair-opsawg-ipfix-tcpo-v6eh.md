@@ -27,30 +27,53 @@ author:
 normative:
      IANA-IPFIX:
         title: IP Flow Information Export (IPFIX) Entities
+        author:
+        -
+          organization: "IANA"
         target: https://www.iana.org/assignments/ipfix/ipfix.xhtml
-        date: 2022-11
+        date: false
      IPv6-EH:
         title: Internet Protocol Version 6 (IPv6) Parameters, IPv6 Extension Header Types
+        author:
+        -
+          organization: "IANA"
         target: https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml#ipv6-parameters-1
-        date: 2022-11
+        date: false
      IANA-TCP:
         title: Transmission Control Protocol (TCP) Parameters, TCP Option Kind Numbers
+        author:
+        -
+          organization: "IANA"
         target: https://www.iana.org/assignments/tcp-parameters/tcp-parameters.xhtml#tcp-parameters-1
-        date: 2022-11
+        date: false
+
+     IANA-TCP-EXIDs:
+        title: Transmission Control Protocol (TCP) Parameters, TCP Experimental Option Experiment Identifiers (TCP ExIDs)
+        author:
+        -
+          organization: "IANA"
+        target: https://www.iana.org/assignments/tcp-parameters/tcp-parameters.xhtml#tcp-exids
+        date: false
 informative:
 
 
 --- abstract
 
-This document sepcifies new IPFIX Information Elements (IEs) to fix solve many issues with existing ipv6ExtensionHeaders and tcpOptions IEs, especially the ability to export any observer TCP option or IPv6 Extension Headers in packets.
+This document sepcifies new IPFIX Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IEs, especially the ability to export any observed TCP option or IPv6 Extension Headers.
 
 --- middle
 
 # Introduction
 
-This document sepcifies new IPFIX Information Elements (IEs) to fix solve many issues with existing ipv6ExtensionHeaders and tcpOptipn IEs, especially the ability to export any observer TCP option or IPv6 Extension Headers in packets.
+The current specification of ipv6ExtensionHeaders Information Element (IE) does not:
 
-Issues with current ipv6ExtensionHeaders IE are listed in {{sec-eh-issues}}. Likewise, issues with current tcpOptions IE are listed in {{sec-to-issues}}.
+- Cover the full EHs range.
+- Specify how to automatically update the registry when a new value is assigned in {{IPv6-EH}}.
+- Specify the procedure to follow when all bits are exhausted.
+
+Alos, only TCP options having a kind =< 63 can be included in a tcpOptions IE. The specification of the tcpOptions IE does not describe how any observed TCP option in a packet can be exported using IPFIX. Also, there is no way to report the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (kind=253 or 254) {{!RFC6994}}.
+
+This document specifies new IPFIX Information Elements to solve the abovementioned issues.
 
 # Conventions and Definitions
 
@@ -62,18 +85,7 @@ This document uses the IPFIX-specific terminology (Information Element, Template
    Section 2 of {{!RFC7011}}. As in {{!RFC7011}}, these IPFIX-specific terms
    have the first letter of a word capitalized.
 
-
-# IPv6 Extension Headers
-
-## Issues with The ipv6ExtensionHeaders Information Element {#sec-eh-issues}
-
-The current specification of ipv6ExtensionHeaders Information Element does not:
-
-- Cover the full EHs range.
-- Specify how to automatically update the registry when a new value is assigned in {{IPv6-EH}}.
-- Specify the procedure to follow when all bits are exhausted.
-
-## New IPv6 EH IE: ipv6ExtensionHeadersFull
+## ipv6ExtensionHeadersFull Information Element
 
 This document requests IANA to add this new IE to the IPFIX regisry:
 
@@ -97,10 +109,6 @@ This document requests IANA to add this new IE to the IPFIX regisry:
    * Additional Information: See the assigned bits to each IPv6 extension header in [NEW_IPFIX_IPv6EH_SUBREGISTRY]. See [RFC8200] for the general definition of IPv6 extension headers and [IPv6-EH] for assigned extension headers.
 
 ## TCP Options
-
-## Issues with The tcpOptions Information Elements {#sec-to-issues}
-
-Only TCP options having a kind =< 63 can be included in a tcpOptions IE. It is thus required to specify how any observed TCP option in a packet can be exported using IPFIX. Also, there is no way to report the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (kind=253 or 254) {{!RFC6994}}.
 
 ### New Information Elements for the Full TCP Options Range: tcpOptionsFull
 
@@ -148,7 +156,7 @@ This document requests IANA to add the following new IEs to the IANA IPFIX regis
 
    *  Data Type Semantics: identifier
 
-   *  Additional Information: See assigned 16-bit ExIDs at [https://www.iana.org/assignments/tcp-parameters/tcp-parameters.xhtml#tcp-exids].
+   *  Additional Information: See assigned 16-bit ExIDs at {{IANA-TCP-EXIDs}}.
 
    *  Reference: [This-Document]
 
@@ -167,7 +175,7 @@ This document requests IANA to add the following new IEs to the IANA IPFIX regis
 
    *  Data Type Semantics: identifier
 
-   *  Additional Information: See assigned 32-bit ExIDs at [https://www.iana.org/assignments/tcp-parameters/tcp-parameters.xhtml#tcp-exids].
+   *  Additional Information: See assigned 32-bit ExIDs at {{IANA-TCP-EXIDs}}.
 
    *  Reference: [This-Document]
 
