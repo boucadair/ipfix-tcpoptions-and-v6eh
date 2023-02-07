@@ -85,7 +85,7 @@ This document uses the IPFIX-specific terminology (Information Element, Template
    Section 2 of {{!RFC7011}}. As in {{!RFC7011}}, these IPFIX-specific terms
    have the first letter of a word capitalized.
 
-## ipv6ExtensionHeadersFull Information Element
+# ipv6ExtensionHeadersFull Information Element
 
 This document requests IANA to add this new IE to the IPFIX regisry:
 
@@ -108,9 +108,9 @@ This document requests IANA to add this new IE to the IPFIX regisry:
    * Reference: [This-Document]
    * Additional Information: See the assigned bits to each IPv6 extension header in [NEW_IPFIX_IPv6EH_SUBREGISTRY]. See [RFC8200] for the general definition of IPv6 extension headers and [IPv6-EH] for assigned extension headers.
 
-## TCP Options
+# TCP Options
 
-### New Information Elements for the Full TCP Options Range: tcpOptionsFull
+## New Information Elements for the Full TCP Options Range: tcpOptionsFull
 
 This document requests IANA to add this new IE to the IPFIX regisry:
 
@@ -135,13 +135,13 @@ This document requests IANA to add this new IE to the IPFIX regisry:
    * Reference: [This-Document]
    * Additional Information: See the assigned TCP option kinds at {{IANA-TCP}}. See {{!RFC9293}} for the general definition of TCP options.
 
-### New Information Elements for Shared TCP Options
+## New Information Elements for Shared TCP Options
 
 ExIDs can be either 2 or 4 bytes in length {{!RFC6994}}. Two new IEs are defined to accomodate these two lengths without introducing extra complexity in mixing both types in the same IE.
 
 This document requests IANA to add the following new IEs to the IANA IPFIX registry {{IANA-IPFIX}}.
 
-#### tcpExID16 Information Element
+### tcpExID16 Information Element
 
    *  Name: tcpExID16
 
@@ -160,7 +160,7 @@ This document requests IANA to add the following new IEs to the IANA IPFIX regis
 
    *  Reference: [This-Document]
 
-#### New IE: tcpExID32
+### New IE: tcpExID32
 
    *  Name: tcpExID32
 
