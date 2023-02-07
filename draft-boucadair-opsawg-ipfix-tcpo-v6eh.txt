@@ -177,10 +177,9 @@ Table of Contents
 
    *  Reference: [This-Document]
 
-   *  Additional Information: See the assigned bits to each IPv6
-      extension header in [NEW_IPFIX_IPv6EH_SUBREGISTRY].  See [RFC8200]
-      for the general definition of IPv6 extension headers and [IPv6-EH]
-      for assigned extension headers.
+   *  Additional Information: See the assigned TCP option kinds at
+      [IANA-TCP].  See [RFC9293] for the general definition of TCP
+      options.
 
 2.2.2.  New Information Elements for Shared TCP Options
 
@@ -285,6 +284,10 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC9293]  Eddy, W., Ed., "Transmission Control Protocol (TCP)",
+              STD 7, RFC 9293, DOI 10.17487/RFC9293, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9293>.
 
 Acknowledgments
 
