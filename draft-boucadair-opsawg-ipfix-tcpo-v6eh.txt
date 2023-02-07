@@ -2,7 +2,7 @@
 
 
 
-Operations and Management Area Working Group                M. Boucadair
+OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
 Expires: 11 August 2023                                           Huawei
