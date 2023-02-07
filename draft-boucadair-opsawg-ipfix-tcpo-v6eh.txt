@@ -67,14 +67,16 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-     2.1.  ipv6ExtensionHeadersFull Information Element
-     2.2.  TCP Options
-       2.2.1.  New Information Elements for the Full TCP Options
-               Range: tcpOptionsFull
-       2.2.2.  New Information Elements for Shared TCP Options
-   3.  Security Considerations
-   4.  IANA Considerations
-   5.  Normative References
+   3.  ipv6ExtensionHeadersFull Information Element
+   4.  TCP Options
+     4.1.  New Information Elements for the Full TCP Options Range:
+           tcpOptionsFull
+     4.2.  New Information Elements for Shared TCP Options
+       4.2.1.  tcpExID16 Information Element
+       4.2.2.  New IE: tcpExID32
+   5.  Security Considerations
+   6.  IANA Considerations
+   7.  Normative References
    Acknowledgments
    Authors' Addresses
 
@@ -114,7 +116,7 @@ Table of Contents
    As in [RFC7011], these IPFIX-specific terms have the first letter of
    a word capitalized.
 
-2.1.  ipv6ExtensionHeadersFull Information Element
+3.  ipv6ExtensionHeadersFull Information Element
 
    This document requests IANA to add this new IE to the IPFIX regisry:
 
@@ -146,10 +148,10 @@ Table of Contents
       for the general definition of IPv6 extension headers and [IPv6-EH]
       for assigned extension headers.
 
-2.2.  TCP Options
+4.  TCP Options
 
-2.2.1.  New Information Elements for the Full TCP Options Range:
-        tcpOptionsFull
+4.1.  New Information Elements for the Full TCP Options Range:
+      tcpOptionsFull
 
    This document requests IANA to add this new IE to the IPFIX regisry:
 
@@ -181,7 +183,7 @@ Table of Contents
       [IANA-TCP].  See [RFC9293] for the general definition of TCP
       options.
 
-2.2.2.  New Information Elements for Shared TCP Options
+4.2.  New Information Elements for Shared TCP Options
 
    ExIDs can be either 2 or 4 bytes in length [RFC6994].  Two new IEs
    are defined to accomodate these two lengths without introducing extra
@@ -190,7 +192,7 @@ Table of Contents
    This document requests IANA to add the following new IEs to the IANA
    IPFIX registry [IANA-IPFIX].
 
-2.2.2.1.  tcpExID16 Information Element
+4.2.1.  tcpExID16 Information Element
 
    *  Name: tcpExID16
 
@@ -210,7 +212,7 @@ Table of Contents
 
    *  Reference: [This-Document]
 
-2.2.2.2.  New IE: tcpExID32
+4.2.2.  New IE: tcpExID32
 
    *  Name: tcpExID32
 
@@ -230,17 +232,17 @@ Table of Contents
 
    *  Reference: [This-Document]
 
-3.  Security Considerations
+5.  Security Considerations
 
    IPFIX security considerations are discussed in Section 8 of
    [RFC7012].
 
-4.  IANA Considerations
+6.  IANA Considerations
 
    A set of requested IANA actions are described in the main document.
    These actions are not repeated here.
 
-5.  Normative References
+7.  Normative References
 
    [IANA-IPFIX]
               IANA, "IP Flow Information Export (IPFIX) Entities",
