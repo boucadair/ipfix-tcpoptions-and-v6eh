@@ -133,7 +133,7 @@ This document requests IANA to add this new IE to the IPFIX regisry:
    * Abstract Data Type: unsigned
    * Data Type Semantics: flags
    * Reference: [This-Document]
-   * Additional Information: See the assigned bits to each IPv6 extension header in [NEW_IPFIX_IPv6EH_SUBREGISTRY]. See [RFC8200] for the general definition of IPv6 extension headers and [IPv6-EH] for assigned extension headers.
+   * Additional Information: See the assigned TCP option kinds at {{IANA-TCP}}. See {{!RFC9293}} for the general definition of TCP options.
 
 ### New Information Elements for Shared TCP Options
 
