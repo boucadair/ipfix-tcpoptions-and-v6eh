@@ -59,7 +59,7 @@ informative:
 
 --- abstract
 
-This document specifies new IPFIX Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IEs, especially the ability to export any observed TCP option or IPv6 Extension Headers.
+This document specifies new IPFIX Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IPFIX IEs, especially the ability to export any observed IPv6 Extension Headers or TCP options.
 
 --- middle
 
@@ -91,7 +91,7 @@ This document uses the IPFIX-specific terminology (Information Element, Template
 
 # ipv6ExtensionHeadersFull Information Element
 
-This document requests IANA to add this new IPFIX IE to the IPFIX regisry:
+This document requests IANA to add this new IPFIX IE to the IPFIX registry:
 
    *  Name: ipv6ExtensionHeadersFull
    *  ElementID: TBD1
@@ -103,10 +103,10 @@ This document requests IANA to add this new IPFIX IE to the IPFIX regisry:
       extension header.  Otherwise, if no observed packet of this Flow
       contained the respective IPv6 extension header, the value of the
       corresponding bit is 0. The IPv6 EH associated with each bit
-      is provided in  [NEW_IPFIX_IPv6EH_SUBREGISTRY].
+      is provided in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
 
       The value can be encoded in fewer octets as per the guidelines in
-      Section 6.2 of [RFC7011].
+      Section 6.2 of {{!RFC7011}}.
    * Abstract Data Type: unsigned
    * Data Type Semantics: flags
    * Reference: [This-Document]
@@ -116,7 +116,7 @@ This document requests IANA to add this new IPFIX IE to the IPFIX regisry:
 
 ## New Information Elements for the Full TCP Options Range: tcpOptionsFull
 
-This document requests IANA to add this new IPFIX IE to the IPFIX regisry:
+This document requests IANA to add this new IPFIX IE to the IPFIX registry:
 
    *  Name: tcpOptionsFull
    *  ElementID: TBD2
@@ -133,7 +133,7 @@ This document requests IANA to add this new IPFIX IE to the IPFIX regisry:
       maintained by IANA.
 
       The value can be encoded in fewer octets as per the guidelines in
-      Section 6.2 of [RFC7011].
+      Section 6.2 of {{!RFC7011}}.
    * Abstract Data Type: unsigned
    * Data Type Semantics: flags
    * Reference: [This-Document]
