@@ -8,7 +8,7 @@
 <meta content="Mohamed Boucadair" name="author">
 <meta content="Benoit Claise" name="author">
 <meta content="
-       This document specifies new IPFIX Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IEs, especially the ability to export any observed TCP option or IPv6 Extension Headers. 
+       This document specifies new IPFIX Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IPFIX IEs, especially the ability to export any observed IPv6 Extension Headers or TCP options. 
     " name="description">
 <meta content="xml2rfc 3.16.0" name="generator">
 <meta content="IPFIX" name="keyword">
@@ -1077,7 +1077,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Extended TCP Options and IPv6 Extension Headers IPFIX Information Elements</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document specifies new IPFIX Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IEs, especially the ability to export any observed TCP option or IPv6 Extension Headers.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document specifies new IPFIX Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IPFIX IEs, especially the ability to export any observed IPv6 Extension Headers or TCP options.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1246,7 +1246,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-ipv6extensionheadersfull-in">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-ipv6extensionheadersfull-in" class="section-name selfRef">ipv6ExtensionHeadersFull Information Element</a>
       </h2>
-<p id="section-3-1">This document requests IANA to add this new IPFIX IE to the IPFIX regisry:<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">This document requests IANA to add this new IPFIX IE to the IPFIX registry:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-2.1">Name: ipv6ExtensionHeadersFull<a href="#section-3-2.1" class="pilcrow">¶</a>
 </li>
@@ -1261,7 +1261,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
  extension header.  Otherwise, if no observed packet of this Flow
  contained the respective IPv6 extension header, the value of the
  corresponding bit is 0. The IPv6 EH associated with each bit
- is provided in  [NEW_IPFIX_IPv6EH_SUBREGISTRY].<a href="#section-3-2.3.1" class="pilcrow">¶</a></p>
+ is provided in [NEW_IPFIX_IPv6EH_SUBREGISTRY].<a href="#section-3-2.3.1" class="pilcrow">¶</a></p>
 <p id="section-3-2.3.2">
 The value can be encoded in fewer octets as per the guidelines in
  Section 6.2 of <span>[<a href="#RFC7011" class="cite xref">RFC7011</a>]</span>.<a href="#section-3-2.3.2" class="pilcrow">¶</a></p>
@@ -1287,7 +1287,7 @@ The value can be encoded in fewer octets as per the guidelines in
         <h3 id="name-new-information-elements-fo">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-new-information-elements-fo" class="section-name selfRef">New Information Elements for the Full TCP Options Range: tcpOptionsFull</a>
         </h3>
-<p id="section-4.1-1">This document requests IANA to add this new IPFIX IE to the IPFIX regisry:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">This document requests IANA to add this new IPFIX IE to the IPFIX registry:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1-2.1">Name: tcpOptionsFull<a href="#section-4.1-2.1" class="pilcrow">¶</a>
 </li>
