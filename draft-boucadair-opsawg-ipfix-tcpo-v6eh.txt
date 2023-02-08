@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 11 August 2023                                           Huawei
-                                                         7 February 2023
+Expires: 12 August 2023                                           Huawei
+                                                         8 February 2023
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -15,7 +15,7 @@ Expires: 11 August 2023                                           Huawei
 
 Abstract
 
-   This document sepcifies new IPFIX Information Elements (IEs) to solve
+   This document specifies new IPFIX Information Elements (IEs) to solve
    some issues with existing ipv6ExtensionHeaders and tcpOptions IEs,
    especially the ability to export any observed TCP option or IPv6
    Extension Headers.
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 August 2023.
+   This Internet-Draft will expire on 12 August 2023.
 
 Copyright Notice
 
@@ -66,6 +66,8 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
+     1.1.  ipv6ExtensionHeaders Issues
+     1.2.  tcpOptions Issues
    2.  Conventions and Definitions
    3.  ipv6ExtensionHeadersFull Information Element
    4.  TCP Options
@@ -73,7 +75,7 @@ Table of Contents
            tcpOptionsFull
      4.2.  New Information Elements for Shared TCP Options
        4.2.1.  tcpExID16 Information Element
-       4.2.2.  New IE: tcpExID32
+       4.2.2.  tcpExID32 Information Element
    5.  Security Considerations
    6.  IANA Considerations
    7.  Normative References
@@ -82,25 +84,31 @@ Table of Contents
 
 1.  Introduction
 
-   The current specification of ipv6ExtensionHeaders Information Element
-   (IE) does not:
+   This document specifies new IPFIX Information Elements (IEs) to solve
+   a set of issues encountered with the current specifications of
+   ipv6ExtensionHeaders (for IPv6 Extension Headers (EHs)) and
+   tcpOptions (to export TCP options).  More details about these issues
+   are provided in the following sub-sections.
 
-   *  Cover the full EHs range.
+1.1.  ipv6ExtensionHeaders Issues
 
-   *  Specify how to automatically update the registry when a new value
-      is assigned in [IPv6-EH].
+   The current specification of ipv6ExtensionHeaders IPFIX IE does not:
+
+   *  Cover the full EHs range (Section 4 of [RFC8200]).
+
+   *  Specify how to automatically update the IANA IPFIX registry
+      ([IANA-IPFIX]) when a new value is assigned in [IPv6-EH].
 
    *  Specify the procedure to follow when all bits are exhausted.
 
-   Alos, only TCP options having a kind =< 63 can be included in a
-   tcpOptions IE.  The specification of the tcpOptions IE does not
+1.2.  tcpOptions Issues
+
+   Only TCP options having a kind =< 63 can be included in a tcpOptions
+   IPFIX IE.  The specification of the tcpOptions IPFIX IE does not
    describe how any observed TCP option in a packet can be exported
    using IPFIX.  Also, there is no way to report the observed
    Experimental Identifiers (ExIDs) that are carried in shared TCP
    options (kind=253 or 254) [RFC6994].
-
-   This document specifies new IPFIX Information Elements to solve the
-   abovementioned issues.
 
 2.  Conventions and Definitions
 
@@ -118,7 +126,8 @@ Table of Contents
 
 3.  ipv6ExtensionHeadersFull Information Element
 
-   This document requests IANA to add this new IE to the IPFIX regisry:
+   This document requests IANA to add this new IPFIX IE to the IPFIX
+   regisry:
 
    *  Name: ipv6ExtensionHeadersFull
 
@@ -153,7 +162,8 @@ Table of Contents
 4.1.  New Information Elements for the Full TCP Options Range:
       tcpOptionsFull
 
-   This document requests IANA to add this new IE to the IPFIX regisry:
+   This document requests IANA to add this new IPFIX IE to the IPFIX
+   regisry:
 
    *  Name: tcpOptionsFull
 
@@ -185,12 +195,12 @@ Table of Contents
 
 4.2.  New Information Elements for Shared TCP Options
 
-   ExIDs can be either 2 or 4 bytes in length [RFC6994].  Two new IEs
-   are defined to accomodate these two lengths without introducing extra
-   complexity in mixing both types in the same IE.
+   ExIDs can be either 2 or 4 bytes in length [RFC6994].  Two new IPFIX
+   IEs are defined to accomodate these two lengths without introducing
+   extra complexity in mixing both types in the same IPFIX IE.
 
-   This document requests IANA to add the following new IEs to the IANA
-   IPFIX registry [IANA-IPFIX].
+   This document requests IANA to add the following new IPFIX IEs to the
+   IANA IPFIX registry [IANA-IPFIX].
 
 4.2.1.  tcpExID16 Information Element
 
@@ -212,7 +222,7 @@ Table of Contents
 
    *  Reference: [This-Document]
 
-4.2.2.  New IE: tcpExID32
+4.2.2.  tcpExID32 Information Element
 
    *  Name: tcpExID32
 
@@ -286,6 +296,11 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8200]  Deering, S. and R. Hinden, "Internet Protocol, Version 6
+              (IPv6) Specification", STD 86, RFC 8200,
+              DOI 10.17487/RFC8200, July 2017,
+              <https://www.rfc-editor.org/rfc/rfc8200>.
 
    [RFC9293]  Eddy, W., Ed., "Transmission Control Protocol (TCP)",
               STD 7, RFC 9293, DOI 10.17487/RFC9293, August 2022,

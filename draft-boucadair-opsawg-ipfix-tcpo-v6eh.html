@@ -8,7 +8,7 @@
 <meta content="Mohamed Boucadair" name="author">
 <meta content="Benoit Claise" name="author">
 <meta content="
-       This document sepcifies new IPFIX Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IEs, especially the ability to export any observed TCP option or IPv6 Extension Headers. 
+       This document specifies new IPFIX Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IEs, especially the ability to export any observed TCP option or IPv6 Extension Headers. 
     " name="description">
 <meta content="xml2rfc 3.16.0" name="generator">
 <meta content="IPFIX" name="keyword">
@@ -1042,7 +1042,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Boucadair &amp; Claise</td>
-<td class="center">Expires 11 August 2023</td>
+<td class="center">Expires 12 August 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1055,12 +1055,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-boucadair-opsawg-ipfix-tcpo-v6eh-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-02-07" class="published">7 February 2023</time>
+<time datetime="2023-02-08" class="published">8 February 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-08-11">11 August 2023</time></dd>
+<dd class="expires"><time datetime="2023-08-12">12 August 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1077,7 +1077,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Extended TCP Options and IPv6 Extension Headers IPFIX Information Elements</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document sepcifies new IPFIX Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IEs, especially the ability to export any observed TCP option or IPv6 Extension Headers.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document specifies new IPFIX Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IEs, especially the ability to export any observed TCP option or IPv6 Extension Headers.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1109,7 +1109,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 11 August 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 August 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1140,12 +1140,20 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <nav class="toc"><ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-ipv6extensionheaders-issues" class="internal xref">ipv6ExtensionHeaders Issues</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-tcpoptions-issues" class="internal xref">tcpOptions Issues</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-ipv6extensionheadersfull-in" class="internal xref">ipv6ExtensionHeadersFull Information Element</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-ipv6extensionheadersfull-in" class="internal xref">ipv6ExtensionHeadersFull Information Element</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-tcp-options" class="internal xref">TCP Options</a></p>
@@ -1160,7 +1168,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                     <p id="section-toc.1-1.4.2.2.2.1.1"><a href="#section-4.2.1" class="auto internal xref">4.2.1</a>.  <a href="#name-tcpexid16-information-eleme" class="internal xref">tcpExID16 Information Element</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.2">
-                    <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="auto internal xref">4.2.2</a>.  <a href="#name-new-ie-tcpexid32" class="internal xref">New IE: tcpExID32</a></p>
+                    <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="auto internal xref">4.2.2</a>.  <a href="#name-tcpexid32-information-eleme" class="internal xref">tcpExID32 Information Element</a></p>
 </li>
                 </ul>
 </li>
@@ -1190,17 +1198,31 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">The current specification of ipv6ExtensionHeaders Information Element (IE) does not:<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">This document specifies new IPFIX Information Elements (IEs) to solve a set of issues encountered with the current specifications of ipv6ExtensionHeaders (for IPv6 Extension Headers (EHs)) and tcpOptions (to export TCP options). More details about these issues are provided in the following sub-sections.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<div id="ipv6extensionheaders-issues">
+<section id="section-1.1">
+        <h3 id="name-ipv6extensionheaders-issues">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-ipv6extensionheaders-issues" class="section-name selfRef">ipv6ExtensionHeaders Issues</a>
+        </h3>
+<p id="section-1.1-1">The current specification of ipv6ExtensionHeaders IPFIX IE does not:<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1-2.1">Cover the full EHs range.<a href="#section-1-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-1.1-2.1">Cover the full EHs range (Section 4 of <span>[<a href="#RFC8200" class="cite xref">RFC8200</a>]</span>).<a href="#section-1.1-2.1" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-1-2.2">Specify how to automatically update the registry when a new value is assigned in <span>[<a href="#IPv6-EH" class="cite xref">IPv6-EH</a>]</span>.<a href="#section-1-2.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-1.1-2.2">Specify how to automatically update the IANA IPFIX registry (<span>[<a href="#IANA-IPFIX" class="cite xref">IANA-IPFIX</a>]</span>) when a new value is assigned in <span>[<a href="#IPv6-EH" class="cite xref">IPv6-EH</a>]</span>.<a href="#section-1.1-2.2" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-1-2.3">Specify the procedure to follow when all bits are exhausted.<a href="#section-1-2.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-1.1-2.3">Specify the procedure to follow when all bits are exhausted.<a href="#section-1.1-2.3" class="pilcrow">¶</a>
 </li>
-      </ul>
-<p id="section-1-3">Alos, only TCP options having a kind =&lt; 63 can be included in a tcpOptions IE. The specification of the tcpOptions IE does not describe how any observed TCP option in a packet can be exported using IPFIX. Also, there is no way to report the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (kind=253 or 254) <span>[<a href="#RFC6994" class="cite xref">RFC6994</a>]</span>.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">This document specifies new IPFIX Information Elements to solve the abovementioned issues.<a href="#section-1-4" class="pilcrow">¶</a></p>
+        </ul>
+</section>
+</div>
+<div id="tcpoptions-issues">
+<section id="section-1.2">
+        <h3 id="name-tcpoptions-issues">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-tcpoptions-issues" class="section-name selfRef">tcpOptions Issues</a>
+        </h3>
+<p id="section-1.2-1">Only TCP options having a kind =&lt; 63 can be included in a tcpOptions IPFIX IE. The specification of the tcpOptions IPFIX IE does not describe how any observed TCP option in a packet can be exported using IPFIX. Also, there is no way to report the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (kind=253 or 254) <span>[<a href="#RFC6994" class="cite xref">RFC6994</a>]</span>.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1224,7 +1246,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-ipv6extensionheadersfull-in">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-ipv6extensionheadersfull-in" class="section-name selfRef">ipv6ExtensionHeadersFull Information Element</a>
       </h2>
-<p id="section-3-1">This document requests IANA to add this new IE to the IPFIX regisry:<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">This document requests IANA to add this new IPFIX IE to the IPFIX regisry:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-2.1">Name: ipv6ExtensionHeadersFull<a href="#section-3-2.1" class="pilcrow">¶</a>
 </li>
@@ -1250,7 +1272,7 @@ The value can be encoded in fewer octets as per the guidelines in
 </li>
         <li class="normal" id="section-3-2.6">Reference: [This-Document]<a href="#section-3-2.6" class="pilcrow">¶</a>
 </li>
-        <li class="normal" id="section-3-2.7">Additional Information: See the assigned bits to each IPv6 extension header in [NEW_IPFIX_IPv6EH_SUBREGISTRY]. See [RFC8200] for the general definition of IPv6 extension headers and <span>[<a href="#IPv6-EH" class="cite xref">IPv6-EH</a>]</span> for assigned extension headers.<a href="#section-3-2.7" class="pilcrow">¶</a>
+        <li class="normal" id="section-3-2.7">Additional Information: See the assigned bits to each IPv6 extension header in [NEW_IPFIX_IPv6EH_SUBREGISTRY]. See <span>[<a href="#RFC8200" class="cite xref">RFC8200</a>]</span> for the general definition of IPv6 extension headers and <span>[<a href="#IPv6-EH" class="cite xref">IPv6-EH</a>]</span> for assigned extension headers.<a href="#section-3-2.7" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
@@ -1265,7 +1287,7 @@ The value can be encoded in fewer octets as per the guidelines in
         <h3 id="name-new-information-elements-fo">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-new-information-elements-fo" class="section-name selfRef">New Information Elements for the Full TCP Options Range: tcpOptionsFull</a>
         </h3>
-<p id="section-4.1-1">This document requests IANA to add this new IE to the IPFIX regisry:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">This document requests IANA to add this new IPFIX IE to the IPFIX regisry:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1-2.1">Name: tcpOptionsFull<a href="#section-4.1-2.1" class="pilcrow">¶</a>
 </li>
@@ -1303,8 +1325,8 @@ The value can be encoded in fewer octets as per the guidelines in
         <h3 id="name-new-information-elements-for">
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-new-information-elements-for" class="section-name selfRef">New Information Elements for Shared TCP Options</a>
         </h3>
-<p id="section-4.2-1">ExIDs can be either 2 or 4 bytes in length <span>[<a href="#RFC6994" class="cite xref">RFC6994</a>]</span>. Two new IEs are defined to accomodate these two lengths without introducing extra complexity in mixing both types in the same IE.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
-<p id="section-4.2-2">This document requests IANA to add the following new IEs to the IANA IPFIX registry <span>[<a href="#IANA-IPFIX" class="cite xref">IANA-IPFIX</a>]</span>.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
+<p id="section-4.2-1">ExIDs can be either 2 or 4 bytes in length <span>[<a href="#RFC6994" class="cite xref">RFC6994</a>]</span>. Two new IPFIX IEs are defined to accomodate these two lengths without introducing extra complexity in mixing both types in the same IPFIX IE.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2">This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX registry <span>[<a href="#IANA-IPFIX" class="cite xref">IANA-IPFIX</a>]</span>.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 <div id="tcpexid16-information-element">
 <section id="section-4.2.1">
           <h4 id="name-tcpexid16-information-eleme">
@@ -1331,10 +1353,10 @@ shared option.<a href="#section-4.2.1-1.3" class="pilcrow">¶</a>
           </ul>
 </section>
 </div>
-<div id="new-ie-tcpexid32">
+<div id="tcpexid32-information-element">
 <section id="section-4.2.2">
-          <h4 id="name-new-ie-tcpexid32">
-<a href="#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="#name-new-ie-tcpexid32" class="section-name selfRef">New IE: tcpExID32</a>
+          <h4 id="name-tcpexid32-information-eleme">
+<a href="#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="#name-tcpexid32-information-eleme" class="section-name selfRef">tcpExID32 Information Element</a>
           </h4>
 <ul class="normal">
 <li class="normal" id="section-4.2.2-1.1">Name: tcpExID32<a href="#section-4.2.2-1.1" class="pilcrow">¶</a>
@@ -1417,6 +1439,10 @@ shared option.<a href="#section-4.2.2-1.3" class="pilcrow">¶</a>
 <dt id="RFC8174">[RFC8174]</dt>
       <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8200">[RFC8200]</dt>
+      <dd>
+<span class="refAuthor">Deering, S.</span> and <span class="refAuthor">R. Hinden</span>, <span class="refTitle">"Internet Protocol, Version 6 (IPv6) Specification"</span>, <span class="seriesInfo">STD 86</span>, <span class="seriesInfo">RFC 8200</span>, <span class="seriesInfo">DOI 10.17487/RFC8200</span>, <time datetime="2017-07" class="refDate">July 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8200">https://www.rfc-editor.org/rfc/rfc8200</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9293">[RFC9293]</dt>
     <dd>
