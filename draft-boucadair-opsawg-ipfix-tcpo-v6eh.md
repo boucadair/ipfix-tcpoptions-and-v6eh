@@ -67,6 +67,11 @@ This document specifies new IPFIX Information Elements (IEs) to solve some issue
 
 This document specifies new IPFIX Information Elements (IEs) to solve a set of issues encountered with the current specifications of ipv6ExtensionHeaders (for IPv6 Extension Headers (EHs)) and tcpOptions (to export TCP options). More details about these issues are provided in the following sub-sections.
 
+~~~
+{::include-fold ./figures/figure-ex.txt}
+~~~
+
+
 ## ipv6ExtensionHeaders Issues
 
 The current specification of ipv6ExtensionHeaders IPFIX IE does not:
