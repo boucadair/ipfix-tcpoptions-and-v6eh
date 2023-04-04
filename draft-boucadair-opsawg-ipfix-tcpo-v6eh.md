@@ -89,7 +89,9 @@ This document uses the IPFIX-specific terminology (Information Element, Template
    Section 2 of {{!RFC7011}}. As in {{!RFC7011}}, these IPFIX-specific terms
    have the first letter of a word capitalized.
 
-# ipv6ExtensionHeadersFull Information Element
+# IPv6 Extension Header
+
+## ipv6ExtensionHeadersFull Information Element
 
 This document requests IANA to add this new IPFIX IE to the IPFIX registry:
 
