@@ -198,10 +198,10 @@ Reference:
 
 ExIDs can be either 2 or 4 bytes in length {{!RFC6994}}. Two new IPFIX IEs are defined to accomodate these two lengths without introducing extra complexity in mixing both types in the same IPFIX IE.
 
-### tcpExID16 Information Element {#sec-ex16}
+### tcpSharedOptionExID16 Information Element {#sec-ex16}
 
 Name:
-: tcpExID16
+: tcpSharedOptionExID16
 
 ElementID:
 : TBD4
@@ -224,10 +224,10 @@ Additional Information:
 Reference:
 : This-Document
 
-### tcpExID32 Information Element {#sec-ex32}
+### tcpSharedOptionExID32 Information Element {#sec-ex32}
 
 Name:
-: tcpExID32
+: tcpSharedOptionExID32
 
 ElementID:
 : TBD5
@@ -250,7 +250,6 @@ Additional Information:
 Reference:
 : This-Document
 
-
 # Security Considerations
 
 IPFIX security considerations are discussed in {{Section 8 of !RFC7012}}.
@@ -263,8 +262,8 @@ This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX
 |TBD1| ipv6ExtensionHeadersFull|{{sec-v6full}} of This-Document|
 |TBD2| ipv6ExtensionHeaderCount|{{sec-v6count}} of This-Document|
 |TBD3| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
-|TBD4|tcpExID16|{{sec-ex16}} of This-Document|
-|TBD5| tcpExID32|{{sec-ex32}} of This-Document|
+|TBD4|tcpSharedOptionExID16|{{sec-ex16}} of This-Document|
+|TBD5| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
 {: title="New IPFIX Information Elements"}
 
 --- back
