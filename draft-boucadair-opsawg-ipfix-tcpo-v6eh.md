@@ -69,7 +69,7 @@ This document specifies new IPFIX Information Elements (IEs) to solve a set of i
 
 ## ipv6ExtensionHeaders Issues
 
-The current specification of ipv6ExtensionHeaders IPFIX IE does not:
+The specification of ipv6ExtensionHeaders IPFIX IE does not:
 
 - Cover the full EHs range (Section 4 of {{!RFC8200}}).
 - Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IPv6-EH}}.
@@ -91,14 +91,16 @@ This document uses the IPFIX-specific terminology (Information Element, Template
 
 # IPv6 Extension Header
 
-## ipv6ExtensionHeadersFull Information Element
+## ipv6ExtensionHeadersFull Information Element {#sec-v6full}
 
-This document requests IANA to add this new IPFIX IE to the IPFIX registry:
+Name:
+: ipv6ExtensionHeadersFull
 
-   *  Name: ipv6ExtensionHeadersFull
-   *  ElementID: TBD1
-   * Description:
-      IPv6 extension headers observed in packets of this Flow. The
+ElementID:
+: TBD1
+
+Description:
+:  IPv6 extension headers observed in packets of this Flow. The
       information is encoded in a set of bit fields.  For each IPv6
       option header, there is a bit in this set.  The bit is set to 1 if
       any observed packet of this Flow contains the corresponding IPv6
@@ -106,84 +108,113 @@ This document requests IANA to add this new IPFIX IE to the IPFIX registry:
       contained the respective IPv6 extension header, the value of the
       corresponding bit is 0. The IPv6 EH associated with each bit
       is provided in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
+: The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
-      The value can be encoded in fewer octets as per the guidelines in
-      Section 6.2 of {{!RFC7011}}.
-   * Abstract Data Type: unsigned
-   * Data Type Semantics: flags
-   * Reference: [This-Document]
-   * Additional Information: See the assigned bits to each IPv6 extension header in [NEW_IPFIX_IPv6EH_SUBREGISTRY]. See [RFC8200] for the general definition of IPv6 extension headers and [IPv6-EH] for assigned extension headers.
+Abstract Data Type:
+: unsigned
 
-# TCP Options
+Data Type Semantics:
+: flags
 
-## New Information Elements for the Full TCP Options Range: tcpOptionsFull
+Additional Information:
+: See the assigned bits to each IPv6 extension header in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
+: See {{!RFC8200}} for the general definition of IPv6 extension headers and {{IPv6-EH}} for assigned extension headers.
 
-This document requests IANA to add this new IPFIX IE to the IPFIX registry:
+Reference:
+: This-Document
 
-   *  Name: tcpOptionsFull
-   *  ElementID: TBD2
-   * Description:
-      TCP options in packets of this Flow.  The information is encoded
+# Information Elements for TCP Options
+
+## tcpOptionsFull Information Element {#sec-tcpfull}
+
+This section specifies a new Information Elements to cover the full TCP options range.
+
+Name:
+: tcpOptionsFull
+
+ElementID:
+: TBD2
+
+Description:
+: TCP options in packets of this Flow.  The information is encoded
       in a set of bit fields.  For each TCP option, there is a bit in
       this set.  The bit is set to 1 if any observed packet of this Flow
       contains the corresponding TCP option.  Otherwise, if no observed
       packet of this Flow contained the respective TCP option, the value
       of the corresponding bit is 0.
-
-      Options are mapped to bits according to their option numbers.
+: Options are mapped to bits according to their option numbers.
       Option number X is mapped to bit X.  TCP option numbers are
       maintained by IANA.
+: The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
-      The value can be encoded in fewer octets as per the guidelines in
-      Section 6.2 of {{!RFC7011}}.
-   * Abstract Data Type: unsigned
-   * Data Type Semantics: flags
-   * Reference: [This-Document]
-   * Additional Information: See the assigned TCP option kinds at {{IANA-TCP}}. See {{!RFC9293}} for the general definition of TCP options.
+Abstract Data Type:
+: unsigned
+
+Data Type Semantics:
+: flags
+
+Additional Information:
+: See the assigned TCP option kinds at {{IANA-TCP}}.
+: See {{!RFC9293}} for the general definition of TCP options.
+
+Reference:
+: This-Document
 
 ## New Information Elements for Shared TCP Options
 
 ExIDs can be either 2 or 4 bytes in length {{!RFC6994}}. Two new IPFIX IEs are defined to accomodate these two lengths without introducing extra complexity in mixing both types in the same IPFIX IE.
 
-This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX registry {{IANA-IPFIX}}.
+### tcpExID16 Information Element {#sec-ex16}
 
-### tcpExID16 Information Element
+Name:
+: tcpExID16
 
-   *  Name: tcpExID16
+ElementID:
+: TBD3
 
-   *  ElementID: TBD3
-
-   *  Description: Observed 2-byte Expermients IDs (ExIDs) in a shared
+Description:
+: Observed 2-byte Expermients IDs (ExIDs) in a shared
       TCP option (Kind=253 or 254).  The information is encoded in a set of
       16-bit fields.  Each 16-bit field carries the observed 2-byte ExID in a
       shared option.
 
-   *  Abstract Data Type: octetArray
+Abstract Data Type:
+: octetArray
 
-   *  Data Type Semantics: identifier
+Data Type Semantics:
+: identifier
 
-   *  Additional Information: See assigned 16-bit ExIDs at {{IANA-TCP-EXIDs}}.
+Additional Information:
+: See assigned 16-bit ExIDs at {{IANA-TCP-EXIDs}}.
 
-   *  Reference: [This-Document]
+Reference:
+: This-Document
 
-### tcpExID32 Information Element
+### tcpExID32 Information Element {#sec-ex32}
 
-   *  Name: tcpExID32
+Name:
+: tcpExID32
 
-   *  ElementID: TBD4
+ElementID:
+: TBD4
 
-   *  Description: Observed 4-byte Expermients ID (ExIDs) in a shared
+Description:
+: Observed 4-byte Expermients ID (ExIDs) in a shared
       TCP option (Kind=253 or 254).  The information is encoded in a set of
       16-bit fields.  Each 32-bit field carries the observed 4-byte ExID in a
       shared option.
 
-   *  Abstract Data Type: octetArray
+Abstract Data Type:
+: octetArray
 
-   *  Data Type Semantics: identifier
+Data Type Semantics:
+: identifier
 
-   *  Additional Information: See assigned 32-bit ExIDs at {{IANA-TCP-EXIDs}}.
+Additional Information:
+: See assigned 32-bit ExIDs at {{IANA-TCP-EXIDs}}.
 
-   *  Reference: [This-Document]
+Reference:
+: This-Document
 
 
 # Security Considerations
@@ -192,7 +223,14 @@ IPFIX security considerations are discussed in {{Section 8 of !RFC7012}}.
 
 # IANA Considerations
 
-A set of requested IANA actions are described in the main document. These actions are not repeated here.
+This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX registry {{IANA-IPFIX}}:
+
+|Value|	Name|	Reference|
+|TBD1| ipv6ExtensionHeadersFull|{{sec-v6full}} of This-Document|
+|TBD2| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
+|TBD3|tcpExID16|{{sec-ex16}} of This-Document|
+|TBD4| tcpExID32|{{sec-ex32}} of This-Document|
+{: title="New IPFIX Information Elements"}
 
 --- back
 
