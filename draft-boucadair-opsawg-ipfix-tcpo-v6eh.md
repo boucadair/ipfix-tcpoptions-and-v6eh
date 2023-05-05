@@ -117,8 +117,42 @@ Data Type Semantics:
 : flags
 
 Additional Information:
-: See the assigned bits to each IPv6 extension header in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
-: See {{!RFC8200}} for the general definition of IPv6 extension headers and {{IPv6-EH}} for assigned extension headers.
+: See the assigned bits to each IPv6 extension header type in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
+: See {{!RFC8200}} for the general definition of IPv6 extension headers and {{IPv6-EH}} for assigned extension header types.
+
+Reference:
+: This-Document
+
+## ipv6ExtensionHeaderCount Information Element {#sec-v6count}
+
+Name:
+: ipv6ExtensionHeaderCount
+
+ElementID:
+: TBD2
+
+Description:
+: As per {{!RFC8200}}, IPv6 nodes must accept and attempt to process extension headers in
+  occurring any number of times in the same packet. This Information Element echoes the
+  number of occurences of the same EH instance in an IPv6 packet. EH Type values are taken from {{IPv6-EH}}.
+: IPFIX reduced-size encoding as per {{Section 6.2 of !RFC7011}} is used as required.
+
+~~~~
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 ...
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |  EH Type#1    |   Count       |...|  EH Type#n      |   Count       |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~~
+
+Abstract Data Type:
+: unsigned64
+
+Data Type Semantics:
+: identifier
+
+Additional Information:
+: See the assigned IPv6 extension header types in {{IPv6-EH}}.
+: See {{!RFC8200}} for the general definition of IPv6 extension headers.
 
 Reference:
 : This-Document
@@ -127,13 +161,13 @@ Reference:
 
 ## tcpOptionsFull Information Element {#sec-tcpfull}
 
-This section specifies a new Information Elements to cover the full TCP options range.
+This section specifies a new Information Element to cover the full TCP options range.
 
 Name:
 : tcpOptionsFull
 
 ElementID:
-: TBD2
+: TBD3
 
 Description:
 : TCP options in packets of this Flow.  The information is encoded
@@ -170,7 +204,7 @@ Name:
 : tcpExID16
 
 ElementID:
-: TBD3
+: TBD4
 
 Description:
 : Observed 2-byte Expermients IDs (ExIDs) in a shared
@@ -196,7 +230,7 @@ Name:
 : tcpExID32
 
 ElementID:
-: TBD4
+: TBD5
 
 Description:
 : Observed 4-byte Expermients ID (ExIDs) in a shared
@@ -227,9 +261,10 @@ This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX
 
 |Value|	Name|	Reference|
 |TBD1| ipv6ExtensionHeadersFull|{{sec-v6full}} of This-Document|
-|TBD2| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
-|TBD3|tcpExID16|{{sec-ex16}} of This-Document|
-|TBD4| tcpExID32|{{sec-ex32}} of This-Document|
+|TBD2| ipv6ExtensionHeaderCount|{{sec-v6count}} of This-Document|
+|TBD3| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
+|TBD4|tcpExID16|{{sec-ex16}} of This-Document|
+|TBD5| tcpExID32|{{sec-ex32}} of This-Document|
 {: title="New IPFIX Information Elements"}
 
 --- back
