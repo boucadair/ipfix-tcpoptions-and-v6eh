@@ -134,7 +134,7 @@ ElementID:
 Description:
 : As per {{!RFC8200}}, IPv6 nodes must accept and attempt to process extension headers in
   occurring any number of times in the same packet. This Information Element echoes the
-  number of occurences of the same EH instance in an IPv6 packet. EH Type values are taken from {{IPv6-EH}}.
+  number of occurences of the same EH instance in an IPv6 packet.
 : IPFIX reduced-size encoding as per {{Section 6.2 of !RFC7011}} is used as required.
 
 ~~~~
