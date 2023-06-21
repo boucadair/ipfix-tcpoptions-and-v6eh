@@ -3,7 +3,7 @@ title: "Extended TCP Options and IPv6 Extension Headers IPFIX Information Elemen
 abbrev: "New TCP and IPv6 EH IPFIX IEs"
 category: std
 
-docname: draft-boucadair-opsawg-ipfix-tcpo-v6eh-latest
+docname: draft-ietf-opsawg-ipfix-tcpo-v6eh-latest
 submissiontype: IETF
 number:
 date:
