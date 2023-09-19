@@ -2,10 +2,10 @@
 
 This is the working area for the individual Internet-Draft, "Extended TCP Options and IPv6 Extension Headers IPFIX Information Elements".
 
-* [Editor's Copy](https://boucadair.github.io/ipfix-tcpoptions-and-v6eh/#go.draft-boucadair-opsawg-ipfix-tcpo-v6eh.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-boucadair-opsawg-ipfix-tcpo-v6eh)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-boucadair-opsawg-ipfix-tcpo-v6eh)
-* [Compare Editor's Copy to Individual Draft](https://boucadair.github.io/ipfix-tcpoptions-and-v6eh/#go.draft-boucadair-opsawg-ipfix-tcpo-v6eh.diff)
+* [Editor's Copy](https://boucadair.github.io/ipfix-tcpoptions-and-v6eh/#go.draft-ietf-opsawg-ipfix-tcpo-v6eh.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-opsawg-ipfix-tcpo-v6eh)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-tcpo-v6eh)
+* [Compare Editor's Copy to Individual Draft](https://boucadair.github.io/ipfix-tcpoptions-and-v6eh/#go.draft-ietf-opsawg-ipfix-tcpo-v6eh.diff)
 
 
 ## Contributing
