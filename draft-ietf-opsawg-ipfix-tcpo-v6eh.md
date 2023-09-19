@@ -135,7 +135,6 @@ Reference:
 
 > Note to the RFC Editor: Please replace [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link to the "ipv6ExtensionHeaders Bits" registry created by {{?I-D.ietf-opsawg-ipfix-fixes}}.
 
- 
 ## ipv6ExtensionHeaderCount Information Element {#sec-v6count}
 
 Name:
