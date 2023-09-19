@@ -32,7 +32,7 @@ normative:
           organization: "IANA"
         target: https://www.iana.org/assignments/ipfix/ipfix.xhtml
         date: false
-     IPv6-EH:
+     IANA-EH:
         title: Internet Protocol Version 6 (IPv6) Parameters, IPv6 Extension Header Types
         author:
         -
@@ -59,25 +59,35 @@ informative:
 
 --- abstract
 
-This document specifies new IPFIX Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IPFIX IEs, especially the ability to export any observed IPv6 Extension Headers or TCP options.
+This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IPFIX IEs, especially the ability to export any observed IPv6 extension headers or TCP options.
 
 --- middle
 
 # Introduction
 
-This document specifies new IPFIX Information Elements (IEs) to solve a set of issues encountered with the current specifications of ipv6ExtensionHeaders (for IPv6 Extension Headers (EHs)) and tcpOptions (to export TCP options). More details about these issues are provided in the following sub-sections.
+This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve a set of issues encountered with the specifications of ipv6ExtensionHeaders (to export IPv6 extension headers) and tcpOptions (to export TCP options). More details about these issues are provided in the following sub-sections.
 
 ## ipv6ExtensionHeaders Issues
 
 The specification of ipv6ExtensionHeaders IPFIX IE does not:
 
-- Cover the full EHs range (Section 4 of {{!RFC8200}}).
-- Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IPv6-EH}}.
+- Cover the full extension headers range ({{Section 4 of !RFC8200}}).
 - Specify the procedure to follow when all bits are exhausted.
+- Specify a means to export the number of occurences of a given extension header.
+- Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IANA-EH}}.
+
+The last issue is now solved in {{?I-D.ietf-opsawg-ipfix-fixes}} which defines a new IANA registry entitled "ipv6ExtensionHeaders Bits" under the IANA IPFIX registry group {{IANA-IPFIX}}.
+
+{{sec-eh}} addresses three first issues.
 
 ## tcpOptions Issues
 
-Only TCP options having a kind =< 63 can be included in a tcpOptions IPFIX IE. The specification of the tcpOptions IPFIX IE does not describe how any observed TCP option in a packet can be exported using IPFIX. Also, there is no way to report the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (kind=253 or 254) {{!RFC6994}}.
+The specification of tcpOptions IPFIX IE does not:
+
+- Describe how any observed TCP option in a packet can be exported using IPFIX. Only TCP options having a kind =< 63 can be exported in a tcpOptions IPFIX IE.
+- Support means to report the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (kind=253 or 254) {{!RFC6994}}.
+
+{{sec-tcp}} addresses these issues.
 
 # Conventions and Definitions
 
@@ -89,7 +99,7 @@ This document uses the IPFIX-specific terminology (Information Element, Template
    Section 2 of {{!RFC7011}}. As in {{!RFC7011}}, these IPFIX-specific terms
    have the first letter of a word capitalized.
 
-# IPv6 Extension Header
+# IPv6 Extension Header {#sec-eh}
 
 ## ipv6ExtensionHeadersFull Information Element {#sec-v6full}
 
@@ -106,7 +116,7 @@ Description:
       any observed packet of this Flow contains the corresponding IPv6
       extension header.  Otherwise, if no observed packet of this Flow
       contained the respective IPv6 extension header, the value of the
-      corresponding bit is 0. The IPv6 EH associated with each bit
+      corresponding bit is 0. The IPv6 extension header associated with each bit
       is provided in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
@@ -118,11 +128,14 @@ Data Type Semantics:
 
 Additional Information:
 : See the assigned bits to each IPv6 extension header type in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
-: See {{!RFC8200}} for the general definition of IPv6 extension headers and {{IPv6-EH}} for assigned extension header types.
+: See {{!RFC8200}} for the general definition of IPv6 extension headers and {{IANA-EH}} for assigned extension header types.
 
 Reference:
 : This-Document
 
+> Note to the RFC Editor: Please replace [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link to the "ipv6ExtensionHeaders Bits" registry created by {{?I-D.ietf-opsawg-ipfix-fixes}}.
+
+ 
 ## ipv6ExtensionHeaderCount Information Element {#sec-v6count}
 
 Name:
@@ -134,7 +147,7 @@ ElementID:
 Description:
 : As per {{!RFC8200}}, IPv6 nodes must accept and attempt to process extension headers in
   occurring any number of times in the same packet. This Information Element echoes the
-  number of occurences of the same EH instance in an IPv6 packet.
+  number of occurences of the same extension header instance in an IPv6 packet.
 : IPFIX reduced-size encoding as per {{Section 6.2 of !RFC7011}} is used as required.
 
 ~~~~
@@ -151,13 +164,13 @@ Data Type Semantics:
 : identifier
 
 Additional Information:
-: See the assigned IPv6 extension header types in {{IPv6-EH}}.
+: See the assigned IPv6 extension header types in {{IANA-EH}}.
 : See {{!RFC8200}} for the general definition of IPv6 extension headers.
 
 Reference:
 : This-Document
 
-# Information Elements for TCP Options
+# Information Elements for TCP Options {#sec-tcp}
 
 ## tcpOptionsFull Information Element {#sec-tcpfull}
 
@@ -177,7 +190,7 @@ Description:
       packet of this Flow contained the respective TCP option, the value
       of the corresponding bit is 0.
 : Options are mapped to bits according to their option numbers.
-      Option number X is mapped to bit X.  TCP option numbers are
+      Option number X is mapped to bit position X.  TCP option numbers are
       maintained by IANA.
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
