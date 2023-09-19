@@ -112,7 +112,7 @@ ElementID:
 Description:
 :  IPv6 extension headers observed in packets of this Flow. The
       information is encoded in a set of bit fields.  For each IPv6
-      option header, there is a bit in this set.  The bit is set to 1 if
+      extension header, there is a bit in this set.  The bit is set to 1 if
       any observed packet of this Flow contains the corresponding IPv6
       extension header.  Otherwise, if no observed packet of this Flow
       contained the respective IPv6 extension header, the value of the
@@ -128,7 +128,7 @@ Data Type Semantics:
 
 Additional Information:
 : See the assigned bits to each IPv6 extension header type in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
-: See {{!RFC8200}} for the general definition of IPv6 extension headers and {{IANA-EH}} for assigned extension header types.
+: See {{Section 4 of !RFC8200}} for the general definition of IPv6 extension headers and {{IANA-EH}} for assigned extension header types.
 
 Reference:
 : This-Document
@@ -146,7 +146,7 @@ ElementID:
 Description:
 : As per {{!RFC8200}}, IPv6 nodes must accept and attempt to process extension headers in
   occurring any number of times in the same packet. This Information Element echoes the
-  number of occurences of the same extension header instance in an IPv6 packet.
+  order and number of occurences of the same extension header instance in an IPv6 packet.
 : IPFIX reduced-size encoding as per {{Section 6.2 of !RFC7011}} is used as required.
 
 ~~~~
