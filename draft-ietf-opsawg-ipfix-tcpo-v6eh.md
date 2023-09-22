@@ -116,8 +116,21 @@ Description:
       any observed packet of this Flow contains the corresponding IPv6
       extension header.  Otherwise, if no observed packet of this Flow
       contained the respective IPv6 extension header, the value of the
-      corresponding bit is 0. The IPv6 extension header associated with each bit
-      is provided in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
+      corresponding bit is 0.
+: Extension headers are mapped to bits according to their extension numbers.
+      Extension X is mapped to bit position X. This approach allows
+      an observer to export any observed extension header and without requiring
+      updating a mapping table. The following
+      provides an example of reported values for an IPv6 packet that includes
+      a Hop-by-Hop Option.
+~~~~
+MSB                                                       LSB
+                     1                   2     …  25
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+~~~~
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
 Abstract Data Type:
@@ -133,7 +146,6 @@ Additional Information:
 Reference:
 : This-Document
 
-> Note to the RFC Editor: Please replace [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link to the "ipv6ExtensionHeaders Bits" registry created by {{?I-D.ietf-opsawg-ipfix-fixes}}.
 
 ## ipv6ExtensionHeaderCount Information Element {#sec-v6count}
 
@@ -196,8 +208,8 @@ Description:
       End of Option List, Maximum Segment Size, and Window Scale TCP options.
 ~~~~
 MSB                                                       LSB
-                     1                   2     …  25         
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4 
+                     1                   2     …  25
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 |1|0|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
