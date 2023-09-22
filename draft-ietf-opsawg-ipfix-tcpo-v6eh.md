@@ -189,8 +189,20 @@ Description:
       packet of this Flow contained the respective TCP option, the value
       of the corresponding bit is 0.
 : Options are mapped to bits according to their option numbers.
-      Option number X is mapped to bit position X.  TCP option numbers are
-      maintained by IANA.
+      Option number X is mapped to bit position X. This approach allows
+      an observer to export any observed TCP option even if it does support
+      that option and without requiring updating a mapping table. The following
+      provides an example of reported values for a TCP segment that includes
+      End of Option List, Maximum Segment Size, and Window Scale TCP options.
+~~~~
+MSB                                                       LSB
+                     1                   2     …  25         
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+|1|0|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+~~~~
+
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
 Abstract Data Type:
