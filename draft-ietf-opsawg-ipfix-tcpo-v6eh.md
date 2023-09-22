@@ -80,6 +80,8 @@ The last issue is solved in {{?I-D.ietf-opsawg-ipfix-fixes}} which defines a new
 
 {{sec-eh}} addresses three first issues.
 
+If an implementation determines that it includes an extension header, that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE. How an implementation disambiguates between unknown upper layers vs. extension header is not IPFIX-specific.
+
 ## tcpOptions Issues
 
 The specification of tcpOptions IPFIX IE does not:
@@ -207,7 +209,7 @@ Description:
 : Options are mapped to bits according to their option numbers.
       Option number X is mapped to bit position X. This approach allows
       an observer to export any observed TCP option even if it does support
-      that option and without requiring updating a mapping table. 
+      that option and without requiring updating a mapping table.
 
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
