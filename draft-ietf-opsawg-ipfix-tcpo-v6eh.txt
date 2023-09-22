@@ -113,11 +113,11 @@ Table of Contents
 
    Section 3 addresses three first issues.
 
-   If an implementation determines that it includes an extension header,
+   If an implementation determines that it includes an extension header
    that it does no support, then the exact observed code of that
    extension header will be echoed in the ipv6ExtensionHeadersFull IE.
    How an implementation disambiguates between unknown upper layers vs.
-   extension header is not IPFIX-specific.
+   extension headers is not IPFIX-specific.
 
 1.2.  tcpOptions Issues
 
@@ -174,12 +174,12 @@ Table of Contents
       The following provides an example of reported values for an IPv6
       packet that only includes an Authentication Header.
 
-   MSB                                                    LSB
-                        1                   5     …  25
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 … 6 7 8 9 0 1 2 … 9 0 1 2 3 4
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-   |0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0| |0|0|0|0|0|0|
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+        MSB                                                    LSB
+                             1                   5     …  25
+         0 1 2 3 4 5 6 7 8 9 0 1 2 3 … 6 7 8 9 0 1 2 … 9 0 1 2 3 4
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+        |0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0| |0|0|0|0|0|0|
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 
    Abstract Data Type:  unsigned
 
@@ -256,12 +256,12 @@ Table of Contents
       segment that includes End of Option List, Maximum Segment Size,
       Window Scale, and a Shared TCP options.
 
-   MSB                                                       LSB
-                        1                   2     …  25
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-   |1|0|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|1|0|
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+       MSB                                                       LSB
+                            1                   2     …  25
+        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+       |1|0|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|1|0|
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 
    Abstract Data Type:  unsigned
 

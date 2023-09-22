@@ -1221,7 +1221,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         </ul>
 <p id="section-1.1-3">The last issue is solved in <span>[<a href="#I-D.ietf-opsawg-ipfix-fixes" class="cite xref">I-D.ietf-opsawg-ipfix-fixes</a>]</span> which defines a new IANA registry entitled "ipv6ExtensionHeaders Bits" under the IANA IPFIX registry group <span>[<a href="#IANA-IPFIX" class="cite xref">IANA-IPFIX</a>]</span>.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
 <p id="section-1.1-4"><a href="#sec-eh" class="auto internal xref">Section 3</a> addresses three first issues.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
-<p id="section-1.1-5">If an implementation determines that it includes an extension header, that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE. How an implementation disambiguates between unknown upper layers vs. extension header is not IPFIX-specific.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE. How an implementation disambiguates between unknown upper layers vs. extension headers is not IPFIX-specific.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="tcpoptions-issues">
@@ -1310,7 +1310,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 </dd>
         <dd class="break"></dd>
 </dl>
-<div class="alignLeft art-text artwork" id="section-3.1-2">
+<div class="alignCenter art-text artwork" id="section-3.1-2">
 <pre>
 MSB                                                    LSB
                      1                   5     …  25
@@ -1378,7 +1378,7 @@ order and number of occurences of the same extension header instance in an IPv6 
 </dd>
         <dd class="break"></dd>
 </dl>
-<div class="alignLeft art-text artwork" id="section-3.2-2">
+<div class="alignCenter art-text artwork" id="section-3.2-2">
 <pre>
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 ...
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -1471,7 +1471,7 @@ order and number of occurences of the same extension header instance in an IPv6 
 </dd>
         <dd class="break"></dd>
 </dl>
-<div class="alignLeft art-text artwork" id="section-4.1-3">
+<div class="alignCenter art-text artwork" id="section-4.1-3">
 <pre>
 MSB                                                       LSB
                      1                   2     …  25
