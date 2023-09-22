@@ -76,7 +76,7 @@ The specification of ipv6ExtensionHeaders IPFIX IE does not:
 - Specify a means to export the number of occurences of a given extension header.
 - Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IANA-EH}}.
 
-The last issue is now solved in {{?I-D.ietf-opsawg-ipfix-fixes}} which defines a new IANA registry entitled "ipv6ExtensionHeaders Bits" under the IANA IPFIX registry group {{IANA-IPFIX}}.
+The last issue is solved in {{?I-D.ietf-opsawg-ipfix-fixes}} which defines a new IANA registry entitled "ipv6ExtensionHeaders Bits" under the IANA IPFIX registry group {{IANA-IPFIX}}.
 
 {{sec-eh}} addresses three first issues.
 
@@ -120,18 +120,22 @@ Description:
 : Extension headers are mapped to bits according to their extension numbers.
       Extension X is mapped to bit position X. This approach allows
       an observer to export any observed extension header and without requiring
-      updating a mapping table. The following
-      provides an example of reported values for an IPv6 packet that includes
-      a Hop-by-Hop Option.
-~~~~
-MSB                                                       LSB
-                     1                   2     …  25
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-~~~~
+      updating a mapping table.
+
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
+
+: The following
+      provides an example of reported values for an IPv6 packet that only includes
+      an	Authentication Header.
+
+~~~~
+MSB                                                    LSB
+                     1                   5     …  25
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 … 6 7 8 9 0 1 2 … 9 0 1 2 3 4
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0| |0|0|0|0|0|0|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+~~~~
 
 Abstract Data Type:
 : unsigned
@@ -140,8 +144,8 @@ Data Type Semantics:
 : flags
 
 Additional Information:
-: See the assigned bits to each IPv6 extension header type in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
-: See {{Section 4 of !RFC8200}} for the general definition of IPv6 extension headers and {{IANA-EH}} for assigned extension header types.
+: See {{IANA-EH}} for assigned extension header types.
+: See {{Section 4 of !RFC8200}} for the general definition of IPv6 extension headers.
 
 Reference:
 : This-Document
@@ -203,19 +207,23 @@ Description:
 : Options are mapped to bits according to their option numbers.
       Option number X is mapped to bit position X. This approach allows
       an observer to export any observed TCP option even if it does support
-      that option and without requiring updating a mapping table. The following
+      that option and without requiring updating a mapping table. 
+
+: The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
+
+: The following
       provides an example of reported values for a TCP segment that includes
-      End of Option List, Maximum Segment Size, and Window Scale TCP options.
+      End of Option List, Maximum Segment Size, Window Scale, and
+      a Shared TCP options.
+
 ~~~~
 MSB                                                       LSB
                      1                   2     …  25
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-|1|0|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|
+|1|0|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|1|0|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 ~~~~
-
-: The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
 Abstract Data Type:
 : unsigned
