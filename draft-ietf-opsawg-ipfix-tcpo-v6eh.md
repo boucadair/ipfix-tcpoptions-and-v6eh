@@ -80,7 +80,7 @@ The last issue is solved in {{?I-D.ietf-opsawg-ipfix-fixes}} which defines a new
 
 {{sec-eh}} addresses three first issues.
 
-If an implementation determines that it includes an extension header, that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE. How an implementation disambiguates between unknown upper layers vs. extension header is not IPFIX-specific.
+If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE. How an implementation disambiguates between unknown upper layers vs. extension headers is not IPFIX-specific.
 
 ## tcpOptions Issues
 
@@ -138,6 +138,7 @@ MSB                                                    LSB
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0| |0|0|0|0|0|0|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 ~~~~
+{: artwork-align="center"}
 
 Abstract Data Type:
 : unsigned
@@ -173,6 +174,7 @@ Description:
  |  EH Type#1    |   Count       |...|  EH Type#n      |   Count       |
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~~
+{: artwork-align="center"}
 
 Abstract Data Type:
 : unsigned64
@@ -226,6 +228,7 @@ MSB                                                       LSB
 |1|0|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|1|0|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 ~~~~
+{: artwork-align="center"}
 
 Abstract Data Type:
 : unsigned
