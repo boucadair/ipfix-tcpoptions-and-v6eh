@@ -116,10 +116,15 @@ Description:
       extension header.  Otherwise, if no observed packet of this Flow
       contained the respective IPv6 extension header, the value of the
       corresponding bit is 0.
+: Several extension header chains may be observed in a Flow. These extension headers
+  may be aggregated in one single ipv6ExtensionHeadersFull Information Element or
+  be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.
 : Extension headers are mapped to bits according to their extension numbers.
       Extension X is mapped to bit position X. This approach allows
       an observer to export any observed extension header and without requiring
-      updating a mapping table.
+      relying upon (including updating) a mapping table.
+: The "No Next Header" (59) value is used if there is no upper-layer header in an IPv6 packet.
+  That value is not considered as an extension header as such.
 
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
@@ -163,7 +168,9 @@ Description:
 : As per {{Section 4.1 of !RFC8200}}, IPv6 nodes must accept and attempt to process extension headers in
   occurring any number of times in the same packet. This Information Element echoes the
   order of extension headers and number of consecutive occurrences of the same extension header type in an IPv6 packet.
-: The same extension header type may appear several times in an ipv6ExtensionHeaderCount Information Element (see {{Section 4.1 of !RFC8200}}.
+: If several extension headers chains are observed in a Flow, each header
+  chain MUST be exported in a separate ipv6ExtensionHeaderCount IE.
+: The same extension header type may appear several times in an ipv6ExtensionHeaderCount Information Element.
   For example, if an IPv6 packet includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
   and Destination Options header, the ipv6ExtensionHeaderCount Information Element will report two counts of the Destination Options header: the occurrences
   that are observed before the Fragment header and the occurrences right after the Fragment header.
@@ -200,8 +207,9 @@ ElementID:
 
 Description:
 :  When set to "true", this Information Element indicates that the exported extension
-   header information does not match the full enclosed extension headers, but only up to a
-   limit set, e.g., by hardware or software.
+   headers information (e.g., ipv6ExtensionHeaderFull or ipv6ExtensionHeaderCount) does
+   not match the full enclosed extension headers, but only up to a
+   limit that is typically set by hardware or software.
 :  When set to "false", this Information Element indicates that the exported extension
    header information matches the full enclosed extension headers.
 : When this Information Element is absent, this is equivalent to returning an ipv6ExtensionHeadersLimit
