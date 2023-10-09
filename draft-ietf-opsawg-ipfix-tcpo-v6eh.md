@@ -238,11 +238,11 @@ ElementID:
 
 Description:
 : In theory, there are no limits on the number of IPv6 extension headers that may
-  be present in a packet other than the path MTU constraints. However, it  was
-  reported that packets with IPv6 extension headers are often dropped in the Internet.
+  be present in a packet other than the path MTU. However, it was regularly
+  reported that IPv6 packets with extension headers are often dropped in the Internet.
 : As discussed in {{Section 1.2 of ?RFC8883}}, some hardware devices implement
   a parsing buffer of a fixed size to process packets, including all the headers.
-  When the aggregate header length exceeded that size, the packet will be discarded or deferred to a slow path.
+  When the aggregate header length of an IPv6 packet exceeds that size, the packet will be discarded or deferred to a slow path.
 : The ipv6ExtensionHeadersAggrLength IE is used to report the aggregate length of enclosed
   extension headers chain of a Flow. Exporting such information may help identifying
   root causes of performance degradation, including packet drops.
