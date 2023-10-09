@@ -75,7 +75,7 @@ The specification of ipv6ExtensionHeaders IPFIX IE does not:
 - Specify the procedure to follow when all bits are exhausted.
 - Specify a means to export the order and the number of occurences of a given extension header.
 - Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IANA-EH}}.
-- Specify whether the exported values matches the full observed or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}).
+- Specify whether the exported values match the full enclosed value or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}).
 
 If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE. How an implementation disambiguates between unknown upper layers vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
 
@@ -93,9 +93,9 @@ The specification of tcpOptions IPFIX IE does not:
 {::boilerplate bcp14-tagged}
 
 This document uses the IPFIX-specific terminology (Information Element, Template,
-   Collector,  Data Record, Flow Record, Exporting Process,
+   Collector,  Data Record, Flow, Flow Record, Exporting Process,
    Collecting Process, etc.) defined in
-   Section 2 of {{!RFC7011}}. As in {{!RFC7011}}, these IPFIX-specific terms
+   {{Section 2 of !RFC7011}}. As in {{!RFC7011}}, these IPFIX-specific terms
    have the first letter of a word capitalized.
 
 # IPv6 Extension Header {#sec-eh}
