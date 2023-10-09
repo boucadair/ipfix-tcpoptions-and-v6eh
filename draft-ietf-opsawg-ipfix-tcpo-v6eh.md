@@ -185,7 +185,7 @@ Description:
 {: artwork-align="center"}
 
 Abstract Data Type:
-: unsigned8
+: unsigned64
 
 Data Type Semantics:
 : identifier
@@ -238,7 +238,7 @@ ElementID:
 
 Description:
 : In theory, there are no limits on the number of IPv6 extension headers that may
-  be present in a packet other than the path MTU constraints. However, it  was 
+  be present in a packet other than the path MTU constraints. However, it  was
   reported that packets with IPv6 extension headers are often dropped in the Internet.
 : As discussed in {{Section 1.2 of ?RFC8883}}, some hardware devices implement
   a parsing buffer of a fixed size to process packets, including all the headers.
