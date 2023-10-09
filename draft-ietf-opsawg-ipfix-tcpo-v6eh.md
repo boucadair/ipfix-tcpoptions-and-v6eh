@@ -215,7 +215,7 @@ Data Type Semantics:
 
 Additional Information:
 : See {{Section 4 of !RFC8200}} for the general definition of IPv6 extension headers.
-: See {{!RFC8883}} for an example of IPv6 packets processing due to limits on extension headers.
+: See {{?RFC8883}} for an example of IPv6 packets processing due to limits on extension headers.
 
 Reference:
 : This-Document
