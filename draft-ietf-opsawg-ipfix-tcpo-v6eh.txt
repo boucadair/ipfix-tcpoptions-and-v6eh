@@ -80,7 +80,9 @@ Table of Contents
        4.2.2.  tcpSharedOptionExID32 Information Element
    5.  Security Considerations
    6.  IANA Considerations
-   7.  Normative References
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -391,7 +393,9 @@ Table of Contents
 
                   Table 1: New IPFIX Information Elements
 
-7.  Normative References
+7.  References
+
+7.1.  Normative References
 
    [IANA-EH]  IANA, "Internet Protocol Version 6 (IPv6) Parameters, IPv6
               Extension Header Types",
@@ -441,13 +445,15 @@ Table of Contents
               DOI 10.17487/RFC8200, July 2017,
               <https://www.rfc-editor.org/rfc/rfc8200>.
 
-   [RFC8883]  Herbert, T., "ICMPv6 Errors for Discarding Packets Due to
-              Processing Limits", RFC 8883, DOI 10.17487/RFC8883,
-              September 2020, <https://www.rfc-editor.org/rfc/rfc8883>.
-
    [RFC9293]  Eddy, W., Ed., "Transmission Control Protocol (TCP)",
               STD 7, RFC 9293, DOI 10.17487/RFC9293, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9293>.
+
+7.2.  Informative References
+
+   [RFC8883]  Herbert, T., "ICMPv6 Errors for Discarding Packets Due to
+              Processing Limits", RFC 8883, DOI 10.17487/RFC8883,
+              September 2020, <https://www.rfc-editor.org/rfc/rfc8883>.
 
 Acknowledgments
 
