@@ -451,7 +451,7 @@ Table of Contents
 
 Acknowledgments
 
-   Thanks to Paul Aitken for the review.
+   Thanks to Paul Aitken and Eric Vyncke for the review and comments.
 
 Authors' Addresses
 
