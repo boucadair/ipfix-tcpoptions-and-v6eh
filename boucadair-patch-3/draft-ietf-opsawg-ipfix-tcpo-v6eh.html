@@ -1538,15 +1538,15 @@ Information Element with a value set to "false".<a href="#section-3.3-1.10.1" cl
 <dt id="section-3.4-1.5">Description:</dt>
           <dd style="margin-left: 1.5em" id="section-3.4-1.6">
             <p id="section-3.4-1.6.1">In theory, there are no limits on the number of IPv6 extension headers that may
-be present in a packet other than the path MTU constraints. However, it  was
-reported that packets with IPv6 extension headers are often dropped in the Internet.<a href="#section-3.4-1.6.1" class="pilcrow">¶</a></p>
+be present in a packet other than the path MTU. However, it was regularly
+reported that IPv6 packets with extension headers are often dropped in the Internet.<a href="#section-3.4-1.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.4-1.7"></dt>
           <dd style="margin-left: 1.5em" id="section-3.4-1.8">
             <p id="section-3.4-1.8.1">As discussed in <span><a href="https://rfc-editor.org/rfc/rfc8883#section-1.2" class="relref">Section 1.2</a> of [<a href="#RFC8883" class="cite xref">RFC8883</a>]</span>, some hardware devices implement
 a parsing buffer of a fixed size to process packets, including all the headers.
-When the aggregate header length exceeded that size, the packet will be discarded or deferred to a slow path.<a href="#section-3.4-1.8.1" class="pilcrow">¶</a></p>
+When the aggregate header length of an IPv6 packet exceeds that size, the packet will be discarded or deferred to a slow path.<a href="#section-3.4-1.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.4-1.9"></dt>
