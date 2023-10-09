@@ -1317,7 +1317,8 @@ be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension hea
 <dt id="section-3.1-1.11"></dt>
           <dd style="margin-left: 1.5em" id="section-3.1-1.12">
             <p id="section-3.1-1.12.1">The "No Next Header" (59) value is used if there is no upper-layer header in an IPv6 packet.
-That value is not considered as an extension header as such.<a href="#section-3.1-1.12.1" class="pilcrow">¶</a></p>
+Even if the value is not considered as an extension header as such, the corresponding
+bit is set in the ipv6ExtensionHeadersFull IE whenever that value is encountered in the Flow.<a href="#section-3.1-1.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.1-1.13"></dt>
