@@ -185,7 +185,7 @@ Description:
 {: artwork-align="center"}
 
 Abstract Data Type:
-: unsigned64
+: unsigned8
 
 Data Type Semantics:
 : identifier
@@ -228,6 +228,38 @@ Additional Information:
 Reference:
 : This-Document
 
+## ipv6ExtensionHeadersAggrLength Information Element {#sec-v6aggr}
+
+Name:
+: ipv6ExtensionHeadersAggrLength
+
+ElementID:
+: TBD4
+
+Description:
+: In theory, there are no limits on the number of IPv6 extension headers that may
+  be present in a packet other than the path MTU constraints. However, it  was 
+  reported that packets with IPv6 extension headers are often dropped in the Internet.
+: As discussed in {{Section 1.2 of ?RFC8883}}, some hardware devices implement
+  a parsing buffer of a fixed size to process packets, including all the headers.
+  When the aggregate header length exceeded that size, the packet will be discarded or deferred to a slow path.
+: The ipv6ExtensionHeadersAggrLength IE is used to report the aggregate length of enclosed
+  extension headers chain of a Flow. Exporting such information may help identifying
+  root causes of performance degradation, including packet drops.
+
+Abstract Data Type:
+: unsigned
+
+Data Type Semantics:
+: identifier
+
+Additional Information:
+: See {{Section 4 of !RFC8200}} for the general definition of IPv6 extension headers.
+: See {{?RFC9098}} for an overview of operational implications of IPv6 packets with extension headerss.
+
+Reference:
+: This-Document
+
 # Information Elements for TCP Options {#sec-tcp}
 
 ## tcpOptionsFull Information Element {#sec-tcpfull}
@@ -238,7 +270,7 @@ Name:
 : tcpOptionsFull
 
 ElementID:
-: TBD4
+: TBD5
 
 Description:
 : TCP options in packets of this Flow.  The information is encoded
@@ -292,7 +324,7 @@ Name:
 : tcpSharedOptionExID16
 
 ElementID:
-: TBD5
+: TBD6
 
 Description:
 : Observed 2-byte Expermients IDs (ExIDs) in a shared
@@ -318,7 +350,7 @@ Name:
 : tcpSharedOptionExID32
 
 ElementID:
-: TBD6
+: TBD7
 
 Description:
 : Observed 4-byte Expermients ID (ExIDs) in a shared
@@ -350,9 +382,10 @@ This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX
 |TBD1| ipv6ExtensionHeadersFull|{{sec-v6full}} of This-Document|
 |TBD2| ipv6ExtensionHeaderCount|{{sec-v6count}} of This-Document|
 |TBD3| ipv6ExtensionHeaderLimit|{{sec-v6limit}} of This-Document|
-|TBD4| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
-|TBD5|tcpSharedOptionExID16|{{sec-ex16}} of This-Document|
-|TBD6| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
+|TBD4| ipv6ExtensionHeadersAggrLength |{{sec-v6aggr}} of This-Document|
+|TBD5| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
+|TBD6| tcpSharedOptionExID16|{{sec-ex16}} of This-Document|
+|TBD7| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
 {: title="New IPFIX Information Elements"}
 
 --- back
