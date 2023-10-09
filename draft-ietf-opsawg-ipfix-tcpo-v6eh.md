@@ -124,7 +124,8 @@ Description:
       an observer to export any observed extension header and without requiring
       relying upon (including updating) a mapping table.
 : The "No Next Header" (59) value is used if there is no upper-layer header in an IPv6 packet.
-  That value is not considered as an extension header as such.
+  Even if the value is not considered as an extension header as such, the corresponding
+  bit is set in the ipv6ExtensionHeadersFull IE whenever that value is encountered in the Flow.
 
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
