@@ -1301,22 +1301,35 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
           <dd class="break"></dd>
 <dt id="section-3.1-1.7"></dt>
           <dd style="margin-left: 1.5em" id="section-3.1-1.8">
-            <p id="section-3.1-1.8.1">Extension headers are mapped to bits according to their extension numbers.
-    Extension X is mapped to bit position X. This approach allows
-    an observer to export any observed extension header and without requiring
-    updating a mapping table.<a href="#section-3.1-1.8.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-1.8.1">Several extension header chains may be observed in a Flow. These extension headers
+may be aggregated in one single ipv6ExtensionHeadersFull Information Element or
+be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.<a href="#section-3.1-1.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.1-1.9"></dt>
           <dd style="margin-left: 1.5em" id="section-3.1-1.10">
-            <p id="section-3.1-1.10.1">The value should be encoded in fewer octets as per the guidelines in <span><a href="https://rfc-editor.org/rfc/rfc7011#section-6.2" class="relref">Section 6.2</a> of [<a href="#RFC7011" class="cite xref">RFC7011</a>]</span>.<a href="#section-3.1-1.10.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-1.10.1">Extension headers are mapped to bits according to their extension numbers.
+    Extension X is mapped to bit position X. This approach allows
+    an observer to export any observed extension header and without requiring
+    relying upon (including updating) a mapping table.<a href="#section-3.1-1.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.1-1.11"></dt>
           <dd style="margin-left: 1.5em" id="section-3.1-1.12">
-            <p id="section-3.1-1.12.1">The following
+            <p id="section-3.1-1.12.1">The "No Next Header" (59) value is used if there is no upper-layer header in an IPv6 packet.
+That value is not considered as an extension header as such.<a href="#section-3.1-1.12.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-3.1-1.13"></dt>
+          <dd style="margin-left: 1.5em" id="section-3.1-1.14">
+            <p id="section-3.1-1.14.1">The value should be encoded in fewer octets as per the guidelines in <span><a href="https://rfc-editor.org/rfc/rfc7011#section-6.2" class="relref">Section 6.2</a> of [<a href="#RFC7011" class="cite xref">RFC7011</a>]</span>.<a href="#section-3.1-1.14.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-3.1-1.15"></dt>
+          <dd style="margin-left: 1.5em" id="section-3.1-1.16">
+            <p id="section-3.1-1.16.1">The following
     provides an example of reported values for an IPv6 packet that only includes
-    an        Authentication Header.<a href="#section-3.1-1.12.1" class="pilcrow">¶</a></p>
+    an        Authentication Header.<a href="#section-3.1-1.16.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1384,15 +1397,21 @@ order of extension headers and number of consecutive occurrences of the same ext
           <dd class="break"></dd>
 <dt id="section-3.2-1.7"></dt>
           <dd style="margin-left: 1.5em" id="section-3.2-1.8">
-            <p id="section-3.2-1.8.1">The same extension header type may appear several times in an ipv6ExtensionHeaderCount Information Element (see <span><a href="https://rfc-editor.org/rfc/rfc8200#section-4.1" class="relref">Section 4.1</a> of [<a href="#RFC8200" class="cite xref">RFC8200</a>]</span>.
-For example, if an IPv6 packet includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
-and Destination Options header, the ipv6ExtensionHeaderCount Information Element will report two counts of the Destination Options header: the occurrences
-that are observed before the Fragment header and the occurrences right after the Fragment header.<a href="#section-3.2-1.8.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-1.8.1">If several extension headers chains are observed in a Flow, each header
+chain <span class="bcp14">MUST</span> be exported in a separate ipv6ExtensionHeaderCount IE.<a href="#section-3.2-1.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.2-1.9"></dt>
           <dd style="margin-left: 1.5em" id="section-3.2-1.10">
-            <p id="section-3.2-1.10.1">IPFIX reduced-size encoding as per <span><a href="https://rfc-editor.org/rfc/rfc7011#section-6.2" class="relref">Section 6.2</a> of [<a href="#RFC7011" class="cite xref">RFC7011</a>]</span> is used as required.<a href="#section-3.2-1.10.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-1.10.1">The same extension header type may appear several times in an ipv6ExtensionHeaderCount Information Element.
+For example, if an IPv6 packet includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
+and Destination Options header, the ipv6ExtensionHeaderCount Information Element will report two counts of the Destination Options header: the occurrences
+that are observed before the Fragment header and the occurrences right after the Fragment header.<a href="#section-3.2-1.10.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-3.2-1.11"></dt>
+          <dd style="margin-left: 1.5em" id="section-3.2-1.12">
+            <p id="section-3.2-1.12.1">IPFIX reduced-size encoding as per <span><a href="https://rfc-editor.org/rfc/rfc7011#section-6.2" class="relref">Section 6.2</a> of [<a href="#RFC7011" class="cite xref">RFC7011</a>]</span> is used as required.<a href="#section-3.2-1.12.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1452,8 +1471,9 @@ that are observed before the Fragment header and the occurrences right after the
 <dt id="section-3.3-1.5">Description:</dt>
           <dd style="margin-left: 1.5em" id="section-3.3-1.6">
             <p id="section-3.3-1.6.1">When set to "true", this Information Element indicates that the exported extension
-header information does not match the full enclosed extension headers, but only up to a
-limit set, e.g., by hardware or software.<a href="#section-3.3-1.6.1" class="pilcrow">¶</a></p>
+headers information (e.g., ipv6ExtensionHeaderFull or ipv6ExtensionHeaderCount) does
+not match the full enclosed extension headers, but only up to a
+limit that is typically set by hardware or software.<a href="#section-3.3-1.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.3-1.7"></dt>
