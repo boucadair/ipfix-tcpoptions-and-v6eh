@@ -73,14 +73,11 @@ The specification of ipv6ExtensionHeaders IPFIX IE does not:
 
 - Cover the full extension headers range ({{Section 4 of !RFC8200}}).
 - Specify the procedure to follow when all bits are exhausted.
-- Specify a means to export the number of occurences of a given extension header.
+- Specify a means to export the order and the number of occurences of a given extension header.
 - Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IANA-EH}}.
+- Specify whether the exported values matches the full observed or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}).
 
-The last issue is solved in {{?I-D.ietf-opsawg-ipfix-fixes}} which defines a new IANA registry entitled "ipv6ExtensionHeaders Bits" under the IANA IPFIX registry group {{IANA-IPFIX}}.
-
-{{sec-eh}} addresses three first issues.
-
-If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE. How an implementation disambiguates between unknown upper layers vs. extension headers is not IPFIX-specific.
+If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE. How an implementation disambiguates between unknown upper layers vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
 
 ## tcpOptions Issues
 
@@ -163,9 +160,13 @@ ElementID:
 : TBD2
 
 Description:
-: As per {{!RFC8200}}, IPv6 nodes must accept and attempt to process extension headers in
+: As per {{Section 4.1 of !RFC8200}}, IPv6 nodes must accept and attempt to process extension headers in
   occurring any number of times in the same packet. This Information Element echoes the
-  order and number of occurences of the same extension header instance in an IPv6 packet.
+  order of extension headers and number of consecutive occurrences of the same extension header type in an IPv6 packet.
+: The same extension header type may appear several times in an ipv6ExtensionHeaderCount Information Element (see {{Section 4.1 of !RFC8200}}.
+  For example, if an IPv6 packet includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
+  and Destination Options header, the ipv6ExtensionHeaderCount Information Element will report two counts of the Destination Options header: the occurrences
+  that are observed before the Fragment header and the occurrences right after the Fragment header.
 : IPFIX reduced-size encoding as per {{Section 6.2 of !RFC7011}} is used as required.
 
 ~~~~
@@ -189,6 +190,36 @@ Additional Information:
 Reference:
 : This-Document
 
+## ipv6ExtensionHeadersLimit Information Element {#sec-v6limit}
+
+Name:
+: ipv6ExtensionHeadersLimit
+
+ElementID:
+: TBD3
+
+Description:
+:  When set to "true", this Information Element indicates that the exported extension
+   header information does not match the full enclosed extension headers, but only up to a
+   limit set, e.g., by hardware or software.
+:  When set to "false", this Information Element indicates that the exported extension
+   header information matches the full enclosed extension headers.
+: When this Information Element is absent, this is equivalent to returning an ipv6ExtensionHeadersLimit
+  Information Element with a value set to "false".
+
+Abstract Data Type:
+: boolean
+
+Data Type Semantics:
+: default
+
+Additional Information:
+: See {{Section 4 of !RFC8200}} for the general definition of IPv6 extension headers.
+: See {{!RFC8883}} for an example of IPv6 packets processing due to limits on extension headers.
+
+Reference:
+: This-Document
+
 # Information Elements for TCP Options {#sec-tcp}
 
 ## tcpOptionsFull Information Element {#sec-tcpfull}
@@ -199,7 +230,7 @@ Name:
 : tcpOptionsFull
 
 ElementID:
-: TBD3
+: TBD4
 
 Description:
 : TCP options in packets of this Flow.  The information is encoded
@@ -253,7 +284,7 @@ Name:
 : tcpSharedOptionExID16
 
 ElementID:
-: TBD4
+: TBD5
 
 Description:
 : Observed 2-byte Expermients IDs (ExIDs) in a shared
@@ -279,7 +310,7 @@ Name:
 : tcpSharedOptionExID32
 
 ElementID:
-: TBD5
+: TBD6
 
 Description:
 : Observed 4-byte Expermients ID (ExIDs) in a shared
@@ -310,9 +341,10 @@ This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX
 |Value|	Name|	Reference|
 |TBD1| ipv6ExtensionHeadersFull|{{sec-v6full}} of This-Document|
 |TBD2| ipv6ExtensionHeaderCount|{{sec-v6count}} of This-Document|
-|TBD3| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
-|TBD4|tcpSharedOptionExID16|{{sec-ex16}} of This-Document|
-|TBD5| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
+|TBD3| ipv6ExtensionHeaderLimit|{{sec-v6limit}} of This-Document|
+|TBD4| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
+|TBD5|tcpSharedOptionExID16|{{sec-ex16}} of This-Document|
+|TBD6| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
 {: title="New IPFIX Information Elements"}
 
 --- back
