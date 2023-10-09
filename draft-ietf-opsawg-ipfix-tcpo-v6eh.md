@@ -352,5 +352,5 @@ This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX
 # Acknowledgments
 {:numbered="false"}
 
-Thanks to Paul Aitken for the review.
+Thanks to Paul Aitken and Eric Vyncke for the review and comments.
 
