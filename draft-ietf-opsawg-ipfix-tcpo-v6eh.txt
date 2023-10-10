@@ -66,8 +66,8 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-     1.1.  ipv6ExtensionHeaders Issues
-     1.2.  tcpOptions Issues
+     1.1.  Issues with ipv6ExtensionHeaders Information Element
+     1.2.  Issues with tcpOptions Information Element
    2.  Conventions and Definitions
    3.  Information Elements for IPv6 Extension Headers
      3.1.  ipv6ExtensionHeadersFull Information Element
@@ -92,10 +92,10 @@ Table of Contents
    This document specifies new IP Flow Information Export (IPFIX)
    Information Elements (IEs) to solve a set of issues encountered with
    the specifications of ipv6ExtensionHeaders (to export IPv6 extension
-   headers) and tcpOptions (to export TCP options).  More details about
-   these issues are provided in the following sub-sections.
+   headers) and tcpOptions (to export TCP options) IEs.  More details
+   about these issues are provided in the following sub-sections.
 
-1.1.  ipv6ExtensionHeaders Issues
+1.1.  Issues with ipv6ExtensionHeaders Information Element
 
    The specification of ipv6ExtensionHeaders IPFIX IE does not:
 
@@ -109,7 +109,7 @@ Table of Contents
    *  Specify how to automatically update the IANA IPFIX registry
       ([IANA-IPFIX]) when a new value is assigned in [IANA-EH].
 
-   *  Specify whether the exported values match the full enclosed value
+   *  Specify whether the exported values match the full enclosed values
       or only up to a limit imposed by hardware or software (e.g.,
       Section 1.1 of [RFC8883]).
 
@@ -122,7 +122,7 @@ Table of Contents
    intermediate nodes that encounters an unknown Next Header type.  It
    is out of the scope of this document to discuss those considerations.
 
-1.2.  tcpOptions Issues
+1.2.  Issues with tcpOptions Information Element
 
    The specification of tcpOptions IPFIX IE does not:
 
@@ -439,7 +439,9 @@ Table of Contents
 
 5.  Security Considerations
 
-   IPFIX security considerations are discussed in Section 8 of
+   IPFIX security considerations are discussed in Section 11 of
+   [RFC7011].  This document does not add new security considerations
+   for exporting IEs other than those already discussed in Section 8 of
    [RFC7012].
 
 6.  IANA Considerations
