@@ -348,10 +348,9 @@ Table of Contents
       in Section 6.2 of [RFC7011].  Given TCP kind allocation practices
       and the option mapping above, fewer octers are likely to be used
       for Flows with common TCP options.  For example, the following
-      provides an example of reported values for a TCP Flow that
-      includes End of Option List, Maximum Segment Size, and Window
-      Scale options.  One octet would be sufficient to report the
-      observed options.
+      shows the reported values for a TCP Flow that includes End of
+      Option List, Maximum Segment Size, and Window Scale options.  One
+      octet is sufficient to report these observed options.
 
        MSB                                                       LSB
                             1                   2     …  25
