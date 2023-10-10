@@ -73,6 +73,7 @@ Table of Contents
      3.1.  ipv6ExtensionHeadersFull Information Element
      3.2.  ipv6ExtensionHeaderCount Information Element
      3.3.  ipv6ExtensionHeadersLimit Information Element
+     3.4.  ipv6ExtensionHeadersAggrLength Information Element
    4.  Information Elements for TCP Options
      4.1.  tcpOptionsFull Information Element
      4.2.  New Information Elements for Shared TCP Options
@@ -285,6 +286,40 @@ Table of Contents
 
    Reference:  This-Document
 
+3.4.  ipv6ExtensionHeadersAggrLength Information Element
+
+   Name:  ipv6ExtensionHeadersAggrLength
+
+   ElementID:  TBD4
+
+   Description:  In theory, there are no limits on the number of IPv6
+      extension headers that may be present in a packet other than the
+      path MTU.  However, it was regularly reported that IPv6 packets
+      with extension headers are often dropped in the Internet.
+
+      As discussed in Section 1.2 of [RFC8883], some hardware devices
+      implement a parsing buffer of a fixed size to process packets,
+      including all the headers.  When the aggregate header length of an
+      IPv6 packet exceeds that size, the packet will be discarded or
+      deferred to a slow path.
+
+      The ipv6ExtensionHeadersAggrLength IE is used to report the
+      aggregate length of enclosed extension headers chain of a Flow.
+      Exporting such information may help identifying root causes of
+      performance degradation, including packet drops.
+
+   Abstract Data Type:  unsigned
+
+   Data Type Semantics:  identifier
+
+   Additional Information:  See Section 4 of [RFC8200] for the general
+      definition of IPv6 extension headers.
+
+      See [RFC9098] for an overview of operational implications of IPv6
+      packets with extension headerss.
+
+   Reference:  This-Document
+
 4.  Information Elements for TCP Options
 
 4.1.  tcpOptionsFull Information Element
@@ -294,7 +329,7 @@ Table of Contents
 
    Name:  tcpOptionsFull
 
-   ElementID:  TBD4
+   ElementID:  TBD5
 
    Description:  TCP options in packets of this Flow.  The information
       is encoded in a set of bit fields.  For each TCP option, there is
@@ -358,7 +393,7 @@ Table of Contents
 
    Name:  tcpSharedOptionExID16
 
-   ElementID:  TBD5
+   ElementID:  TBD6
 
    Description:  Observed 2-byte Expermients IDs (ExIDs) in a shared TCP
       option (Kind=253 or 254).  The information is encoded in a set of
@@ -378,7 +413,7 @@ Table of Contents
 
    Name:  tcpSharedOptionExID32
 
-   ElementID:  TBD6
+   ElementID:  TBD7
 
    Description:  Observed 4-byte Expermients ID (ExIDs) in a shared TCP
       option (Kind=253 or 254).  The information is encoded in a set of
@@ -404,23 +439,30 @@ Table of Contents
    This document requests IANA to add the following new IPFIX IEs to the
    IANA IPFIX registry [IANA-IPFIX]:
 
-   +=======+==========================+================================+
-   | Value | Name                     | Reference                      |
-   +=======+==========================+================================+
-   | TBD1  | ipv6ExtensionHeadersFull | Section 3.1 of This-Document   |
-   +-------+--------------------------+--------------------------------+
-   | TBD2  | ipv6ExtensionHeaderCount | Section 3.2 of This-Document   |
-   +-------+--------------------------+--------------------------------+
-   | TBD3  | ipv6ExtensionHeaderLimit | Section 3.3 of This-Document   |
-   +-------+--------------------------+--------------------------------+
-   | TBD4  | tcpOptionsFull           | Section 4.1 of This-Document   |
-   +-------+--------------------------+--------------------------------+
-   | TBD5  | tcpSharedOptionExID16    | Section 4.2.1 of This-         |
-   |       |                          | Document                       |
-   +-------+--------------------------+--------------------------------+
-   | TBD6  | tcpSharedOptionExID32    | Section 4.2.2 of This-         |
-   |       |                          | Document                       |
-   +-------+--------------------------+--------------------------------+
+       +=======+================================+==================+
+       | Value | Name                           | Reference        |
+       +=======+================================+==================+
+       | TBD1  | ipv6ExtensionHeadersFull       | Section 3.1 of   |
+       |       |                                | This-Document    |
+       +-------+--------------------------------+------------------+
+       | TBD2  | ipv6ExtensionHeaderCount       | Section 3.2 of   |
+       |       |                                | This-Document    |
+       +-------+--------------------------------+------------------+
+       | TBD3  | ipv6ExtensionHeaderLimit       | Section 3.3 of   |
+       |       |                                | This-Document    |
+       +-------+--------------------------------+------------------+
+       | TBD4  | ipv6ExtensionHeadersAggrLength | Section 3.4 of   |
+       |       |                                | This-Document    |
+       +-------+--------------------------------+------------------+
+       | TBD5  | tcpOptionsFull                 | Section 4.1 of   |
+       |       |                                | This-Document    |
+       +-------+--------------------------------+------------------+
+       | TBD6  | tcpSharedOptionExID16          | Section 4.2.1 of |
+       |       |                                | This-Document    |
+       +-------+--------------------------------+------------------+
+       | TBD7  | tcpSharedOptionExID32          | Section 4.2.2 of |
+       |       |                                | This-Document    |
+       +-------+--------------------------------+------------------+
 
                   Table 1: New IPFIX Information Elements
 
@@ -485,6 +527,11 @@ Table of Contents
    [RFC8883]  Herbert, T., "ICMPv6 Errors for Discarding Packets Due to
               Processing Limits", RFC 8883, DOI 10.17487/RFC8883,
               September 2020, <https://www.rfc-editor.org/rfc/rfc8883>.
+
+   [RFC9098]  Gont, F., Hilliard, N., Doering, G., Kumari, W., Huston,
+              G., and W. Liu, "Operational Implications of IPv6 Packets
+              with Extension Headers", RFC 9098, DOI 10.17487/RFC9098,
+              September 2021, <https://www.rfc-editor.org/rfc/rfc9098>.
 
 Acknowledgments
 
