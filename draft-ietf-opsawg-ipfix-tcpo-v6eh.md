@@ -65,9 +65,9 @@ This document specifies new IP Flow Information Export (IPFIX) Information Eleme
 
 # Introduction
 
-This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve a set of issues encountered with the specifications of ipv6ExtensionHeaders (to export IPv6 extension headers) and tcpOptions (to export TCP options). More details about these issues are provided in the following sub-sections.
+This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve a set of issues encountered with the specifications of ipv6ExtensionHeaders (to export IPv6 extension headers) and tcpOptions (to export TCP options) IEs. More details about these issues are provided in the following sub-sections.
 
-## ipv6ExtensionHeaders Issues
+## Issues with ipv6ExtensionHeaders Information Element
 
 The specification of ipv6ExtensionHeaders IPFIX IE does not:
 
@@ -75,11 +75,11 @@ The specification of ipv6ExtensionHeaders IPFIX IE does not:
 - Specify the procedure to follow when all bits are exhausted.
 - Specify a means to export the order and the number of occurences of a given extension header.
 - Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IANA-EH}}.
-- Specify whether the exported values match the full enclosed value or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}).
+- Specify whether the exported values match the full enclosed values or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}).
 
 If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE. How an implementation disambiguates between unknown upper layers vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
 
-## tcpOptions Issues
+## Issues with tcpOptions Information Element
 
 The specification of tcpOptions IPFIX IE does not:
 
@@ -391,7 +391,7 @@ Reference:
 
 # Security Considerations
 
-IPFIX security considerations are discussed in {{Section 8 of !RFC7012}}.
+IPFIX security considerations are discussed in {{Section 11 of !RFC7011}}. This document does not add new security considerations for exporting IEs other than those already discussed in {{Section 8 of !RFC7012}}.
 
 # IANA Considerations
 
