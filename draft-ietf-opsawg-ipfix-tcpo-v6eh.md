@@ -289,11 +289,11 @@ Description:
 Given TCP kind allocation practices and the option mapping above, fewer octers are likely to be used for
 Flows with common TCP options.
 
-: The following 
+: The following
       first example shows reported values for a TCP Flow that includes
       End of Option List, Maximum Segment Size, and Window Scale options.
       One octet is sufficient to report these observed options.
- 
+
  : The second example shows reported values for a TCP Flow that includes
   End of Option List, Maximum Segment Size, Window Scale, and shared
   TCP options. The reduced encoding is not possible in this case.
