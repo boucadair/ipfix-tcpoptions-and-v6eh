@@ -69,14 +69,14 @@ Table of Contents
      1.1.  ipv6ExtensionHeaders Issues
      1.2.  tcpOptions Issues
    2.  Conventions and Definitions
-   3.  IPv6 Extension Header
+   3.  Information Elements for IPv6 Extension Headers
      3.1.  ipv6ExtensionHeadersFull Information Element
      3.2.  ipv6ExtensionHeaderCount Information Element
      3.3.  ipv6ExtensionHeadersLimit Information Element
      3.4.  ipv6ExtensionHeadersAggrLength Information Element
    4.  Information Elements for TCP Options
      4.1.  tcpOptionsFull Information Element
-     4.2.  New Information Elements for Shared TCP Options
+     4.2.  Information Elements for Shared TCP Options
        4.2.1.  tcpSharedOptionExID16 Information Element
        4.2.2.  tcpSharedOptionExID32 Information Element
    5.  Security Considerations
@@ -150,7 +150,7 @@ Table of Contents
    [RFC7011].  As in [RFC7011], these IPFIX-specific terms have the
    first letter of a word capitalized.
 
-3.  IPv6 Extension Header
+3.  Information Elements for IPv6 Extension Headers
 
 3.1.  ipv6ExtensionHeadersFull Information Element
 
@@ -383,7 +383,7 @@ Table of Contents
 
    Reference:  This-Document
 
-4.2.  New Information Elements for Shared TCP Options
+4.2.  Information Elements for Shared TCP Options
 
    ExIDs can be either 2 or 4 bytes in length [RFC6994].  Two new IPFIX
    IEs are defined to accomodate these two lengths without introducing
