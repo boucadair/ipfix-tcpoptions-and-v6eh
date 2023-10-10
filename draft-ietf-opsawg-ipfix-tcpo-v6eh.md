@@ -98,7 +98,7 @@ This document uses the IPFIX-specific terminology (Information Element, Template
    {{Section 2 of !RFC7011}}. As in {{!RFC7011}}, these IPFIX-specific terms
    have the first letter of a word capitalized.
 
-# IPv6 Extension Header {#sec-eh}
+# Information Elements for IPv6 Extension Headers {#sec-eh}
 
 ## ipv6ExtensionHeadersFull Information Element {#sec-v6full}
 
@@ -329,7 +329,7 @@ Additional Information:
 Reference:
 : This-Document
 
-## New Information Elements for Shared TCP Options
+## Information Elements for Shared TCP Options
 
 ExIDs can be either 2 or 4 bytes in length {{!RFC6994}}. Two new IPFIX IEs are defined to accomodate these two lengths without introducing extra complexity in mixing both types in the same IPFIX IE.
 
