@@ -126,7 +126,7 @@ Description:
 : The "No Next Header" (59) value is used if there is no upper-layer header in an IPv6 packet.
   Even if the value is not considered as an extension header as such, the corresponding
   bit is set in the ipv6ExtensionHeadersFull IE whenever that value is encountered in the Flow.
-
+: This Information Element SHOULD NOT be exported if ipv6ExtensionHeaderCount Information Element is also present.
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
 : The following
@@ -287,29 +287,29 @@ Description:
 
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 Given TCP kind allocation practices and the option mapping above, fewer octers are likely to be used for
-Flows with common TCP options. For example, the following
-      shows the reported values for a TCP Flow that includes
+Flows with common TCP options.
+
+: The following 
+      first example shows reported values for a TCP Flow that includes
       End of Option List, Maximum Segment Size, and Window Scale options.
       One octet is sufficient to report these observed options.
+ 
+ : The second example shows reported values for a TCP Flow that includes
+  End of Option List, Maximum Segment Size, Window Scale, and shared
+  TCP options. The reduced encoding is not possible in this case.
 
 ~~~~
+# First Example
+
 MSB                                                       LSB
                      1                   2     …  25
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-~~~~
-{: artwork-align="center"}
 
+# Second Example
 
-: The following
-  provides an example of reported values for a TCP Flow that includes
-  End of Option List, Maximum Segment Size, Window Scale, and shared
-  TCP options. The reduced encoding is not possible in this case.
-
-
-~~~~
 MSB                                                       LSB
                      1                   2     …  25
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
@@ -318,6 +318,7 @@ MSB                                                       LSB
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 ~~~~
 {: artwork-align="center"}
+
 
 Abstract Data Type:
 : unsigned
