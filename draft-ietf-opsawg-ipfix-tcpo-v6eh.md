@@ -249,23 +249,37 @@ Description:
       packet of this Flow contained the respective TCP option, the value
       of the corresponding bit is 0.
 : Options are mapped to bits according to their option numbers.
-      Option number X is mapped to bit position X. This approach allows
+      Option number X is mapped to bit position "254 - X". This approach allows
       an observer to export any observed TCP option even if it does support
       that option and without requiring updating a mapping table.
 
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
-
-: The following
-      provides an example of reported values for a TCP segment that includes
-      End of Option List, Maximum Segment Size, Window Scale, and
-      a Shared TCP options.
+Given TCP kind allocation practices and the option mapping above, fewer octers are likely to be used for
+Flows with common TCP options. For example, the following
+      provides an example of reported values for a TCP Flow that includes
+      End of Option List, Maximum Segment Size, and Window Scale options.
+      One octet would be sufficient to report the observed options.
 
 ~~~~
 MSB                                                       LSB
                      1                   2     …  25
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-|1|0|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|1|0|
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+~~~~
+{: artwork-align="center"}
+
+: The following
+      provides an example of reported values for a TCP Flow that includes
+      End of Option List, Maximum Segment Size, Window Scale, and shared TCP options. The reduced encoding is not possible in this case.
+
+~~~~
+MSB                                                       LSB
+                     1                   2     …  25
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 ~~~~
 {: artwork-align="center"}
