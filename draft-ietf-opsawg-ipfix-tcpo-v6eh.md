@@ -288,9 +288,9 @@ Description:
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 Given TCP kind allocation practices and the option mapping above, fewer octers are likely to be used for
 Flows with common TCP options. For example, the following
-      provides an example of reported values for a TCP Flow that includes
+      shows the reported values for a TCP Flow that includes
       End of Option List, Maximum Segment Size, and Window Scale options.
-      One octet would be sufficient to report the observed options.
+      One octet is sufficient to report these observed options.
 
 ~~~~
 MSB                                                       LSB
@@ -302,9 +302,12 @@ MSB                                                       LSB
 ~~~~
 {: artwork-align="center"}
 
+
 : The following
-      provides an example of reported values for a TCP Flow that includes
-      End of Option List, Maximum Segment Size, Window Scale, and shared TCP options. The reduced encoding is not possible in this case.
+  provides an example of reported values for a TCP Flow that includes
+  End of Option List, Maximum Segment Size, Window Scale, and shared
+  TCP options. The reduced encoding is not possible in this case.
+
 
 ~~~~
 MSB                                                       LSB
