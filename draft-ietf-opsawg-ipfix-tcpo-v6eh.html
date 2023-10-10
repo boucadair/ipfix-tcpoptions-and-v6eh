@@ -1326,14 +1326,19 @@ bit is set in the ipv6ExtensionHeadersFull IE whenever that value is encountered
           <dd class="break"></dd>
 <dt id="section-3.1-1.13"></dt>
           <dd style="margin-left: 1.5em" id="section-3.1-1.14">
-            <p id="section-3.1-1.14.1">The value should be encoded in fewer octets as per the guidelines in <span><a href="https://rfc-editor.org/rfc/rfc7011#section-6.2" class="relref">Section 6.2</a> of [<a href="#RFC7011" class="cite xref">RFC7011</a>]</span>.<a href="#section-3.1-1.14.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-1.14.1">This Information Element <span class="bcp14">SHOULD NOT</span> be exported if ipv6ExtensionHeaderCount Information Element is also present.<a href="#section-3.1-1.14.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.1-1.15"></dt>
           <dd style="margin-left: 1.5em" id="section-3.1-1.16">
-            <p id="section-3.1-1.16.1">The following
+            <p id="section-3.1-1.16.1">The value should be encoded in fewer octets as per the guidelines in <span><a href="https://rfc-editor.org/rfc/rfc7011#section-6.2" class="relref">Section 6.2</a> of [<a href="#RFC7011" class="cite xref">RFC7011</a>]</span>.<a href="#section-3.1-1.16.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-3.1-1.17"></dt>
+          <dd style="margin-left: 1.5em" id="section-3.1-1.18">
+            <p id="section-3.1-1.18.1">The following
     provides an example of reported values for an IPv6 packet that only includes
-    an        Authentication Header.<a href="#section-3.1-1.16.1" class="pilcrow">¶</a></p>
+    an        Authentication Header.<a href="#section-3.1-1.18.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1631,61 +1636,70 @@ root causes of performance degradation, including packet drops.<a href="#section
           <dd style="margin-left: 1.5em" id="section-4.1-2.10">
             <p id="section-4.1-2.10.1">The value should be encoded in fewer octets as per the guidelines in <span><a href="https://rfc-editor.org/rfc/rfc7011#section-6.2" class="relref">Section 6.2</a> of [<a href="#RFC7011" class="cite xref">RFC7011</a>]</span>.
 Given TCP kind allocation practices and the option mapping above, fewer octers are likely to be used for
-Flows with common TCP options. For example, the following
-    shows the reported values for a TCP Flow that includes
+Flows with common TCP options.<a href="#section-4.1-2.10.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.1-2.11"></dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-2.12">
+            <p id="section-4.1-2.12.1">The following
+    first example shows reported values for a TCP Flow that includes
     End of Option List, Maximum Segment Size, and Window Scale options.
-    One octet is sufficient to report these observed options.<a href="#section-4.1-2.10.1" class="pilcrow">¶</a></p>
+    One octet is sufficient to report these observed options.<a href="#section-4.1-2.12.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.1-2.13"></dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-2.14">
+            <p id="section-4.1-2.14.1">The second example shows reported values for a TCP Flow that includes
+  End of Option List, Maximum Segment Size, Window Scale, and shared
+  TCP options. The reduced encoding is not possible in this case.<a href="#section-4.1-2.14.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
 <div class="alignCenter art-text artwork" id="section-4.1-3">
 <pre>
+# First Example
+
 MSB                                                       LSB
                      1                   2     …  25
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-</pre><a href="#section-4.1-3" class="pilcrow">¶</a>
-</div>
-<p id="section-4.1-4">: The following
-  provides an example of reported values for a TCP Flow that includes
-  End of Option List, Maximum Segment Size, Window Scale, and shared
-  TCP options. The reduced encoding is not possible in this case.<a href="#section-4.1-4" class="pilcrow">¶</a></p>
-<div class="alignCenter art-text artwork" id="section-4.1-5">
-<pre>
+
+# Second Example
+
 MSB                                                       LSB
                      1                   2     …  25
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 |0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-</pre><a href="#section-4.1-5" class="pilcrow">¶</a>
+</pre><a href="#section-4.1-3" class="pilcrow">¶</a>
 </div>
-<span class="break"></span><dl class="dlParallel" id="section-4.1-6">
-          <dt id="section-4.1-6.1">Abstract Data Type:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.1-6.2">
-            <p id="section-4.1-6.2.1">unsigned<a href="#section-4.1-6.2.1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-4.1-4">
+          <dt id="section-4.1-4.1">Abstract Data Type:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-4.2">
+            <p id="section-4.1-4.2.1">unsigned<a href="#section-4.1-4.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.1-6.3">Data Type Semantics:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.1-6.4">
-            <p id="section-4.1-6.4.1">flags<a href="#section-4.1-6.4.1" class="pilcrow">¶</a></p>
+<dt id="section-4.1-4.3">Data Type Semantics:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-4.4">
+            <p id="section-4.1-4.4.1">flags<a href="#section-4.1-4.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.1-6.5">Additional Information:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.1-6.6">
-            <p id="section-4.1-6.6.1">See the assigned TCP option kinds at <span>[<a href="#IANA-TCP" class="cite xref">IANA-TCP</a>]</span>.<a href="#section-4.1-6.6.1" class="pilcrow">¶</a></p>
+<dt id="section-4.1-4.5">Additional Information:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-4.6">
+            <p id="section-4.1-4.6.1">See the assigned TCP option kinds at <span>[<a href="#IANA-TCP" class="cite xref">IANA-TCP</a>]</span>.<a href="#section-4.1-4.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.1-6.7"></dt>
-          <dd style="margin-left: 1.5em" id="section-4.1-6.8">
-            <p id="section-4.1-6.8.1">See <span>[<a href="#RFC9293" class="cite xref">RFC9293</a>]</span> for the general definition of TCP options.<a href="#section-4.1-6.8.1" class="pilcrow">¶</a></p>
+<dt id="section-4.1-4.7"></dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-4.8">
+            <p id="section-4.1-4.8.1">See <span>[<a href="#RFC9293" class="cite xref">RFC9293</a>]</span> for the general definition of TCP options.<a href="#section-4.1-4.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.1-6.9">Reference:</dt>
-          <dd style="margin-left: 1.5em" id="section-4.1-6.10">
-            <p id="section-4.1-6.10.1">This-Document<a href="#section-4.1-6.10.1" class="pilcrow">¶</a></p>
+<dt id="section-4.1-4.9">Reference:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.1-4.10">
+            <p id="section-4.1-4.10.1">This-Document<a href="#section-4.1-4.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
