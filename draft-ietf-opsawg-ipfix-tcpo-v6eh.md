@@ -229,10 +229,10 @@ Additional Information:
 Reference:
 : This-Document
 
-## ipv6ExtensionHeadersAggrLength Information Element {#sec-v6aggr}
+## ipv6ExtensionHeadersChainLength Information Element {#sec-v6aggr}
 
 Name:
-: ipv6ExtensionHeadersAggrLength
+: ipv6ExtensionHeadersChainLength
 
 ElementID:
 : TBD4
@@ -244,7 +244,7 @@ Description:
 : As discussed in {{Section 1.2 of ?RFC8883}}, some hardware devices implement
   a parsing buffer of a fixed size to process packets, including all the headers.
   When the aggregate header length of an IPv6 packet exceeds that size, the packet will be discarded or deferred to a slow path.
-: The ipv6ExtensionHeadersAggrLength IE is used to report the aggregate length of enclosed
+: The ipv6ExtensionHeadersChainLength IE is used to report the aggregate length of enclosed
   extension headers chain of a Flow. Exporting such information may help identifying
   root causes of performance degradation, including packet drops.
 
@@ -401,7 +401,7 @@ This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX
 |TBD1| ipv6ExtensionHeadersFull|{{sec-v6full}} of This-Document|
 |TBD2| ipv6ExtensionHeaderCount|{{sec-v6count}} of This-Document|
 |TBD3| ipv6ExtensionHeaderLimit|{{sec-v6limit}} of This-Document|
-|TBD4| ipv6ExtensionHeadersAggrLength |{{sec-v6aggr}} of This-Document|
+|TBD4| ipv6ExtensionHeadersChainLength |{{sec-v6aggr}} of This-Document|
 |TBD5| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
 |TBD6| tcpSharedOptionExID16|{{sec-ex16}} of This-Document|
 |TBD7| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
