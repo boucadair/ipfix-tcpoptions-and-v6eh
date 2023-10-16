@@ -74,6 +74,7 @@ Table of Contents
      3.2.  ipv6ExtensionHeaderCount Information Element
      3.3.  ipv6ExtensionHeadersLimit Information Element
      3.4.  ipv6ExtensionHeadersChainLength Information Element
+     3.5.  Operational Considerations
    4.  Information Elements for TCP Options
      4.1.  tcpOptionsFull Information Element
      4.2.  Information Elements for Shared TCP Options
@@ -113,6 +114,8 @@ Table of Contents
       or only up to a limit imposed by hardware or software (e.g.,
       Section 1.1 of [RFC8883]).
 
+   *  Specify how to report the length of IPv6 extension headers.
+
    Section 3 addresses these issues.
 
 1.2.  Issues with tcpOptions Information Element
@@ -143,6 +146,17 @@ Table of Contents
    [RFC7011].  As in [RFC7011], these IPFIX-specific terms have the
    first letter of a word capitalized.
 
+   Also, the document uses the terms defined in [RFC8200] and [RFC9293].
+
+   In addition, the document makes use of the following term:
+
+   Extension header chain:  Refers to the chain of extension headers
+      that are present in an IPv6 packet.
+
+      This term should not be confused with the IPv6 header chain, which
+      includes the IPv6 header, zero or more IPv6 extension headers, and
+      zero or a single Upper-Layer Header.
+
 3.  Information Elements for IPv6 Extension Headers
 
    The definition of the ipv6ExtensionHeaders Information is updated in
@@ -151,21 +165,6 @@ Table of Contents
    simple updates to ipv6ExtensionHeaders, this section specifies a set
    of new Information Elements to address all the ipv6ExtensionHeaders
    limitations.
-
-   If an implementation determines that it includes an extension header
-   that it does no support, then the exact observed code of that
-   extension header will be echoed in the ipv6ExtensionHeadersFull IE
-   (Section 3.1).  How an implementation disambiguates between unknown
-   upper layers vs. extension headers is not IPFIX-specific.  Readers
-   may refer, for example, to Section 2.2 of [RFC8883] for a behavior of
-   an intermediate nodes that encounters an unknown Next Header type.
-   It is out of the scope of this document to discuss those
-   considerations.
-
-   The ipv6ExtensionHeadersLimit IE (Section 3.3) may or may not be
-   present when the ipv6ExtensionHeadersChainLength IE (Section 3.4) is
-   also present as these IEs are targeting distinct properties of
-   extension headers handling.
 
 3.1.  ipv6ExtensionHeadersFull Information Element
 
@@ -239,7 +238,7 @@ Table of Contents
       order of extension headers and number of consecutive occurrences
       of the same extension header type in a Flow.
 
-      If several extension headers chains are observed in a Flow, each
+      If several extension header chains are observed in a Flow, each
       header chain MUST be exported in a separate
       ipv6ExtensionHeaderCount IE.
 
@@ -322,7 +321,7 @@ Table of Contents
       or deferred to a slow path.
 
       The ipv6ExtensionHeadersChainLength IE is used to report, in
-      octets, the length of an extension headers chain observed in a
+      octets, the length of an extension header chain observed in a
       Flow.  The length is the sum of the length of all extension
       headers of the chain.  Exporting such information may help
       identifying root causes of performance degradation, including
@@ -341,6 +340,23 @@ Table of Contents
       packets with extension headerss.
 
    Reference:  This-Document
+
+3.5.  Operational Considerations
+
+   If an implementation determines that it includes an extension header
+   that it does no support, then the exact observed code of that
+   extension header will be echoed in the ipv6ExtensionHeadersFull IE
+   (Section 3.1).  How an implementation disambiguates between unknown
+   upper-layer protocols vs. extension headers is not IPFIX-specific.
+   Readers may refer, for example, to Section 2.2 of [RFC8883] for a
+   behavior of an intermediate nodes that encounters an unknown Next
+   Header type.  It is out of the scope of this document to discuss
+   those considerations.
+
+   The ipv6ExtensionHeadersLimit IE (Section 3.3) may or may not be
+   present when the ipv6ExtensionHeadersChainLength IE (Section 3.4) is
+   also present as these IEs are targeting distinct properties of
+   extension headers handling.
 
 4.  Information Elements for TCP Options
 
