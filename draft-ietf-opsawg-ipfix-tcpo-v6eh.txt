@@ -162,6 +162,11 @@ Table of Contents
    It is out of the scope of this document to discuss those
    considerations.
 
+   The ipv6ExtensionHeadersLimit IE (Section 3.3) may or may not be
+   present when the ipv6ExtensionHeadersChainLength IE (Section 3.4) is
+   also present as these IEs are targeting distinct properties of
+   extension headers handling.
+
 3.1.  ipv6ExtensionHeadersFull Information Element
 
    Name:  ipv6ExtensionHeadersFull
@@ -312,18 +317,22 @@ Table of Contents
 
       As discussed in Section 1.2 of [RFC8883], some hardware devices
       implement a parsing buffer of a fixed size to process packets,
-      including all the headers.  When the aggregate header length of an
-      IPv6 packet exceeds that size, the packet will be discarded or
-      deferred to a slow path.
+      including all the headers.  When the aggregate length of headers
+      of an IPv6 packet exceeds that size, the packet will be discarded
+      or deferred to a slow path.
 
-      The ipv6ExtensionHeadersChainLength IE is used to report the
-      aggregate length of enclosed extension headers chain of a Flow.
-      Exporting such information may help identifying root causes of
-      performance degradation, including packet drops.
+      The ipv6ExtensionHeadersChainLength IE is used to report, in
+      octets, the length of an extension headers chain observed in a
+      Flow.  The length is the sum of the length of all extension
+      headers of the chain.  Exporting such information may help
+      identifying root causes of performance degradation, including
+      packet drops.
 
    Abstract Data Type:  unsigned
 
    Data Type Semantics:  identifier
+
+   Units:  octets
 
    Additional Information:  See Section 4 of [RFC8200] for the general
       definition of IPv6 extension headers.
