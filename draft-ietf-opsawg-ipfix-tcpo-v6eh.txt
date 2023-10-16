@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 12 April 2024                                            Huawei
-                                                         10 October 2023
+Expires: 18 April 2024                                            Huawei
+                                                         16 October 2023
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 April 2024.
+   This Internet-Draft will expire on 18 April 2024.
 
 Copyright Notice
 
@@ -73,7 +73,7 @@ Table of Contents
      3.1.  ipv6ExtensionHeadersFull Information Element
      3.2.  ipv6ExtensionHeaderCount Information Element
      3.3.  ipv6ExtensionHeadersLimit Information Element
-     3.4.  ipv6ExtensionHeadersAggrLength Information Element
+     3.4.  ipv6ExtensionHeadersChainLength Information Element
    4.  Information Elements for TCP Options
      4.1.  tcpOptionsFull Information Element
      4.2.  Information Elements for Shared TCP Options
@@ -113,14 +113,7 @@ Table of Contents
       or only up to a limit imposed by hardware or software (e.g.,
       Section 1.1 of [RFC8883]).
 
-   If an implementation determines that it includes an extension header
-   that it does no support, then the exact observed code of that
-   extension header will be echoed in the ipv6ExtensionHeadersFull IE.
-   How an implementation disambiguates between unknown upper layers vs.
-   extension headers is not IPFIX-specific.  Readers may refer, for
-   example, to Section 2.2 of [RFC8883] for a behavior of an
-   intermediate nodes that encounters an unknown Next Header type.  It
-   is out of the scope of this document to discuss those considerations.
+   Section 3 addresses these issues.
 
 1.2.  Issues with tcpOptions Information Element
 
@@ -152,6 +145,23 @@ Table of Contents
 
 3.  Information Elements for IPv6 Extension Headers
 
+   The definition of the ipv6ExtensionHeaders Information is updated in
+   [I-D.ietf-opsawg-ipfix-fixes] to address some of the issues listed in
+   Section 1.1.  Because some of these limitations can't be addressed by
+   simple updates to ipv6ExtensionHeaders, this section specifies a set
+   of new Information Elements to address all the ipv6ExtensionHeaders
+   limitations.
+
+   If an implementation determines that it includes an extension header
+   that it does no support, then the exact observed code of that
+   extension header will be echoed in the ipv6ExtensionHeadersFull IE
+   (Section 3.1).  How an implementation disambiguates between unknown
+   upper layers vs. extension headers is not IPFIX-specific.  Readers
+   may refer, for example, to Section 2.2 of [RFC8883] for a behavior of
+   an intermediate nodes that encounters an unknown Next Header type.
+   It is out of the scope of this document to discuss those
+   considerations.
+
 3.1.  ipv6ExtensionHeadersFull Information Element
 
    Name:  ipv6ExtensionHeadersFull
@@ -166,12 +176,6 @@ Table of Contents
       packet of this Flow contained the respective IPv6 extension
       header, the value of the corresponding bit is 0.
 
-      Several extension header chains may be observed in a Flow.  These
-      extension headers may be aggregated in one single
-      ipv6ExtensionHeadersFull Information Element or be exported in
-      separate ipv6ExtensionHeadersFull IEs, one for each extension
-      header chain.
-
       Extension headers are mapped to bits according to their extension
       numbers.  Extension X is mapped to bit position X.  This approach
       allows an observer to export any observed extension header and
@@ -183,6 +187,12 @@ Table of Contents
       an extension header as such, the corresponding bit is set in the
       ipv6ExtensionHeadersFull IE whenever that value is encountered in
       the Flow.
+
+      Several extension header chains may be observed in a Flow.  These
+      extension headers may be aggregated in one single
+      ipv6ExtensionHeadersFull Information Element or be exported in
+      separate ipv6ExtensionHeadersFull IEs, one for each extension
+      header chain.
 
       This Information Element SHOULD NOT be exported if
       ipv6ExtensionHeaderCount Information Element is also present.
@@ -222,7 +232,7 @@ Table of Contents
       and attempt to process extension headers in occurring any number
       of times in the same packet.  This Information Element echoes the
       order of extension headers and number of consecutive occurrences
-      of the same extension header type in an IPv6 packet.
+      of the same extension header type in a Flow.
 
       If several extension headers chains are observed in a Flow, each
       header chain MUST be exported in a separate
@@ -230,12 +240,12 @@ Table of Contents
 
       The same extension header type may appear several times in an
       ipv6ExtensionHeaderCount Information Element.  For example, if an
-      IPv6 packet includes a Hop-by-Hop Options header, a Destination
-      Options header, a Fragment header, and Destination Options header,
-      the ipv6ExtensionHeaderCount Information Element will report two
-      counts of the Destination Options header: the occurrences that are
-      observed before the Fragment header and the occurrences right
-      after the Fragment header.
+      IPv6 packet of a Flow includes a Hop-by-Hop Options header, a
+      Destination Options header, a Fragment header, and Destination
+      Options header, the ipv6ExtensionHeaderCount Information Element
+      will report two counts of the Destination Options header: the
+      occurrences that are observed before the Fragment header and the
+      occurrences right after the Fragment header.
 
       IPFIX reduced-size encoding as per Section 6.2 of [RFC7011] is
       used as required.
@@ -289,9 +299,9 @@ Table of Contents
 
    Reference:  This-Document
 
-3.4.  ipv6ExtensionHeadersAggrLength Information Element
+3.4.  ipv6ExtensionHeadersChainLength Information Element
 
-   Name:  ipv6ExtensionHeadersAggrLength
+   Name:  ipv6ExtensionHeadersChainLength
 
    ElementID:  TBD4
 
@@ -306,7 +316,7 @@ Table of Contents
       IPv6 packet exceeds that size, the packet will be discarded or
       deferred to a slow path.
 
-      The ipv6ExtensionHeadersAggrLength IE is used to report the
+      The ipv6ExtensionHeadersChainLength IE is used to report the
       aggregate length of enclosed extension headers chain of a Flow.
       Exporting such information may help identifying root causes of
       performance degradation, including packet drops.
@@ -449,32 +459,32 @@ Table of Contents
    This document requests IANA to add the following new IPFIX IEs to the
    IANA IPFIX registry [IANA-IPFIX]:
 
-       +=======+================================+==================+
-       | Value | Name                           | Reference        |
-       +=======+================================+==================+
-       | TBD1  | ipv6ExtensionHeadersFull       | Section 3.1 of   |
-       |       |                                | This-Document    |
-       +-------+--------------------------------+------------------+
-       | TBD2  | ipv6ExtensionHeaderCount       | Section 3.2 of   |
-       |       |                                | This-Document    |
-       +-------+--------------------------------+------------------+
-       | TBD3  | ipv6ExtensionHeaderLimit       | Section 3.3 of   |
-       |       |                                | This-Document    |
-       +-------+--------------------------------+------------------+
-       | TBD4  | ipv6ExtensionHeadersAggrLength | Section 3.4 of   |
-       |       |                                | This-Document    |
-       +-------+--------------------------------+------------------+
-       | TBD5  | tcpOptionsFull                 | Section 4.1 of   |
-       |       |                                | This-Document    |
-       +-------+--------------------------------+------------------+
-       | TBD6  | tcpSharedOptionExID16          | Section 4.2.1 of |
-       |       |                                | This-Document    |
-       +-------+--------------------------------+------------------+
-       | TBD7  | tcpSharedOptionExID32          | Section 4.2.2 of |
-       |       |                                | This-Document    |
-       +-------+--------------------------------+------------------+
+      +=======+=================================+==================+
+      | Value | Name                            | Reference        |
+      +=======+=================================+==================+
+      | TBD1  | ipv6ExtensionHeadersFull        | Section 3.1 of   |
+      |       |                                 | This-Document    |
+      +-------+---------------------------------+------------------+
+      | TBD2  | ipv6ExtensionHeaderCount        | Section 3.2 of   |
+      |       |                                 | This-Document    |
+      +-------+---------------------------------+------------------+
+      | TBD3  | ipv6ExtensionHeaderLimit        | Section 3.3 of   |
+      |       |                                 | This-Document    |
+      +-------+---------------------------------+------------------+
+      | TBD4  | ipv6ExtensionHeadersChainLength | Section 3.4 of   |
+      |       |                                 | This-Document    |
+      +-------+---------------------------------+------------------+
+      | TBD5  | tcpOptionsFull                  | Section 4.1 of   |
+      |       |                                 | This-Document    |
+      +-------+---------------------------------+------------------+
+      | TBD6  | tcpSharedOptionExID16           | Section 4.2.1 of |
+      |       |                                 | This-Document    |
+      +-------+---------------------------------+------------------+
+      | TBD7  | tcpSharedOptionExID32           | Section 4.2.2 of |
+      |       |                                 | This-Document    |
+      +-------+---------------------------------+------------------+
 
-                  Table 1: New IPFIX Information Elements
+                 Table 1: New IPFIX Information Elements
 
 7.  References
 
@@ -533,6 +543,14 @@ Table of Contents
               <https://www.rfc-editor.org/rfc/rfc9293>.
 
 7.2.  Informative References
+
+   [I-D.ietf-opsawg-ipfix-fixes]
+              Boucadair, M. and B. Claise, "Simple Fixes to the IP Flow
+              Information Export (IPFIX) IANA Registry", Work in
+              Progress, Internet-Draft, draft-ietf-opsawg-ipfix-fixes-
+              02, 20 September 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
+              ipfix-fixes-02>.
 
    [RFC8883]  Herbert, T., "ICMPv6 Errors for Discarding Packets Due to
               Processing Limits", RFC 8883, DOI 10.17487/RFC8883,
