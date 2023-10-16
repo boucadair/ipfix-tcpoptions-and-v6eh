@@ -104,6 +104,8 @@ The definition of the ipv6ExtensionHeaders Information is updated in {{?I-D.ietf
 
 If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE ({{sec-v6full}}). How an implementation disambiguates between unknown upper layers vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
 
+The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
+
 ## ipv6ExtensionHeadersFull Information Element {#sec-v6full}
 
 Name:
@@ -258,17 +260,19 @@ Description:
 
 : As discussed in {{Section 1.2 of ?RFC8883}}, some hardware devices implement
   a parsing buffer of a fixed size to process packets, including all the headers.
-  When the aggregate header length of an IPv6 packet exceeds that size, the packet will be discarded or deferred to a slow path.
+  When the aggregate length of headers of an IPv6 packet exceeds that size, the packet will be discarded or deferred to a slow path.
 
-: The ipv6ExtensionHeadersChainLength IE is used to report the aggregate length of enclosed
-  extension headers chain of a Flow. Exporting such information may help identifying
-  root causes of performance degradation, including packet drops.
+: The ipv6ExtensionHeadersChainLength IE is used to report, in octets, the length of
+  an extension headers chain observed in a Flow. The length is the sum of the length of all extension headers of the chain. Exporting such information may help identifying root causes of performance degradation, including packet drops.
 
 Abstract Data Type:
 : unsigned
 
 Data Type Semantics:
 : identifier
+
+Units:
+: octets
 
 Additional Information:
 : See {{Section 4 of !RFC8200}} for the general definition of IPv6 extension headers.
