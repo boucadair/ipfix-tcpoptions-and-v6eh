@@ -67,7 +67,7 @@ This document specifies new IP Flow Information Export (IPFIX) Information Eleme
 
 This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve a set of issues encountered with the specifications of ipv6ExtensionHeaders (to export IPv6 extension headers) and tcpOptions (to export TCP options) IEs. More details about these issues are provided in the following sub-sections.
 
-## Issues with ipv6ExtensionHeaders Information Element
+## Issues with ipv6ExtensionHeaders Information Element {#sec-eh-issues}
 
 The specification of ipv6ExtensionHeaders IPFIX IE does not:
 
@@ -77,7 +77,7 @@ The specification of ipv6ExtensionHeaders IPFIX IE does not:
 - Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IANA-EH}}.
 - Specify whether the exported values match the full enclosed values or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}).
 
-If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE. How an implementation disambiguates between unknown upper layers vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
+{{sec-eh}} addresses these issues.
 
 ## Issues with tcpOptions Information Element
 
@@ -100,6 +100,10 @@ This document uses the IPFIX-specific terminology (Information Element, Template
 
 # Information Elements for IPv6 Extension Headers {#sec-eh}
 
+The definition of the ipv6ExtensionHeaders Information is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-eh-issues}}. Because some of these limitations can't be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new Information Elements to address all the ipv6ExtensionHeaders limitations.
+
+If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE ({{sec-v6full}}). How an implementation disambiguates between unknown upper layers vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
+
 ## ipv6ExtensionHeadersFull Information Element {#sec-v6full}
 
 Name:
@@ -116,17 +120,22 @@ Description:
       extension header.  Otherwise, if no observed packet of this Flow
       contained the respective IPv6 extension header, the value of the
       corresponding bit is 0.
-: Several extension header chains may be observed in a Flow. These extension headers
-  may be aggregated in one single ipv6ExtensionHeadersFull Information Element or
-  be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.
+
 : Extension headers are mapped to bits according to their extension numbers.
       Extension X is mapped to bit position X. This approach allows
       an observer to export any observed extension header and without requiring
       relying upon (including updating) a mapping table.
+
 : The "No Next Header" (59) value is used if there is no upper-layer header in an IPv6 packet.
   Even if the value is not considered as an extension header as such, the corresponding
   bit is set in the ipv6ExtensionHeadersFull IE whenever that value is encountered in the Flow.
+
+: Several extension header chains may be observed in a Flow. These extension headers
+  may be aggregated in one single ipv6ExtensionHeadersFull Information Element or
+  be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.
+
 : This Information Element SHOULD NOT be exported if ipv6ExtensionHeaderCount Information Element is also present.
+
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
 : The following
@@ -168,13 +177,16 @@ ElementID:
 Description:
 : As per {{Section 4.1 of !RFC8200}}, IPv6 nodes must accept and attempt to process extension headers in
   occurring any number of times in the same packet. This Information Element echoes the
-  order of extension headers and number of consecutive occurrences of the same extension header type in an IPv6 packet.
+  order of extension headers and number of consecutive occurrences of the same extension header type in a Flow.
+
 : If several extension headers chains are observed in a Flow, each header
   chain MUST be exported in a separate ipv6ExtensionHeaderCount IE.
+
 : The same extension header type may appear several times in an ipv6ExtensionHeaderCount Information Element.
-  For example, if an IPv6 packet includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
+  For example, if an IPv6 packet of a Flow includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
   and Destination Options header, the ipv6ExtensionHeaderCount Information Element will report two counts of the Destination Options header: the occurrences
   that are observed before the Fragment header and the occurrences right after the Fragment header.
+
 : IPFIX reduced-size encoding as per {{Section 6.2 of !RFC7011}} is used as required.
 
 ~~~~
@@ -211,8 +223,10 @@ Description:
    headers information (e.g., ipv6ExtensionHeaderFull or ipv6ExtensionHeaderCount) does
    not match the full enclosed extension headers, but only up to a
    limit that is typically set by hardware or software.
+
 :  When set to "false", this Information Element indicates that the exported extension
    header information matches the full enclosed extension headers.
+
 : When this Information Element is absent, this is equivalent to returning an ipv6ExtensionHeadersLimit
   Information Element with a value set to "false".
 
@@ -241,9 +255,11 @@ Description:
 : In theory, there are no limits on the number of IPv6 extension headers that may
   be present in a packet other than the path MTU. However, it was regularly
   reported that IPv6 packets with extension headers are often dropped in the Internet.
+
 : As discussed in {{Section 1.2 of ?RFC8883}}, some hardware devices implement
   a parsing buffer of a fixed size to process packets, including all the headers.
   When the aggregate header length of an IPv6 packet exceeds that size, the packet will be discarded or deferred to a slow path.
+
 : The ipv6ExtensionHeadersChainLength IE is used to report the aggregate length of enclosed
   extension headers chain of a Flow. Exporting such information may help identifying
   root causes of performance degradation, including packet drops.
