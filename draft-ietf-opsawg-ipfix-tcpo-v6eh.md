@@ -76,6 +76,7 @@ The specification of ipv6ExtensionHeaders IPFIX IE does not:
 - Specify a means to export the order and the number of occurences of a given extension header.
 - Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IANA-EH}}.
 - Specify whether the exported values match the full enclosed values or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}).
+- Specify how to report the length of IPv6 extension headers.
 
 {{sec-eh}} addresses these issues.
 
@@ -98,13 +99,20 @@ This document uses the IPFIX-specific terminology (Information Element, Template
    {{Section 2 of !RFC7011}}. As in {{!RFC7011}}, these IPFIX-specific terms
    have the first letter of a word capitalized.
 
+Also, the document uses the terms defined in {{!RFC8200}} and {{!RFC9293}}.
+
+In addition, the document makes use of the following term:
+
+Extension header chain:
+: Refers to the chain of extension headers that are present in an IPv6 packet.
+: This term should not be confused with the IPv6 header chain, which includes
+  the IPv6 header, zero or more IPv6 extension headers,
+  and zero or a single Upper-Layer Header.
+
+
 # Information Elements for IPv6 Extension Headers {#sec-eh}
 
 The definition of the ipv6ExtensionHeaders Information is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-eh-issues}}. Because some of these limitations can't be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new Information Elements to address all the ipv6ExtensionHeaders limitations.
-
-If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE ({{sec-v6full}}). How an implementation disambiguates between unknown upper layers vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
-
-The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
 
 ## ipv6ExtensionHeadersFull Information Element {#sec-v6full}
 
@@ -181,7 +189,7 @@ Description:
   occurring any number of times in the same packet. This Information Element echoes the
   order of extension headers and number of consecutive occurrences of the same extension header type in a Flow.
 
-: If several extension headers chains are observed in a Flow, each header
+: If several extension header chains are observed in a Flow, each header
   chain MUST be exported in a separate ipv6ExtensionHeaderCount IE.
 
 : The same extension header type may appear several times in an ipv6ExtensionHeaderCount Information Element.
@@ -263,7 +271,7 @@ Description:
   When the aggregate length of headers of an IPv6 packet exceeds that size, the packet will be discarded or deferred to a slow path.
 
 : The ipv6ExtensionHeadersChainLength IE is used to report, in octets, the length of
-  an extension headers chain observed in a Flow. The length is the sum of the length of all extension headers of the chain. Exporting such information may help identifying root causes of performance degradation, including packet drops.
+  an extension header chain observed in a Flow. The length is the sum of the length of all extension headers of the chain. Exporting such information may help identifying root causes of performance degradation, including packet drops.
 
 Abstract Data Type:
 : unsigned
@@ -280,6 +288,12 @@ Additional Information:
 
 Reference:
 : This-Document
+
+## Operational Considerations
+
+If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE ({{sec-v6full}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
+
+The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
 
 # Information Elements for TCP Options {#sec-tcp}
 
@@ -300,6 +314,7 @@ Description:
       contains the corresponding TCP option.  Otherwise, if no observed
       packet of this Flow contained the respective TCP option, the value
       of the corresponding bit is 0.
+
 : Options are mapped to bits according to their option numbers.
       Option number X is mapped to bit position "254 - X". This approach allows
       an observer to export any observed TCP option even if it does support
