@@ -130,9 +130,11 @@ Description:
    extension header.  Otherwise, if no observed packet of this Flow
    contained the respective IPv6 extension header, the value of the
    corresponding bit is 0.
+
 : The IPv6 extension header associated with each bit is provided in
-  [NEW_IPFIX_IPv6EH_SUBREGISTRY]. The bit 0 is the least-significant bit
-  while the bit 254 is the most-significant bit.
+  [NEW_IPFIX_IPv6EH_SUBREGISTRY]. Bit 0 corresponds to the least-significant bit
+  in the ipv6ExtensionHeadersFull IE while bit 254 corresponds to the most-significant bit of the IE.
+  In doing so, few octets will be needed to encode common IPv6 extension headers when observed in a Flow.
 
 : The "No Next Header" (59) value is used if there is no upper-layer header in an IPv6 packet.
   Even if the value is not considered as an extension header as such, the corresponding
@@ -395,7 +397,7 @@ MSB                                                    LSB
 ~~~~
 {: #ex-eh1 title='A First Example of Extension Headers': artwork-align="center"}
 
-{{ex-eh2}} provides another example of reported values in an ipv6ExtensionHeadersFull Information Element for an IPv6 Flow in which 
+{{ex-eh2}} provides another example of reported values in an ipv6ExtensionHeadersFull Information Element for an IPv6 Flow in which
 the	IPv6 Hop-by-Hop Options, Routing, and Destination Options headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 19.
 
 ~~~~
@@ -423,7 +425,7 @@ MSB                                                       LSB
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 ~~~~
-{: #ex-tcp1- title='First Example of TCP Options': artwork-align="center"}
+{: #ex-tcp1 title='First Example of TCP Options': artwork-align="center"}
 
 
 # Security Considerations
