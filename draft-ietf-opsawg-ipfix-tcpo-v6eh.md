@@ -80,7 +80,7 @@ The specification of ipv6ExtensionHeaders IPFIX IE does not:
 
 {{sec-eh}} addresses these issues.
 
-## Issues with tcpOptions Information Element
+## Issues with tcpOptions Information Element {#sec-tcp-issues}
 
 The specification of tcpOptions IPFIX IE does not:
 
@@ -112,7 +112,7 @@ Extension header chain:
 
 # Information Elements for IPv6 Extension Headers {#sec-eh}
 
-The definition of the ipv6ExtensionHeaders Information is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-eh-issues}}. Because some of these limitations can't be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new Information Elements to address all the ipv6ExtensionHeaders limitations.
+The definition of the ipv6ExtensionHeaders IE is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-eh-issues}}. Because some of these limitations can't be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new Information Elements to address all the ipv6ExtensionHeaders limitations.
 
 ## ipv6ExtensionHeadersFull Information Element {#sec-v6full}
 
@@ -283,6 +283,8 @@ If an implementation determines that it includes an extension header that it doe
 The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
 
 # Information Elements for TCP Options {#sec-tcp}
+
+The definition of the tcpOptions IE is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-tcp-issues}}. Because some of these limitations can't be addressed by simple updates to tcpOptions, this section specifies a set of new Information Elements to address all the tcpOptions limitations.
 
 ## tcpOptionsFull Information Element {#sec-tcpfull}
 
