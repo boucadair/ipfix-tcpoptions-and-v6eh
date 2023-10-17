@@ -84,7 +84,7 @@ The specification of ipv6ExtensionHeaders IPFIX IE does not:
 
 The specification of tcpOptions IPFIX IE does not:
 
-- Describe how any observed TCP option in a packet can be exported using IPFIX. Only TCP options having a kind =< 63 can be exported in a tcpOptions IPFIX IE.
+- Describe how any observed TCP option in a Flow can be exported using IPFIX. Only TCP options having a kind =< 63 can be exported in a tcpOptions IPFIX IE.
 - Support means to report the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (kind=253 or 254) {{!RFC6994}}.
 
 {{sec-tcp}} addresses these issues.
@@ -324,23 +324,20 @@ Additional Information:
 Reference:
 : This-Document
 
-## Information Elements for Shared TCP Options
-
-ExIDs can be either 2 or 4 bytes in length {{!RFC6994}}. Two new IPFIX IEs are defined to accomodate these two lengths without introducing extra complexity in mixing both types in the same IPFIX IE.
-
-### tcpSharedOptionExID16 Information Element {#sec-ex16}
+### tcpSharedOptionExID Information Element {#sec-ex}
 
 Name:
-: tcpSharedOptionExID16
+: tcpSharedOptionExID
 
 ElementID:
 : TBD6
 
 Description:
-: Observed 2-byte Expermients IDs (ExIDs) in a shared
-      TCP option (Kind=253 or 254).  The information is encoded in a set of
-      16-bit fields.  Each 16-bit field carries the observed 2-byte ExID in a
+: Observed 2-byte (or 4-byte) Expermients IDs (ExIDs) in a shared
+      TCP option (Kind=253 or 254)  in a Flow.  The information is encoded in a set of
+      16-bit (or 32-bit) fields.  Each 16-bit (or 32-bit) field carries the observed 2-byte (or 4-bute) ExID in a
       shared option.
+: The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
 Abstract Data Type:
 : octetArray
@@ -349,36 +346,13 @@ Data Type Semantics:
 : identifier
 
 Additional Information:
-: See assigned 16-bit ExIDs at {{IANA-TCP-EXIDs}}.
+: See assigned ExIDs at {{IANA-TCP-EXIDs}}.
+: See {{!RFC9293}} for the general definition of TCP options.
+: See {{!RFC6964}} for the shared use of experimental TCP Options.
 
 Reference:
 : This-Document
 
-### tcpSharedOptionExID32 Information Element {#sec-ex32}
-
-Name:
-: tcpSharedOptionExID32
-
-ElementID:
-: TBD7
-
-Description:
-: Observed 4-byte Expermients ID (ExIDs) in a shared
-      TCP option (Kind=253 or 254).  The information is encoded in a set of
-      16-bit fields.  Each 32-bit field carries the observed 4-byte ExID in a
-      shared option.
-
-Abstract Data Type:
-: octetArray
-
-Data Type Semantics:
-: identifier
-
-Additional Information:
-: See assigned 32-bit ExIDs at {{IANA-TCP-EXIDs}}.
-
-Reference:
-: This-Document
 
 # Examples {#sec-examples}
 
@@ -444,8 +418,7 @@ This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX
 |TBD3| ipv6ExtensionHeaderLimit|{{sec-v6limit}} of This-Document|
 |TBD4| ipv6ExtensionHeadersChainLength |{{sec-v6aggr}} of This-Document|
 |TBD5| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
-|TBD6| tcpSharedOptionExID16|{{sec-ex16}} of This-Document|
-|TBD7| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
+|TBD6| tcpSharedOptionExID|{{sec-ex}} of This-Document|
 {: title="New IPFIX Information Elements"}
 
 --- back
