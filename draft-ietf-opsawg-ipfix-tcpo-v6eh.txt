@@ -77,9 +77,7 @@ Table of Contents
      3.5.  Operational Considerations
    4.  Information Elements for TCP Options
      4.1.  tcpOptionsFull Information Element
-     4.2.  Information Elements for Shared TCP Options
-       4.2.1.  tcpSharedOptionExID16 Information Element
-       4.2.2.  tcpSharedOptionExID32 Information Element
+       4.1.1.  tcpSharedOptionExID Information Element
    5.  Examples
      5.1.  IPv6 Extension Headers
      5.2.  TCP Options
@@ -125,7 +123,7 @@ Table of Contents
 
    The specification of tcpOptions IPFIX IE does not:
 
-   *  Describe how any observed TCP option in a packet can be exported
+   *  Describe how any observed TCP option in a Flow can be exported
       using IPFIX.  Only TCP options having a kind =< 63 can be exported
       in a tcpOptions IPFIX IE.
 
@@ -401,49 +399,30 @@ Table of Contents
 
    Reference:  This-Document
 
-4.2.  Information Elements for Shared TCP Options
+4.1.1.  tcpSharedOptionExID Information Element
 
-   ExIDs can be either 2 or 4 bytes in length [RFC6994].  Two new IPFIX
-   IEs are defined to accomodate these two lengths without introducing
-   extra complexity in mixing both types in the same IPFIX IE.
-
-4.2.1.  tcpSharedOptionExID16 Information Element
-
-   Name:  tcpSharedOptionExID16
+   Name:  tcpSharedOptionExID
 
    ElementID:  TBD6
 
-   Description:  Observed 2-byte Expermients IDs (ExIDs) in a shared TCP
-      option (Kind=253 or 254).  The information is encoded in a set of
-      16-bit fields.  Each 16-bit field carries the observed 2-byte ExID
-      in a shared option.
+   Description:  Observed 2-byte (or 4-byte) Expermients IDs (ExIDs) in
+      a shared TCP option (Kind=253 or 254) in a Flow.  The information
+      is encoded in a set of 16-bit (or 32-bit) fields.  Each 16-bit (or
+      32-bit) field carries the observed 2-byte (or 4-bute) ExID in a
+      shared option.
+
+      The value should be encoded in fewer octets as per the guidelines
+      in Section 6.2 of [RFC7011].
 
    Abstract Data Type:  octetArray
 
    Data Type Semantics:  identifier
 
-   Additional Information:  See assigned 16-bit ExIDs at
-      [IANA-TCP-EXIDs].
+   Additional Information:  See assigned ExIDs at [IANA-TCP-EXIDs].
 
-   Reference:  This-Document
+      See [RFC9293] for the general definition of TCP options.
 
-4.2.2.  tcpSharedOptionExID32 Information Element
-
-   Name:  tcpSharedOptionExID32
-
-   ElementID:  TBD7
-
-   Description:  Observed 4-byte Expermients ID (ExIDs) in a shared TCP
-      option (Kind=253 or 254).  The information is encoded in a set of
-      16-bit fields.  Each 32-bit field carries the observed 4-byte ExID
-      in a shared option.
-
-   Abstract Data Type:  octetArray
-
-   Data Type Semantics:  identifier
-
-   Additional Information:  See assigned 32-bit ExIDs at
-      [IANA-TCP-EXIDs].
+      See [RFC6964] for the shared use of experimental TCP Options.
 
    Reference:  This-Document
 
@@ -536,10 +515,7 @@ Table of Contents
       | TBD5  | tcpOptionsFull                  | Section 4.1 of   |
       |       |                                 | This-Document    |
       +-------+---------------------------------+------------------+
-      | TBD6  | tcpSharedOptionExID16           | Section 4.2.1 of |
-      |       |                                 | This-Document    |
-      +-------+---------------------------------+------------------+
-      | TBD7  | tcpSharedOptionExID32           | Section 4.2.2 of |
+      | TBD6  | tcpSharedOptionExID             | Section 4.1.1 of |
       |       |                                 | This-Document    |
       +-------+---------------------------------+------------------+
 
@@ -572,6 +548,12 @@ Table of Contents
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC6964]  Templin, F., "Operational Guidance for IPv6 Deployment in
+              IPv4 Sites Using the Intra-Site Automatic Tunnel
+              Addressing Protocol (ISATAP)", RFC 6964,
+              DOI 10.17487/RFC6964, May 2013,
+              <https://www.rfc-editor.org/rfc/rfc6964>.
 
    [RFC6994]  Touch, J., "Shared Use of Experimental TCP Options",
               RFC 6994, DOI 10.17487/RFC6994, August 2013,
