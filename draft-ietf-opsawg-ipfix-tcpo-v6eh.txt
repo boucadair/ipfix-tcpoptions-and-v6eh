@@ -461,7 +461,7 @@ Table of Contents
         |0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0| |0|0|0|0|0|1|
         +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 
-                                  Figure 1
+               Figure 1: A First Example of Extension Headers
 
    Figure 2 provides another example of reported values in an
    ipv6ExtensionHeadersFull Information Element for an IPv6 Flow in
@@ -477,7 +477,7 @@ Table of Contents
         |0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0| |0|1|0|0|1|1|
         +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 
-                                  Figure 2
+              Figure 2: A Second Example of Extension Headers
 
 5.2.  TCP Options
 
@@ -498,7 +498,7 @@ Table of Contents
        |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 
-                                  Figure 3
+                   Figure 3: First Example of TCP Options
 
 6.  Security Considerations
 
