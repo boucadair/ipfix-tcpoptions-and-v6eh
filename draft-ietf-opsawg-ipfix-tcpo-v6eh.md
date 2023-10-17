@@ -124,17 +124,15 @@ ElementID:
 
 Description:
 :  IPv6 extension headers observed in packets of this Flow. The
-      information is encoded in a set of bit fields.  For each IPv6
-      extension header, there is a bit in this set.  The bit is set to 1 if
-      any observed packet of this Flow contains the corresponding IPv6
-      extension header.  Otherwise, if no observed packet of this Flow
-      contained the respective IPv6 extension header, the value of the
-      corresponding bit is 0.
-
-: Extension headers are mapped to bits according to their extension numbers.
-      Extension X is mapped to bit position X. This approach allows
-      an observer to export any observed extension header and without requiring
-      relying upon (including updating) a mapping table.
+   information is encoded in a set of bit fields.  For each IPv6
+   extension header, there is a bit in this set. The bit is set to 1 if
+   any observed packet of this Flow contains the corresponding IPv6
+   extension header.  Otherwise, if no observed packet of this Flow
+   contained the respective IPv6 extension header, the value of the
+   corresponding bit is 0.
+: The IPv6 extension header associated with each bit is provided in
+  [NEW_IPFIX_IPv6EH_SUBREGISTRY]. The bit 0 is the least-significant bit
+  while the bit 254 is the most-significant bit.
 
 : The "No Next Header" (59) value is used if there is no upper-layer header in an IPv6 packet.
   Even if the value is not considered as an extension header as such, the corresponding
@@ -147,20 +145,6 @@ Description:
 : This Information Element SHOULD NOT be exported if ipv6ExtensionHeaderCount Information Element is also present.
 
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
-
-: The following
-      provides an example of reported values for an IPv6 packet that only includes
-      an	Authentication Header.
-
-~~~~
-MSB                                                    LSB
-                     1                   5     …  25
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 … 6 7 8 9 0 1 2 … 9 0 1 2 3 4
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0| |0|0|0|0|0|0|
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-~~~~
-{: artwork-align="center"}
 
 Abstract Data Type:
 : unsigned
@@ -175,6 +159,7 @@ Additional Information:
 Reference:
 : This-Document
 
+> Note to the RFC Editor: Please replace [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link to the "ipv6ExtensionHeaders Bits" registry created by {{?I-D.ietf-opsawg-ipfix-fixes}}.
 
 ## ipv6ExtensionHeaderCount Information Element {#sec-v6count}
 
@@ -291,7 +276,7 @@ Reference:
 
 ## Operational Considerations
 
-If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeadersFull IE ({{sec-v6full}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
+If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeaderCount IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
 
 The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
 
@@ -321,39 +306,6 @@ Description:
       that option and without requiring updating a mapping table.
 
 : The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
-Given TCP kind allocation practices and the option mapping above, fewer octers are likely to be used for
-Flows with common TCP options.
-
-: The following
-      first example shows reported values for a TCP Flow that includes
-      End of Option List, Maximum Segment Size, and Window Scale options.
-      One octet is sufficient to report these observed options.
-
- : The second example shows reported values for a TCP Flow that includes
-  End of Option List, Maximum Segment Size, Window Scale, and shared
-  TCP options. The reduced encoding is not possible in this case.
-
-~~~~
-# First Example
-
-MSB                                                       LSB
-                     1                   2     …  25
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-
-# Second Example
-
-MSB                                                       LSB
-                     1                   2     …  25
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-~~~~
-{: artwork-align="center"}
-
 
 Abstract Data Type:
 : unsigned
@@ -423,6 +375,56 @@ Additional Information:
 
 Reference:
 : This-Document
+
+# Examples {#sec-examples}
+
+## IPv6 Extension Headers
+
+This section provides few examples to illustrate the use of some IEs defined in the document.
+
+{{ex-eh1}} provides an example of reported values in an ipv6ExtensionHeadersFull Information Element for an IPv6 Flow in which only
+the	IPv6 Destination Options header is observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 1.
+
+~~~~
+MSB                                                    LSB
+                     1                20     …  25
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 … 6 7 8 9 0 1 2 … 9 0 1 2 3 4
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0| |0|0|0|0|0|1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+~~~~
+{: #ex-eh1 title='A First Example of Extension Headers': artwork-align="center"}
+
+{{ex-eh2}} provides another example of reported values in an ipv6ExtensionHeadersFull Information Element for an IPv6 Flow in which 
+the	IPv6 Hop-by-Hop Options, Routing, and Destination Options headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 19.
+
+~~~~
+MSB                                                    LSB
+                     1                20     …  25
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 … 6 7 8 9 0 1 2 … 9 0 1 2 3 4
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0| |0|1|0|0|1|1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+~~~~
+{: #ex-eh2 title='A Second Example of Extension Headers': artwork-align="center"}
+
+## TCP Options
+
+Given TCP kind allocation practices and the option mapping defined in {{sec-tcpfull}}, fewer octers are likely to be used for
+Flows with common TCP options.
+
+{{ex-tcp1}} shows an example of reported values in a tcpOptionsFull IE for a TCP Flow in which End of Option List, Maximum Segment Size, and Window Scale options are observed. One octet is sufficient to report these observed options. Concretely, the tcpOptionsFull IE will be set to 15.
+
+~~~~
+MSB                                                       LSB
+                     1                   2     …  25
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+~~~~
+{: #ex-tcp1- title='First Example of TCP Options': artwork-align="center"}
+
 
 # Security Considerations
 
