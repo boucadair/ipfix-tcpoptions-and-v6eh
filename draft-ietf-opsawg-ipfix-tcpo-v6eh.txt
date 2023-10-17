@@ -162,7 +162,7 @@ Table of Contents
 
 3.  Information Elements for IPv6 Extension Headers
 
-   The definition of the ipv6ExtensionHeaders Information is updated in
+   The definition of the ipv6ExtensionHeaders IE is updated in
    [I-D.ietf-opsawg-ipfix-fixes] to address some of the issues listed in
    Section 1.1.  Because some of these limitations can't be addressed by
    simple updates to ipv6ExtensionHeaders, this section specifies a set
@@ -358,6 +358,12 @@ Table of Contents
    extension headers handling.
 
 4.  Information Elements for TCP Options
+
+   The definition of the tcpOptions IE is updated in
+   [I-D.ietf-opsawg-ipfix-fixes] to address some of the issues listed in
+   Section 1.2.  Because some of these limitations can't be addressed by
+   simple updates to tcpOptions, this section specifies a set of new
+   Information Elements to address all the tcpOptions limitations.
 
 4.1.  tcpOptionsFull Information Element
 
