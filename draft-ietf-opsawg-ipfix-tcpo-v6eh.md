@@ -146,8 +146,6 @@ Description:
 
 : This Information Element SHOULD NOT be exported if ipv6ExtensionHeaderCount Information Element is also present.
 
-: The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
-
 Abstract Data Type:
 : unsigned
 
@@ -183,8 +181,6 @@ Description:
   For example, if an IPv6 packet of a Flow includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
   and Destination Options header, the ipv6ExtensionHeaderCount Information Element will report two counts of the Destination Options header: the occurrences
   that are observed before the Fragment header and the occurrences right after the Fragment header.
-
-: IPFIX reduced-size encoding as per {{Section 6.2 of !RFC7011}} is used as required.
 
 ~~~~
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 ...
@@ -276,12 +272,6 @@ Additional Information:
 Reference:
 : This-Document
 
-## Operational Considerations
-
-If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeaderCount IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
-
-The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
-
 # Information Elements for TCP Options {#sec-tcp}
 
 The definition of the tcpOptions IE is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-tcp-issues}}. Because some of these limitations can't be addressed by simple updates to tcpOptions, this section specifies a set of new Information Elements to address all the tcpOptions limitations.
@@ -309,8 +299,6 @@ Description:
       an observer to export any observed TCP option even if it does support
       that option and without requiring updating a mapping table.
 
-: The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
-
 Abstract Data Type:
 : unsigned
 
@@ -324,7 +312,7 @@ Additional Information:
 Reference:
 : This-Document
 
-### tcpSharedOptionExID Information Element {#sec-ex}
+## tcpSharedOptionExID Information Element {#sec-ex}
 
 Name:
 : tcpSharedOptionExID
@@ -353,6 +341,21 @@ Additional Information:
 Reference:
 : This-Document
 
+# Operational Considerations
+
+## IPv6 Extension Headers
+
+The value of ipv6ExtensionHeadersFull and ipv6ExtensionHeaderCount IEs should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
+
+If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeaderCount IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
+
+The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
+
+## TCP Options
+
+The value of tcpOptionsFull IE should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
+
+If a TCP Flow contains packets with a mix of 2-byte and 4-byte Experiment IDs, two different Template Records may be used: one containing the tcpSharedOptionExID IE with a length of 2 bytes and another similar one containing the tcpSharedOptionExID IE with a length of 4 bytes.
 
 # Examples {#sec-examples}
 
