@@ -395,7 +395,7 @@ MSB                                                    LSB
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0| |0|0|0|0|0|1|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 ~~~~
-{: #ex-eh1 title='A First Example of Extension Headers': artwork-align="center"}
+{: #ex-eh1 title="A First Example of Extension Headers" artwork-align="center"}
 
 {{ex-eh2}} provides another example of reported values in an ipv6ExtensionHeadersFull Information Element for an IPv6 Flow in which
 the	IPv6 Hop-by-Hop Options, Routing, and Destination Options headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 19.
@@ -408,7 +408,7 @@ MSB                                                    LSB
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0| |0|1|0|0|1|1|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 ~~~~
-{: #ex-eh2 title='A Second Example of Extension Headers': artwork-align="center"}
+{: #ex-eh2 title="A Second Example of Extension Headers" artwork-align="center"}
 
 ## TCP Options
 
@@ -425,7 +425,7 @@ MSB                                                       LSB
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
 ~~~~
-{: #ex-tcp1 title='First Example of TCP Options': artwork-align="center"}
+{: #ex-tcp1 title="First Example of TCP Options" artwork-align="center"}
 
 
 # Security Considerations
