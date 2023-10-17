@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 18 April 2024                                            Huawei
-                                                         16 October 2023
+Expires: 19 April 2024                                            Huawei
+                                                         17 October 2023
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 April 2024.
+   This Internet-Draft will expire on 19 April 2024.
 
 Copyright Notice
 
@@ -80,11 +80,14 @@ Table of Contents
      4.2.  Information Elements for Shared TCP Options
        4.2.1.  tcpSharedOptionExID16 Information Element
        4.2.2.  tcpSharedOptionExID32 Information Element
-   5.  Security Considerations
-   6.  IANA Considerations
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+   5.  Examples
+     5.1.  IPv6 Extension Headers
+     5.2.  TCP Options
+   6.  Security Considerations
+   7.  IANA Considerations
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -180,11 +183,12 @@ Table of Contents
       packet of this Flow contained the respective IPv6 extension
       header, the value of the corresponding bit is 0.
 
-      Extension headers are mapped to bits according to their extension
-      numbers.  Extension X is mapped to bit position X.  This approach
-      allows an observer to export any observed extension header and
-      without requiring relying upon (including updating) a mapping
-      table.
+      The IPv6 extension header associated with each bit is provided in
+      [NEW_IPFIX_IPv6EH_SUBREGISTRY].  Bit 0 corresponds to the least-
+      significant bit in the ipv6ExtensionHeadersFull IE while bit 254
+      corresponds to the most-significant bit of the IE.  In doing so,
+      few octets will be needed to encode common IPv6 extension headers
+      when observed in a Flow.
 
       The "No Next Header" (59) value is used if there is no upper-layer
       header in an IPv6 packet.  Even if the value is not considered as
@@ -204,16 +208,6 @@ Table of Contents
       The value should be encoded in fewer octets as per the guidelines
       in Section 6.2 of [RFC7011].
 
-      The following provides an example of reported values for an IPv6
-      packet that only includes an Authentication Header.
-
-        MSB                                                    LSB
-                             1                   5     …  25
-         0 1 2 3 4 5 6 7 8 9 0 1 2 3 … 6 7 8 9 0 1 2 … 9 0 1 2 3 4
-        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-        |0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|1|0| |0|0|0|0|0|0|
-        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-
    Abstract Data Type:  unsigned
 
    Data Type Semantics:  flags
@@ -225,6 +219,11 @@ Table of Contents
       extension headers.
 
    Reference:  This-Document
+
+      Note to the RFC Editor: Please replace
+      [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link to the
+      "ipv6ExtensionHeaders Bits" registry created by
+      [I-D.ietf-opsawg-ipfix-fixes].
 
 3.2.  ipv6ExtensionHeaderCount Information Element
 
@@ -345,8 +344,8 @@ Table of Contents
 
    If an implementation determines that it includes an extension header
    that it does no support, then the exact observed code of that
-   extension header will be echoed in the ipv6ExtensionHeadersFull IE
-   (Section 3.1).  How an implementation disambiguates between unknown
+   extension header will be echoed in the ipv6ExtensionHeaderCount IE
+   (Section 3.2).  How an implementation disambiguates between unknown
    upper-layer protocols vs. extension headers is not IPFIX-specific.
    Readers may refer, for example, to Section 2.2 of [RFC8883] for a
    behavior of an intermediate nodes that encounters an unknown Next
@@ -383,37 +382,7 @@ Table of Contents
       mapping table.
 
       The value should be encoded in fewer octets as per the guidelines
-      in Section 6.2 of [RFC7011].  Given TCP kind allocation practices
-      and the option mapping above, fewer octers are likely to be used
-      for Flows with common TCP options.
-
-      The following first example shows reported values for a TCP Flow
-      that includes End of Option List, Maximum Segment Size, and Window
-      Scale options.  One octet is sufficient to report these observed
-      options.
-
-      The second example shows reported values for a TCP Flow that
-      includes End of Option List, Maximum Segment Size, Window Scale,
-      and shared TCP options.  The reduced encoding is not possible in
-      this case.
-
-       # First Example
-
-       MSB                                                       LSB
-                            1                   2     …  25
-        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-       |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-
-       # Second Example
-
-       MSB                                                       LSB
-                            1                   2     …  25
-        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-       |0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+      in Section 6.2 of [RFC7011].
 
    Abstract Data Type:  unsigned
 
@@ -472,14 +441,73 @@ Table of Contents
 
    Reference:  This-Document
 
-5.  Security Considerations
+5.  Examples
+
+5.1.  IPv6 Extension Headers
+
+   This section provides few examples to illustrate the use of some IEs
+   defined in the document.
+
+   Figure 1 provides an example of reported values in an
+   ipv6ExtensionHeadersFull Information Element for an IPv6 Flow in
+   which only the IPv6 Destination Options header is observed.  One
+   octet is sufficient to report these observed options.  Concretely,
+   the ipv6ExtensionHeadersFull IE will be set to 1.
+
+        MSB                                                    LSB
+                             1                20     …  25
+         0 1 2 3 4 5 6 7 8 9 0 1 2 3 … 6 7 8 9 0 1 2 … 9 0 1 2 3 4
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+        |0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0| |0|0|0|0|0|1|
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+
+                                  Figure 1
+
+   Figure 2 provides another example of reported values in an
+   ipv6ExtensionHeadersFull Information Element for an IPv6 Flow in
+   which the IPv6 Hop-by-Hop Options, Routing, and Destination Options
+   headers are observed.  One octet is sufficient to report these
+   observed options.  Concretely, the ipv6ExtensionHeadersFull IE will
+   be set to 19.
+
+        MSB                                                    LSB
+                             1                20     …  25
+         0 1 2 3 4 5 6 7 8 9 0 1 2 3 … 6 7 8 9 0 1 2 … 9 0 1 2 3 4
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+        |0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0| |0|1|0|0|1|1|
+        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+
+                                  Figure 2
+
+5.2.  TCP Options
+
+   Given TCP kind allocation practices and the option mapping defined in
+   Section 4.1, fewer octers are likely to be used for Flows with common
+   TCP options.
+
+   Figure 3 shows an example of reported values in a tcpOptionsFull IE
+   for a TCP Flow in which End of Option List, Maximum Segment Size, and
+   Window Scale options are observed.  One octet is sufficient to report
+   these observed options.  Concretely, the tcpOptionsFull IE will be
+   set to 15.
+
+       MSB                                                       LSB
+                            1                   2     …  25
+        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+       |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+
+                                  Figure 3
+
+6.  Security Considerations
 
    IPFIX security considerations are discussed in Section 11 of
    [RFC7011].  This document does not add new security considerations
    for exporting IEs other than those already discussed in Section 8 of
    [RFC7012].
 
-6.  IANA Considerations
+7.  IANA Considerations
 
    This document requests IANA to add the following new IPFIX IEs to the
    IANA IPFIX registry [IANA-IPFIX]:
@@ -511,9 +539,9 @@ Table of Contents
 
                  Table 1: New IPFIX Information Elements
 
-7.  References
+8.  References
 
-7.1.  Normative References
+8.1.  Normative References
 
    [IANA-EH]  IANA, "Internet Protocol Version 6 (IPv6) Parameters, IPv6
               Extension Header Types",
@@ -567,7 +595,7 @@ Table of Contents
               STD 7, RFC 9293, DOI 10.17487/RFC9293, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9293>.
 
-7.2.  Informative References
+8.2.  Informative References
 
    [I-D.ietf-opsawg-ipfix-fixes]
               Boucadair, M. and B. Claise, "Simple Fixes to the IP Flow
