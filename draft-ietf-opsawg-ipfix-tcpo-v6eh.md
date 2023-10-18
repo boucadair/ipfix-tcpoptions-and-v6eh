@@ -88,7 +88,7 @@ The specification of tcpOptions IPFIX IE does not:
 
 - Describe how any observed TCP option in a Flow can be exported using IPFIX. Only TCP options having a kind =< 63 can be exported in a tcpOptions IPFIX IE.
 - Support means to report the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (kind=253 or 254) {{!RFC6994}}.
-- Optimize the encoding. 
+- Optimize the encoding.
 
 {{sec-tcp}} addresses these issues.
 
@@ -115,7 +115,7 @@ Extension header chain:
 
 # Information Elements for IPv6 Extension Headers {#sec-eh}
 
-The definition of the ipv6ExtensionHeaders IE is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-eh-issues}}. Because some of these limitations can't be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new Information Elements to address all the ipv6ExtensionHeaders limitations.
+The definition of the ipv6ExtensionHeaders IE is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-eh-issues}}. Because some of these limitations can't be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new IEs to address all the ipv6ExtensionHeaders IE limitations.
 
 ## ipv6ExtensionHeadersFull Information Element {#sec-v6full}
 
@@ -278,11 +278,11 @@ Reference:
 
 # Information Elements for TCP Options {#sec-tcp}
 
-The definition of the tcpOptions IE is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-tcp-issues}}. Because some of these limitations can't be addressed by simple updates to tcpOptions, this section specifies a set of new Information Elements to address all the tcpOptions limitations.
+The definition of the tcpOptions IE is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-tcp-issues}}. Because some of these limitations can't be addressed by simple updates to tcpOptions, this section specifies a set of new IEs to address all the tcpOptions IE limitations.
 
 ## tcpOptionsFull Information Element {#sec-tcpfull}
 
-This section specifies a new Information Element to cover the full TCP options range.
+This section specifies a new IE to cover the full TCP options range.
 
 Name:
 : tcpOptionsFull
@@ -367,7 +367,7 @@ If a TCP Flow contains packets with a mix of 2-byte and 4-byte Experiment IDs, t
 
 This section provides few examples to illustrate the use of some IEs defined in the document.
 
-{{ex-eh1}} provides an example of reported values in an ipv6ExtensionHeadersFull Information Element for an IPv6 Flow in which only
+{{ex-eh1}} provides an example of reported values in an ipv6ExtensionHeadersFull IE for an IPv6 Flow in which only
 the	IPv6 Destination Options header is observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 1.
 
 ~~~~
@@ -380,7 +380,7 @@ MSB                                                    LSB
 ~~~~
 {: #ex-eh1 title="A First Example of Extension Headers" artwork-align="center"}
 
-{{ex-eh2}} provides another example of reported values in an ipv6ExtensionHeadersFull Information Element for an IPv6 Flow in which
+{{ex-eh2}} provides another example of reported values in an ipv6ExtensionHeadersFull IE for an IPv6 Flow in which
 the	IPv6 Hop-by-Hop Options, Routing, and Destination Options headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 19.
 
 ~~~~
