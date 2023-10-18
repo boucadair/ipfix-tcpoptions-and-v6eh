@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 19 April 2024                                            Huawei
-                                                         17 October 2023
+Expires: 20 April 2024                                            Huawei
+                                                         18 October 2023
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 April 2024.
+   This Internet-Draft will expire on 20 April 2024.
 
 Copyright Notice
 
@@ -111,13 +111,21 @@ Table of Contents
       of a given extension header.
 
    *  Specify how to automatically update the IANA IPFIX registry
-      ([IANA-IPFIX]) when a new value is assigned in [IANA-EH].
+      ([IANA-IPFIX]) when a new value is assigned in [IANA-EH].  Only a
+      frozen set of extension headers can be exported using the
+      ipv6ExtensionHeaders IE.
 
    *  Specify whether the exported values match the full enclosed values
       or only up to a limit imposed by hardware or software (e.g.,
       Section 1.1 of [RFC8883]).
 
    *  Specify how to report the length of IPv6 extension headers.
+
+   *  Optimize the encoding.
+
+   *  Explain the reasoning for reporting values which do no correspond
+      to extension headers (e.g., "Unknown Layer 4 header" or "Payload
+      compression header").
 
    Section 3 addresses these issues.
 
@@ -132,6 +140,8 @@ Table of Contents
    *  Support means to report the observed Experimental Identifiers
       (ExIDs) that are carried in shared TCP options (kind=253 or 254)
       [RFC6994].
+
+   *  Optimize the encoding.
 
    Section 4 addresses these issues.
 
@@ -166,8 +176,7 @@ Table of Contents
    [I-D.ietf-opsawg-ipfix-fixes] to address some of the issues listed in
    Section 1.1.  Because some of these limitations can't be addressed by
    simple updates to ipv6ExtensionHeaders, this section specifies a set
-   of new Information Elements to address all the ipv6ExtensionHeaders
-   limitations.
+   of new IEs to address all the ipv6ExtensionHeaders IE limitations.
 
 3.1.  ipv6ExtensionHeadersFull Information Element
 
@@ -209,8 +218,10 @@ Table of Contents
 
    Data Type Semantics:  flags
 
-   Additional Information:  See [IANA-EH] for assigned extension header
-      types.
+   Additional Information:  See the assigned bits to each IPv6 extension
+      header type in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
+
+      See [IANA-EH] for assigned extension header types.
 
       See Section 4 of [RFC8200] for the general definition of IPv6
       extension headers.
@@ -339,13 +350,12 @@ Table of Contents
    The definition of the tcpOptions IE is updated in
    [I-D.ietf-opsawg-ipfix-fixes] to address some of the issues listed in
    Section 1.2.  Because some of these limitations can't be addressed by
-   simple updates to tcpOptions, this section specifies a set of new
-   Information Elements to address all the tcpOptions limitations.
+   simple updates to tcpOptions, this section specifies a set of new IEs
+   to address all the tcpOptions IE limitations.
 
 4.1.  tcpOptionsFull Information Element
 
-   This section specifies a new Information Element to cover the full
-   TCP options range.
+   This section specifies a new IE to cover the full TCP options range.
 
    Name:  tcpOptionsFull
 
@@ -398,7 +408,7 @@ Table of Contents
 
       See [RFC9293] for the general definition of TCP options.
 
-      See [RFC6964] for the shared use of experimental TCP Options.
+      See [RFC6994] for the shared use of experimental TCP Options.
 
    Reference:  This-Document
 
@@ -444,10 +454,10 @@ Table of Contents
    defined in the document.
 
    Figure 1 provides an example of reported values in an
-   ipv6ExtensionHeadersFull Information Element for an IPv6 Flow in
-   which only the IPv6 Destination Options header is observed.  One
-   octet is sufficient to report these observed options.  Concretely,
-   the ipv6ExtensionHeadersFull IE will be set to 1.
+   ipv6ExtensionHeadersFull IE for an IPv6 Flow in which only the IPv6
+   Destination Options header is observed.  One octet is sufficient to
+   report these observed options.  Concretely, the
+   ipv6ExtensionHeadersFull IE will be set to 1.
 
         MSB                                                    LSB
                              1                20     …  25
@@ -459,11 +469,10 @@ Table of Contents
                Figure 1: A First Example of Extension Headers
 
    Figure 2 provides another example of reported values in an
-   ipv6ExtensionHeadersFull Information Element for an IPv6 Flow in
-   which the IPv6 Hop-by-Hop Options, Routing, and Destination Options
-   headers are observed.  One octet is sufficient to report these
-   observed options.  Concretely, the ipv6ExtensionHeadersFull IE will
-   be set to 19.
+   ipv6ExtensionHeadersFull IE for an IPv6 Flow in which the IPv6 Hop-
+   by-Hop Options, Routing, and Destination Options headers are
+   observed.  One octet is sufficient to report these observed options.
+   Concretely, the ipv6ExtensionHeadersFull IE will be set to 19.
 
         MSB                                                    LSB
                              1                20     …  25
@@ -558,12 +567,6 @@ Table of Contents
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
-
-   [RFC6964]  Templin, F., "Operational Guidance for IPv6 Deployment in
-              IPv4 Sites Using the Intra-Site Automatic Tunnel
-              Addressing Protocol (ISATAP)", RFC 6964,
-              DOI 10.17487/RFC6964, May 2013,
-              <https://www.rfc-editor.org/rfc/rfc6964>.
 
    [RFC6994]  Touch, J., "Shared Use of Experimental TCP Options",
               RFC 6994, DOI 10.17487/RFC6994, August 2013,
