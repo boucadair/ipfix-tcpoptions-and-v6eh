@@ -6,6 +6,7 @@ This is the working area for the individual Internet-Draft, "Extended TCP Option
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-opsawg-ipfix-tcpo-v6eh)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-tcpo-v6eh)
 * [Compare Editor's Copy to Individual Draft](https://boucadair.github.io/ipfix-tcpoptions-and-v6eh/#go.draft-ietf-opsawg-ipfix-tcpo-v6eh.diff)
+* [IDNITS](https://author-tools.ietf.org/api/idnits?url=https://boucadair.github.io/ipfix-tcpoptions-and-v6eh/draft-ietf-opsawg-ipfix-tcpo-v6eh.txt&verbose=2&submissioncheck=True)
 
 
 ## Contributing
