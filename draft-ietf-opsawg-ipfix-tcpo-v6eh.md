@@ -225,9 +225,6 @@ Description:
 :  When set to "false", this Information Element indicates that the exported extension
    header information matches the full enclosed extension headers.
 
-: When this Information Element is absent, this is equivalent to returning an ipv6ExtensionHeadersLimit
-  Information Element with a value set to "false".
-
 Abstract Data Type:
 : boolean
 
