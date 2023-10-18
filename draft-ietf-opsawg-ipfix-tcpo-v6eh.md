@@ -74,9 +74,11 @@ The specification of ipv6ExtensionHeaders IPFIX IE does not:
 - Cover the full extension headers range ({{Section 4 of !RFC8200}}).
 - Specify the procedure to follow when all bits are exhausted.
 - Specify a means to export the order and the number of occurences of a given extension header.
-- Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IANA-EH}}.
+- Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IANA-EH}}. Only a frozen set of extension headers can be exported using the ipv6ExtensionHeaders IE.
 - Specify whether the exported values match the full enclosed values or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}).
 - Specify how to report the length of IPv6 extension headers.
+- Optimize the encoding.
+- Explain the reasoning for reporting values which do no correspond to extension headers (e.g., "Unknown Layer 4 header" or "Payload compression header").
 
 {{sec-eh}} addresses these issues.
 
@@ -86,6 +88,7 @@ The specification of tcpOptions IPFIX IE does not:
 
 - Describe how any observed TCP option in a Flow can be exported using IPFIX. Only TCP options having a kind =< 63 can be exported in a tcpOptions IPFIX IE.
 - Support means to report the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (kind=253 or 254) {{!RFC6994}}.
+- Optimize the encoding. 
 
 {{sec-tcp}} addresses these issues.
 
@@ -153,6 +156,7 @@ Data Type Semantics:
 : flags
 
 Additional Information:
+: See the assigned bits to each IPv6 extension header type in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
 : See {{IANA-EH}} for assigned extension header types.
 : See {{Section 4 of !RFC8200}} for the general definition of IPv6 extension headers.
 
@@ -336,7 +340,7 @@ Data Type Semantics:
 Additional Information:
 : See assigned ExIDs at {{IANA-TCP-EXIDs}}.
 : See {{!RFC9293}} for the general definition of TCP options.
-: See {{!RFC6964}} for the shared use of experimental TCP Options.
+: See {{!RFC6994}} for the shared use of experimental TCP Options.
 
 Reference:
 : This-Document
