@@ -187,6 +187,7 @@ Description:
   that are observed before the Fragment header and the occurrences right after the Fragment header.
 
 ~~~~
+MSB                                                                  LSB
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 ...
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
  |  EH Type#1    |   Count       |...|  EH Type#n      |   Count       |
@@ -371,12 +372,12 @@ This section provides few examples to illustrate the use of some IEs defined in 
 the	IPv6 Destination Options header is observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 1.
 
 ~~~~
-MSB                                                    LSB
-                     1                20     …  25
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 … 6 7 8 9 0 1 2 … 9 0 1 2 3 4
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0| |0|0|0|0|0|1|
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+MSB                                                        LSB
+                     1                 20     ...  25
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 ...6 7 8 9 0 1 2 ... 9 0 1 2 3 4
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|0|0|0|0|0|   |0|0|0|0|0|1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
 ~~~~
 {: #ex-eh1 title="A First Example of Extension Headers" artwork-align="center"}
 
@@ -384,12 +385,12 @@ MSB                                                    LSB
 the	IPv6 Hop-by-Hop Options, Routing, and Destination Options headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 19.
 
 ~~~~
-MSB                                                    LSB
-                     1                20     …  25
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 … 6 7 8 9 0 1 2 … 9 0 1 2 3 4
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|0|0|0|0|0| |0|1|0|0|1|1|
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+MSB                                                        LSB
+                     1                  20     ...  25
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 ... 6 7 8 9 0 1 2 ... 9 0 1 2 3 4
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|0|0|0|0|0|   |0|1|0|0|1|1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
 ~~~~
 {: #ex-eh2 title="A Second Example of Extension Headers" artwork-align="center"}
 
@@ -401,12 +402,12 @@ Flows with common TCP options.
 {{ex-tcp1}} shows an example of reported values in a tcpOptionsFull IE for a TCP Flow in which End of Option List, Maximum Segment Size, and Window Scale options are observed. One octet is sufficient to report these observed options. Concretely, the tcpOptionsFull IE will be set to 15.
 
 ~~~~
-MSB                                                       LSB
-                     1                   2     …  25
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 … 9 0 1 2 3 4
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
-|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0| |0|0|1|1|0|1|
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+…+-+-+-+-+-+-+
+MSB                                                        LSB
+                     1                   2     ...  25
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 ... 9 0 1 2 3 4
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
+|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|1|1|0|1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
 ~~~~
 {: #ex-tcp1 title="First Example of TCP Options" artwork-align="center"}
 
