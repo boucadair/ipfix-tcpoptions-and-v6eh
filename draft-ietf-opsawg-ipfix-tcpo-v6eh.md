@@ -314,20 +314,48 @@ Additional Information:
 Reference:
 : This-Document
 
-## tcpSharedOptionExID Information Element {#sec-ex}
+## tcpSharedOptionExID16 Information Element {#sec-ex}
 
 Name:
-: tcpSharedOptionExID
+: tcpSharedOptionExID16
 
 ElementID:
 : TBD6
 
 Description:
-: Observed 2-byte (or 4-byte) Expermients IDs (ExIDs) in a shared
+: Observed Expermients IDs (ExIDs) in a shared
       TCP option (Kind=253 or 254)  in a Flow.  The information is encoded in a set of
-      16-bit (or 32-bit) fields.  Each 16-bit (or 32-bit) field carries the observed 2-byte (or 4-bute) ExID in a
+      16-bit fields.  Each 16-bit field carries an observed 2-byte ExID in a
       shared option.
-: The value should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
+
+
+Abstract Data Type:
+: octetArray
+
+Data Type Semantics:
+: identifier
+
+Additional Information:
+: See assigned ExIDs at {{IANA-TCP-EXIDs}}.
+: See {{!RFC9293}} for the general definition of TCP options.
+: See {{!RFC6994}} for the shared use of experimental TCP Options.
+
+Reference:
+: This-Document
+
+## tcpSharedOptionExID32 Information Element {#sec-ex32}
+
+Name:
+: tcpSharedOptionExID32
+
+ElementID:
+: TBD7
+
+Description:
+: Observed Expermients IDs (ExIDs) in a shared
+  TCP option (Kind=253 or 254)  in a Flow.  The information is encoded in a set of
+  32-bit fields. Each 32-bit field carries an observed 4-byte ExID in a
+  shared option.
 
 Abstract Data Type:
 : octetArray
@@ -345,7 +373,7 @@ Reference:
 
 # Operational Considerations
 
-## IPv6 Extension Headers
+## IPv6 Extension Headers {#op-eh}
 
 The value of ipv6ExtensionHeadersFull and ipv6ExtensionHeaderCount IEs should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
@@ -353,11 +381,11 @@ If an implementation determines that it includes an extension header that it doe
 
 The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
 
-## TCP Options
+## TCP Options {#op-tcp}
 
 The value of tcpOptionsFull IE should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
-If a TCP Flow contains packets with a mix of 2-byte and 4-byte Experiment IDs, two different Template Records may be used: one containing the tcpSharedOptionExID IE with a length of 2 bytes and another similar one containing the tcpSharedOptionExID IE with a length of 4 bytes.
+If a TCP Flow contains packets with a mix of 2-byte and 4-byte Experiment IDs, the same Template Record MAY be used with both tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs. 32-bit ExIDs MUST NOT be included in a tcpSharedOptionExID16 IE. An implementation MAY decide to use the same tcpSharedOptionExID32 IE to export both 16-bit and 32-bit ExIDs. In such a case, 16-bit ExIDs MUST be passed returned in 32 bits (that is, the first 16 most-significant bits are set to 0).
 
 # Examples {#sec-examples}
 
@@ -423,7 +451,8 @@ This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX
 |TBD3| ipv6ExtensionHeaderLimit|{{sec-v6limit}} of This-Document|
 |TBD4| ipv6ExtensionHeadersChainLength |{{sec-v6aggr}} of This-Document|
 |TBD5| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
-|TBD6| tcpSharedOptionExID|{{sec-ex}} of This-Document|
+|TBD6| tcpSharedOptionExID16|{{sec-ex}} of This-Document|
+|TBD7| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
 {: title="New IPFIX Information Elements"}
 
 --- back
