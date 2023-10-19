@@ -1824,7 +1824,7 @@ shared option.<a href="#section-4.3-1.6.1" class="pilcrow">¶</a></p>
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-tcp-options" class="section-name selfRef">TCP Options</a>
         </h3>
 <p id="section-5.2-1">The value of tcpOptionsFull IE should be encoded in fewer octets as per the guidelines in <span><a href="https://rfc-editor.org/rfc/rfc7011#section-6.2" class="relref">Section 6.2</a> of [<a href="#RFC7011" class="cite xref">RFC7011</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">If a TCP Flow contains packets with a mix of 2-byte and 4-byte Experiment IDs, the same Template Record <span class="bcp14">MAY</span> be used with both tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs. 32-bit ExIDs <span class="bcp14">MUST NOT</span> be included in a tcpSharedOptionExID16 IE. An implementation <span class="bcp14">MAY</span> decide to use the same tcpSharedOptionExID32 IE to export both 16-bit and 32-bit ExIDs. In such a case, 16-bit ExIDs <span class="bcp14">MUST</span> be passed returned in 32 bits (that is, the first 16 most-significant bits are set to 0).<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">If a TCP Flow contains packets with a mix of 2-byte and 4-byte Experiment IDs, the same Template Record is used with both tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
