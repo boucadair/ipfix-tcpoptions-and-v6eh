@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 20 April 2024                                            Huawei
-                                                         18 October 2023
+Expires: 21 April 2024                                            Huawei
+                                                         19 October 2023
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 April 2024.
+   This Internet-Draft will expire on 21 April 2024.
 
 Copyright Notice
 
@@ -76,7 +76,8 @@ Table of Contents
      3.4.  ipv6ExtensionHeadersChainLength Information Element
    4.  Information Elements for TCP Options
      4.1.  tcpOptionsFull Information Element
-     4.2.  tcpSharedOptionExID Information Element
+     4.2.  tcpSharedOptionExID16 Information Element
+     4.3.  tcpSharedOptionExID32 Information Element
    5.  Operational Considerations
      5.1.  IPv6 Extension Headers
      5.2.  TCP Options
@@ -382,20 +383,39 @@ MSB                                                                  LSB
 
    Reference:  This-Document
 
-4.2.  tcpSharedOptionExID Information Element
+4.2.  tcpSharedOptionExID16 Information Element
 
-   Name:  tcpSharedOptionExID
+   Name:  tcpSharedOptionExID16
 
    ElementID:  TBD6
 
-   Description:  Observed 2-byte (or 4-byte) Expermients IDs (ExIDs) in
-      a shared TCP option (Kind=253 or 254) in a Flow.  The information
-      is encoded in a set of 16-bit (or 32-bit) fields.  Each 16-bit (or
-      32-bit) field carries the observed 2-byte (or 4-bute) ExID in a
-      shared option.
+   Description:  Observed Expermients IDs (ExIDs) in a shared TCP option
+      (Kind=253 or 254) in a Flow.  The information is encoded in a set
+      of 16-bit fields.  Each 16-bit field carries an observed 2-byte
+      ExID in a shared option.
 
-      The value should be encoded in fewer octets as per the guidelines
-      in Section 6.2 of [RFC7011].
+   Abstract Data Type:  octetArray
+
+   Data Type Semantics:  identifier
+
+   Additional Information:  See assigned ExIDs at [IANA-TCP-EXIDs].
+
+      See [RFC9293] for the general definition of TCP options.
+
+      See [RFC6994] for the shared use of experimental TCP Options.
+
+   Reference:  This-Document
+
+4.3.  tcpSharedOptionExID32 Information Element
+
+   Name:  tcpSharedOptionExID32
+
+   ElementID:  TBD7
+
+   Description:  Observed Expermients IDs (ExIDs) in a shared TCP option
+      (Kind=253 or 254) in a Flow.  The information is encoded in a set
+      of 32-bit fields.  Each 32-bit field carries an observed 4-byte
+      ExID in a shared option.
 
    Abstract Data Type:  octetArray
 
@@ -438,10 +458,13 @@ MSB                                                                  LSB
    per the guidelines in Section 6.2 of [RFC7011].
 
    If a TCP Flow contains packets with a mix of 2-byte and 4-byte
-   Experiment IDs, two different Template Records may be used: one
-   containing the tcpSharedOptionExID IE with a length of 2 bytes and
-   another similar one containing the tcpSharedOptionExID IE with a
-   length of 4 bytes.
+   Experiment IDs, the same Template Record MAY be used with both
+   tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs. 32-bit ExIDs
+   MUST NOT be included in a tcpSharedOptionExID16 IE.  An
+   implementation MAY decide to use the same tcpSharedOptionExID32 IE to
+   export both 16-bit and 32-bit ExIDs.  In such a case, 16-bit ExIDs
+   MUST be passed returned in 32 bits (that is, the first 16 most-
+   significant bits are set to 0).
 
 6.  Examples
 
@@ -531,7 +554,10 @@ MSB                                                                  LSB
        | TBD5  | tcpOptionsFull                  | Section 4.1 of |
        |       |                                 | This-Document  |
        +-------+---------------------------------+----------------+
-       | TBD6  | tcpSharedOptionExID             | Section 4.2 of |
+       | TBD6  | tcpSharedOptionExID16           | Section 4.2 of |
+       |       |                                 | This-Document  |
+       +-------+---------------------------------+----------------+
+       | TBD7  | tcpSharedOptionExID32           | Section 4.3 of |
        |       |                                 | This-Document  |
        +-------+---------------------------------+----------------+
 
