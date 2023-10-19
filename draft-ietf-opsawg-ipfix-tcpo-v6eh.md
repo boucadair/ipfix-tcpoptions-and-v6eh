@@ -385,7 +385,7 @@ The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present whe
 
 The value of tcpOptionsFull IE should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
-If a TCP Flow contains packets with a mix of 2-byte and 4-byte Experiment IDs, the same Template Record MAY be used with both tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs. 32-bit ExIDs MUST NOT be included in a tcpSharedOptionExID16 IE. An implementation MAY decide to use the same tcpSharedOptionExID32 IE to export both 16-bit and 32-bit ExIDs. In such a case, 16-bit ExIDs MUST be passed returned in 32 bits (that is, the first 16 most-significant bits are set to 0).
+If a TCP Flow contains packets with a mix of 2-byte and 4-byte Experiment IDs, the same Template Record is used with both tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs.
 
 # Examples {#sec-examples}
 
