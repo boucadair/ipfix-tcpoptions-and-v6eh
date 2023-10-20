@@ -194,9 +194,6 @@ Description:
 ~~~~
 {: artwork-align="center"}
 
-Abstract Data Type:
-: unsigned64
-
 Data Type Semantics:
 : identifier
 
