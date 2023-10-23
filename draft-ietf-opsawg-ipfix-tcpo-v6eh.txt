@@ -263,7 +263,7 @@ Table of Contents
  |  EH Type#1    |   Count       |...|  EH Type#n      |   Count       |
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-   Data Type Semantics:  identifier
+   Abstract Data Type:  unsigned64
 
    Additional Information:  See the assigned IPv6 extension header types
       in [IANA-EH].
@@ -520,6 +520,38 @@ Table of Contents
 
                    Figure 3: First Example of TCP Options
 
+   Let's consider a TCP Flow in which shared options with ExIDs 0x0348
+   (HOST_ID) [RFC7974], 0x454E (TCP-ENO) [RFC8547], and 0xE2D4C3D9
+   (Shared Memory communications over RMDA protocol) [RFC7609] are
+   observed.  As shown in Figure 4, two TCP shared IEs will be used to
+   report these observed ExIDs:
+
+   1.  The tcpSharedOptionExID16 IE set to 55067982 (i.e., 0x348454E) to
+       report observed 2-byte ExIDs: HOST_ID and TCP-ENO ExIDs.
+
+   2.  The tcpSharedOptionExID32 IE set to 3805594585 (i.e., 0xE2D4C3D9)
+       to report the only observed 4-byte ExID.
+
+     tcpSharedOptionExID16 IE:
+
+     MSB                                                          LSB
+                          1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |              0x0348           |             0x454E            |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+     tcpSharedOptionExID32 IE:
+
+     MSB                                                          LSB
+                          1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                           0xE2D4C3D9                          |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+                    Figure 4: Example of TCP Shared IEs
+
 7.  Security Considerations
 
    IPFIX security considerations are discussed in Section 11 of
@@ -624,6 +656,21 @@ Table of Contents
               03, 17 October 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
               ipfix-fixes-03>.
+
+   [RFC7609]  Fox, M., Kassimis, C., and J. Stevens, "IBM's Shared
+              Memory Communications over RDMA (SMC-R) Protocol",
+              RFC 7609, DOI 10.17487/RFC7609, August 2015,
+              <https://www.rfc-editor.org/rfc/rfc7609>.
+
+   [RFC7974]  Williams, B., Boucadair, M., and D. Wing, "An Experimental
+              TCP Option for Host Identification", RFC 7974,
+              DOI 10.17487/RFC7974, October 2016,
+              <https://www.rfc-editor.org/rfc/rfc7974>.
+
+   [RFC8547]  Bittau, A., Giffin, D., Handley, M., Mazieres, D., and E.
+              Smith, "TCP-ENO: Encryption Negotiation Option", RFC 8547,
+              DOI 10.17487/RFC8547, May 2019,
+              <https://www.rfc-editor.org/rfc/rfc8547>.
 
    [RFC8883]  Herbert, T., "ICMPv6 Errors for Discarding Packets Due to
               Processing Limits", RFC 8883, DOI 10.17487/RFC8883,

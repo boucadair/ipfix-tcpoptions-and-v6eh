@@ -1460,9 +1460,9 @@ that are observed before the Fragment header and the occurrences right after the
 </pre><a href="#section-3.2-2" class="pilcrow">¶</a>
 </div>
 <span class="break"></span><dl class="dlParallel" id="section-3.2-3">
-          <dt id="section-3.2-3.1">Data Type Semantics:</dt>
+          <dt id="section-3.2-3.1">Abstract Data Type:</dt>
           <dd style="margin-left: 1.5em" id="section-3.2-3.2">
-            <p id="section-3.2-3.2.1">identifier<a href="#section-3.2-3.2.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-3.2.1">unsigned64<a href="#section-3.2-3.2.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.2-3.3">Additional Information:</dt>
@@ -1903,6 +1903,42 @@ MSB                                                        LSB
 <a href="#name-first-example-of-tcp-option" class="selfRef">First Example of TCP Options</a>
           </figcaption></figure>
 </div>
+<p id="section-6.2-4">Let's consider a TCP Flow in which shared options with ExIDs 0x0348 (HOST_ID) <span>[<a href="#RFC7974" class="cite xref">RFC7974</a>]</span>, 0x454E      (TCP-ENO) <span>[<a href="#RFC8547" class="cite xref">RFC8547</a>]</span>, and 0xE2D4C3D9  (Shared Memory communications over RMDA protocol)       <span>[<a href="#RFC7609" class="cite xref">RFC7609</a>]</span> are observed. As shown in <a href="#ex-tcp2" class="auto internal xref">Figure 4</a>, two TCP shared IEs will be used to report these observed ExIDs:<a href="#section-6.2-4" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-6.2-5">
+<li id="section-6.2-5.1">
+            <p id="section-6.2-5.1.1">The tcpSharedOptionExID16 IE set to 55067982 (i.e., 0x348454E) to report observed 2-byte ExIDs:  HOST_ID and TCP-ENO ExIDs.<a href="#section-6.2-5.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li id="section-6.2-5.2">
+            <p id="section-6.2-5.2.1">The tcpSharedOptionExID32 IE set to 3805594585 (i.e., 0xE2D4C3D9) to report the only observed 4-byte ExID.<a href="#section-6.2-5.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ol>
+<span id="name-example-of-tcp-shared-ies"></span><div id="ex-tcp2">
+<figure id="figure-4">
+          <div class="alignCenter art-text artwork" id="section-6.2-6.1">
+<pre>
+tcpSharedOptionExID16 IE:
+
+MSB                                                          LSB
+                     1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|              0x0348           |             0x454E            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+tcpSharedOptionExID32 IE:
+
+MSB                                                          LSB
+                     1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                           0xE2D4C3D9                          |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-example-of-tcp-shared-ies" class="selfRef">Example of TCP Shared IEs</a>
+          </figcaption></figure>
+</div>
 </section>
 </div>
 </section>
@@ -2046,6 +2082,18 @@ MSB                                                        LSB
 <dt id="I-D.ietf-opsawg-ipfix-fixes">[I-D.ietf-opsawg-ipfix-fixes]</dt>
         <dd>
 <span class="refAuthor">Boucadair, M.</span> and <span class="refAuthor">B. Claise</span>, <span class="refTitle">"Simple Fixes to the IP Flow Information Export (IPFIX) IANA Registry"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-ipfix-fixes-03</span>, <time datetime="2023-10-17" class="refDate">17 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-fixes-03">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-fixes-03</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7609">[RFC7609]</dt>
+        <dd>
+<span class="refAuthor">Fox, M.</span>, <span class="refAuthor">Kassimis, C.</span>, and <span class="refAuthor">J. Stevens</span>, <span class="refTitle">"IBM's Shared Memory Communications over RDMA (SMC-R) Protocol"</span>, <span class="seriesInfo">RFC 7609</span>, <span class="seriesInfo">DOI 10.17487/RFC7609</span>, <time datetime="2015-08" class="refDate">August 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7609">https://www.rfc-editor.org/rfc/rfc7609</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7974">[RFC7974]</dt>
+        <dd>
+<span class="refAuthor">Williams, B.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">D. Wing</span>, <span class="refTitle">"An Experimental TCP Option for Host Identification"</span>, <span class="seriesInfo">RFC 7974</span>, <span class="seriesInfo">DOI 10.17487/RFC7974</span>, <time datetime="2016-10" class="refDate">October 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7974">https://www.rfc-editor.org/rfc/rfc7974</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8547">[RFC8547]</dt>
+        <dd>
+<span class="refAuthor">Bittau, A.</span>, <span class="refAuthor">Giffin, D.</span>, <span class="refAuthor">Handley, M.</span>, <span class="refAuthor">Mazieres, D.</span>, and <span class="refAuthor">E. Smith</span>, <span class="refTitle">"TCP-ENO: Encryption Negotiation Option"</span>, <span class="seriesInfo">RFC 8547</span>, <span class="seriesInfo">DOI 10.17487/RFC8547</span>, <time datetime="2019-05" class="refDate">May 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8547">https://www.rfc-editor.org/rfc/rfc8547</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8883">[RFC8883]</dt>
         <dd>
