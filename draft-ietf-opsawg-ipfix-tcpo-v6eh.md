@@ -194,8 +194,8 @@ Description:
 ~~~~
 {: artwork-align="center"}
 
-Data Type Semantics:
-: identifier
+Abstract Data Type:
+: unsigned64
 
 Additional Information:
 : See the assigned IPv6 extension header types in {{IANA-EH}}.
@@ -435,6 +435,33 @@ MSB                                                        LSB
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
 ~~~~
 {: #ex-tcp1 title="First Example of TCP Options" artwork-align="center"}
+
+
+Let's consider a TCP Flow in which shared options with ExIDs 0x0348 (HOST_ID) {{?RFC7974}}, 0x454E	(TCP-ENO) {{?RFC8547}}, and 0xE2D4C3D9	(Shared Memory communications over RMDA protocol)	{{?RFC7609}} are observed. As shown in {{ex-tcp2}}, two TCP shared IEs will be used to report these observed ExIDs:
+
+1. The tcpSharedOptionExID16 IE set to 55067982 (i.e., 0x348454E) to report observed 2-byte ExIDs:  HOST_ID and TCP-ENO ExIDs.
+2. The tcpSharedOptionExID32 IE set to 3805594585 (i.e., 0xE2D4C3D9) to report the only observed 4-byte ExID.
+
+~~~~
+tcpSharedOptionExID16 IE:
+
+MSB                                                          LSB
+                     1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|              0x0348           |             0x454E            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+tcpSharedOptionExID32 IE:
+
+MSB                                                          LSB
+                     1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                           0xE2D4C3D9                          |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~~
+{: #ex-tcp2 title="Example of TCP Shared IEs" artwork-align="center"}
 
 
 # Security Considerations
