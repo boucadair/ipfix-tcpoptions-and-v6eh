@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 21 April 2024                                            Huawei
-                                                         19 October 2023
+Expires: 25 April 2024                                            Huawei
+                                                         23 October 2023
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 April 2024.
+   This Internet-Draft will expire on 25 April 2024.
 
 Copyright Notice
 
@@ -138,9 +138,8 @@ Table of Contents
       using IPFIX.  Only TCP options having a kind =< 63 can be exported
       in a tcpOptions IPFIX IE.
 
-   *  Support means to report the observed Experimental Identifiers
-      (ExIDs) that are carried in shared TCP options (kind=253 or 254)
-      [RFC6994].
+   *  Allow reporting the observed Experimental Identifiers (ExIDs) that
+      are carried in shared TCP options (kind=253 or 254) [RFC6994].
 
    *  Optimize the encoding.
 
@@ -155,8 +154,7 @@ Table of Contents
    capitals, as shown here.
 
    This document uses the IPFIX-specific terminology (Information
-   Element, Template, Collector, Data Record, Flow, Flow Record,
-   Exporting Process, Collecting Process, etc.) defined in Section 2 of
+   Element, Template Record, Flow, etc.) defined in Section 2 of
    [RFC7011].  As in [RFC7011], these IPFIX-specific terms have the
    first letter of a word capitalized.
 
@@ -195,7 +193,7 @@ Table of Contents
 
       The IPv6 extension header associated with each bit is provided in
       [NEW_IPFIX_IPv6EH_SUBREGISTRY].  Bit 0 corresponds to the least-
-      significant bit in the ipv6ExtensionHeadersFull IE while bit 254
+      significant bit in the ipv6ExtensionHeadersFull IE while bit 255
       corresponds to the most-significant bit of the IE.  In doing so,
       few octets will be needed to encode common IPv6 extension headers
       when observed in a Flow.
@@ -259,13 +257,11 @@ Table of Contents
       occurrences that are observed before the Fragment header and the
       occurrences right after the Fragment header.
 
-MSB                                                                  LSB
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 ...
+ MSB                                                                  LSB
+  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 ...
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
  |  EH Type#1    |   Count       |...|  EH Type#n      |   Count       |
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-   Abstract Data Type:  unsigned64
 
    Data Type Semantics:  identifier
 
@@ -283,13 +279,13 @@ MSB                                                                  LSB
 
    ElementID:  TBD3
 
-   Description:  When set to "true", this Information Element indicates
+   Description:  When set to "false", this Information Element indicates
       that the exported extension headers information (e.g.,
-      ipv6ExtensionHeaderFull or ipv6ExtensionHeaderCount) does not
+      ipv6ExtensionHeadersFull or ipv6ExtensionHeaderCount) does not
       match the full enclosed extension headers, but only up to a limit
       that is typically set by hardware or software.
 
-      When set to "false", this Information Element indicates that the
+      When set to "true", this Information Element indicates that the
       exported extension header information matches the full enclosed
       extension headers.
 
@@ -300,7 +296,7 @@ MSB                                                                  LSB
    Additional Information:  See Section 4 of [RFC8200] for the general
       definition of IPv6 extension headers.
 
-      See [RFC8883] for an example of IPv6 packets processing due to
+      See [RFC8883] for an example of IPv6 packet processing due to
       limits on extension headers.
 
    Reference:  This-Document
@@ -328,6 +324,10 @@ MSB                                                                  LSB
       headers of the chain.  Exporting such information may help
       identifying root causes of performance degradation, including
       packet drops.
+
+      If several extension header chains are observed in a Flow, each
+      header chain length MUST be exported in a separate
+      ipv6ExtensionHeadersChainLength IE.
 
    Abstract Data Type:  unsigned
 
@@ -366,11 +366,12 @@ MSB                                                                  LSB
       observed packet of this Flow contained the respective TCP option,
       the value of the corresponding bit is 0.
 
-      Options are mapped to bits according to their option numbers.
-      Option number X is mapped to bit position "254 - X".  This
-      approach allows an observer to export any observed TCP option even
-      if it does support that option and without requiring updating a
-      mapping table.
+      Options are mapped to bits according to their option numbers.  TCP
+      option kind 0 corresponds to the least-significant bit in the
+      tcpOptionsFull IE while kind 255 corresponds to the most-
+      significant bit of the IE.  This approach allows an observer to
+      export any observed TCP option even if it does support that option
+      and without requiring updating a mapping table.
 
    Abstract Data Type:  unsigned
 
@@ -389,7 +390,7 @@ MSB                                                                  LSB
 
    ElementID:  TBD6
 
-   Description:  Observed Expermients IDs (ExIDs) in a shared TCP option
+   Description:  Observed Experiments IDs (ExIDs) in a shared TCP option
       (Kind=253 or 254) in a Flow.  The information is encoded in a set
       of 16-bit fields.  Each 16-bit field carries an observed 2-byte
       ExID in a shared option.
@@ -412,7 +413,7 @@ MSB                                                                  LSB
 
    ElementID:  TBD7
 
-   Description:  Observed Expermients IDs (ExIDs) in a shared TCP option
+   Description:  Observed Experiments IDs (ExIDs) in a shared TCP option
       (Kind=253 or 254) in a Flow.  The information is encoded in a set
       of 32-bit fields.  Each 32-bit field carries an observed 4-byte
       ExID in a shared option.
@@ -463,10 +464,10 @@ MSB                                                                  LSB
 
 6.  Examples
 
-6.1.  IPv6 Extension Headers
-
    This section provides few examples to illustrate the use of some IEs
    defined in the document.
+
+6.1.  IPv6 Extension Headers
 
    Figure 1 provides an example of reported values in an
    ipv6ExtensionHeadersFull IE for an IPv6 Flow in which only the IPv6
@@ -475,11 +476,11 @@ MSB                                                                  LSB
    ipv6ExtensionHeadersFull IE will be set to 1.
 
       MSB                                                        LSB
-                           1                 20     ...  25
-       0 1 2 3 4 5 6 7 8 9 0 1 2 3 ...6 7 8 9 0 1 2 ... 9 0 1 2 3 4
-      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
-      |0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|0|0|0|0|0|   |0|0|0|0|0|1|
-      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
+                           1                   2     ...25
+       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 ... 0 1 2 3 4 5
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
+      |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|0|0|0|1|
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-++-++-+-+-+-+-+-+-+...+-+-+-+-+-+-+
 
                Figure 1: A First Example of Extension Headers
 
@@ -487,14 +488,14 @@ MSB                                                                  LSB
    ipv6ExtensionHeadersFull IE for an IPv6 Flow in which the IPv6 Hop-
    by-Hop Options, Routing, and Destination Options headers are
    observed.  One octet is sufficient to report these observed options.
-   Concretely, the ipv6ExtensionHeadersFull IE will be set to 19.
+   Concretely, the ipv6ExtensionHeadersFull IE will be set to 35.
 
       MSB                                                        LSB
-                           1                  20     ...  25
-       0 1 2 3 4 5 6 7 8 9 0 1 2 3 ... 6 7 8 9 0 1 2 ... 9 0 1 2 3 4
-      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
-      |0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|0|0|0|0|0|   |0|1|0|0|1|1|
-      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
+                           1                   2     ...25
+       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 ... 0 1 2 3 4 5
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
+      |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |1|0|0|0|1|1|
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
 
               Figure 2: A Second Example of Extension Headers
 
@@ -508,11 +509,11 @@ MSB                                                                  LSB
    for a TCP Flow in which End of Option List, Maximum Segment Size, and
    Window Scale options are observed.  One octet is sufficient to report
    these observed options.  Concretely, the tcpOptionsFull IE will be
-   set to 15.
+   set to 13.
 
       MSB                                                        LSB
-                           1                   2     ...  25
-       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 ... 9 0 1 2 3 4
+                           1                   2     ...25
+       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 ... 0 1 2 3 4 5
       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
       |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|1|1|0|1|
       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+
@@ -540,7 +541,7 @@ MSB                                                                  LSB
        | TBD2  | ipv6ExtensionHeaderCount        | Section 3.2 of |
        |       |                                 | This-Document  |
        +-------+---------------------------------+----------------+
-       | TBD3  | ipv6ExtensionHeaderLimit        | Section 3.3 of |
+       | TBD3  | ipv6ExtensionHeadersLimit       | Section 3.3 of |
        |       |                                 | This-Document  |
        +-------+---------------------------------+----------------+
        | TBD4  | ipv6ExtensionHeadersChainLength | Section 3.4 of |
