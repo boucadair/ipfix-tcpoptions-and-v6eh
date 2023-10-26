@@ -323,7 +323,7 @@ ElementID:
 : TBD6
 
 Description:
-: Observed Experiments IDs (ExIDs) in a shared
+: Observed 2-byte Experiments IDs (ExIDs) in a shared
       TCP option (Kind=253 or 254)  in a Flow.  The information is encoded in a set of
       16-bit fields.  Each 16-bit field carries an observed 2-byte ExID in a
       shared option.
@@ -352,7 +352,7 @@ ElementID:
 : TBD7
 
 Description:
-: Observed Experiments IDs (ExIDs) in a shared
+: Observed  4-byte Experiments IDs (ExIDs) in a shared
   TCP option (Kind=253 or 254)  in a Flow.  The information is encoded in a set of
   32-bit fields. Each 32-bit field carries an observed 4-byte ExID in a
   shared option.
