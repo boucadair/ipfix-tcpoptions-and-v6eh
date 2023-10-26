@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 25 April 2024                                            Huawei
-                                                         23 October 2023
+Expires: 28 April 2024                                            Huawei
+                                                         26 October 2023
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 April 2024.
+   This Internet-Draft will expire on 28 April 2024.
 
 Copyright Notice
 
@@ -390,10 +390,10 @@ Table of Contents
 
    ElementID:  TBD6
 
-   Description:  Observed Experiments IDs (ExIDs) in a shared TCP option
-      (Kind=253 or 254) in a Flow.  The information is encoded in a set
-      of 16-bit fields.  Each 16-bit field carries an observed 2-byte
-      ExID in a shared option.
+   Description:  Observed 2-byte Experiments IDs (ExIDs) in a shared TCP
+      option (Kind=253 or 254) in a Flow.  The information is encoded in
+      a set of 16-bit fields.  Each 16-bit field carries an observed
+      2-byte ExID in a shared option.
 
    Abstract Data Type:  octetArray
 
@@ -413,10 +413,10 @@ Table of Contents
 
    ElementID:  TBD7
 
-   Description:  Observed Experiments IDs (ExIDs) in a shared TCP option
-      (Kind=253 or 254) in a Flow.  The information is encoded in a set
-      of 32-bit fields.  Each 32-bit field carries an observed 4-byte
-      ExID in a shared option.
+   Description:  Observed 4-byte Experiments IDs (ExIDs) in a shared TCP
+      option (Kind=253 or 254) in a Flow.  The information is encoded in
+      a set of 32-bit fields.  Each 32-bit field carries an observed
+      4-byte ExID in a shared option.
 
    Abstract Data Type:  octetArray
 
