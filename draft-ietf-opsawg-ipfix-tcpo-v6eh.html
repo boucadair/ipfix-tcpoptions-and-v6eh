@@ -1225,7 +1225,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve a set of issues encountered with the specifications of ipv6ExtensionHeaders (to export IPv6 extension headers) and tcpOptions (to export TCP options) IEs <span>[<a href="#IANA-IPFIX" class="cite xref">IANA-IPFIX</a>]</span>. More details about these issues are provided in the following sub-sections.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">This document specifies new IP Flow Information Export (IPFIX) <span>[<a href="#RFC7011" class="cite xref">RFC7011</a>]</span> Information Elements (IEs) to solve a set of issues encountered with the specifications of ipv6ExtensionHeaders (to export IPv6 extension headers) and tcpOptions (to export TCP options) IEs <span>[<a href="#IANA-IPFIX" class="cite xref">IANA-IPFIX</a>]</span>. More details about these issues are provided in the following sub-sections.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <div id="sec-eh-issues">
 <section id="section-1.1">
         <h3 id="name-issues-with-ipv6extensionhe">
@@ -1319,7 +1319,7 @@ and zero or a single Upper-Layer Header.<a href="#section-2-5.4.1" class="pilcro
       <h2 id="name-information-elements-for-ip">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-information-elements-for-ip" class="section-name selfRef">Information Elements for IPv6 Extension Headers</a>
       </h2>
-<p id="section-3-1">The definition of the ipv6ExtensionHeaders IE is updated in <span>[<a href="#I-D.ietf-opsawg-ipfix-fixes" class="cite xref">I-D.ietf-opsawg-ipfix-fixes</a>]</span> to address some of the issues listed in <a href="#sec-eh-issues" class="auto internal xref">Section 1.1</a>. Because some of these limitations can't be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new IEs to address all the ipv6ExtensionHeaders IE limitations.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">The definition of the ipv6ExtensionHeaders IE is updated in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-fixes-03#section-4.1" class="relref">Section 4.1</a> of [<a href="#I-D.ietf-opsawg-ipfix-fixes" class="cite xref">I-D.ietf-opsawg-ipfix-fixes</a>]</span> to address some of the issues listed in <a href="#sec-eh-issues" class="auto internal xref">Section 1.1</a>. Because some of these limitations can't be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new IEs to address all the ipv6ExtensionHeaders IE limitations. Refer also to <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-fixes-03#section-4.1.1" class="relref">Section 4.1.1</a> of [<a href="#I-D.ietf-opsawg-ipfix-fixes" class="cite xref">I-D.ietf-opsawg-ipfix-fixes</a>]</span> for more details.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="sec-v6full">
 <section id="section-3.1">
         <h3 id="name-ipv6extensionheadersfull-in">
@@ -1343,7 +1343,7 @@ information is encoded in a set of bit fields.  For each IPv6
 extension header, there is a bit in this set. The bit is set to 1 if
 any observed packet of this Flow contains the corresponding IPv6
 extension header.  Otherwise, if no observed packet of this Flow
-contained the respective IPv6 extension header, the value of the
+contains the respective IPv6 extension header, the value of the
 corresponding bit is 0.<a href="#section-3.1-1.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
@@ -1647,7 +1647,7 @@ chain length <span class="bcp14">MUST</span> be exported in a separate ipv6Exten
     in a set of bit fields.  For each TCP option, there is a bit in
     this set.  The bit is set to 1 if any observed packet of this Flow
     contains the corresponding TCP option.  Otherwise, if no observed
-    packet of this Flow contained the respective TCP option, the value
+    packet of this Flow contains the respective TCP option, the value
     of the corresponding bit is 0.<a href="#section-4.1-2.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
@@ -2113,7 +2113,7 @@ MSB                                                          LSB
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-A-1">Thanks to Paul Aitken and Eric Vyncke for the review and comments.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<p id="appendix-A-2">Thanks to Wesley Eddy for the tsvart review.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">Thanks to Wesley Eddy for the tsvart review and Yingzhen Qu for the opsdir review.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
