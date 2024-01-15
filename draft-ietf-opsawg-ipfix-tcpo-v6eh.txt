@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 28 April 2024                                            Huawei
-                                                         26 October 2023
+Expires: 18 July 2024                                             Huawei
+                                                         15 January 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,11 +47,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 April 2024.
+   This Internet-Draft will expire on 18 July 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -97,8 +97,9 @@ Table of Contents
    This document specifies new IP Flow Information Export (IPFIX)
    Information Elements (IEs) to solve a set of issues encountered with
    the specifications of ipv6ExtensionHeaders (to export IPv6 extension
-   headers) and tcpOptions (to export TCP options) IEs.  More details
-   about these issues are provided in the following sub-sections.
+   headers) and tcpOptions (to export TCP options) IEs [IANA-IPFIX].
+   More details about these issues are provided in the following sub-
+   sections.
 
 1.1.  Issues with ipv6ExtensionHeaders Information Element
 
@@ -124,7 +125,7 @@ Table of Contents
 
    *  Optimize the encoding.
 
-   *  Explain the reasoning for reporting values which do no correspond
+   *  Explain the reasoning for reporting values which do not correspond
       to extension headers (e.g., "Unknown Layer 4 header" or "Payload
       compression header").
 
@@ -205,7 +206,7 @@ Table of Contents
       the Flow.
 
       Several extension header chains may be observed in a Flow.  These
-      extension headers may be aggregated in one single
+      extension headers MAY be aggregated in one single
       ipv6ExtensionHeadersFull Information Element or be exported in
       separate ipv6ExtensionHeadersFull IEs, one for each extension
       header chain.
@@ -390,10 +391,10 @@ Table of Contents
 
    ElementID:  TBD6
 
-   Description:  Observed 2-byte Experiments IDs (ExIDs) in a shared TCP
-      option (Kind=253 or 254) in a Flow.  The information is encoded in
-      a set of 16-bit fields.  Each 16-bit field carries an observed
-      2-byte ExID in a shared option.
+   Description:  Any observed 2-byte Experiments IDs (ExIDs) in a shared
+      TCP option (Kind=253 or 254) in a Flow.  The information is
+      encoded in a set of 16-bit fields.  Each 16-bit field carries an
+      observed 2-byte ExID in a shared option.
 
    Abstract Data Type:  octetArray
 
@@ -413,10 +414,10 @@ Table of Contents
 
    ElementID:  TBD7
 
-   Description:  Observed 4-byte Experiments IDs (ExIDs) in a shared TCP
-      option (Kind=253 or 254) in a Flow.  The information is encoded in
-      a set of 32-bit fields.  Each 32-bit field carries an observed
-      4-byte ExID in a shared option.
+   Description:  Any observed 4-byte Experiments IDs (ExIDs) in a shared
+      TCP option (Kind=253 or 254) in a Flow.  The information is
+      encoded in a set of 32-bit fields.  Each 32-bit field carries an
+      observed 4-byte ExID in a shared option.
 
    Abstract Data Type:  octetArray
 
@@ -684,6 +685,8 @@ Table of Contents
 Acknowledgments
 
    Thanks to Paul Aitken and Eric Vyncke for the review and comments.
+
+   Thanks to Wesley Eddy for the tsvart review.
 
 Authors' Addresses
 
