@@ -65,7 +65,7 @@ This document specifies new IP Flow Information Export (IPFIX) Information Eleme
 
 # Introduction
 
-This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve a set of issues encountered with the specifications of ipv6ExtensionHeaders (to export IPv6 extension headers) and tcpOptions (to export TCP options) IEs {{IANA-IPFIX}}. More details about these issues are provided in the following sub-sections.
+This document specifies new IP Flow Information Export (IPFIX) {{!RFC7011}} Information Elements (IEs) to solve a set of issues encountered with the specifications of ipv6ExtensionHeaders (to export IPv6 extension headers) and tcpOptions (to export TCP options) IEs {{IANA-IPFIX}}. More details about these issues are provided in the following sub-sections.
 
 ## Issues with ipv6ExtensionHeaders Information Element {#sec-eh-issues}
 
@@ -114,7 +114,7 @@ Extension header chain:
 
 # Information Elements for IPv6 Extension Headers {#sec-eh}
 
-The definition of the ipv6ExtensionHeaders IE is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-eh-issues}}. Because some of these limitations can't be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new IEs to address all the ipv6ExtensionHeaders IE limitations.
+The definition of the ipv6ExtensionHeaders IE is updated in {{Section 4.1 of ?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-eh-issues}}. Because some of these limitations can't be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new IEs to address all the ipv6ExtensionHeaders IE limitations. Refer also to {{Section 4.1.1 of ?I-D.ietf-opsawg-ipfix-fixes}} for more details.
 
 ## ipv6ExtensionHeadersFull Information Element {#sec-v6full}
 
@@ -130,7 +130,7 @@ Description:
    extension header, there is a bit in this set. The bit is set to 1 if
    any observed packet of this Flow contains the corresponding IPv6
    extension header.  Otherwise, if no observed packet of this Flow
-   contained the respective IPv6 extension header, the value of the
+   contains the respective IPv6 extension header, the value of the
    corresponding bit is 0.
 
 : The IPv6 extension header associated with each bit is provided in
@@ -292,7 +292,7 @@ Description:
       in a set of bit fields.  For each TCP option, there is a bit in
       this set.  The bit is set to 1 if any observed packet of this Flow
       contains the corresponding TCP option.  Otherwise, if no observed
-      packet of this Flow contained the respective TCP option, the value
+      packet of this Flow contains the respective TCP option, the value
       of the corresponding bit is 0.
 
 : Options are mapped to bits according to their option numbers.
@@ -489,4 +489,4 @@ This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX
 
 Thanks to Paul Aitken and Eric Vyncke for the review and comments.
 
-Thanks to Wesley Eddy for the tsvart review.
+Thanks to Wesley Eddy for the tsvart review and Yingzhen Qu for the opsdir review.
