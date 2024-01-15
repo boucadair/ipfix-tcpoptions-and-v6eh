@@ -71,7 +71,7 @@ This document specifies new IP Flow Information Export (IPFIX) {{!RFC7011}} Info
 
 The specification of ipv6ExtensionHeaders IPFIX IE does not:
 
-- Cover the full extension headers range ({{Section 4 of !RFC8200}}).
+- Cover the full extension headers' range ({{Section 4 of !RFC8200}}).
 - Specify the procedure to follow when all bits are exhausted.
 - Specify a means to export the order and the number of occurences of a given extension header.
 - Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IANA-EH}}. Only a frozen set of extension headers can be exported using the ipv6ExtensionHeaders IE.
@@ -114,7 +114,7 @@ Extension header chain:
 
 # Information Elements for IPv6 Extension Headers {#sec-eh}
 
-The definition of the ipv6ExtensionHeaders IE is updated in {{Section 4.1 of ?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-eh-issues}}. Because some of these limitations can't be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new IEs to address all the ipv6ExtensionHeaders IE limitations. Refer also to {{Section 4.1.1 of ?I-D.ietf-opsawg-ipfix-fixes}} for more details.
+The definition of the ipv6ExtensionHeaders IE is updated in {{Section 4.1 of ?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-eh-issues}}. Because some of these limitations cannot be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new IEs to address all the ipv6ExtensionHeaders IE limitations. Refer also to {{Section 4.1.1 of ?I-D.ietf-opsawg-ipfix-fixes}} for more details.
 
 ## ipv6ExtensionHeadersFull Information Element {#sec-v6full}
 
@@ -275,7 +275,7 @@ Reference:
 
 # Information Elements for TCP Options {#sec-tcp}
 
-The definition of the tcpOptions IE is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-tcp-issues}}. Because some of these limitations can't be addressed by simple updates to tcpOptions, this section specifies a set of new IEs to address all the tcpOptions IE limitations.
+The definition of the tcpOptions IE is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-tcp-issues}}. Because some of these limitations cannot be addressed by simple updates to tcpOptions, this section specifies a set of new IEs to address all the tcpOptions IE limitations.
 
 ## tcpOptionsFull Information Element {#sec-tcpfull}
 
@@ -377,7 +377,7 @@ Reference:
 
 The value of ipv6ExtensionHeadersFull and ipv6ExtensionHeaderCount IEs should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
-If an implementation determines that it includes an extension header that it does no support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeaderCount IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
+If an implementation determines that it includes an extension header that it does not support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeaderCount IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
 
 The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
 
@@ -437,7 +437,7 @@ MSB                                                        LSB
 {: #ex-tcp1 title="First Example of TCP Options" artwork-align="center"}
 
 
-Let's consider a TCP Flow in which shared options with ExIDs 0x0348 (HOST_ID) {{?RFC7974}}, 0x454E	(TCP-ENO) {{?RFC8547}}, and 0xE2D4C3D9	(Shared Memory communications over RMDA protocol)	{{?RFC7609}} are observed. As shown in {{ex-tcp2}}, two TCP shared IEs will be used to report these observed ExIDs:
+Let us consider a TCP Flow in which shared options with ExIDs 0x0348 (HOST_ID) {{?RFC7974}}, 0x454E	(TCP-ENO) {{?RFC8547}}, and 0xE2D4C3D9	(Shared Memory communications over RMDA protocol)	{{?RFC7609}} are observed. As shown in {{ex-tcp2}}, two TCP shared IEs will be used to report these observed ExIDs:
 
 1. The tcpSharedOptionExID16 IE set to 55067982 (i.e., 0x348454E) to report observed 2-byte ExIDs:  HOST_ID and TCP-ENO ExIDs.
 2. The tcpSharedOptionExID32 IE set to 3805594585 (i.e., 0xE2D4C3D9) to report the only observed 4-byte ExID.
@@ -489,4 +489,5 @@ This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX
 
 Thanks to Paul Aitken and Eric Vyncke for the review and comments.
 
-Thanks to Wesley Eddy for the tsvart review and Yingzhen Qu for the opsdir review.
+Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review,
+and Dirk Von Hugo for intdir review.
