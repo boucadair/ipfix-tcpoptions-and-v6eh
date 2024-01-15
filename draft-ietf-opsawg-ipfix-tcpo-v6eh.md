@@ -65,7 +65,7 @@ This document specifies new IP Flow Information Export (IPFIX) Information Eleme
 
 # Introduction
 
-This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve a set of issues encountered with the specifications of ipv6ExtensionHeaders (to export IPv6 extension headers) and tcpOptions (to export TCP options) IEs. More details about these issues are provided in the following sub-sections.
+This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve a set of issues encountered with the specifications of ipv6ExtensionHeaders (to export IPv6 extension headers) and tcpOptions (to export TCP options) IEs {{IANA-IPFIX}}. More details about these issues are provided in the following sub-sections.
 
 ## Issues with ipv6ExtensionHeaders Information Element {#sec-eh-issues}
 
@@ -78,7 +78,7 @@ The specification of ipv6ExtensionHeaders IPFIX IE does not:
 - Specify whether the exported values match the full enclosed values or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}).
 - Specify how to report the length of IPv6 extension headers.
 - Optimize the encoding.
-- Explain the reasoning for reporting values which do no correspond to extension headers (e.g., "Unknown Layer 4 header" or "Payload compression header").
+- Explain the reasoning for reporting values which do not correspond to extension headers (e.g., "Unknown Layer 4 header" or "Payload compression header").
 
 {{sec-eh}} addresses these issues.
 
@@ -143,7 +143,7 @@ Description:
   bit is set in the ipv6ExtensionHeadersFull IE whenever that value is encountered in the Flow.
 
 : Several extension header chains may be observed in a Flow. These extension headers
-  may be aggregated in one single ipv6ExtensionHeadersFull Information Element or
+  MAY be aggregated in one single ipv6ExtensionHeadersFull Information Element or
   be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.
 
 : This Information Element SHOULD NOT be exported if ipv6ExtensionHeaderCount Information Element is also present.
@@ -323,7 +323,7 @@ ElementID:
 : TBD6
 
 Description:
-: Observed 2-byte Experiments IDs (ExIDs) in a shared
+: Any observed 2-byte Experiments IDs (ExIDs) in a shared
       TCP option (Kind=253 or 254)  in a Flow.  The information is encoded in a set of
       16-bit fields.  Each 16-bit field carries an observed 2-byte ExID in a
       shared option.
@@ -352,7 +352,7 @@ ElementID:
 : TBD7
 
 Description:
-: Observed  4-byte Experiments IDs (ExIDs) in a shared
+: Any observed  4-byte Experiments IDs (ExIDs) in a shared
   TCP option (Kind=253 or 254)  in a Flow.  The information is encoded in a set of
   32-bit fields. Each 32-bit field carries an observed 4-byte ExID in a
   shared option.
@@ -489,3 +489,4 @@ This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX
 
 Thanks to Paul Aitken and Eric Vyncke for the review and comments.
 
+Thanks to Wesley Eddy for the tsvart review.
