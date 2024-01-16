@@ -149,7 +149,7 @@ Description:
 : This Information Element SHOULD NOT be exported if ipv6ExtensionHeaderCount Information Element is also present.
 
 Abstract Data Type:
-: unsigned
+: unsigned256
 
 Data Type Semantics:
 : flags
@@ -258,7 +258,7 @@ Description:
   chain length MUST be exported in a separate ipv6ExtensionHeadersChainLength IE.
 
 Abstract Data Type:
-: unsigned
+: unsigned32
 
 Data Type Semantics:
 : identifier
@@ -302,7 +302,7 @@ Description:
   that option and without requiring updating a mapping table.
 
 Abstract Data Type:
-: unsigned
+: unsigned256
 
 Data Type Semantics:
 : flags
@@ -470,7 +470,9 @@ IPFIX security considerations are discussed in {{Section 11 of !RFC7011}}. This 
 
 # IANA Considerations
 
-This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX registry {{IANA-IPFIX}}:
+## New IPFIX Information Elements
+
+This document requests IANA to add the following new IPFIX IEs to the "IPFIX Information Elements" registry under the "IP Flow Information Export (IPFIX) Entities" registry group {{IANA-IPFIX}}:
 
 |Value|	Name|	Reference|
 |TBD1| ipv6ExtensionHeadersFull|{{sec-v6full}} of This-Document|
@@ -481,6 +483,17 @@ This document requests IANA to add the following new IPFIX IEs to the IANA IPFIX
 |TBD6| tcpSharedOptionExID16|{{sec-ex}} of This-Document|
 |TBD7| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
 {: title="New IPFIX Information Elements"}
+
+## New IPFIX Information Element Data Type
+
+This document requests IANA to add the following new abstract data type to the "IPFIX Information Element Data Types" registry under the "IP Flow Information Export (IPFIX) Entities" registry group {{IANA-IPFIX}}:
+
+|Value|	Description|	Reference|
+|TBD8| unsigned256|This-Document|
+{: title="New IPFIX Information Element Data Type"}
+
+The type "unsigned256" represents a non-negative integer value in the
+range of '0' to '2^256 - 1'.
 
 --- back
 
