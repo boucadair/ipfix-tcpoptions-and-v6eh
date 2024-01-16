@@ -186,11 +186,11 @@ Description:
   that are observed before the Fragment header and the occurrences right after the Fragment header.
 
 ~~~~
- MSB                                                                  LSB
-  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 ...
- +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
- |  EH Type#1    |   Count       |...|  EH Type#n      |   Count       |
- +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+MSB                                                                 LSB
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 ...
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|  EH Type#1    |   Count       |...|  EH Type#n      |   Count       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~~
 {: artwork-align="center"}
 
