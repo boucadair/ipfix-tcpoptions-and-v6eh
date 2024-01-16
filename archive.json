@@ -1,0 +1,166 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2023-06-22T01:01:50.670218+00:00",
+  "repo": "boucadair/ipfix-tcpoptions-and-v6eh",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOI66GDs5h7uRu",
+      "title": "Expose the number of occurrence of an IPv6 EH",
+      "url": "https://github.com/boucadair/ipfix-tcpoptions-and-v6eh/issues/1",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "boucadair"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-03-28T01:09:56Z",
+      "updatedAt": "2023-04-04T13:43:39Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOI66GDs5m5fSr",
+      "title": "Expose the Routing Types/DST Options Count",
+      "url": "https://github.com/boucadair/ipfix-tcpoptions-and-v6eh/issues/2",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Not only aggerates",
+      "createdAt": "2023-05-25T19:04:55Z",
+      "updatedAt": "2023-05-25T19:04:55Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOI66GDs5nOOPZ",
+      "title": "Export EH Length",
+      "url": "https://github.com/boucadair/ipfix-tcpoptions-and-v6eh/issues/3",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-05-30T08:33:41Z",
+      "updatedAt": "2023-05-30T08:33:41Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOI66GDs5nOOUC",
+      "title": "Export EHs order",
+      "url": "https://github.com/boucadair/ipfix-tcpoptions-and-v6eh/issues/4",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-05-30T08:33:55Z",
+      "updatedAt": "2023-05-30T08:33:55Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOI66GDs5nOPKc",
+      "title": "disambiguate unknown EHs vs. unknown upper-layer",
+      "url": "https://github.com/boucadair/ipfix-tcpoptions-and-v6eh/issues/5",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "From \u00c9ric Vyncke: \r\n \r\n> - how would an 'old' implementation (post a potential future\r\n> publication of this I-D) differentiate between \"unknown ext header\"\r\n> (this set is normally closed but who knows) and \"unknown L4 header\"\r\n> and \"unknow IP protocol\" ?\r\n",
+      "createdAt": "2023-05-30T08:36:06Z",
+      "updatedAt": "2023-05-30T08:36:06Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 6,
+      "id": "PR_kwDOI66GDs5Tjror",
+      "title": "Update and rename draft-boucadair-opsawg-ipfix-tcpo-v6eh.md to draft-\u2026",
+      "url": "https://github.com/boucadair/ipfix-tcpoptions-and-v6eh/pull/6",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026ietf-opsawg-ipfix-tcpo-v6eh.md",
+      "createdAt": "2023-06-21T14:46:40Z",
+      "updatedAt": "2023-06-21T14:46:50Z",
+      "baseRepository": "boucadair/ipfix-tcpoptions-and-v6eh",
+      "baseRefName": "main",
+      "baseRefOid": "7c8a2757d14850f45843df5478894b5fe976223b",
+      "headRepository": "boucadair/ipfix-tcpoptions-and-v6eh",
+      "headRefName": "boucadair-patch-1",
+      "headRefOid": "85645d8b17fb742402205005d6032a8f01942caf",
+      "closedAt": "2023-06-21T14:46:50Z",
+      "mergedAt": "2023-06-21T14:46:50Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "30d8f7987bd5dc0ce882d3d267e4a6806dce9597"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
