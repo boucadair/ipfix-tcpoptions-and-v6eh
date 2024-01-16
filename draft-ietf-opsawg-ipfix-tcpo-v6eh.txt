@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 18 July 2024                                             Huawei
-                                                         15 January 2024
+Expires: 19 July 2024                                             Huawei
+                                                         16 January 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 July 2024.
+   This Internet-Draft will expire on 19 July 2024.
 
 Copyright Notice
 
@@ -86,6 +86,8 @@ Table of Contents
      6.2.  TCP Options
    7.  Security Considerations
    8.  IANA Considerations
+     8.1.  New IPFIX Information Elements
+     8.2.  New IPFIX Information Element Data Type
    9.  References
      9.1.  Normative References
      9.2.  Informative References
@@ -216,7 +218,7 @@ Table of Contents
       This Information Element SHOULD NOT be exported if
       ipv6ExtensionHeaderCount Information Element is also present.
 
-   Abstract Data Type:  unsigned
+   Abstract Data Type:  unsigned256
 
    Data Type Semantics:  flags
 
@@ -332,7 +334,7 @@ Table of Contents
       header chain length MUST be exported in a separate
       ipv6ExtensionHeadersChainLength IE.
 
-   Abstract Data Type:  unsigned
+   Abstract Data Type:  unsigned32
 
    Data Type Semantics:  identifier
 
@@ -376,7 +378,7 @@ Table of Contents
       export any observed TCP option even if it does support that option
       and without requiring updating a mapping table.
 
-   Abstract Data Type:  unsigned
+   Abstract Data Type:  unsigned256
 
    Data Type Semantics:  flags
 
@@ -564,8 +566,11 @@ Table of Contents
 
 8.  IANA Considerations
 
+8.1.  New IPFIX Information Elements
+
    This document requests IANA to add the following new IPFIX IEs to the
-   IANA IPFIX registry [IANA-IPFIX]:
+   "IPFIX Information Elements" registry under the "IP Flow Information
+   Export (IPFIX) Entities" registry group [IANA-IPFIX]:
 
        +=======+=================================+================+
        | Value | Name                            | Reference      |
@@ -593,6 +598,25 @@ Table of Contents
        +-------+---------------------------------+----------------+
 
                  Table 1: New IPFIX Information Elements
+
+8.2.  New IPFIX Information Element Data Type
+
+   This document requests IANA to add the following new abstract data
+   type to the "IPFIX Information Element Data Types" registry under the
+   "IP Flow Information Export (IPFIX) Entities" registry group
+   [IANA-IPFIX]:
+
+                  +=======+=============+===============+
+                  | Value | Description | Reference     |
+                  +=======+=============+===============+
+                  | TBD8  | unsigned256 | This-Document |
+                  +-------+-------------+---------------+
+
+                       Table 2: New IPFIX Information
+                             Element Data Type
+
+   The type "unsigned256" represents a non-negative integer value in the
+   range of '0' to '2^256 - 1'.
 
 9.  References
 
@@ -656,9 +680,9 @@ Table of Contents
               Boucadair, M. and B. Claise, "Simple Fixes to the IP Flow
               Information Export (IPFIX) IANA Registry", Work in
               Progress, Internet-Draft, draft-ietf-opsawg-ipfix-fixes-
-              03, 17 October 2023,
+              04, 15 January 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              ipfix-fixes-03>.
+              ipfix-fixes-04>.
 
    [RFC7609]  Fox, M., Kassimis, C., and J. Stevens, "IBM's Shared
               Memory Communications over RDMA (SMC-R) Protocol",
