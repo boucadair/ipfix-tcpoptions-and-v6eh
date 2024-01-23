@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 20 July 2024                                             Huawei
-                                                         17 January 2024
+Expires: 26 July 2024                                             Huawei
+                                                         23 January 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 July 2024.
+   This Internet-Draft will expire on 26 July 2024.
 
 Copyright Notice
 
@@ -721,6 +721,8 @@ Acknowledgments
 
    Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the
    opsdir review, and Dirk Von Hugo for intdir review.
+
+   Thanks to Thomas Graf for the Shepherd review.
 
 Authors' Addresses
 
