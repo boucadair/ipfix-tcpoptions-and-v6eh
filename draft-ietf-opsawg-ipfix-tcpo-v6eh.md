@@ -138,7 +138,7 @@ Description:
   in the ipv6ExtensionHeadersFull IE while bit 255 corresponds to the most-significant bit of the IE.
   In doing so, few octets will be needed to encode common IPv6 extension headers when observed in a Flow.
 
-: The "No Next Header" (59) value {{Section 4.7 of !RFC8200}} is used if there is no upper-layer header in an IPv6 packet.
+: The "No Next Header" (59) value ({{Section 4.7 of !RFC8200}}) is used if there is no upper-layer header in an IPv6 packet.
   Even if the value is not considered as an extension header as such, the corresponding
   bit is set in the ipv6ExtensionHeadersFull IE whenever that value is encountered in the Flow.
 
