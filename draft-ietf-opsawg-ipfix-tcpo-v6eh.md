@@ -468,7 +468,11 @@ MSB                                                          LSB
 
 # Security Considerations
 
-IPFIX security considerations are discussed in {{Section 11 of !RFC7011}}. This document does not add new security considerations for exporting IEs other than those already discussed in {{Section 8 of !RFC7012}}.
+IPFIX security considerations are discussed in {{Section 11 of !RFC7011}}. 
+
+ipv6ExtensionHeadersChainLength and ipv6ExtensionHeadersLimit IEs can be exploited by an unauthorized observer as a means to deduce the processing capabilities of nodes. {{Section 8 of !RFC7012}} discusses the required measures to guarantee the integrity and confidentiality of the exported information.
+
+This document does not add new security considerations for exporting other IEs other than those already discussed in {{Section 8 of !RFC7012}}.
 
 # IANA Considerations
 
