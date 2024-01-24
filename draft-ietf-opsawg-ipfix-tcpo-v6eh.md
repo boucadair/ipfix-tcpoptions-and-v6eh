@@ -116,13 +116,62 @@ Extension header chain:
 
 The definition of the ipv6ExtensionHeaders IE is updated in {{Section 4.1 of ?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-eh-issues}} of this document. Because some of these limitations cannot be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new IEs to address all the ipv6ExtensionHeaders IE limitations. Refer also to {{Section 4.1.1 of ?I-D.ietf-opsawg-ipfix-fixes}} for more details.
 
+## ipv6ExtensionHeaderType Information Element {#sec-v6ehtype}
+
+Name:
+: ipv6ExtensionHeaderType
+
+ElementID:
+: TBD1
+
+Description:
+:  The type of an IPv6 extension header observed in packets of this Flow.
+
+Abstract Data Type:
+: unsigned8
+
+Data Type Semantics:
+: identifier
+
+Additional Information:
+: See {{IANA-EH}} for assigned extension header types.
+: See {{Section 4 of !RFC8200}} for the general definition of IPv6 extension headers.
+
+Reference:
+: This-Document
+
+## ipv6ExtensionHeaderCount Information Element {#sec-v6ehcount}
+
+Name:
+: ipv6ExtensionHeaderCount
+
+ElementID:
+: TBD2
+
+Description:
+: The number of consecutive occurrences of a same extension header type in a Flow.
+: The type of the extension header is provided in the ipv6ExtensionHeaderType Information Element.
+
+Abstract Data Type:
+: unsigned8
+
+Data Type Semantics:
+: totalCounter
+
+Additional Information:
+: See {{IANA-EH}} for assigned extension header types.
+: See {{Section 4 of !RFC8200}} for the general definition of IPv6 extension headers.
+
+Reference:
+: This-Document
+
 ## ipv6ExtensionHeadersFull Information Element {#sec-v6full}
 
 Name:
 : ipv6ExtensionHeadersFull
 
 ElementID:
-: TBD1
+: TBD3
 
 Description:
 :  IPv6 extension headers observed in packets of this Flow. The
@@ -162,38 +211,34 @@ Reference:
 
 > Note to the RFC Editor: Please replace [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link to the "ipv6ExtensionHeaders Bits" registry created by {{?I-D.ietf-opsawg-ipfix-fixes}}.
 
-## ipv6ExtensionHeaderCount Information Element {#sec-v6count}
+## ipv6ExtensionHeaderCountList Information Element {#sec-v6count}
 
 Name:
-: ipv6ExtensionHeaderCount
+: ipv6ExtensionHeaderCountList
 
 ElementID:
-: TBD2
+: TBD4
 
 Description:
 : As per {{Section 4.1 of !RFC8200}}, IPv6 nodes must accept and attempt to process extension headers
   occurring any number of times in the same packet. This Information Element echoes the
   order of extension headers and number of consecutive occurrences of the same extension header type in a Flow.
 
-: If several extension header chains are observed in a Flow, each header
-  chain MUST be exported in a separate ipv6ExtensionHeaderCount IE.
+: This Information Element is a subTemplateList of ipv6ExtensionHeaderType and ipv6ExtensionHeaderCount Information Elements.
 
-: The same extension header type may appear several times in an ipv6ExtensionHeaderCount Information Element.
+: If several extension header chains are observed in a Flow, each header
+  chain MUST be exported in a separate ipv6ExtensionHeaderCountList IE.
+
+: The same extension header type may appear several times in anipv6ExtensionHeaderCountList Information Element.
   For example, if an IPv6 packet of a Flow includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
-  and Destination Options header, the ipv6ExtensionHeaderCount Information Element will report two counts of the Destination Options header: the occurrences
+  and Destination Options header, theipv6ExtensionHeaderCountList Information Element will report two counts of the Destination Options header: the occurrences
   that are observed before the Fragment header and the occurrences right after the Fragment header.
 
-~~~~
-MSB                                                                 LSB
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 ...
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|  EH Type#1    |   Count       |...|  EH Type#n      |   Count       |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-~~~~
-{: artwork-align="center"}
-
 Abstract Data Type:
-: unsigned64
+: subTemplateList
+
+Data Type Semantics:
+: list
 
 Additional Information:
 : See the assigned IPv6 extension header types in {{IANA-EH}}.
@@ -208,11 +253,11 @@ Name:
 : ipv6ExtensionHeadersLimit
 
 ElementID:
-: TBD3
+: TBD5
 
 Description:
 :  When set to "false", this Information Element indicates that the exported extension
-   headers information (e.g., ipv6ExtensionHeadersFull or ipv6ExtensionHeaderCount) does
+   headers information (e.g., ipv6ExtensionHeadersFull oripv6ExtensionHeaderCountList) does
    not match the full enclosed extension headers, but only up to a
    limit that is typically set by hardware or software.
 
@@ -238,7 +283,7 @@ Name:
 : ipv6ExtensionHeadersChainLength
 
 ElementID:
-: TBD4
+: TBD6
 
 Description:
 : In theory, there are no limits on the number of IPv6 extension headers that may
@@ -283,7 +328,7 @@ Name:
 : tcpOptionsFull
 
 ElementID:
-: TBD5
+: TBD7
 
 Description:
 : TCP options in packets of this Flow.  The information is encoded
@@ -318,7 +363,7 @@ Name:
 : tcpSharedOptionExID16
 
 ElementID:
-: TBD6
+: TBD8
 
 Description:
 : Any observed 2-byte Experiments IDs (ExIDs) in a shared
@@ -347,7 +392,7 @@ Name:
 : tcpSharedOptionExID32
 
 ElementID:
-: TBD7
+: TBD9
 
 Description:
 : Any observed  4-byte Experiments IDs (ExIDs) in a shared
@@ -373,11 +418,11 @@ Reference:
 
 ## IPv6 Extension Headers {#op-eh}
 
-The value of ipv6ExtensionHeadersFull and ipv6ExtensionHeaderCount IEs should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
+The value of ipv6ExtensionHeadersFull andipv6ExtensionHeaderCountList IEs should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
-If an implementation determines that an observed packet of a Flow includes an extension header that it does not support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeaderCount IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
+If an implementation determines that an observed packet of a Flow includes an extension header that it does not support, then the exact observed code of that extension header will be echoed in theipv6ExtensionHeaderCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
 
-The ipv6ExtensionHeadersFull Information Element SHOULD NOT be exported if ipv6ExtensionHeaderCount Information Element is also present because of the overlapping scopes between these two IEs. If both IEs are present, then ipv6ExtensionHeaderCount Information Element takes precedence.
+The ipv6ExtensionHeadersFull Information Element SHOULD NOT be exported ifipv6ExtensionHeaderCountList Information Element is also present because of the overlapping scopes between these two IEs. If both IEs are present, thenipv6ExtensionHeaderCountList Information Element takes precedence.
 
 The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
 
@@ -477,13 +522,15 @@ IPFIX security considerations are discussed in {{Section 11 of !RFC7011}}. This 
 This document requests IANA to add the following new IPFIX IEs to the "IPFIX Information Elements" registry under the "IP Flow Information Export (IPFIX) Entities" registry group {{IANA-IPFIX}}:
 
 |Value|	Name|	Reference|
-|TBD1| ipv6ExtensionHeadersFull|{{sec-v6full}} of This-Document|
-|TBD2| ipv6ExtensionHeaderCount|{{sec-v6count}} of This-Document|
-|TBD3| ipv6ExtensionHeadersLimit|{{sec-v6limit}} of This-Document|
-|TBD4| ipv6ExtensionHeadersChainLength |{{sec-v6aggr}} of This-Document|
-|TBD5| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
-|TBD6| tcpSharedOptionExID16|{{sec-ex}} of This-Document|
-|TBD7| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
+|TBD1| ipv6ExtensionHeader|{{sec-v6ehtype}} of This-Document|
+|TBD2|ipv6ExtensionHeaderCount|{{sec-v6ehcount}} of This-Document|
+|TBD3| ipv6ExtensionHeadersFull|{{sec-v6full}} of This-Document|
+|TBD4|ipv6ExtensionHeaderCountList|{{sec-v6count}} of This-Document|
+|TBD5| ipv6ExtensionHeadersLimit|{{sec-v6limit}} of This-Document|
+|TBD6| ipv6ExtensionHeadersChainLength |{{sec-v6aggr}} of This-Document|
+|TBD7| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
+|TBD8| tcpSharedOptionExID16|{{sec-ex}} of This-Document|
+|TBD9| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
 {: title="New IPFIX Information Elements"}
 
 ## New IPFIX Information Element Data Type
@@ -491,7 +538,7 @@ This document requests IANA to add the following new IPFIX IEs to the "IPFIX Inf
 This document requests IANA to add the following new abstract data type to the "IPFIX Information Element Data Types" registry under the "IP Flow Information Export (IPFIX) Entities" registry group {{IANA-IPFIX}}:
 
 |Value|	Description|	Reference|
-|TBD8| unsigned256|This-Document|
+|TBD10| unsigned256|This-Document|
 {: title="New IPFIX Information Element Data Type"}
 
 The type "unsigned256" represents a non-negative integer value in the
