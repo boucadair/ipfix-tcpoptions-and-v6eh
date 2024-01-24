@@ -1030,7 +1030,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Boucadair &amp; Claise</td>
-<td class="center">Expires 26 July 2024</td>
+<td class="center">Expires 27 July 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1043,12 +1043,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-opsawg-ipfix-tcpo-v6eh-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-01-23" class="published">23 January 2024</time>
+<time datetime="2024-01-24" class="published">24 January 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-07-26">26 July 2024</time></dd>
+<dd class="expires"><time datetime="2024-07-27">27 July 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1097,7 +1097,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 July 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1327,7 +1327,7 @@ and zero or a single Upper-Layer Header.<a href="#section-2-5.4.1" class="pilcro
       <h2 id="name-information-elements-for-ip">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-information-elements-for-ip" class="section-name selfRef">Information Elements for IPv6 Extension Headers</a>
       </h2>
-<p id="section-3-1">The definition of the ipv6ExtensionHeaders IE is updated in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-fixes-04#section-4.1" class="relref">Section 4.1</a> of [<a href="#I-D.ietf-opsawg-ipfix-fixes" class="cite xref">I-D.ietf-opsawg-ipfix-fixes</a>]</span> to address some of the issues listed in <a href="#sec-eh-issues" class="auto internal xref">Section 1.1</a> of this document. Because some of these limitations cannot be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new IEs to address all the ipv6ExtensionHeaders IE limitations. Refer also to <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-fixes-04#section-4.1.1" class="relref">Section 4.1.1</a> of [<a href="#I-D.ietf-opsawg-ipfix-fixes" class="cite xref">I-D.ietf-opsawg-ipfix-fixes</a>]</span> for more details.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">The definition of the ipv6ExtensionHeaders IE is updated in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-fixes-05#section-4.1" class="relref">Section 4.1</a> of [<a href="#I-D.ietf-opsawg-ipfix-fixes" class="cite xref">I-D.ietf-opsawg-ipfix-fixes</a>]</span> to address some of the issues listed in <a href="#sec-eh-issues" class="auto internal xref">Section 1.1</a> of this document. Because some of these limitations cannot be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new IEs to address all the ipv6ExtensionHeaders IE limitations. Refer also to <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-fixes-05#section-4.1.1" class="relref">Section 4.1.1</a> of [<a href="#I-D.ietf-opsawg-ipfix-fixes" class="cite xref">I-D.ietf-opsawg-ipfix-fixes</a>]</span> for more details.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="sec-v6full">
 <section id="section-3.1">
         <h3 id="name-ipv6extensionheadersfull-in">
@@ -1953,7 +1953,9 @@ MSB                                                          LSB
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">IPFIX security considerations are discussed in <span><a href="https://rfc-editor.org/rfc/rfc7011#section-11" class="relref">Section 11</a> of [<a href="#RFC7011" class="cite xref">RFC7011</a>]</span>. This document does not add new security considerations for exporting IEs other than those already discussed in <span><a href="https://rfc-editor.org/rfc/rfc7012#section-8" class="relref">Section 8</a> of [<a href="#RFC7012" class="cite xref">RFC7012</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">IPFIX security considerations are discussed in <span><a href="https://rfc-editor.org/rfc/rfc7011#section-11" class="relref">Section 11</a> of [<a href="#RFC7011" class="cite xref">RFC7011</a>]</span>.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">ipv6ExtensionHeadersChainLength and ipv6ExtensionHeadersLimit IEs can be exploited by an unauthorized observer as a means to deduce the processing capabilities of nodes. <span><a href="https://rfc-editor.org/rfc/rfc7012#section-8" class="relref">Section 8</a> of [<a href="#RFC7012" class="cite xref">RFC7012</a>]</span> discusses the required measures to guarantee the integrity and confidentiality of the exported information.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">This document does not add new security considerations for exporting other IEs other than those already discussed in <span><a href="https://rfc-editor.org/rfc/rfc7012#section-8" class="relref">Section 8</a> of [<a href="#RFC7012" class="cite xref">RFC7012</a>]</span>.<a href="#section-7-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -2123,7 +2125,7 @@ range of '0' to '2^256 - 1'.<a href="#section-8.2-3" class="pilcrow">¶</a></p>
 <dl class="references">
 <dt id="I-D.ietf-opsawg-ipfix-fixes">[I-D.ietf-opsawg-ipfix-fixes]</dt>
         <dd>
-<span class="refAuthor">Boucadair, M.</span> and <span class="refAuthor">B. Claise</span>, <span class="refTitle">"Simple Fixes to the IP Flow Information Export (IPFIX) IANA Registry"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-ipfix-fixes-04</span>, <time datetime="2024-01-15" class="refDate">15 January 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-fixes-04">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-fixes-04</a>&gt;</span>. </dd>
+<span class="refAuthor">Boucadair, M.</span> and <span class="refAuthor">B. Claise</span>, <span class="refTitle">"Simple Fixes to the IP Flow Information Export (IPFIX) IANA Registry"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-ipfix-fixes-05</span>, <time datetime="2024-01-23" class="refDate">23 January 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-fixes-05">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-ipfix-fixes-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7609">[RFC7609]</dt>
         <dd>

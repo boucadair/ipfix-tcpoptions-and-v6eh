@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 26 July 2024                                             Huawei
-                                                         23 January 2024
+Expires: 27 July 2024                                             Huawei
+                                                         24 January 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 July 2024.
+   This Internet-Draft will expire on 27 July 2024.
 
 Copyright Notice
 
@@ -570,8 +570,16 @@ Table of Contents
 7.  Security Considerations
 
    IPFIX security considerations are discussed in Section 11 of
-   [RFC7011].  This document does not add new security considerations
-   for exporting IEs other than those already discussed in Section 8 of
+   [RFC7011].
+
+   ipv6ExtensionHeadersChainLength and ipv6ExtensionHeadersLimit IEs can
+   be exploited by an unauthorized observer as a means to deduce the
+   processing capabilities of nodes.  Section 8 of [RFC7012] discusses
+   the required measures to guarantee the integrity and confidentiality
+   of the exported information.
+
+   This document does not add new security considerations for exporting
+   other IEs other than those already discussed in Section 8 of
    [RFC7012].
 
 8.  IANA Considerations
@@ -690,9 +698,9 @@ Table of Contents
               Boucadair, M. and B. Claise, "Simple Fixes to the IP Flow
               Information Export (IPFIX) IANA Registry", Work in
               Progress, Internet-Draft, draft-ietf-opsawg-ipfix-fixes-
-              04, 15 January 2024,
+              05, 23 January 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              ipfix-fixes-04>.
+              ipfix-fixes-05>.
 
    [RFC7609]  Fox, M., Kassimis, C., and J. Stevens, "IBM's Shared
               Memory Communications over RDMA (SMC-R) Protocol",
