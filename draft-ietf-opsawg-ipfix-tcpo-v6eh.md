@@ -418,7 +418,7 @@ Reference:
 
 ## IPv6 Extension Headers {#op-eh}
 
-The value of ipv6ExtensionHeadersFull and ipv6ExtensionHeaderTypeCountList IEs should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
+The value of ipv6ExtensionHeadersFull IE should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
 If an implementation determines that an observed packet of a Flow includes an extension header that it does not support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeaderTypeCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
 
