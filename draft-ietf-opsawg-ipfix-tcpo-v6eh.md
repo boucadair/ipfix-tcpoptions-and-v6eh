@@ -211,10 +211,10 @@ Reference:
 
 > Note to the RFC Editor: Please replace [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link to the "ipv6ExtensionHeaders Bits" registry created by {{?I-D.ietf-opsawg-ipfix-fixes}}.
 
-## ipv6ExtensionHeaderCountList Information Element {#sec-v6count}
+##  Information Element {#sec-v6count}
 
 Name:
-: ipv6ExtensionHeaderCountList
+: 
 
 ElementID:
 : TBD4
@@ -227,11 +227,11 @@ Description:
 : This Information Element is a subTemplateList of ipv6ExtensionHeaderType and ipv6ExtensionHeaderCount Information Elements.
 
 : If several extension header chains are observed in a Flow, each header
-  chain MUST be exported in a separate ipv6ExtensionHeaderCountList IE.
+  chain MUST be exported in a separate  IE.
 
-: The same extension header type may appear several times in anipv6ExtensionHeaderCountList Information Element.
+: The same extension header type may appear several times in an ipv6ExtensionHeaderCountList Information Element.
   For example, if an IPv6 packet of a Flow includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
-  and Destination Options header, theipv6ExtensionHeaderCountList Information Element will report two counts of the Destination Options header: the occurrences
+  and Destination Options header, the ipv6ExtensionHeaderCountList Information Element will report two counts of the Destination Options header: the occurrences
   that are observed before the Fragment header and the occurrences right after the Fragment header.
 
 Abstract Data Type:
@@ -257,7 +257,7 @@ ElementID:
 
 Description:
 :  When set to "false", this Information Element indicates that the exported extension
-   headers information (e.g., ipv6ExtensionHeadersFull oripv6ExtensionHeaderCountList) does
+   headers information (e.g., ipv6ExtensionHeadersFull or ipv6ExtensionHeaderCountList) does
    not match the full enclosed extension headers, but only up to a
    limit that is typically set by hardware or software.
 
@@ -418,11 +418,11 @@ Reference:
 
 ## IPv6 Extension Headers {#op-eh}
 
-The value of ipv6ExtensionHeadersFull andipv6ExtensionHeaderCountList IEs should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
+The value of ipv6ExtensionHeadersFull and ipv6ExtensionHeaderCountList IEs should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
-If an implementation determines that an observed packet of a Flow includes an extension header that it does not support, then the exact observed code of that extension header will be echoed in theipv6ExtensionHeaderCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
+If an implementation determines that an observed packet of a Flow includes an extension header that it does not support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeaderCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
 
-The ipv6ExtensionHeadersFull Information Element SHOULD NOT be exported ifipv6ExtensionHeaderCountList Information Element is also present because of the overlapping scopes between these two IEs. If both IEs are present, thenipv6ExtensionHeaderCountList Information Element takes precedence.
+The ipv6ExtensionHeadersFull Information Element SHOULD NOT be exported if ipv6ExtensionHeaderCountList Information Element is also present because of the overlapping scopes between these two IEs. If both IEs are present, then ipv6ExtensionHeaderCountList Information Element takes precedence.
 
 The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
 
@@ -525,7 +525,7 @@ This document requests IANA to add the following new IPFIX IEs to the "IPFIX Inf
 |TBD1| ipv6ExtensionHeader|{{sec-v6ehtype}} of This-Document|
 |TBD2|ipv6ExtensionHeaderCount|{{sec-v6ehcount}} of This-Document|
 |TBD3| ipv6ExtensionHeadersFull|{{sec-v6full}} of This-Document|
-|TBD4|ipv6ExtensionHeaderCountList|{{sec-v6count}} of This-Document|
+|TBD4| ipv6ExtensionHeaderCountList|{{sec-v6count}} of This-Document|
 |TBD5| ipv6ExtensionHeadersLimit|{{sec-v6limit}} of This-Document|
 |TBD6| ipv6ExtensionHeadersChainLength |{{sec-v6aggr}} of This-Document|
 |TBD7| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
