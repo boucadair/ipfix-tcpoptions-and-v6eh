@@ -73,7 +73,7 @@ Table of Contents
      3.1.  ipv6ExtensionHeaderType Information Element
      3.2.  ipv6ExtensionHeaderCount Information Element
      3.3.  ipv6ExtensionHeadersFull Information Element
-     3.4.  Information Element
+     3.4.  ipv6ExtensionHeaderTypeCountList Information Element
      3.5.  ipv6ExtensionHeadersLimit Information Element
      3.6.  ipv6ExtensionHeadersChainLength Information Element
    4.  Information Elements for TCP Options
@@ -288,7 +288,7 @@ Table of Contents
       [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link to the
       "ipv6ExtensionHeaders Bits" registry (Section 8.4).
 
-3.4.  Information Element
+3.4.  ipv6ExtensionHeaderTypeCountList Information Element
 
    Name:  ipv6ExtensionHeaderTypeCountList
 
