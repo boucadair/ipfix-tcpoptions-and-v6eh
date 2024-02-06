@@ -218,7 +218,7 @@ Reference:
 
 > Note to the RFC Editor: Please replace [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link to the "ipv6ExtensionHeaders Bits" registry ({{sec-iana-eh}}).
 
-##  Information Element {#sec-v6count}
+##  ipv6ExtensionHeaderTypeCountList Information Element {#sec-v6count}
 
 Name:
 : ipv6ExtensionHeaderTypeCountList
