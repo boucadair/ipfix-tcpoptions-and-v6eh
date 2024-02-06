@@ -54,12 +54,20 @@ normative:
           organization: "IANA"
         target: https://www.iana.org/assignments/tcp-parameters/tcp-parameters.xhtml#tcp-exids
         date: false
+
+     IANA-Protocols:
+        title: Protocol Numbers
+        author:
+        -
+          organization: "IANA"
+        target: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
+        date: false
 informative:
 
 
 --- abstract
 
-This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IPFIX IEs, especially the ability to export any observed IPv6 extension headers or TCP options.
+This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve issues with existing ipv6ExtensionHeaders and tcpOptions IPFIX IEs, especially the ability to export any observed IPv6 extension headers or TCP options.
 
 --- middle
 
