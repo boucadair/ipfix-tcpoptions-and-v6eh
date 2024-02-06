@@ -575,13 +575,15 @@ When a new code is assigned to an IPv6 EH in {{IANA-EH}}, the next available fre
 
 Otherwise, the registration policy for the registry is Expert Review ({{Section 4.5 of !RFC8126}}). See more details in {{sec-de}}.
 
+### Initial Values
+
 The initial values of this registry are provided in {{iana-new-eh}}.
 
 |Bit|	Label|	Protocol Number| Description                | Reference |
 |0  | DST  |60              |Destination Options for IPv6|This-Document|
 |1  |HOP   |0               |Pv6 Hop-by-Hop Options      |This-Document|
 |2  | NoNxt|59              |No Next Header for IPv6     |This-Document|
-|3  |UNK   |Unknown Layer 4 header (compressed, encrypted, not supported)|This-Document|
+|3  |UNK   |                |Unknown Layer 4 header (compressed, encrypted, not supported)|This-Document|
 |4  | FRA0 |44              |Fragment header - first fragment    |This-Document|
 |5  |RH    |43              |Routing header                      |This-Document|
 |6  |FRA1  |44              |Fragmentation header - not first fragment|This-Document|
@@ -592,12 +594,12 @@ The initial values of this registry are provided in {{iana-new-eh}}.
 |15 |      |                | Unassigned                         |             |
 |16 |HIP   |139             |Host Identity Protocol              |This-Document|
 |17 |SHIM6 |140             |Shim6 Protocol                      |This-Document|
-|18 |253   |                | Use for experimentation and testing|This-Document|
-|19 |254   |                | Use for experimentation and testing|This-Document|
-|20 to 255 |                | Unassigned                         | |
+|18 |      |253             | Use for experimentation and testing|This-Document|
+|19 |      |254             | Use for experimentation and testing|This-Document|
+|20 to 255|  |             | Unassigned                         | |
 {: #iana-new-eh title="Initial Values of the IPv6 Extension Headers IPFIX Subregistry"}
 
-## Guidelines for the Designated Experts {#sec-de}
+### Guidelines for the Designated Experts {#sec-de}
 
 It is suggested that multiple designated experts be appointed for registry change requests.
 
