@@ -93,7 +93,8 @@ Table of Contents
      8.2.  New IPFIX Information Elements
      8.3.  New IPFIX Information Element Data Type
      8.4.  IPFIX Subregistry for IPv6 Extension Headers
-     8.5.  Guidelines for the Designated Experts
+       8.4.1.  Initial Values
+       8.4.2.  Guidelines for the Designated Experts
    9.  References
      9.1.  Normative References
      9.2.  Informative References
@@ -735,77 +736,67 @@ Table of Contents
       new registry.
 
    Otherwise, the registration policy for the registry is Expert Review
-   (Section 4.5 of [RFC8126]).  See more details in Section 8.5.
+   (Section 4.5 of [RFC8126]).  See more details in Section 8.4.2.
+
+8.4.1.  Initial Values
 
    The initial values of this registry are provided in Table 3.
 
-    +=====+=======+================+=================+===============+
-    | Bit | Label | Protocol       | Description     | Reference     |
-    |     |       | Number         |                 |               |
-    +=====+=======+================+=================+===============+
-    | 0   | DST   | 60             | Destination     | This-Document |
-    |     |       |                | Options for     |               |
-    |     |       |                | IPv6            |               |
-    +-----+-------+----------------+-----------------+---------------+
-    | 1   | HOP   | 0              | Pv6 Hop-by-Hop  | This-Document |
-    |     |       |                | Options         |               |
-    +-----+-------+----------------+-----------------+---------------+
-    | 2   | NoNxt | 59             | No Next Header  | This-Document |
-    |     |       |                | for IPv6        |               |
-    +-----+-------+----------------+-----------------+---------------+
-    | 3   | UNK   | Unknown Layer  | This-Document   |               |
-    |     |       | 4 header       |                 |               |
-    |     |       | (compressed,   |                 |               |
-    |     |       | encrypted, not |                 |               |
-    |     |       | supported)     |                 |               |
-    +-----+-------+----------------+-----------------+---------------+
-    | 4   | FRA0  | 44             | Fragment header | This-Document |
-    |     |       |                | - first         |               |
-    |     |       |                | fragment        |               |
-    +-----+-------+----------------+-----------------+---------------+
-    | 5   | RH    | 43             | Routing header  | This-Document |
-    +-----+-------+----------------+-----------------+---------------+
-    | 6   | FRA1  | 44             | Fragmentation   | This-Document |
-    |     |       |                | header - not    |               |
-    |     |       |                | first fragment  |               |
-    +-----+-------+----------------+-----------------+---------------+
-    | 7   |       |                | Unassigned      |               |
-    | to  |       |                |                 |               |
-    | 11  |       |                |                 |               |
-    +-----+-------+----------------+-----------------+---------------+
-    | 12  | MOB   | 135            | Mobility Header | This-Document |
-    +-----+-------+----------------+-----------------+---------------+
-    | 13  | ESP   | 50             | Encapsulating   | This-Document |
-    |     |       |                | Security        |               |
-    |     |       |                | Payload         |               |
-    +-----+-------+----------------+-----------------+---------------+
-    | 14  | AH    | 51             | Authentication  | This-Document |
-    |     |       |                | Header          |               |
-    +-----+-------+----------------+-----------------+---------------+
-    | 15  |       |                | Unassigned      |               |
-    +-----+-------+----------------+-----------------+---------------+
-    | 16  | HIP   | 139            | Host Identity   | This-Document |
-    |     |       |                | Protocol        |               |
-    +-----+-------+----------------+-----------------+---------------+
-    | 17  | SHIM6 | 140            | Shim6 Protocol  | This-Document |
-    +-----+-------+----------------+-----------------+---------------+
-    | 18  | 253   |                | Use for         | This-Document |
-    |     |       |                | experimentation |               |
-    |     |       |                | and testing     |               |
-    +-----+-------+----------------+-----------------+---------------+
-    | 19  | 254   |                | Use for         | This-Document |
-    |     |       |                | experimentation |               |
-    |     |       |                | and testing     |               |
-    +-----+-------+----------------+-----------------+---------------+
-    | 20  |       | Unassigned     |                 |               |
-    | to  |       |                |                 |               |
-    | 255 |       |                |                 |               |
-    +-----+-------+----------------+-----------------+---------------+
+   +=====+=======+==========+=========================+===============+
+   | Bit | Label | Protocol | Description             | Reference     |
+   |     |       | Number   |                         |               |
+   +=====+=======+==========+=========================+===============+
+   | 0   | DST   | 60       | Destination Options for | This-Document |
+   |     |       |          | IPv6                    |               |
+   +-----+-------+----------+-------------------------+---------------+
+   | 1   | HOP   | 0        | Pv6 Hop-by-Hop Options  | This-Document |
+   +-----+-------+----------+-------------------------+---------------+
+   | 2   | NoNxt | 59       | No Next Header for IPv6 | This-Document |
+   +-----+-------+----------+-------------------------+---------------+
+   | 3   | UNK   |          | Unknown Layer 4 header  | This-Document |
+   |     |       |          | (compressed, encrypted, |               |
+   |     |       |          | not supported)          |               |
+   +-----+-------+----------+-------------------------+---------------+
+   | 4   | FRA0  | 44       | Fragment header - first | This-Document |
+   |     |       |          | fragment                |               |
+   +-----+-------+----------+-------------------------+---------------+
+   | 5   | RH    | 43       | Routing header          | This-Document |
+   +-----+-------+----------+-------------------------+---------------+
+   | 6   | FRA1  | 44       | Fragmentation header -  | This-Document |
+   |     |       |          | not first fragment      |               |
+   +-----+-------+----------+-------------------------+---------------+
+   | 7   |       |          | Unassigned              |               |
+   | to  |       |          |                         |               |
+   | 11  |       |          |                         |               |
+   +-----+-------+----------+-------------------------+---------------+
+   | 12  | MOB   | 135      | Mobility Header         | This-Document |
+   +-----+-------+----------+-------------------------+---------------+
+   | 13  | ESP   | 50       | Encapsulating Security  | This-Document |
+   |     |       |          | Payload                 |               |
+   +-----+-------+----------+-------------------------+---------------+
+   | 14  | AH    | 51       | Authentication Header   | This-Document |
+   +-----+-------+----------+-------------------------+---------------+
+   | 15  |       |          | Unassigned              |               |
+   +-----+-------+----------+-------------------------+---------------+
+   | 16  | HIP   | 139      | Host Identity Protocol  | This-Document |
+   +-----+-------+----------+-------------------------+---------------+
+   | 17  | SHIM6 | 140      | Shim6 Protocol          | This-Document |
+   +-----+-------+----------+-------------------------+---------------+
+   | 18  |       | 253      | Use for experimentation | This-Document |
+   |     |       |          | and testing             |               |
+   +-----+-------+----------+-------------------------+---------------+
+   | 19  |       | 254      | Use for experimentation | This-Document |
+   |     |       |          | and testing             |               |
+   +-----+-------+----------+-------------------------+---------------+
+   | 20  |       |          | Unassigned              |               |
+   | to  |       |          |                         |               |
+   | 255 |       |          |                         |               |
+   +-----+-------+----------+-------------------------+---------------+
 
        Table 3: Initial Values of the IPv6 Extension Headers IPFIX
                                Subregistry
 
-8.5.  Guidelines for the Designated Experts
+8.4.2.  Guidelines for the Designated Experts
 
    It is suggested that multiple designated experts be appointed for
    registry change requests.
