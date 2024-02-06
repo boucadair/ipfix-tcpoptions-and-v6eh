@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 8 August 2024                                            Huawei
-                                                         5 February 2024
+Expires: 9 August 2024                                            Huawei
+                                                         6 February 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 August 2024.
+   This Internet-Draft will expire on 9 August 2024.
 
 Copyright Notice
 
@@ -686,7 +686,8 @@ Table of Contents
                              Element Data Type
 
    The type "unsigned256" represents a non-negative integer value in the
-   range of '0' to '2^256 - 1'.
+   range of '0' to '2^256 - 1'.  This type MUST be encoded as per
+   Section 6.1.1 of [RFC7011].
 
 9.  References
 
