@@ -132,7 +132,7 @@ Table of Contents
       Section 1.1 of [RFC8883]).  Note that some implementations may not
       be able to export all observed extension headers in a Flow because
       of a hardware or software limit (see, e.g.,
-      [I-D.ietf-6man-eh-limits].  The specification of the
+      [I-D.ietf-6man-eh-limits]).  The specification of the
       ipv6ExtensionHeaders Information Element does not discuss whether
       it covers all enclosed extension headers or only up to a limit.
 
