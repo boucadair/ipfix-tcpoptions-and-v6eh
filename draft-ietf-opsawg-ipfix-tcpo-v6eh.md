@@ -610,7 +610,7 @@ Within the review period, the designated experts will either approve or deny the
 # Acknowledgments
 {:numbered="false"}
 
-Thanks to Paul Aitken and Eric Vyncke for the review and comments.
+Thanks to Paul Aitken and Eric Vyncke for the review and comments. Special thanks to Andrew Feren for sharing data about scans of IPFIX data he collected.
 
 Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review,
 and Dirk Von Hugo for intdir review.
