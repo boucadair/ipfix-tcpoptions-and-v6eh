@@ -546,7 +546,7 @@ This document requests IANA to add the following new abstract data type to the "
 {: title="New IPFIX Information Element Data Type"}
 
 The type "unsigned256" represents a non-negative integer value in the
-range of '0' to '2^256 - 1'.
+range of '0' to '2^256 - 1'. This type MUST be encoded as per {{Section 6.1.1 of !RFC7011}}.
 
 --- back
 
