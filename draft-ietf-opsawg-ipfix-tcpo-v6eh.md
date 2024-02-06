@@ -54,12 +54,20 @@ normative:
           organization: "IANA"
         target: https://www.iana.org/assignments/tcp-parameters/tcp-parameters.xhtml#tcp-exids
         date: false
+
+     IANA-Protocols:
+        title: Protocol Numbers
+        author:
+        -
+          organization: "IANA"
+        target: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
+        date: false
 informative:
 
 
 --- abstract
 
-This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve some issues with existing ipv6ExtensionHeaders and tcpOptions IPFIX IEs, especially the ability to export any observed IPv6 extension headers or TCP options.
+This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve issues with existing ipv6ExtensionHeaders and tcpOptions IPFIX IEs, especially the ability to export any observed IPv6 extension headers or TCP options.
 
 --- middle
 
@@ -74,23 +82,24 @@ The specification of ipv6ExtensionHeaders IPFIX IE (64) does not:
 - Cover the full extension headers' range ({{Section 4 of !RFC8200}}).
 - Specify the procedure to follow when all bits are exhausted.
 - Specify a means to export the order and the number of occurrences of a given extension header.
-- Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IANA-EH}}. Only a frozen set of extension headers can be exported using the ipv6ExtensionHeaders IE.
-- Specify whether the exported values match the full enclosed values or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}).
+- Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IANA-EH}}. Only a frozen set of extension headers can be exported using the ipv6ExtensionHeaders IE. For example, the ipv6ExtensionHeaders IE can't report some IPv6 EHs, specifically 139, 140, 253, and 254.
+- Specify whether the exported values match the full enclosed values or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}). Note that some implementations may not be able to export all observed extension headers in a Flow because of a hardware or software limit (see, e.g., {{?I-D.ietf-6man-eh-limits}}. The specification of the ipv6ExtensionHeaders Information Element does not discuss whether it covers all enclosed extension headers or only up to a limit.
 - Specify how to report the length of IPv6 extension headers.
 - Optimize the encoding.
 - Explain the reasoning for reporting values which do not correspond to extension headers (e.g., "Unknown Layer 4 header" or "Payload compression header").
+- Specify how to report extension header chains or aggregate extension headers length.
 
-{{sec-eh}} addresses these issues.
+{{sec-eh}} addresses these issues. Also, ipv6ExtensionHeaders IPFIX IE is deprecated in favor of the new IEs defined in this document.
 
 ## Issues with tcpOptions Information Element {#sec-tcp-issues}
 
 The specification of tcpOptions IPFIX IE (209) does not:
 
-- Describe how any observed TCP option in a Flow can be exported using IPFIX. Only TCP options having a kind <= 63 can be exported in a tcpOptions IPFIX IE.
+- Describe how any observed TCP option in a Flow can be exported using IPFIX. Only TCP options having a kind <= 63 can be exported in a tcpOptions IE.
 - Allow reporting the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (kind=253 or 254) {{!RFC6994}}.
 - Optimize the encoding.
 
-{{sec-tcp}} addresses these issues.
+{{sec-tcp}} addresses these issues. Also, tcpOptions IE is deprecated in favor of the new IEs defined in this document.
 
 # Conventions and Definitions
 
@@ -113,8 +122,6 @@ Extension header chain:
 
 
 # Information Elements for IPv6 Extension Headers {#sec-eh}
-
-The definition of the ipv6ExtensionHeaders IE is updated in {{Section 4.1 of ?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-eh-issues}} of this document. Because some of these limitations cannot be addressed by simple updates to ipv6ExtensionHeaders, this section specifies a set of new IEs to address all the ipv6ExtensionHeaders IE limitations. Refer also to {{Section 4.1.1 of ?I-D.ietf-opsawg-ipfix-fixes}} for more details.
 
 ## ipv6ExtensionHeaderType Information Element {#sec-v6ehtype}
 
@@ -209,7 +216,7 @@ Additional Information:
 Reference:
 : This-Document
 
-> Note to the RFC Editor: Please replace [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link to the "ipv6ExtensionHeaders Bits" registry created by {{?I-D.ietf-opsawg-ipfix-fixes}}.
+> Note to the RFC Editor: Please replace [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link to the "ipv6ExtensionHeaders Bits" registry ({{sec-iana-eh}}).
 
 ##  Information Element {#sec-v6count}
 
@@ -317,8 +324,6 @@ Reference:
 : This-Document
 
 # Information Elements for TCP Options {#sec-tcp}
-
-The definition of the tcpOptions IE is updated in {{?I-D.ietf-opsawg-ipfix-fixes}} to address some of the issues listed in {{sec-tcp-issues}}. Because some of these limitations cannot be addressed by simple updates to tcpOptions, this section specifies a set of new IEs to address all the tcpOptions IE limitations.
 
 ## tcpOptionsFull Information Element {#sec-tcpfull}
 
@@ -521,6 +526,15 @@ This document does not add new security considerations for exporting other IEs o
 
 # IANA Considerations
 
+## Deprecate ipv6ExtensionHeaders and tcpOptions Information Elements
+
+This document requests IANA to update the "IPFIX Information Elements" registry under the "IP Flow Information Export (IPFIX) Entities" registry group {{IANA-IPFIX}} as follows:
+
+* Update the ipv6ExtensionHeaders IE (64) entry by marking it as deprecated in favor of the ipv6ExtensionHeadersFull IE defined in this document. This note should also be echoed in the "Additional Information" of this IE.
+* Update the tcpOptions IE (209) entry by marking it as deprecated in favor of the tcpOptionsFull IE defined in this document. This note should also be echoed in the "Additional Information" of this IE.
+
+IANA is also requested to update the reference of ipv6ExtensionHeaders IE (64) and tcpOptions IE (209) to point to this document.
+
 ## New IPFIX Information Elements
 
 This document requests IANA to add the following new IPFIX IEs to the "IPFIX Information Elements" registry under the "IP Flow Information Export (IPFIX) Entities" registry group {{IANA-IPFIX}}:
@@ -535,7 +549,7 @@ This document requests IANA to add the following new IPFIX IEs to the "IPFIX Inf
 |TBD7| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
 |TBD8| tcpSharedOptionExID16|{{sec-ex}} of This-Document|
 |TBD9| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
-{: title="New IPFIX Information Elements"}
+{: #iana-new-ies title="New IPFIX Information Elements"}
 
 ## New IPFIX Information Element Data Type
 
@@ -543,17 +557,60 @@ This document requests IANA to add the following new abstract data type to the "
 
 |Value|	Description|	Reference|
 |TBD10| unsigned256|This-Document|
-{: title="New IPFIX Information Element Data Type"}
+{: #iana-new-dt title="New IPFIX Information Element Data Type"}
 
 The type "unsigned256" represents a non-negative integer value in the
 range of '0' to '2^256 - 1'. This type MUST be encoded as per {{Section 6.1.1 of !RFC7011}}.
+
+## IPFIX Subregistry for IPv6 Extension Headers {#sec-iana-eh}
+
+This document requests IANA to create a new registry entitled "ipv6ExtensionHeaders Bits" under the IANA IPFIX registry group {{IANA-IPFIX}}.
+
+When a new code is assigned to an IPv6 EH in {{IANA-EH}}, the next available free bit is selected by IANA for this EH from "ipv6ExtensionHeaders Bits" registry and the registry is updated with the details that mirror the assigned EH. The "Label" mirrors the "keyword" of an EH as indicated in {{IANA-Protocols}}, while the "Protocol Number" mirrors the "Protocol Number" in {{IANA-EH}}. IANA is requested to add the following note to {{IANA-EH}}:
+
+> Note:
+: When a new code is assigned to an IPv6 Extension Header, the next available free bit in [NEW_IPFIX_IPv6EH_SUBREGISTRY] is selected for this new Extension Header. >>[NEW_IPFIX_IPv6EH_SUBREGISTRY] is updated accordingly. Modifications to existing registrations must be mirrored in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
+
+> Note to the RFC Editor: Please replace [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link used by IANA for this new registry.
+
+Otherwise, the registration policy for the registry is Expert Review ({{Section 4.5 of !RFC8126}}). See more details in {{sec-de}}.
+
+The initial values of this registry are provided in {{iana-new-eh}}.
+
+|Bit|	Label|	Protocol Number| Description                | Reference |
+|0  | DST  |60              |Destination Options for IPv6|This-Document|
+|1  |HOP   |0               |Pv6 Hop-by-Hop Options      |This-Document|
+|2  | NoNxt|59              |No Next Header for IPv6     |This-Document|
+|3  |UNK   |Unknown Layer 4 header (compressed, encrypted, not supported)|This-Document|
+|4  | FRA0 |44              |Fragment header - first fragment    |This-Document|
+|5  |RH    |43              |Routing header                      |This-Document|
+|6  |FRA1  |44              |Fragmentation header - not first fragment|This-Document|
+|7 to 11|  |                | Unassigned                         | |
+|12 |MOB   |135             |Mobility Header                     |This-Document|
+|13 |ESP   |50              |Encapsulating Security Payload      |This-Document|
+|14 |AH    |51              |Authentication Header               |This-Document|
+|15 |      |                | Unassigned                         |             |
+|16 |HIP   |139             |Host Identity Protocol              |This-Document|
+|17 |SHIM6 |140             |Shim6 Protocol                      |This-Document|
+|18 |253   |                | Use for experimentation and testing|This-Document|
+|19 |254   |                | Use for experimentation and testing|This-Document|
+|20 to 255 |                | Unassigned                         | |
+{: #iana-new-eh title="Initial Values of the IPv6 Extension Headers IPFIX Subregistry"}
+
+## Guidelines for the Designated Experts {#sec-de}
+
+It is suggested that multiple designated experts be appointed for registry change requests.
+
+Criteria that should be applied by the designated experts include determining whether the proposed registration duplicates existing entries and whether the registration description is clear and fits the purpose of this registry.
+
+Within the review period, the designated experts will either approve or deny the registration request, communicating this decision to the IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request successful.
 
 --- back
 
 # Acknowledgments
 {:numbered="false"}
 
-Thanks to Paul Aitken and Eric Vyncke for the review and comments.
+Thanks to Paul Aitken and Eric Vyncke for the review and comments. Special thanks to Andrew Feren for sharing data about scans of IPFIX data he collected.
 
 Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review,
 and Dirk Von Hugo for intdir review.
