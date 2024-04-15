@@ -155,11 +155,11 @@ Table of Contents
    The specification of tcpOptions IPFIX IE (209) does not:
 
    *  Describe how any observed TCP option in a Flow can be exported
-      using IPFIX.  Only TCP options having a kind <= 63 can be exported
+      using IPFIX.  Only TCP options having a Kind <= 63 can be exported
       in a tcpOptions IE.
 
    *  Allow reporting the observed Experimental Identifiers (ExIDs) that
-      are carried in shared TCP options (kind=253 or 254) [RFC6994].
+      are carried in shared TCP options (Kind=253 or 254) [RFC6994].
 
    *  Optimize the encoding.
 
@@ -424,8 +424,8 @@ Table of Contents
       the value of the corresponding bit is 0.
 
       Options are mapped to bits according to their option numbers.  TCP
-      option kind 0 corresponds to the least-significant bit in the
-      tcpOptionsFull IE while kind 255 corresponds to the most-
+      option Kind 0 corresponds to the least-significant bit in the
+      tcpOptionsFull IE while Kind 255 corresponds to the most-
       significant bit of the IE.  This approach allows an observer to
       export any observed TCP option even if it does support that option
       and without requiring updating a mapping table.
@@ -434,7 +434,7 @@ Table of Contents
 
    Data Type Semantics:  flags
 
-   Additional Information:  See the assigned TCP option kinds at
+   Additional Information:  See the assigned TCP option Kinds at
       [IANA-TCP].
 
       See [RFC9293] for the general definition of TCP options.
@@ -571,7 +571,7 @@ Table of Contents
 
 6.2.  TCP Options
 
-   Given TCP kind allocation practices and the option mapping defined in
+   Given TCP Kind allocation practices and the option mapping defined in
    Section 4.1, fewer octets are likely to be used for Flows with common
    TCP options.
 
@@ -734,7 +734,7 @@ Table of Contents
       Note:  When a new code is assigned to an IPv6 Extension Header,
          the next available free bit in [NEW_IPFIX_IPv6EH_SUBREGISTRY]
          is selected for this new Extension Header.
-         >>[NEW_IPFIX_IPv6EH_SUBREGISTRY] is updated accordingly.
+         [NEW_IPFIX_IPv6EH_SUBREGISTRY] is updated accordingly.
          Modifications to existing registrations must be mirrored in
          [NEW_IPFIX_IPv6EH_SUBREGISTRY].
 
