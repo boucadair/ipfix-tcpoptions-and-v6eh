@@ -95,8 +95,8 @@ The specification of ipv6ExtensionHeaders IPFIX IE (64) does not:
 
 The specification of tcpOptions IPFIX IE (209) does not:
 
-- Describe how any observed TCP option in a Flow can be exported using IPFIX. Only TCP options having a kind <= 63 can be exported in a tcpOptions IE.
-- Allow reporting the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (kind=253 or 254) {{!RFC6994}}.
+- Describe how any observed TCP option in a Flow can be exported using IPFIX. Only TCP options having a Kind <= 63 can be exported in a tcpOptions IE.
+- Allow reporting the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (Kind=253 or 254) {{!RFC6994}}.
 - Optimize the encoding.
 
 {{sec-tcp}} addresses these issues. Also, tcpOptions IE is deprecated in favor of the new IEs defined in this document.
@@ -348,8 +348,8 @@ Description:
       of the corresponding bit is 0.
 
 : Options are mapped to bits according to their option numbers.
-  TCP option kind 0 corresponds to the least-significant bit
-  in the tcpOptionsFull IE while kind 255 corresponds to the most-significant bit of the IE. This approach allows
+  TCP option Kind 0 corresponds to the least-significant bit
+  in the tcpOptionsFull IE while Kind 255 corresponds to the most-significant bit of the IE. This approach allows
   an observer to export any observed TCP option even if it does support
   that option and without requiring updating a mapping table.
 
@@ -360,7 +360,7 @@ Data Type Semantics:
 : flags
 
 Additional Information:
-: See the assigned TCP option kinds at {{IANA-TCP}}.
+: See the assigned TCP option Kinds at {{IANA-TCP}}.
 : See {{!RFC9293}} for the general definition of TCP options.
 
 Reference:
@@ -477,7 +477,7 @@ MSB                                                      LSB
 
 ## TCP Options
 
-Given TCP kind allocation practices and the option mapping defined in {{sec-tcpfull}}, fewer octets are likely to be used for
+Given TCP Kind allocation practices and the option mapping defined in {{sec-tcpfull}}, fewer octets are likely to be used for
 Flows with common TCP options.
 
 {{ex-tcp1}} shows an example of reported values in a tcpOptionsFull IE for a TCP Flow in which End of Option List, Maximum Segment Size, and Window Scale options are observed. One octet is sufficient to report these observed options. Concretely, the tcpOptionsFull IE will be set to 0x0D.
@@ -573,7 +573,7 @@ This document requests IANA to create a new registry entitled "ipv6ExtensionHead
 When a new code is assigned to an IPv6 EH in {{IANA-EH}}, the next available free bit is selected by IANA for this EH from "ipv6ExtensionHeaders Bits" registry and the registry is updated with the details that mirror the assigned EH. The "Label" mirrors the "keyword" of an EH as indicated in {{IANA-Protocols}}, while the "Protocol Number" mirrors the "Protocol Number" in {{IANA-EH}}. IANA is requested to add the following note to {{IANA-EH}}:
 
 > Note:
-: When a new code is assigned to an IPv6 Extension Header, the next available free bit in [NEW_IPFIX_IPv6EH_SUBREGISTRY] is selected for this new Extension Header. >>[NEW_IPFIX_IPv6EH_SUBREGISTRY] is updated accordingly. Modifications to existing registrations must be mirrored in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
+: When a new code is assigned to an IPv6 Extension Header, the next available free bit in [NEW_IPFIX_IPv6EH_SUBREGISTRY] is selected for this new Extension Header. [NEW_IPFIX_IPv6EH_SUBREGISTRY] is updated accordingly. Modifications to existing registrations must be mirrored in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
 
 > Note to the RFC Editor: Please replace [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link used by IANA for this new registry.
 
