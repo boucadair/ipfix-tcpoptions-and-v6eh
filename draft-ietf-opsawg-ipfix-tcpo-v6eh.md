@@ -450,7 +450,7 @@ This section provides a few examples to illustrate the use of some IEs defined i
 ## IPv6 Extension Headers
 
 {{ex-eh1}} provides an example of reported values in an ipv6ExtensionHeadersFull IE for an IPv6 Flow in which only
-the	IPv6 Destination Options header is observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x01.
+the	IPv6 Destination Options header is observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x01. The bits are set following the table provided in {{sec-initial}}.
 
 ~~~~
 MSB                                                      LSB
@@ -463,7 +463,7 @@ MSB                                                      LSB
 {: #ex-eh1 title="A First Example of Extension Headers" artwork-align="center"}
 
 {{ex-eh2}} provides another example of reported values in an ipv6ExtensionHeadersFull IE for an IPv6 Flow in which
-the	IPv6 Hop-by-Hop Options, Routing, and Destination Options headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23. The bits are set following the table provided in {{sec-initial}}.
+the	IPv6 Hop-by-Hop Options, Routing, and Destination Options headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23.
 
 ~~~~
 MSB                                                      LSB
