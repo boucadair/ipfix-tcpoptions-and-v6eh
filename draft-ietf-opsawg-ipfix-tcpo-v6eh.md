@@ -132,7 +132,7 @@ ElementID:
 : TBD1
 
 Description:
-:  The type of an IPv6 extension header observed in packets of this Flow.
+:  Type of an IPv6 extension header observed in packets of this Flow.
 
 Abstract Data Type:
 : unsigned8
@@ -238,8 +238,12 @@ Description:
 
 : The same extension header type may appear several times in an ipv6ExtensionHeaderTypeCountList Information Element.
   For example, if an IPv6 packet of a Flow includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
-  and Destination Options header, the ipv6ExtensionHeaderTypeCountList Information Element will report two counts of the Destination Options header: the occurrences
-  that are observed before the Fragment header and the occurrences right after the Fragment header.
+  and Destination Options header, the ipv6ExtensionHeaderTypeCountList Information Element will report:
+
+  + the count of Hop-by-Hop Options header,
+  + the occurrences of the Destination Options header that are observed before the Fragment header,
+  + the occurrences of the Fragment header, and
+  + the occurrences of the Destination Options header that are observed right after the Fragment header.
 
 Abstract Data Type:
 : subTemplateList
@@ -302,7 +306,7 @@ Description:
   When the aggregate length of headers of an IPv6 packet exceeds that size, the packet will be discarded or deferred to a slow path.
 
 : The ipv6ExtensionHeadersChainLength IE is used to report, in octets, the length of
-  an extension header chain observed in a Flow.  The length is the sum of the length of all extension headers of the chain. Exporting such information may help identifying root causes of performance degradation, including packet drops.
+  an extension header chain observed in a Flow.  The length is the sum of the length of all extension headers of the chain. Exporting such information might help identifying root causes of performance degradation, including packet drops.
 
 : If several extension header chains are observed in a Flow, each header
   chain length MUST be exported in a separate ipv6ExtensionHeadersChainLength IE.
@@ -425,7 +429,7 @@ Reference:
 
 The value of ipv6ExtensionHeadersFull IE should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
-If an implementation determines that an observed packet of a Flow includes an extension header that it does not support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeaderTypeCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
+If an implementation determines that an observed packet of a Flow includes an extension header that it does not support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeaderTypeCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate node that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
 
 The ipv6ExtensionHeadersFull Information Element SHOULD NOT be exported if ipv6ExtensionHeaderTypeCountList Information Element is also present because of the overlapping scopes between these two IEs. If both IEs are present, then ipv6ExtensionHeaderTypeCountList Information Element takes precedence.
 
@@ -459,7 +463,7 @@ MSB                                                      LSB
 {: #ex-eh1 title="A First Example of Extension Headers" artwork-align="center"}
 
 {{ex-eh2}} provides another example of reported values in an ipv6ExtensionHeadersFull IE for an IPv6 Flow in which
-the	IPv6 Hop-by-Hop Options, Routing, and Destination Options headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23.
+the	IPv6 Hop-by-Hop Options, Routing, and Destination Options headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23. The bits are set following the table provided in {{sec-initial}}.
 
 ~~~~
 MSB                                                      LSB
@@ -486,7 +490,7 @@ MSB                                                      LSB
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|0|0|1|1|0|1|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+-+
 ~~~~
-{: #ex-tcp1 title="First Example of TCP Options" artwork-align="center"}
+{: #ex-tcp1 title="An Example of TCP Options" artwork-align="center"}
 
 
 Let us consider a TCP Flow in which shared options with ExIDs 0x0348 (HOST_ID) {{?RFC7974}}, 0x454E	(TCP-ENO) {{?RFC8547}}, and 0xE2D4C3D9	(Shared Memory communications over RMDA protocol)	{{?RFC7609}} are observed. As shown in {{ex-tcp2}}, two TCP shared IEs will be used to report these observed ExIDs:
@@ -522,7 +526,7 @@ IPFIX security considerations are discussed in {{Section 11 of !RFC7011}}.
 
 ipv6ExtensionHeadersChainLength and ipv6ExtensionHeadersLimit IEs can be exploited by an unauthorized observer as a means to deduce the processing capabilities of nodes. {{Section 8 of !RFC7012}} discusses the required measures to guarantee the integrity and confidentiality of the exported information.
 
-This document does not add new security considerations for exporting other IEs other than those already discussed in {{Section 8 of !RFC7012}}.
+This document does not add new security considerations for exporting IEs other than those already discussed in {{Section 8 of !RFC7012}}.
 
 # IANA Considerations
 
@@ -575,7 +579,7 @@ When a new code is assigned to an IPv6 EH in {{IANA-EH}}, the next available fre
 
 Otherwise, the registration policy for the registry is Expert Review ({{Section 4.5 of !RFC8126}}). See more details in {{sec-de}}.
 
-### Initial Values
+### Initial Values {#sec-initial}
 
 The initial values of this registry are provided in {{iana-new-eh}}.
 
@@ -618,3 +622,5 @@ Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review,
 and Dirk Von Hugo for intdir review.
 
 Thanks to Thomas Graf for the Shepherd review.
+
+Thanks Mahesh Jethanandani for the AD review.
