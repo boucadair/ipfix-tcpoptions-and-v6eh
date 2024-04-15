@@ -542,7 +542,8 @@ Table of Contents
    ipv6ExtensionHeadersFull IE for an IPv6 Flow in which only the IPv6
    Destination Options header is observed.  One octet is sufficient to
    report these observed options.  Concretely, the
-   ipv6ExtensionHeadersFull IE will be set to 0x01.
+   ipv6ExtensionHeadersFull IE will be set to 0x01.  The bits are set
+   following the table provided in Section 8.4.1.
 
        MSB                                                      LSB
                             1                          25
@@ -557,8 +558,7 @@ Table of Contents
    ipv6ExtensionHeadersFull IE for an IPv6 Flow in which the IPv6 Hop-
    by-Hop Options, Routing, and Destination Options headers are
    observed.  One octet is sufficient to report these observed options.
-   Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23.  The
-   bits are set following the table provided in Section 8.4.1.
+   Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23.
 
        MSB                                                      LSB
                             1                          25
