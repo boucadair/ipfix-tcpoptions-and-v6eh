@@ -623,4 +623,4 @@ and Dirk Von Hugo for intdir review.
 
 Thanks to Thomas Graf for the Shepherd review.
 
-Thanks Mahesh Jethanandani for the AD review.
+Thanks to Mahesh Jethanandani for the AD review.
