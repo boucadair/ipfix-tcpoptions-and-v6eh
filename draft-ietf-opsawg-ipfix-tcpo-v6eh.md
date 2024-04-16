@@ -95,7 +95,7 @@ The specification of ipv6ExtensionHeaders IPFIX IE (64) does not:
 
 The specification of tcpOptions IPFIX IE (209) does not:
 
-- Describe how any observed TCP option in a Flow can be exported using IPFIX. Only TCP options having a Kind <= 63 can be exported in a tcpOptions IE.
+- Describe how some observed TCP option in a Flow can be exported using IPFIX. Only TCP options having a Kind <= 63 can be exported in a tcpOptions IE.
 - Allow reporting the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (Kind=253 or 254) {{!RFC6994}}.
 - Optimize the encoding.
 
