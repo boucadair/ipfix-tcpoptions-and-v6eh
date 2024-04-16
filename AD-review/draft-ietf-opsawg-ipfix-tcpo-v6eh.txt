@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 17 October 2024                                          Huawei
-                                                           15 April 2024
+Expires: 18 October 2024                                          Huawei
+                                                           16 April 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 October 2024.
+   This Internet-Draft will expire on 18 October 2024.
 
 Copyright Notice
 
@@ -154,7 +154,7 @@ Table of Contents
 
    The specification of tcpOptions IPFIX IE (209) does not:
 
-   *  Describe how any observed TCP option in a Flow can be exported
+   *  Describe how some observed TCP option in a Flow can be exported
       using IPFIX.  Only TCP options having a Kind <= 63 can be exported
       in a tcpOptions IE.
 
