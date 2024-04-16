@@ -95,8 +95,8 @@ The specification of ipv6ExtensionHeaders IPFIX IE (64) does not:
 
 The specification of tcpOptions IPFIX IE (209) does not:
 
-- Describe how any observed TCP option in a Flow can be exported using IPFIX. Only TCP options having a kind <= 63 can be exported in a tcpOptions IE.
-- Allow reporting the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (kind=253 or 254) {{!RFC6994}}.
+- Describe how some observed TCP option in a Flow can be exported using IPFIX. Only TCP options having a Kind <= 63 can be exported in a tcpOptions IE.
+- Allow reporting the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (Kind=253 or 254) {{!RFC6994}}.
 - Optimize the encoding.
 
 {{sec-tcp}} addresses these issues. Also, tcpOptions IE is deprecated in favor of the new IEs defined in this document.
@@ -132,7 +132,7 @@ ElementID:
 : TBD1
 
 Description:
-:  The type of an IPv6 extension header observed in packets of this Flow.
+:  Type of an IPv6 extension header observed in packets of this Flow.
 
 Abstract Data Type:
 : unsigned8
@@ -238,8 +238,12 @@ Description:
 
 : The same extension header type may appear several times in an ipv6ExtensionHeaderTypeCountList Information Element.
   For example, if an IPv6 packet of a Flow includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
-  and Destination Options header, the ipv6ExtensionHeaderTypeCountList Information Element will report two counts of the Destination Options header: the occurrences
-  that are observed before the Fragment header and the occurrences right after the Fragment header.
+  and Destination Options header, the ipv6ExtensionHeaderTypeCountList Information Element will report:
+
+  + the count of Hop-by-Hop Options header,
+  + the occurrences of the Destination Options header that are observed before the Fragment header,
+  + the occurrences of the Fragment header, and
+  + the occurrences of the Destination Options header that are observed right after the Fragment header.
 
 Abstract Data Type:
 : subTemplateList
@@ -302,7 +306,7 @@ Description:
   When the aggregate length of headers of an IPv6 packet exceeds that size, the packet will be discarded or deferred to a slow path.
 
 : The ipv6ExtensionHeadersChainLength IE is used to report, in octets, the length of
-  an extension header chain observed in a Flow.  The length is the sum of the length of all extension headers of the chain. Exporting such information may help identifying root causes of performance degradation, including packet drops.
+  an extension header chain observed in a Flow.  The length is the sum of the length of all extension headers of the chain. Exporting such information might help identifying root causes of performance degradation, including packet drops.
 
 : If several extension header chains are observed in a Flow, each header
   chain length MUST be exported in a separate ipv6ExtensionHeadersChainLength IE.
@@ -344,8 +348,8 @@ Description:
       of the corresponding bit is 0.
 
 : Options are mapped to bits according to their option numbers.
-  TCP option kind 0 corresponds to the least-significant bit
-  in the tcpOptionsFull IE while kind 255 corresponds to the most-significant bit of the IE. This approach allows
+  TCP option Kind 0 corresponds to the least-significant bit
+  in the tcpOptionsFull IE while Kind 255 corresponds to the most-significant bit of the IE. This approach allows
   an observer to export any observed TCP option even if it does support
   that option and without requiring updating a mapping table.
 
@@ -356,7 +360,7 @@ Data Type Semantics:
 : flags
 
 Additional Information:
-: See the assigned TCP option kinds at {{IANA-TCP}}.
+: See the assigned TCP option Kinds at {{IANA-TCP}}.
 : See {{!RFC9293}} for the general definition of TCP options.
 
 Reference:
@@ -425,7 +429,7 @@ Reference:
 
 The value of ipv6ExtensionHeadersFull IE should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
-If an implementation determines that an observed packet of a Flow includes an extension header that it does not support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeaderTypeCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate nodes that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
+If an implementation determines that an observed packet of a Flow includes an extension header that it does not support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeaderTypeCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate node that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
 
 The ipv6ExtensionHeadersFull Information Element SHOULD NOT be exported if ipv6ExtensionHeaderTypeCountList Information Element is also present because of the overlapping scopes between these two IEs. If both IEs are present, then ipv6ExtensionHeaderTypeCountList Information Element takes precedence.
 
@@ -446,7 +450,7 @@ This section provides a few examples to illustrate the use of some IEs defined i
 ## IPv6 Extension Headers
 
 {{ex-eh1}} provides an example of reported values in an ipv6ExtensionHeadersFull IE for an IPv6 Flow in which only
-the	IPv6 Destination Options header is observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x01.
+the	IPv6 Destination Options header is observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x01. The bits are set following the table provided in {{sec-initial}}.
 
 ~~~~
 MSB                                                      LSB
@@ -473,7 +477,7 @@ MSB                                                      LSB
 
 ## TCP Options
 
-Given TCP kind allocation practices and the option mapping defined in {{sec-tcpfull}}, fewer octets are likely to be used for
+Given TCP Kind allocation practices and the option mapping defined in {{sec-tcpfull}}, fewer octets are likely to be used for
 Flows with common TCP options.
 
 {{ex-tcp1}} shows an example of reported values in a tcpOptionsFull IE for a TCP Flow in which End of Option List, Maximum Segment Size, and Window Scale options are observed. One octet is sufficient to report these observed options. Concretely, the tcpOptionsFull IE will be set to 0x0D.
@@ -486,7 +490,7 @@ MSB                                                      LSB
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|0|0|1|1|0|1|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+-+
 ~~~~
-{: #ex-tcp1 title="First Example of TCP Options" artwork-align="center"}
+{: #ex-tcp1 title="An Example of TCP Options" artwork-align="center"}
 
 
 Let us consider a TCP Flow in which shared options with ExIDs 0x0348 (HOST_ID) {{?RFC7974}}, 0x454E	(TCP-ENO) {{?RFC8547}}, and 0xE2D4C3D9	(Shared Memory communications over RMDA protocol)	{{?RFC7609}} are observed. As shown in {{ex-tcp2}}, two TCP shared IEs will be used to report these observed ExIDs:
@@ -522,7 +526,7 @@ IPFIX security considerations are discussed in {{Section 11 of !RFC7011}}.
 
 ipv6ExtensionHeadersChainLength and ipv6ExtensionHeadersLimit IEs can be exploited by an unauthorized observer as a means to deduce the processing capabilities of nodes. {{Section 8 of !RFC7012}} discusses the required measures to guarantee the integrity and confidentiality of the exported information.
 
-This document does not add new security considerations for exporting other IEs other than those already discussed in {{Section 8 of !RFC7012}}.
+This document does not add new security considerations for exporting IEs other than those already discussed in {{Section 8 of !RFC7012}}.
 
 # IANA Considerations
 
@@ -560,7 +564,7 @@ This document requests IANA to add the following new abstract data type to the "
 {: #iana-new-dt title="New IPFIX Information Element Data Type"}
 
 The type "unsigned256" represents a non-negative integer value in the
-range of '0' to '2^256 - 1'. This type MUST be encoded as per {{Section 6.1.1 of !RFC7011}}.
+range of '0' to '2^256 - 1'. This type MUST be encoded per {{Section 6.1.1 of !RFC7011}}. Reduced-Size encoding ({{Section 6.2 of !RFC7011}) applies to this data type.
 
 ## IPFIX Subregistry for IPv6 Extension Headers {#sec-iana-eh}
 
@@ -569,13 +573,13 @@ This document requests IANA to create a new registry entitled "ipv6ExtensionHead
 When a new code is assigned to an IPv6 EH in {{IANA-EH}}, the next available free bit is selected by IANA for this EH from "ipv6ExtensionHeaders Bits" registry and the registry is updated with the details that mirror the assigned EH. The "Label" mirrors the "keyword" of an EH as indicated in {{IANA-Protocols}}, while the "Protocol Number" mirrors the "Protocol Number" in {{IANA-EH}}. IANA is requested to add the following note to {{IANA-EH}}:
 
 > Note:
-: When a new code is assigned to an IPv6 Extension Header, the next available free bit in [NEW_IPFIX_IPv6EH_SUBREGISTRY] is selected for this new Extension Header. >>[NEW_IPFIX_IPv6EH_SUBREGISTRY] is updated accordingly. Modifications to existing registrations must be mirrored in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
+: When a new code is assigned to an IPv6 Extension Header, the next available free bit in [NEW_IPFIX_IPv6EH_SUBREGISTRY] is selected for this new Extension Header. [NEW_IPFIX_IPv6EH_SUBREGISTRY] is updated accordingly. Modifications to existing registrations must be mirrored in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
 
 > Note to the RFC Editor: Please replace [NEW_IPFIX_IPv6EH_SUBREGISTRY] with the link used by IANA for this new registry.
 
 Otherwise, the registration policy for the registry is Expert Review ({{Section 4.5 of !RFC8126}}). See more details in {{sec-de}}.
 
-### Initial Values
+### Initial Values {#sec-initial}
 
 The initial values of this registry are provided in {{iana-new-eh}}.
 
@@ -618,3 +622,5 @@ Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review,
 and Dirk Von Hugo for intdir review.
 
 Thanks to Thomas Graf for the Shepherd review.
+
+Thanks Mahesh Jethanandani for the AD review.
