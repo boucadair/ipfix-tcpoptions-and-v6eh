@@ -121,7 +121,7 @@ Extension header chain:
   and zero or a single Upper-Layer Header.
 
 Flow with varying extension header chain:
-: Refers to a Flow where distinct extension header chains are observed in packets that belong to that Flow. Concretely, different packets in such a Flow will have a different sequence of extension header type codes.
+: Refers to a Flow where distinct extension header chains are observed. Concretely, different packets in such a Flow will have a different sequence of extension header type codes.
 
 # Information Elements for IPv6 Extension Headers {#sec-eh}
 
