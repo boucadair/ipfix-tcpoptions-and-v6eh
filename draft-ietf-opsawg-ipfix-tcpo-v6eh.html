@@ -1274,7 +1274,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-1.1-2.3.1">Specify a means to export the order and the number of occurrences of a given extension header.<a href="#section-1.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-2.4">
-            <p id="section-1.1-2.4.1">Specify how to automatically update the IANA IPFIX registry (<span>[<a href="#IANA-IPFIX" class="cite xref">IANA-IPFIX</a>]</span>) when a new value is assigned in <span>[<a href="#IANA-EH" class="cite xref">IANA-EH</a>]</span>. Only a frozen set of extension headers can be exported using the ipv6ExtensionHeaders IE. For example, the ipv6ExtensionHeaders IE can't report some IPv6 EHs, specifically 139, 140, 253, and 254.<a href="#section-1.1-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-2.4.1">Specify how to automatically update the IANA IPFIX registry (<span>[<a href="#IANA-IPFIX" class="cite xref">IANA-IPFIX</a>]</span>) when a new value is assigned in the IPv6 Extension Header Types registry <span>[<a href="#IANA-EH" class="cite xref">IANA-EH</a>]</span>. Only a frozen set of extension headers can be exported using the ipv6ExtensionHeaders IE. For example, the ipv6ExtensionHeaders IE can't report some IPv6 EHs, specifically EHs for Host Identity Protocol (139), Shim6 Protocol (140) or extension headers for experimentation and testing.<a href="#section-1.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-2.5">
             <p id="section-1.1-2.5.1">Specify whether the exported values match the full enclosed values or only up to a limit imposed by hardware or software (e.g., <span><a href="https://rfc-editor.org/rfc/rfc8883#section-1.1" class="relref">Section 1.1</a> of [<a href="#RFC8883" class="cite xref">RFC8883</a>]</span>). Note that some implementations may not be able to export all observed extension headers in a Flow because of a hardware or software limit (see, e.g., <span>[<a href="#I-D.ietf-6man-eh-limits" class="cite xref">I-D.ietf-6man-eh-limits</a>]</span>). The specification of the ipv6ExtensionHeaders Information Element does not discuss whether it covers all enclosed extension headers or only up to a limit.<a href="#section-1.1-2.5.1" class="pilcrow">¶</a></p>
@@ -1292,7 +1292,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-1.1-2.9.1">Specify how to report extension header chains or aggregate extension headers length.<a href="#section-1.1-2.9.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-1.1-3"><a href="#sec-eh" class="auto internal xref">Section 3</a> addresses these issues. Also, the ipv6ExtensionHeaders IPFIX IE is deprecated in favor of the new IEs defined in this document.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<p id="section-1.1-3"><a href="#sec-eh" class="auto internal xref">Section 3</a> addresses these issues.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<p id="section-1.1-4">This specification deprecates the ipv6ExtensionHeaders IPFIX IE in favor of the new IEs defined in this document.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-tcp-issues">
@@ -1306,13 +1307,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-1.2-2.1.1">Describe how some observed TCP options in a Flow can be exported using IPFIX. Only TCP options having a Kind &lt;= 63 can be exported in a tcpOptions IE.<a href="#section-1.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.2-2.2">
-            <p id="section-1.2-2.2.1">Allow reporting the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (Kind=253 or 254) <span>[<a href="#RFC6994" class="cite xref">RFC6994</a>]</span>.<a href="#section-1.2-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-1.2-2.2.1">Allow reporting the observed Experimental Identifiers (ExIDs) that are carried in shared Experimental TCP options (Kind=253 or 254) <span>[<a href="#RFC6994" class="cite xref">RFC6994</a>]</span>.<a href="#section-1.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.2-2.3">
             <p id="section-1.2-2.3.1">Optimize the encoding.<a href="#section-1.2-2.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-1.2-3"><a href="#sec-tcp" class="auto internal xref">Section 4</a> addresses these issues. Also, the tcpOptions IE is deprecated in favor of the new IEs defined in this document.<a href="#section-1.2-3" class="pilcrow">¶</a></p>
+<p id="section-1.2-3"><a href="#sec-tcp" class="auto internal xref">Section 4</a> addresses these issues.<a href="#section-1.2-3" class="pilcrow">¶</a></p>
+<p id="section-1.2-4">This specification deprecates the tcpOptions IE in favor of the new IEs defined in this document.<a href="#section-1.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1330,7 +1332,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
    Flow, etc.) defined in
    <span><a href="https://rfc-editor.org/rfc/rfc7011#section-2" class="relref">Section 2</a> of [<a href="#RFC7011" class="cite xref">RFC7011</a>]</span>. As in <span>[<a href="#RFC7011" class="cite xref">RFC7011</a>]</span>, these IPFIX-specific terms
    have the first letter of a word capitalized.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">Also, the document uses the terms defined in <span>[<a href="#RFC8200" class="cite xref">RFC8200</a>]</span> and <span>[<a href="#RFC9293" class="cite xref">RFC9293</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-3">Also, the document uses the terms defined in IPv6 <span>[<a href="#RFC8200" class="cite xref">RFC8200</a>]</span> and TCP <span>[<a href="#RFC9293" class="cite xref">RFC9293</a>]</span> specifications.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">In addition, the document makes use of the following term:<a href="#section-2-4" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="section-2-5">
         <dt id="section-2-5.1">Extension header chain:</dt>
@@ -2020,7 +2022,7 @@ shared option.<a href="#section-4.3-1.6.1" class="pilcrow">¶</a></p>
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-ipv6-extension-headers" class="section-name selfRef">IPv6 Extension Headers</a>
         </h3>
 <p id="section-5.1-1">The value of ipv6ExtensionHeadersFull IE should be encoded in fewer octets as per the guidelines in <span><a href="https://rfc-editor.org/rfc/rfc7011#section-6.2" class="relref">Section 6.2</a> of [<a href="#RFC7011" class="cite xref">RFC7011</a>]</span>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">If an implementation determines that an observed packet of a Flow includes an extension header that it does not support, then the exact observed code of that extension header <span class="bcp14">MUST</span> be echoed in the ipv6ExtensionHeaderTypeCountList IE (<a href="#sec-v6count" class="auto internal xref">Section 3.4</a>). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to <span><a href="https://rfc-editor.org/rfc/rfc8883#section-2.2" class="relref">Section 2.2</a> of [<a href="#RFC8883" class="cite xref">RFC8883</a>]</span> for a behavior of an intermediate node that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">If an implementation determines that an observed packet of a Flow includes an extension header (including an extension header that it does not support), then the exact observed code of that extension header <span class="bcp14">MUST</span> be echoed in the ipv6ExtensionHeaderTypeCountList IE (<a href="#sec-v6count" class="auto internal xref">Section 3.4</a>). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to <span><a href="https://rfc-editor.org/rfc/rfc8883#section-2.2" class="relref">Section 2.2</a> of [<a href="#RFC8883" class="cite xref">RFC8883</a>]</span> for a behavior of an intermediate node that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3">The ipv6ExtensionHeadersFull Information Element <span class="bcp14">SHOULD NOT</span> be exported if ipv6ExtensionHeaderTypeCountList Information Element is also present because of the overlapping scopes between these two IEs. If both IEs are present, then ipv6ExtensionHeaderTypeCountList Information Element takes precedence.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
 <p id="section-5.1-4">The ipv6ExtensionHeadersLimit IE (<a href="#sec-v6limit" class="auto internal xref">Section 3.5</a>) may or may not be present when the ipv6ExtensionHeadersChainLength IE (<a href="#sec-v6aggr" class="auto internal xref">Section 3.6</a>) is also present as these IEs are targeting distinct properties of extension headers handling.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 </section>
@@ -2588,7 +2590,7 @@ range of '0' to '2^256 - 1'. Similar to <span><a href="https://rfc-editor.org/rf
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-A-1">Thanks to Paul Aitken and Eric Vyncke for the reviews and comments. Special thanks to Andrew Feren for sharing data about scans of IPFIX data he collected.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<p id="appendix-A-2">Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review, Dirk Von Hugo for intdir review, and Joel Halpern for the genart review.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review, Dirk Von Hugo for intdir review, Joel Halpern for the genart review, and Tero Kivinen for the secdir review.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 <p id="appendix-A-3">Thanks to Thomas Graf for the Shepherd review.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 <p id="appendix-A-4">Thanks to Mahesh Jethanandani for the AD review.<a href="#appendix-A-4" class="pilcrow">¶</a></p>
 </section>

@@ -123,10 +123,12 @@ Table of Contents
       of a given extension header.
 
    *  Specify how to automatically update the IANA IPFIX registry
-      ([IANA-IPFIX]) when a new value is assigned in [IANA-EH].  Only a
-      frozen set of extension headers can be exported using the
-      ipv6ExtensionHeaders IE.  For example, the ipv6ExtensionHeaders IE
-      can't report some IPv6 EHs, specifically 139, 140, 253, and 254.
+      ([IANA-IPFIX]) when a new value is assigned in the IPv6 Extension
+      Header Types registry [IANA-EH].  Only a frozen set of extension
+      headers can be exported using the ipv6ExtensionHeaders IE.  For
+      example, the ipv6ExtensionHeaders IE can't report some IPv6 EHs,
+      specifically EHs for Host Identity Protocol (139), Shim6 Protocol
+      (140) or extension headers for experimentation and testing.
 
    *  Specify whether the exported values match the full enclosed values
       or only up to a limit imposed by hardware or software (e.g.,
@@ -148,9 +150,10 @@ Table of Contents
    *  Specify how to report extension header chains or aggregate
       extension headers length.
 
-   Section 3 addresses these issues.  Also, the ipv6ExtensionHeaders
-   IPFIX IE is deprecated in favor of the new IEs defined in this
-   document.
+   Section 3 addresses these issues.
+
+   This specification deprecates the ipv6ExtensionHeaders IPFIX IE in
+   favor of the new IEs defined in this document.
 
 1.2.  Issues with tcpOptions Information Element
 
@@ -161,12 +164,15 @@ Table of Contents
       in a tcpOptions IE.
 
    *  Allow reporting the observed Experimental Identifiers (ExIDs) that
-      are carried in shared TCP options (Kind=253 or 254) [RFC6994].
+      are carried in shared Experimental TCP options (Kind=253 or 254)
+      [RFC6994].
 
    *  Optimize the encoding.
 
-   Section 4 addresses these issues.  Also, the tcpOptions IE is
-   deprecated in favor of the new IEs defined in this document.
+   Section 4 addresses these issues.
+
+   This specification deprecates the tcpOptions IE in favor of the new
+   IEs defined in this document.
 
 2.  Conventions and Definitions
 
@@ -181,7 +187,8 @@ Table of Contents
    [RFC7011].  As in [RFC7011], these IPFIX-specific terms have the
    first letter of a word capitalized.
 
-   Also, the document uses the terms defined in [RFC8200] and [RFC9293].
+   Also, the document uses the terms defined in IPv6 [RFC8200] and TCP
+   [RFC9293] specifications.
 
    In addition, the document makes use of the following term:
 
@@ -531,14 +538,15 @@ Table of Contents
    octets as per the guidelines in Section 6.2 of [RFC7011].
 
    If an implementation determines that an observed packet of a Flow
-   includes an extension header that it does not support, then the exact
-   observed code of that extension header MUST be echoed in the
-   ipv6ExtensionHeaderTypeCountList IE (Section 3.4).  How an
-   implementation disambiguates between unknown upper-layer protocols
-   vs. extension headers is not IPFIX-specific.  Readers may refer, for
-   example, to Section 2.2 of [RFC8883] for a behavior of an
-   intermediate node that encounters an unknown Next Header type.  It is
-   out of the scope of this document to discuss those considerations.
+   includes an extension header (including an extension header that it
+   does not support), then the exact observed code of that extension
+   header MUST be echoed in the ipv6ExtensionHeaderTypeCountList IE
+   (Section 3.4).  How an implementation disambiguates between unknown
+   upper-layer protocols vs. extension headers is not IPFIX-specific.
+   Readers may refer, for example, to Section 2.2 of [RFC8883] for a
+   behavior of an intermediate node that encounters an unknown Next
+   Header type.  It is out of the scope of this document to discuss
+   those considerations.
 
    The ipv6ExtensionHeadersFull Information Element SHOULD NOT be
    exported if ipv6ExtensionHeaderTypeCountList Information Element is
@@ -966,8 +974,8 @@ Acknowledgments
    data he collected.
 
    Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the
-   opsdir review, Dirk Von Hugo for intdir review, and Joel Halpern for
-   the genart review.
+   opsdir review, Dirk Von Hugo for intdir review, Joel Halpern for the
+   genart review, and Tero Kivinen for the secdir review.
 
    Thanks to Thomas Graf for the Shepherd review.
 
