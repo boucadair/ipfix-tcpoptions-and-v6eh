@@ -82,24 +82,28 @@ The specification of the ipv6ExtensionHeaders IPFIX IE (64) does not:
 - Cover the full extension headers' range ({{Section 4 of !RFC8200}}).
 - Specify the procedure to follow when all bits are exhausted.
 - Specify a means to export the order and the number of occurrences of a given extension header.
-- Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in {{IANA-EH}}. Only a frozen set of extension headers can be exported using the ipv6ExtensionHeaders IE. For example, the ipv6ExtensionHeaders IE can't report some IPv6 EHs, specifically 139, 140, 253, and 254.
+- Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in the IPv6 Extension Header Types registry {{IANA-EH}}. Only a frozen set of extension headers can be exported using the ipv6ExtensionHeaders IE. For example, the ipv6ExtensionHeaders IE can't report some IPv6 EHs, specifically EHs for Host Identity Protocol (139), Shim6 Protocol (140) or extension headers for experimentation and testing.
 - Specify whether the exported values match the full enclosed values or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}). Note that some implementations may not be able to export all observed extension headers in a Flow because of a hardware or software limit (see, e.g., {{?I-D.ietf-6man-eh-limits}}). The specification of the ipv6ExtensionHeaders Information Element does not discuss whether it covers all enclosed extension headers or only up to a limit.
 - Specify how to report the length of IPv6 extension headers.
 - Optimize the encoding.
 - Explain the reasoning for reporting values which do not correspond to extension headers (e.g., "Unknown Layer 4 header" or "Payload compression header").
 - Specify how to report extension header chains or aggregate extension headers length.
 
-{{sec-eh}} addresses these issues. Also, the ipv6ExtensionHeaders IPFIX IE is deprecated in favor of the new IEs defined in this document.
+{{sec-eh}} addresses these issues.
+
+This specification deprecates the ipv6ExtensionHeaders IPFIX IE in favor of the new IEs defined in this document.
 
 ## Issues with tcpOptions Information Element {#sec-tcp-issues}
 
 The specification of the tcpOptions IPFIX IE (209) does not:
 
 - Describe how some observed TCP options in a Flow can be exported using IPFIX. Only TCP options having a Kind <= 63 can be exported in a tcpOptions IE.
-- Allow reporting the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (Kind=253 or 254) {{!RFC6994}}.
+- Allow reporting the observed Experimental Identifiers (ExIDs) that are carried in shared Experimental TCP options (Kind=253 or 254) {{!RFC6994}}.
 - Optimize the encoding.
 
-{{sec-tcp}} addresses these issues. Also, the tcpOptions IE is deprecated in favor of the new IEs defined in this document.
+{{sec-tcp}} addresses these issues.
+
+This specification deprecates the tcpOptions IE in favor of the new IEs defined in this document.
 
 # Conventions and Definitions
 
@@ -110,7 +114,7 @@ This document uses the IPFIX-specific terminology (Information Element, Template
    {{Section 2 of !RFC7011}}. As in {{!RFC7011}}, these IPFIX-specific terms
    have the first letter of a word capitalized.
 
-Also, the document uses the terms defined in {{!RFC8200}} and {{!RFC9293}}.
+Also, the document uses the terms defined in IPv6 {{!RFC8200}} and TCP {{!RFC9293}} specifications.
 
 In addition, the document makes use of the following term:
 
@@ -458,7 +462,7 @@ Reference:
 
 The value of ipv6ExtensionHeadersFull IE should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
-If an implementation determines that an observed packet of a Flow includes an extension header that it does not support, then the exact observed code of that extension header MUST be echoed in the ipv6ExtensionHeaderTypeCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate node that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
+If an implementation determines that an observed packet of a Flow includes an extension header (including an extension header that it does not support), then the exact observed code of that extension header MUST be echoed in the ipv6ExtensionHeaderTypeCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate node that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
 
 The ipv6ExtensionHeadersFull Information Element SHOULD NOT be exported if ipv6ExtensionHeaderTypeCountList Information Element is also present because of the overlapping scopes between these two IEs. If both IEs are present, then ipv6ExtensionHeaderTypeCountList Information Element takes precedence.
 
@@ -648,7 +652,7 @@ Within the review period, the designated experts will either approve or deny the
 
 Thanks to Paul Aitken and Eric Vyncke for the reviews and comments. Special thanks to Andrew Feren for sharing data about scans of IPFIX data he collected.
 
-Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review, Dirk Von Hugo for intdir review, and Joel Halpern for the genart review.
+Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review, Dirk Von Hugo for intdir review, Joel Halpern for the genart review, and Tero Kivinen for the secdir review.
 
 Thanks to Thomas Graf for the Shepherd review.
 
