@@ -77,7 +77,7 @@ This document specifies new IP Flow Information Export (IPFIX) {{!RFC7011}} Info
 
 ## Issues with ipv6ExtensionHeaders Information Element {#sec-eh-issues}
 
-The specification of ipv6ExtensionHeaders IPFIX IE (64) does not:
+The specification of the ipv6ExtensionHeaders IPFIX IE (64) does not:
 
 - Cover the full extension headers' range ({{Section 4 of !RFC8200}}).
 - Specify the procedure to follow when all bits are exhausted.
@@ -89,17 +89,17 @@ The specification of ipv6ExtensionHeaders IPFIX IE (64) does not:
 - Explain the reasoning for reporting values which do not correspond to extension headers (e.g., "Unknown Layer 4 header" or "Payload compression header").
 - Specify how to report extension header chains or aggregate extension headers length.
 
-{{sec-eh}} addresses these issues. Also, ipv6ExtensionHeaders IPFIX IE is deprecated in favor of the new IEs defined in this document.
+{{sec-eh}} addresses these issues. Also, the ipv6ExtensionHeaders IPFIX IE is deprecated in favor of the new IEs defined in this document.
 
 ## Issues with tcpOptions Information Element {#sec-tcp-issues}
 
-The specification of tcpOptions IPFIX IE (209) does not:
+The specification of the tcpOptions IPFIX IE (209) does not:
 
-- Describe how some observed TCP option in a Flow can be exported using IPFIX. Only TCP options having a Kind <= 63 can be exported in a tcpOptions IE.
+- Describe how some observed TCP options in a Flow can be exported using IPFIX. Only TCP options having a Kind <= 63 can be exported in a tcpOptions IE.
 - Allow reporting the observed Experimental Identifiers (ExIDs) that are carried in shared TCP options (Kind=253 or 254) {{!RFC6994}}.
 - Optimize the encoding.
 
-{{sec-tcp}} addresses these issues. Also, tcpOptions IE is deprecated in favor of the new IEs defined in this document.
+{{sec-tcp}} addresses these issues. Also, the tcpOptions IE is deprecated in favor of the new IEs defined in this document.
 
 # Conventions and Definitions
 
@@ -156,7 +156,7 @@ ElementID:
 : TBD2
 
 Description:
-: The number of consecutive occurrences of a same extension header type in a Flow.
+: The number of consecutive occurrences of the same extension header type in a Flow.
 : The type of the extension header is provided in the ipv6ExtensionHeaderType Information Element.
 
 Abstract Data Type:
@@ -234,7 +234,7 @@ Description:
 : This Information Element is a subTemplateList of ipv6ExtensionHeaderType and ipv6ExtensionHeaderCount Information Elements.
 
 : If several extension header chains are observed in a Flow, each header
-  chain MUST be exported in a separate  IE.
+  chain MUST be exported in a separate ipv6ExtensionHeaderTypeCountList IE.
 
 : The same extension header type may appear several times in an ipv6ExtensionHeaderTypeCountList Information Element.
   For example, if an IPv6 packet of a Flow includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
@@ -327,6 +327,34 @@ Additional Information:
 Reference:
 : This-Document
 
+##  ipv6ExtensionHeaderChainLengthList Information Element {#sec-v6chain-list}
+
+Name:
+: ipv6ExtensionHeaderChainLengthList
+
+ElementID:
+: TBD7
+
+Description:
+: This Information Element is used to report the chains and their length as observed in a Flow with varying extension header chain.
+: This Information Element is a subTemplateList of ipv6ExtensionHeadersFull and ipv6ExtensionHeadersChainLength Information Elements.
+
+: If several extension header chains are observed in a Flow, each header
+  chain MUST be exported in a separate ipv6ExtensionHeaderChainLengthList IE.
+
+Abstract Data Type:
+: subTemplateList
+
+Data Type Semantics:
+: list
+
+Additional Information:
+: See the assigned IPv6 extension header types in {{IANA-EH}}.
+: See {{!RFC8200}} for the general definition of IPv6 extension headers.
+
+Reference:
+: This-Document
+
 # Information Elements for TCP Options {#sec-tcp}
 
 ## tcpOptionsFull Information Element {#sec-tcpfull}
@@ -337,7 +365,7 @@ Name:
 : tcpOptionsFull
 
 ElementID:
-: TBD7
+: TBD8
 
 Description:
 : TCP options in packets of this Flow.  The information is encoded
@@ -372,7 +400,7 @@ Name:
 : tcpSharedOptionExID16
 
 ElementID:
-: TBD8
+: TBD9
 
 Description:
 : Any observed 2-byte Experiments IDs (ExIDs) in a shared
@@ -401,7 +429,7 @@ Name:
 : tcpSharedOptionExID32
 
 ElementID:
-: TBD9
+: TBD10
 
 Description:
 : Any observed  4-byte Experiments IDs (ExIDs) in a shared
@@ -429,7 +457,7 @@ Reference:
 
 The value of ipv6ExtensionHeadersFull IE should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
-If an implementation determines that an observed packet of a Flow includes an extension header that it does not support, then the exact observed code of that extension header will be echoed in the ipv6ExtensionHeaderTypeCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate node that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
+If an implementation determines that an observed packet of a Flow includes an extension header that it does not support, then the exact observed code of that extension header MUST be echoed in the ipv6ExtensionHeaderTypeCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate node that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
 
 The ipv6ExtensionHeadersFull Information Element SHOULD NOT be exported if ipv6ExtensionHeaderTypeCountList Information Element is also present because of the overlapping scopes between these two IEs. If both IEs are present, then ipv6ExtensionHeaderTypeCountList Information Element takes precedence.
 
@@ -450,7 +478,7 @@ This section provides a few examples to illustrate the use of some IEs defined i
 ## IPv6 Extension Headers
 
 {{ex-eh1}} provides an example of reported values in an ipv6ExtensionHeadersFull IE for an IPv6 Flow in which only
-the	IPv6 Destination Options header is observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x01. The bits are set following the table provided in {{sec-initial}}.
+the	IPv6 Destination Options (0) header is observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x01. The bits are set following the table provided in {{sec-initial}}.
 
 ~~~~
 MSB                                                      LSB
@@ -463,7 +491,7 @@ MSB                                                      LSB
 {: #ex-eh1 title="A First Example of Extension Headers" artwork-align="center"}
 
 {{ex-eh2}} provides another example of reported values in an ipv6ExtensionHeadersFull IE for an IPv6 Flow in which
-the	IPv6 Hop-by-Hop Options, Routing, and Destination Options headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23.
+the	Destination Options (0), IPv6 Hop-by-Hop Options (1), and Routing (5), and headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23.
 
 ~~~~
 MSB                                                      LSB
@@ -480,7 +508,7 @@ MSB                                                      LSB
 Given TCP Kind allocation practices and the option mapping defined in {{sec-tcpfull}}, fewer octets are likely to be used for
 Flows with common TCP options.
 
-{{ex-tcp1}} shows an example of reported values in a tcpOptionsFull IE for a TCP Flow in which End of Option List, Maximum Segment Size, and Window Scale options are observed. One octet is sufficient to report these observed options. Concretely, the tcpOptionsFull IE will be set to 0x0D.
+{{ex-tcp1}} shows an example of reported values in a tcpOptionsFull IE for a TCP Flow in which End of Option List (0), Maximum Segment Size (2), and Window Scale (3) options are observed. One octet is sufficient to report these observed options. Concretely, the tcpOptionsFull IE will be set to 0x0D.
 
 ~~~~
 MSB                                                      LSB
@@ -495,7 +523,7 @@ MSB                                                      LSB
 
 Let us consider a TCP Flow in which shared options with ExIDs 0x0348 (HOST_ID) {{?RFC7974}}, 0x454E	(TCP-ENO) {{?RFC8547}}, and 0xE2D4C3D9	(Shared Memory communications over RMDA protocol)	{{?RFC7609}} are observed. As shown in {{ex-tcp2}}, two TCP shared IEs will be used to report these observed ExIDs:
 
-1. The tcpSharedOptionExID16 IE set to 0x348454E to report observed 2-byte ExIDs:  HOST_ID and TCP-ENO ExIDs.
+1. The tcpSharedOptionExID16 IE set to 0x0348454E to report observed 2-byte ExIDs:  HOST_ID and TCP-ENO ExIDs.
 2. The tcpSharedOptionExID32 IE set to 0xE2D4C3D9 to report the only observed 4-byte ExID.
 
 ~~~~
@@ -534,8 +562,8 @@ This document does not add new security considerations for exporting IEs other t
 
 This document requests IANA to update the "IPFIX Information Elements" registry under the "IP Flow Information Export (IPFIX) Entities" registry group {{IANA-IPFIX}} as follows:
 
-* Update the ipv6ExtensionHeaders IE (64) entry by marking it as deprecated in favor of the ipv6ExtensionHeadersFull IE defined in this document. This note should also be echoed in the "Additional Information" of this IE.
-* Update the tcpOptions IE (209) entry by marking it as deprecated in favor of the tcpOptionsFull IE defined in this document. This note should also be echoed in the "Additional Information" of this IE.
+* Update the ipv6ExtensionHeaders IE (64) entry by marking it as deprecated in favor of the ipv6ExtensionHeadersFull IE defined in this document. This note should also be echoed in the "Additional Information" of the ipv6ExtensionHeaders IE.
+* Update the tcpOptions IE (209) entry by marking it as deprecated in favor of the tcpOptionsFull IE defined in this document. This note should also be echoed in the "Additional Information" of the tcpOptions IE.
 
 IANA is also requested to update the reference of ipv6ExtensionHeaders IE (64) and tcpOptions IE (209) to point to this document.
 
@@ -550,6 +578,7 @@ This document requests IANA to add the following new IPFIX IEs to the "IPFIX Inf
 |TBD4| ipv6ExtensionHeaderTypeCountList|{{sec-v6count}} of This-Document|
 |TBD5| ipv6ExtensionHeadersLimit|{{sec-v6limit}} of This-Document|
 |TBD6| ipv6ExtensionHeadersChainLength |{{sec-v6aggr}} of This-Document|
+|TBD7| ipv6ExtensionHeaderChainLengthList |{{sec-v6chain-list}} of This-Document|
 |TBD7| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
 |TBD8| tcpSharedOptionExID16|{{sec-ex}} of This-Document|
 |TBD9| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
@@ -585,7 +614,7 @@ The initial values of this registry are provided in {{iana-new-eh}}.
 
 |Bit|	Label|	Protocol Number| Description                | Reference |
 |0  | DST  |60              |Destination Options for IPv6|This-Document|
-|1  |HOP   |0               |Pv6 Hop-by-Hop Options      |This-Document|
+|1  |HOP   |0               |IPv6 Hop-by-Hop Options      |This-Document|
 |2  | NoNxt|59              |No Next Header for IPv6     |This-Document|
 |3  |UNK   |                |Unknown Layer 4 header (compressed, encrypted, not supported)|This-Document|
 |4  | FRA0 |44              |Fragment header - first fragment    |This-Document|
@@ -616,7 +645,7 @@ Within the review period, the designated experts will either approve or deny the
 # Acknowledgments
 {:numbered="false"}
 
-Thanks to Paul Aitken and Eric Vyncke for the review and comments. Special thanks to Andrew Feren for sharing data about scans of IPFIX data he collected.
+Thanks to Paul Aitken and Eric Vyncke for the reviews and comments. Special thanks to Andrew Feren for sharing data about scans of IPFIX data he collected.
 
 Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review,
 and Dirk Von Hugo for intdir review.
