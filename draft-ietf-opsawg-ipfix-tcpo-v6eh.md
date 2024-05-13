@@ -120,6 +120,8 @@ Extension header chain:
   the IPv6 header, zero or more IPv6 extension headers,
   and zero or a single Upper-Layer Header.
 
+Flow with varying extension header chain:
+: Refers to a Flow where distinct extension header chains are observed. Concretely, different packets in such a Flow will have a different sequence of extension header type codes.
 
 # Information Elements for IPv6 Extension Headers {#sec-eh}
 
@@ -198,7 +200,7 @@ Description:
   Even if the value is not considered as an extension header as such, the corresponding
   bit is set in the ipv6ExtensionHeadersFull IE whenever that value is encountered in the Flow.
 
-: Several extension header chains may be observed in a Flow. These extension headers
+: Extension headers observed in a Flow with varying extension header chain
   MAY be aggregated in one single ipv6ExtensionHeadersFull Information Element or
   be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.
 
@@ -233,8 +235,8 @@ Description:
 
 : This Information Element is a subTemplateList of ipv6ExtensionHeaderType and ipv6ExtensionHeaderCount Information Elements.
 
-: If several extension header chains are observed in a Flow, each header
-  chain MUST be exported in a separate ipv6ExtensionHeaderTypeCountList IE.
+: Each header chain in Flow with varying extension header chain MUST be exported in a separate  IE.
+
 
 : The same extension header type may appear several times in an ipv6ExtensionHeaderTypeCountList Information Element.
   For example, if an IPv6 packet of a Flow includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
@@ -308,8 +310,7 @@ Description:
 : The ipv6ExtensionHeadersChainLength IE is used to report, in octets, the length of
   an extension header chain observed in a Flow.  The length is the sum of the length of all extension headers of the chain. Exporting such information might help identifying root causes of performance degradation, including packet drops.
 
-: If several extension header chains are observed in a Flow, each header
-  chain length MUST be exported in a separate ipv6ExtensionHeadersChainLength IE.
+: Each header chain length of a Flow with varying extension header chain MUST be exported in a separate ipv6ExtensionHeadersChainLength IE.
 
 Abstract Data Type:
 : unsigned32
@@ -647,8 +648,7 @@ Within the review period, the designated experts will either approve or deny the
 
 Thanks to Paul Aitken and Eric Vyncke for the reviews and comments. Special thanks to Andrew Feren for sharing data about scans of IPFIX data he collected.
 
-Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review,
-and Dirk Von Hugo for intdir review.
+Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review, Dirk Von Hugo for intdir review, and Joel Halpern for the genart review.
 
 Thanks to Thomas Graf for the Shepherd review.
 
