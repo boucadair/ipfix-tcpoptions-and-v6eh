@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 18 October 2024                                          Huawei
-                                                           16 April 2024
+Expires: 14 November 2024                                         Huawei
+                                                             13 May 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 October 2024.
+   This Internet-Draft will expire on 14 November 2024.
 
 Copyright Notice
 
@@ -190,6 +190,11 @@ Table of Contents
       includes the IPv6 header, zero or more IPv6 extension headers, and
       zero or a single Upper-Layer Header.
 
+   Flow with varying extension header chain:  Refers to a Flow where
+      distinct extension header chains are observed.  Concretely,
+      different packets in such a Flow will have a different sequence of
+      extension header type codes.
+
 3.  Information Elements for IPv6 Extension Headers
 
 3.1.  ipv6ExtensionHeaderType Information Element
@@ -264,11 +269,10 @@ Table of Contents
       corresponding bit is set in the ipv6ExtensionHeadersFull IE
       whenever that value is encountered in the Flow.
 
-      Several extension header chains may be observed in a Flow.  These
-      extension headers MAY be aggregated in one single
-      ipv6ExtensionHeadersFull Information Element or be exported in
-      separate ipv6ExtensionHeadersFull IEs, one for each extension
-      header chain.
+      Extension headers observed in a Flow with varying extension header
+      chain MAY be aggregated in one single ipv6ExtensionHeadersFull
+      Information Element or be exported in separate
+      ipv6ExtensionHeadersFull IEs, one for each extension header chain.
 
    Abstract Data Type:  unsigned256
 
@@ -304,8 +308,8 @@ Table of Contents
       ipv6ExtensionHeaderType and ipv6ExtensionHeaderCount Information
       Elements.
 
-      If several extension header chains are observed in a Flow, each
-      header chain MUST be exported in a separate IE.
+      Each header chain in Flow with varying extension header chain MUST
+      be exported in a separate IE.
 
       The same extension header type may appear several times in an
       ipv6ExtensionHeaderTypeCountList Information Element.  For
@@ -388,8 +392,8 @@ Table of Contents
       identifying root causes of performance degradation, including
       packet drops.
 
-      If several extension header chains are observed in a Flow, each
-      header chain length MUST be exported in a separate
+      Each header chain length of a Flow with varying extension header
+      chain MUST be exported in a separate
       ipv6ExtensionHeadersChainLength IE.
 
    Abstract Data Type:  unsigned32
@@ -925,7 +929,8 @@ Acknowledgments
    data he collected.
 
    Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the
-   opsdir review, and Dirk Von Hugo for intdir review.
+   opsdir review, Dirk Von Hugo for intdir review, and Joel Halpern for
+   the genart review.
 
    Thanks to Thomas Graf for the Shepherd review.
 
