@@ -594,7 +594,7 @@ This document requests IANA to add the following new abstract data type to the "
 {: #iana-new-dt title="New IPFIX Information Element Data Type"}
 
 The type "unsigned256" represents a non-negative integer value in the
-range of '0' to '2^256 - 1'. This type MUST be encoded per {{Section 6.1.1 of !RFC7011}}. Reduced-Size encoding ({{Section 6.2 of !RFC7011}}) applies to this data type.
+range of '0' to '2^256 - 1'. Similar to {{Section 6.1.1 of !RFC7011}}, this type MUST be encoded using the default canonical format in network byte order. Reduced-Size encoding ({{Section 6.2 of !RFC7011}}) applies to this data type.
 
 ## IPFIX Subregistry for IPv6 Extension Headers {#sec-iana-eh}
 
