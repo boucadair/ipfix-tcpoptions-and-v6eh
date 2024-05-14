@@ -496,7 +496,7 @@ MSB                                                      LSB
 {: #ex-eh1 title="A First Example of Extension Headers" artwork-align="center"}
 
 {{ex-eh2}} provides another example of reported values in an ipv6ExtensionHeadersFull IE for an IPv6 Flow in which
-the	Destination Options (0), IPv6 Hop-by-Hop Options (1), and Routing (5), and headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23.
+the	Destination Options (0), IPv6 Hop-by-Hop Options (1), and Routing (5) headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23.
 
 ~~~~
 MSB                                                      LSB
