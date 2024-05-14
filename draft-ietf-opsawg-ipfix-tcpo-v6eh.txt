@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 14 November 2024                                         Huawei
-                                                             13 May 2024
+Expires: 15 November 2024                                         Huawei
+                                                             14 May 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 November 2024.
+   This Internet-Draft will expire on 15 November 2024.
 
 Copyright Notice
 
@@ -600,10 +600,9 @@ Table of Contents
 
    Figure 2 provides another example of reported values in an
    ipv6ExtensionHeadersFull IE for an IPv6 Flow in which the Destination
-   Options (0), IPv6 Hop-by-Hop Options (1), and Routing (5), and
-   headers are observed.  One octet is sufficient to report these
-   observed options.  Concretely, the ipv6ExtensionHeadersFull IE will
-   be set to 0x23.
+   Options (0), IPv6 Hop-by-Hop Options (1), and Routing (5) headers are
+   observed.  One octet is sufficient to report these observed options.
+   Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23.
 
        MSB                                                      LSB
                             1                          25
