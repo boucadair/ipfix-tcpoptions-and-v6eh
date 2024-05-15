@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 15 November 2024                                         Huawei
-                                                             14 May 2024
+Expires: 16 November 2024                                         Huawei
+                                                             15 May 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 November 2024.
+   This Internet-Draft will expire on 16 November 2024.
 
 Copyright Notice
 
@@ -93,6 +93,7 @@ Table of Contents
            Elements
      8.2.  New IPFIX Information Elements
      8.3.  New IPFIX Information Element Data Type
+       8.3.1.  unsigned256
      8.4.  IPFIX Subregistry for IPv6 Extension Headers
        8.4.1.  Initial Values
        8.4.2.  Guidelines for the Designated Experts
@@ -554,6 +555,13 @@ Table of Contents
    If both IEs are present, then ipv6ExtensionHeaderTypeCountList
    Information Element takes precedence.
 
+   Extension headers observed in a Flow with varying extension header
+   chain SHOULD NOT be aggregated in the ipv6ExtensionHeadersFull
+   Information Element if the ipv6ExtensionHeaderChainLengthList
+   Information Element is also present.  If both IEs are present, then
+   ipv6ExtensionHeaderChainLengthList Information Element takes
+   precedence.
+
    The ipv6ExtensionHeadersLimit IE (Section 3.5) may or may not be
    present when the ipv6ExtensionHeadersChainLength IE (Section 3.6) is
    also present as these IEs are targeting distinct properties of
@@ -760,11 +768,17 @@ Table of Contents
                        Table 2: New IPFIX Information
                              Element Data Type
 
+8.3.1.  unsigned256
+
    The type "unsigned256" represents a non-negative integer value in the
    range of '0' to '2^256 - 1'.  Similar to Section 6.1.1 of [RFC7011],
    this type MUST be encoded using the default canonical format in
-   network byte order.  Reduced-Size encoding (Section 6.2 of [RFC7011])
-   applies to this data type.
+   network byte order.
+
+   Reduced-Size encoding (Section 6.2 of [RFC7011]) applies to this data
+   type.  The reduction in size can be to any number of octets smaller
+   than the unsigned256 type if the data value still fits, i.e., so that
+   only leading zeroes are dropped.
 
 8.4.  IPFIX Subregistry for IPv6 Extension Headers
 
@@ -873,8 +887,8 @@ Table of Contents
 
    [IANA-EH]  IANA, "Internet Protocol Version 6 (IPv6) Parameters, IPv6
               Extension Header Types",
-              <https://www.iana.org/assignments/ipv6-parameters/
-              ipv6-parameters.xhtml#ipv6-parameters-1>.
+              <https://www.iana.org/assignments/ipv6-parameters/ipv6-
+              parameters.xhtml#extension-header>.
 
    [IANA-IPFIX]
               IANA, "IP Flow Information Export (IPFIX) Entities",
