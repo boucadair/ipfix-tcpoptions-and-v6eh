@@ -37,7 +37,7 @@ normative:
         author:
         -
           organization: "IANA"
-        target: https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml#ipv6-parameters-1
+        target: https://www.iana.org/assignments/ipv6-parameters/ipv6-parameters.xhtml#extension-header
         date: false
      IANA-TCP:
         title: Transmission Control Protocol (TCP) Parameters, TCP Option Kind Numbers
@@ -466,6 +466,8 @@ If an implementation determines that an observed packet of a Flow includes an ex
 
 The ipv6ExtensionHeadersFull Information Element SHOULD NOT be exported if ipv6ExtensionHeaderTypeCountList Information Element is also present because of the overlapping scopes between these two IEs. If both IEs are present, then ipv6ExtensionHeaderTypeCountList Information Element takes precedence.
 
+Extension headers observed in a Flow with varying extension header chain SHOULD NOT be aggregated in the ipv6ExtensionHeadersFull Information Element if the ipv6ExtensionHeaderChainLengthList Information Element is also present. If both IEs are present, then ipv6ExtensionHeaderChainLengthList Information Element takes precedence.
+
 The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
 
 ## TCP Options {#op-tcp}
@@ -597,8 +599,12 @@ This document requests IANA to add the following new abstract data type to the "
 |TBD10| unsigned256|This-Document|
 {: #iana-new-dt title="New IPFIX Information Element Data Type"}
 
+### unsigned256
+
 The type "unsigned256" represents a non-negative integer value in the
-range of '0' to '2^256 - 1'. Similar to {{Section 6.1.1 of !RFC7011}}, this type MUST be encoded using the default canonical format in network byte order. Reduced-Size encoding ({{Section 6.2 of !RFC7011}}) applies to this data type.
+range of '0' to '2^256 - 1'. Similar to {{Section 6.1.1 of !RFC7011}}, this type MUST be encoded using the default canonical format in network byte order.
+
+Reduced-Size encoding ({{Section 6.2 of !RFC7011}}) applies to this data type. The reduction in size can be to any number of octets smaller than the unsigned256 type if the data value still fits, i.e., so that only leading zeroes are dropped.
 
 ## IPFIX Subregistry for IPv6 Extension Headers {#sec-iana-eh}
 
