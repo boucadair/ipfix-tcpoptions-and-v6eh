@@ -399,7 +399,7 @@ Additional Information:
 Reference:
 : This-Document
 
-## tcpSharedOptionExID16 {#tcpExID16}
+## tcpSharedOptionExID16 {#sec-tcpExID16}
 
 Name:
 : tcpSharedOptionExID16
@@ -425,7 +425,7 @@ Additional Information:
 Reference:
 : This-Document
 
-## tcpSharedOptionExID32 {#tcpExID32}
+## tcpSharedOptionExID32 {#sec-tcpExID32}
 
 Name:
 : tcpSharedOptionExID32
@@ -622,7 +622,7 @@ This document requests IANA to update the "IPFIX Information Elements" registry 
 
 IANA is also requested to update the reference of ipv6ExtensionHeaders IE (64) and tcpOptions IE (209) to point to this document.
 
-## New IPFIX Information Elements
+## IPFIX Information Elements
 
 This document requests IANA to add the following new IPFIX IEs to the "IPFIX Information Elements" registry under the "IP Flow Information Export (IPFIX) Entities" registry group {{IANA-IPFIX}}:
 
@@ -641,7 +641,7 @@ This document requests IANA to add the following new IPFIX IEs to the "IPFIX Inf
 |TBD12| tcpSharedOptionExID32List|{{sec-ex32}} of This-Document|
 {: #iana-new-ies title="New IPFIX Information Elements"}
 
-## New IPFIX Information Element Data Type
+## IPFIX Information Element Data Type
 
 This document requests IANA to add the following new abstract data type to the "IPFIX Information Element Data Types" registry under the "IP Flow Information Export (IPFIX) Entities" registry group {{IANA-IPFIX}}:
 
