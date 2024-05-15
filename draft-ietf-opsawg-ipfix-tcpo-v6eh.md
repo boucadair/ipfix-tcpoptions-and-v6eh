@@ -399,7 +399,7 @@ Additional Information:
 Reference:
 : This-Document
 
-## tcpSharedOptionExID16 {#sec-tcpExID16}
+## tcpSharedOptionExID16  Information Element {#sec-tcpExID16}
 
 Name:
 : tcpSharedOptionExID16
@@ -425,7 +425,7 @@ Additional Information:
 Reference:
 : This-Document
 
-## tcpSharedOptionExID32 {#sec-tcpExID32}
+## tcpSharedOptionExID32 Information Element {#sec-tcpExID32}
 
 Name:
 : tcpSharedOptionExID32
