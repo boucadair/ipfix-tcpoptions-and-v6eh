@@ -410,7 +410,7 @@ ElementID:
 Description:
 : Reports an observed 2-byte Experiment ID (ExID) in a shared
   TCP option (Kind=253 or 254) in a Flow.
-      
+
 Abstract Data Type:
 :  unsigned16
 
@@ -436,7 +436,7 @@ ElementID:
 Description:
 : Reports an observed 4-byte Experiment ID (ExID) in a shared
   TCP option (Kind=253 or 254) in a Flow.
-      
+
 Abstract Data Type:
 :  unsigned32
 
