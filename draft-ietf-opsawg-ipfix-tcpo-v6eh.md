@@ -408,7 +408,7 @@ ElementID:
 :  TBD9
 
 Description:
-: Reports an observed 2-byte Experiment ID (ExID) in a shared
+: Reports an observed 2-byte ExID in a shared
   TCP option (Kind=253 or 254) in a Flow.
 
 Abstract Data Type:
@@ -434,7 +434,7 @@ ElementID:
 :  TBD10
 
 Description:
-: Reports an observed 4-byte Experiment ID (ExID) in a shared
+: Reports an observed 4-byte ExID in a shared
   TCP option (Kind=253 or 254) in a Flow.
 
 Abstract Data Type:
@@ -460,7 +460,7 @@ ElementID:
 : TBD11
 
 Description:
-: Reports observed 2-byte Experiment IDs (ExIDs) in shared
+: Reports observed 2-byte ExIDs in shared
   TCP options (Kind=253 or 254) in a Flow.
 : A basicList of tcpSharedOptionExID16 Information Elements, with each tcpSharedOptionExID16 Information Element carries an observed 2-byte ExID in a
   shared option.
@@ -488,7 +488,7 @@ ElementID:
 : TBD12
 
 Description:
-: Reports observed 4-byte Experiment IDs (ExIDs) in shared
+: Reports observed 4-byte ExIDs in shared
   TCP options (Kind=253 or 254) in a Flow.
 : A basicList of tcpSharedOptionExID32 Information Elements, with each tcpSharedOptionExID32 Information Element carries an observed 4-byte ExID in a
   shared option.
@@ -525,9 +525,11 @@ The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present whe
 
 The value of tcpOptionsFull IE should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
-Implementations of tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs are assumed to be provided with a list of valid Experiment IDs {{IANA-TCP-EXIDs}}. How that list is maintained is implementation-specific. Absent that list, an implementation can't autonomously determine whether an ExID is present and, if so, whether it is 2- or 4-byte length.
+Implementations of tcpSharedOptionExID16, tcpSharedOptionExID32, tcpSharedOptionExID16List, and tcpSharedOptionExID32List IEs are assumed to be provided with a list of valid ExIDs {{IANA-TCP-EXIDs}}. How that list is maintained is implementation-specific. Absent that list, an implementation can't autonomously determine whether an ExID is present and, if so, whether it is 2- or 4-byte length.
 
-If a TCP Flow contains packets with a mix of 2-byte and 4-byte Experiment IDs, the same Template Record is used with both tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs.
+If a TCP Flow contains packets with a mix of 2-byte and 4-byte ExIDs, the same Template Record is used with both tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs.
+
+In order to make use of the reduced-size encoding in the presence of tcpSharedOptionExID16List or tcpSharedOptionExID32List IEs, the Exporter MUST NOT set to 1 the shared TCP options (Kind=253 or 254) flags of the tcpOptionsFull IE that is reported for the same Flow.
 
 # Examples {#sec-examples}
 
@@ -588,13 +590,13 @@ Let us consider a TCP Flow in which shared options with ExIDs 0x0348 (HOST_ID) {
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |      255      |        List Length = 9        |semantic=allof |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|tcpSharedOptionExID16 = TBD8   |         Field Length = 2      |
+|tcpSharedOptionExID16 = TBD9   |         Field Length = 2      |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |              0x0348           |             0x454E            |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |      255      |        List Length = 9        |semantic=allof |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|tcpSharedOptionExID32 = TBD9   |         Field Length = 4      |
+|tcpSharedOptionExID32 = TBD10  |         Field Length = 4      |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                           0xE2D4C3D9                          |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
