@@ -79,8 +79,8 @@ Table of Contents
      3.7.  ipv6ExtensionHeaderChainLengthList Information Element
    4.  Information Elements for TCP Options
      4.1.  tcpOptionsFull Information Element
-     4.2.  tcpSharedOptionExID16
-     4.3.  tcpSharedOptionExID32
+     4.2.  tcpSharedOptionExID16 Information Element
+     4.3.  tcpSharedOptionExID32 Information Element
      4.4.  tcpSharedOptionExID16List Information Element
      4.5.  tcpSharedOptionExID32List Information Element
    5.  Operational Considerations
@@ -487,7 +487,7 @@ Table of Contents
 
    Reference:  This-Document
 
-4.2.  tcpSharedOptionExID16
+4.2.  tcpSharedOptionExID16 Information Element
 
    Name:  tcpSharedOptionExID16
 
@@ -508,7 +508,7 @@ Table of Contents
 
    Reference:  This-Document
 
-4.3.  tcpSharedOptionExID32
+4.3.  tcpSharedOptionExID32 Information Element
 
    Name:  tcpSharedOptionExID32
 
