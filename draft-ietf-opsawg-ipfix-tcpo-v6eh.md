@@ -204,9 +204,15 @@ Description:
   Even if the value is not considered as an extension header as such, the corresponding
   bit is set in the ipv6ExtensionHeadersFull IE whenever that value is encountered in the Flow.
 
-: Extension headers observed in a Flow with varying extension header chain
-  MAY be aggregated in one single ipv6ExtensionHeadersFull Information Element or
-  be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.
+: Extension headers observed in a Flow with varying extension header chain MUST NOT be grouped in the ipv6ExtensionHeadersFull Information Element if the ipv6ExtensionHeaderChainLengthList Information Element is also present.
+
+: If the ipv6ExtensionHeaderChainLengthList Information Element is not present, then extension headers observed in a Flow with varying extension header chain
+  MAY be grouped in one single ipv6ExtensionHeadersFull Information Element or be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.
+
+: The ipv6ExtensionHeadersFull Information Element MUST NOT be exported if ipv6ExtensionHeaderTypeCountList Information Element is also present because of the overlapping scopes between these two IEs.
+
+: The value of ipv6ExtensionHeadersFull IE is encoded in fewer octets per the guidelines in {{Section 6.2 of !RFC7011}}.
+
 
 Abstract Data Type:
 : unsigned256
@@ -250,6 +256,8 @@ Description:
   + the occurrences of the Destination Options header that are observed before the Fragment header,
   + the occurrences of the Fragment header, and
   + the occurrences of the Destination Options header that are observed right after the Fragment header.
+
+: If an implementation determines that an observed packet of a Flow includes an extension header (including an extension header that it does not support), then the exact observed code of that extension header MUST be echoed in the ipv6ExtensionHeaderTypeCountList IE. How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate node that encounters an unknown Next Header type.
 
 Abstract Data Type:
 : subTemplateList
@@ -386,6 +394,10 @@ Description:
   an observer to export any observed TCP option even if it does support
   that option and without requiring updating a mapping table.
 
+: The value of tcpOptionsFull IE is encoded in fewer octets per the guidelines in {{Section 6.2 of !RFC7011}}.
+
+: The presence of tcpSharedOptionExID16List or tcpSharedOptionExID32List IEs is an indication that  a shared TCP option (Kind=253 or 254) is observed in a Flow. The presence of tcpSharedOptionExID16List or tcpSharedOptionExID32List IEs takes precedence over setting the corresponding bits in the tcpOptionsFull IE for the same Flow. In order to make use of the reduced-size encoding in the presence of tcpSharedOptionExID16List or tcpSharedOptionExID32List IEs, the Exporter MUST NOT set to 1 the shared TCP options (Kind=253 or 254) flags of the tcpOptionsFull IE that is reported for the same Flow.
+
 Abstract Data Type:
 : unsigned256
 
@@ -462,7 +474,7 @@ ElementID:
 Description:
 : Reports observed 2-byte ExIDs in shared
   TCP options (Kind=253 or 254) in a Flow.
-: A basicList of tcpSharedOptionExID16 Information Elements, with each tcpSharedOptionExID16 Information Element carries an observed 2-byte ExID in a
+: A basicList of tcpSharedOptionExID16 Information Elements in which each tcpSharedOptionExID16 Information Element carries an observed 2-byte ExID in a
   shared option.
 
 Abstract Data Type:
@@ -490,7 +502,7 @@ ElementID:
 Description:
 : Reports observed 4-byte ExIDs in shared
   TCP options (Kind=253 or 254) in a Flow.
-: A basicList of tcpSharedOptionExID32 Information Elements, with each tcpSharedOptionExID32 Information Element carries an observed 4-byte ExID in a
+: A basicList of tcpSharedOptionExID32 Information Elements in which each tcpSharedOptionExID32 Information Element carries an observed 4-byte ExID in a
   shared option.
 
 Abstract Data Type:
@@ -511,25 +523,13 @@ Reference:
 
 ## IPv6 Extension Headers {#op-eh}
 
-The value of ipv6ExtensionHeadersFull IE should be encoded in fewer octets per the guidelines in {{Section 6.2 of !RFC7011}}.
-
-If an implementation determines that an observed packet of a Flow includes an extension header (including an extension header that it does not support), then the exact observed code of that extension header MUST be echoed in the ipv6ExtensionHeaderTypeCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate node that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
-
-The ipv6ExtensionHeadersFull Information Element SHOULD NOT be exported if ipv6ExtensionHeaderTypeCountList Information Element is also present because of the overlapping scopes between these two IEs. If both IEs are present, then ipv6ExtensionHeaderTypeCountList Information Element takes precedence.
-
-Extension headers observed in a Flow with varying extension header chain SHOULD NOT be aggregated in the ipv6ExtensionHeadersFull Information Element if the ipv6ExtensionHeaderChainLengthList Information Element is also present. If both IEs are present, then ipv6ExtensionHeaderChainLengthList Information Element takes precedence.
-
-The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
+The ipv6ExtensionHeadersLimit IE may or may not be present when the ipv6ExtensionHeadersChainLength IE is also present as these IEs are targeting distinct properties of extension headers handling.
 
 ## TCP Options {#op-tcp}
-
-The value of tcpOptionsFull IE should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
 
 Implementations of tcpSharedOptionExID16, tcpSharedOptionExID32, tcpSharedOptionExID16List, and tcpSharedOptionExID32List IEs are assumed to be provided with a list of valid ExIDs {{IANA-TCP-EXIDs}}. How that list is maintained is implementation-specific. Absent that list, an implementation can't autonomously determine whether an ExID is present and, if so, whether it is 2- or 4-byte length.
 
 If a TCP Flow contains packets with a mix of 2-byte and 4-byte ExIDs, the same Template Record is used with both tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs.
-
-In order to make use of the reduced-size encoding in the presence of tcpSharedOptionExID16List or tcpSharedOptionExID32List IEs, the Exporter MUST NOT set to 1 the shared TCP options (Kind=253 or 254) flags of the tcpOptionsFull IE that is reported for the same Flow.
 
 # Examples {#sec-examples}
 
