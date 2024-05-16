@@ -98,7 +98,7 @@ This specification deprecates the ipv6ExtensionHeaders IPFIX IE in favor of the 
 The specification of the tcpOptions IPFIX IE (209) does not:
 
 - Describe how some observed TCP options in a Flow can be exported using IPFIX. Only TCP options having a Kind <= 63 can be exported in a tcpOptions IE.
-- Allow reporting the observed Experimental Identifiers (ExIDs) that are carried in shared Experimental TCP options (Kind=253 or 254) {{!RFC6994}}.
+- Allow reporting the observed Experiment Identifiers (ExIDs) that are carried in shared Experimental TCP options (Kind=253 or 254) {{!RFC6994}}.
 - Optimize the encoding.
 
 {{sec-tcp}} addresses these issues.
@@ -204,9 +204,15 @@ Description:
   Even if the value is not considered as an extension header as such, the corresponding
   bit is set in the ipv6ExtensionHeadersFull IE whenever that value is encountered in the Flow.
 
-: Extension headers observed in a Flow with varying extension header chain
-  MAY be aggregated in one single ipv6ExtensionHeadersFull Information Element or
-  be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.
+: Extension headers observed in a Flow with varying extension header chain MUST NOT be grouped in the ipv6ExtensionHeadersFull Information Element if the ipv6ExtensionHeaderChainLengthList Information Element is also present.
+
+: If the ipv6ExtensionHeaderChainLengthList Information Element is not present, then extension headers observed in a Flow with varying extension header chain
+  MAY be grouped in one single ipv6ExtensionHeadersFull Information Element or be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.
+
+: The ipv6ExtensionHeadersFull Information Element MUST NOT be exported if ipv6ExtensionHeaderTypeCountList Information Element is also present because of the overlapping scopes between these two IEs.
+
+: The value of ipv6ExtensionHeadersFull IE is encoded in fewer octets per the guidelines in {{Section 6.2 of !RFC7011}}.
+
 
 Abstract Data Type:
 : unsigned256
@@ -250,6 +256,8 @@ Description:
   + the occurrences of the Destination Options header that are observed before the Fragment header,
   + the occurrences of the Fragment header, and
   + the occurrences of the Destination Options header that are observed right after the Fragment header.
+
+: If an implementation determines that an observed packet of a Flow includes an extension header (including an extension header that it does not support), then the exact observed code of that extension header MUST be echoed in the ipv6ExtensionHeaderTypeCountList IE. How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate node that encounters an unknown Next Header type.
 
 Abstract Data Type:
 : subTemplateList
@@ -386,6 +394,10 @@ Description:
   an observer to export any observed TCP option even if it does support
   that option and without requiring updating a mapping table.
 
+: The value of tcpOptionsFull IE is encoded in fewer octets per the guidelines in {{Section 6.2 of !RFC7011}}.
+
+: The presence of tcpSharedOptionExID16List or tcpSharedOptionExID32List IEs is an indication that  a shared TCP option (Kind=253 or 254) is observed in a Flow. The presence of tcpSharedOptionExID16List or tcpSharedOptionExID32List IEs takes precedence over setting the corresponding bits in the tcpOptionsFull IE for the same Flow. In order to make use of the reduced-size encoding in the presence of tcpSharedOptionExID16List or tcpSharedOptionExID32List IEs, the Exporter MUST NOT set to 1 the shared TCP options (Kind=253 or 254) flags of the tcpOptionsFull IE that is reported for the same Flow.
+
 Abstract Data Type:
 : unsigned256
 
@@ -399,26 +411,23 @@ Additional Information:
 Reference:
 : This-Document
 
-## tcpSharedOptionExID16 Information Element {#sec-ex}
+## tcpSharedOptionExID16  Information Element {#sec-tcpExID16}
 
 Name:
 : tcpSharedOptionExID16
 
 ElementID:
-: TBD9
+:  TBD9
 
 Description:
-: Any observed 2-byte Experiments IDs (ExIDs) in a shared
-      TCP option (Kind=253 or 254)  in a Flow.  The information is encoded in a set of
-      16-bit fields.  Each 16-bit field carries an observed 2-byte ExID in a
-      shared option.
-
+: Reports an observed 2-byte ExID in a shared
+  TCP option (Kind=253 or 254) in a Flow.
 
 Abstract Data Type:
-: octetArray
+:  unsigned16
 
 Data Type Semantics:
-: identifier
+:  identifier
 
 Additional Information:
 : See assigned ExIDs at {{IANA-TCP-EXIDs}}.
@@ -428,25 +437,79 @@ Additional Information:
 Reference:
 : This-Document
 
-## tcpSharedOptionExID32 Information Element {#sec-ex32}
+## tcpSharedOptionExID32 Information Element {#sec-tcpExID32}
 
 Name:
 : tcpSharedOptionExID32
 
 ElementID:
-: TBD10
+:  TBD10
 
 Description:
-: Any observed  4-byte Experiments IDs (ExIDs) in a shared
-  TCP option (Kind=253 or 254)  in a Flow.  The information is encoded in a set of
-  32-bit fields. Each 32-bit field carries an observed 4-byte ExID in a
+: Reports an observed 4-byte ExID in a shared
+  TCP option (Kind=253 or 254) in a Flow.
+
+Abstract Data Type:
+:  unsigned32
+
+Data Type Semantics:
+:  identifier
+
+Additional Information:
+: See assigned ExIDs at {{IANA-TCP-EXIDs}}.
+: See {{!RFC9293}} for the general definition of TCP options.
+: See {{!RFC6994}} for the shared use of experimental TCP Options.
+
+Reference:
+: This-Document
+
+## tcpSharedOptionExID16List Information Element {#sec-ex}
+
+Name:
+: tcpSharedOptionExID16List
+
+ElementID:
+: TBD11
+
+Description:
+: Reports observed 2-byte ExIDs in shared
+  TCP options (Kind=253 or 254) in a Flow.
+: A basicList of tcpSharedOptionExID16 Information Elements in which each tcpSharedOptionExID16 Information Element carries an observed 2-byte ExID in a
   shared option.
 
 Abstract Data Type:
-: octetArray
+: basicList
 
 Data Type Semantics:
-: identifier
+: list
+
+Additional Information:
+: See assigned ExIDs at {{IANA-TCP-EXIDs}}.
+: See {{!RFC9293}} for the general definition of TCP options.
+: See {{!RFC6994}} for the shared use of experimental TCP Options.
+
+Reference:
+: This-Document
+
+## tcpSharedOptionExID32List Information Element {#sec-ex32}
+
+Name:
+: tcpSharedOptionExID32List
+
+ElementID:
+: TBD12
+
+Description:
+: Reports observed 4-byte ExIDs in shared
+  TCP options (Kind=253 or 254) in a Flow.
+: A basicList of tcpSharedOptionExID32 Information Elements in which each tcpSharedOptionExID32 Information Element carries an observed 4-byte ExID in a
+  shared option.
+
+Abstract Data Type:
+: basicList
+
+Data Type Semantics:
+: list
 
 Additional Information:
 : See assigned ExIDs at {{IANA-TCP-EXIDs}}.
@@ -460,23 +523,13 @@ Reference:
 
 ## IPv6 Extension Headers {#op-eh}
 
-The value of ipv6ExtensionHeadersFull IE should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
-
-If an implementation determines that an observed packet of a Flow includes an extension header (including an extension header that it does not support), then the exact observed code of that extension header MUST be echoed in the ipv6ExtensionHeaderTypeCountList IE ({{sec-v6count}}). How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Readers may refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate node that encounters an unknown Next Header type. It is out of the scope of this document to discuss those considerations.
-
-The ipv6ExtensionHeadersFull Information Element SHOULD NOT be exported if ipv6ExtensionHeaderTypeCountList Information Element is also present because of the overlapping scopes between these two IEs. If both IEs are present, then ipv6ExtensionHeaderTypeCountList Information Element takes precedence.
-
-Extension headers observed in a Flow with varying extension header chain SHOULD NOT be aggregated in the ipv6ExtensionHeadersFull Information Element if the ipv6ExtensionHeaderChainLengthList Information Element is also present. If both IEs are present, then ipv6ExtensionHeaderChainLengthList Information Element takes precedence.
-
-The ipv6ExtensionHeadersLimit IE ({{sec-v6limit}}) may or may not be present when the ipv6ExtensionHeadersChainLength IE ({{sec-v6aggr}}) is also present as these IEs are targeting distinct properties of extension headers handling.
+The ipv6ExtensionHeadersLimit IE may or may not be present when the ipv6ExtensionHeadersChainLength IE is also present as these IEs are targeting distinct properties of extension headers handling.
 
 ## TCP Options {#op-tcp}
 
-The value of tcpOptionsFull IE should be encoded in fewer octets as per the guidelines in {{Section 6.2 of !RFC7011}}.
+Implementations of tcpSharedOptionExID16, tcpSharedOptionExID32, tcpSharedOptionExID16List, and tcpSharedOptionExID32List IEs are assumed to be provided with a list of valid ExIDs {{IANA-TCP-EXIDs}}. How that list is maintained is implementation-specific. Absent that list, an implementation can't autonomously determine whether an ExID is present and, if so, whether it is 2- or 4-byte length.
 
-Implementations of tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs are assumed to be provided with a list of valid Experiment IDs {{IANA-TCP-EXIDs}}. How that list is maintained is implementation-specific. Absent that list, an implementation can't autonomously determine whether an ExID is present and, if so, whether it is 2- or 4-byte length.
-
-If a TCP Flow contains packets with a mix of 2-byte and 4-byte Experiment IDs, the same Template Record is used with both tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs.
+If a TCP Flow contains packets with a mix of 2-byte and 4-byte ExIDs, the same Template Record is used with both tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs.
 
 # Examples {#sec-examples}
 
@@ -527,30 +580,27 @@ MSB                                                      LSB
 ~~~~
 {: #ex-tcp1 title="An Example of TCP Options" artwork-align="center"}
 
-
-Let us consider a TCP Flow in which shared options with ExIDs 0x0348 (HOST_ID) {{?RFC7974}}, 0x454E	(TCP-ENO) {{?RFC8547}}, and 0xE2D4C3D9	(Shared Memory communications over RMDA protocol)	{{?RFC7609}} are observed. As shown in {{ex-tcp2}}, two TCP shared IEs will be used to report these observed ExIDs:
-
-1. The tcpSharedOptionExID16 IE set to 0x0348454E to report observed 2-byte ExIDs:  HOST_ID and TCP-ENO ExIDs.
-2. The tcpSharedOptionExID32 IE set to 0xE2D4C3D9 to report the only observed 4-byte ExID.
+Let us consider a TCP Flow in which shared options with ExIDs 0x0348 (HOST_ID) {{?RFC7974}}, 0x454E	(TCP-ENO) {{?RFC8547}}, and 0xE2D4C3D9	(Shared Memory communications over RMDA protocol)	{{?RFC7609}} are observed. {{ex-tcp2}} shows an excerpt of the Data Set encoding with a focus on the tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs. The meaning of the fields is defined in {{!RFC6313}}.
 
 ~~~~
-tcpSharedOptionExID16 IE:
-
-MSB                                                          LSB
-                     1                   2                   3
+ MSB                                                          LSB
+ 0                   1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+:                           ...                                 :
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|      255      |        List Length = 9        |semantic=allof |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|tcpSharedOptionExID16 = TBD9   |         Field Length = 2      |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |              0x0348           |             0x454E            |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-tcpSharedOptionExID32 IE:
-
-MSB                                                          LSB
-                     1                   2                   3
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+|      255      |        List Length = 9        |semantic=allof |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|tcpSharedOptionExID32 = TBD10  |         Field Length = 4      |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                           0xE2D4C3D9                          |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+:                           ...                                 :
 ~~~~
 {: #ex-tcp2 title="Example of TCP Shared IEs" artwork-align="center"}
 
@@ -574,7 +624,7 @@ This document requests IANA to update the "IPFIX Information Elements" registry 
 
 IANA is also requested to update the reference of ipv6ExtensionHeaders IE (64) and tcpOptions IE (209) to point to this document.
 
-## New IPFIX Information Elements
+## IPFIX Information Elements
 
 This document requests IANA to add the following new IPFIX IEs to the "IPFIX Information Elements" registry under the "IP Flow Information Export (IPFIX) Entities" registry group {{IANA-IPFIX}}:
 
@@ -586,12 +636,14 @@ This document requests IANA to add the following new IPFIX IEs to the "IPFIX Inf
 |TBD5| ipv6ExtensionHeadersLimit|{{sec-v6limit}} of This-Document|
 |TBD6| ipv6ExtensionHeadersChainLength |{{sec-v6aggr}} of This-Document|
 |TBD7| ipv6ExtensionHeaderChainLengthList |{{sec-v6chain-list}} of This-Document|
-|TBD7| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
-|TBD8| tcpSharedOptionExID16|{{sec-ex}} of This-Document|
-|TBD9| tcpSharedOptionExID32|{{sec-ex32}} of This-Document|
+|TBD8| tcpOptionsFull|{{sec-tcpfull}} of This-Document|
+|TBD9| tcpSharedOptionExID16|{{sec-tcpExID16}} of This-Document|
+|TBD10| tcpSharedOptionExID32|{{sec-tcpExID32}} of This-Document|
+|TBD11| tcpSharedOptionExID16List|{{sec-ex}} of This-Document|
+|TBD12| tcpSharedOptionExID32List|{{sec-ex32}} of This-Document|
 {: #iana-new-ies title="New IPFIX Information Elements"}
 
-## New IPFIX Information Element Data Type
+## IPFIX Information Element Data Type
 
 This document requests IANA to add the following new abstract data type to the "IPFIX Information Element Data Types" registry under the "IP Flow Information Export (IPFIX) Entities" registry group {{IANA-IPFIX}}:
 
