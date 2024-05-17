@@ -544,7 +544,7 @@ MSB                                                      LSB
 ~~~~
 {: #ex-eh1 title="A First Example of EH/Bit Mappings in the ipv6ExtensionHeadersFull IE" artwork-align="center"}
 
-The leading zeros are dropped per the reduced-size encoding guidance. One octet is thus sufficient to report these observed options on the wire. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x01 ({{ex-eh1-wire}}). 
+The leading zeros are dropped per the reduced-size encoding guidance. One octet is thus sufficient to send these observed options on the wire. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x01 ({{ex-eh1-wire}}).
 
 ~~~~
 MSB           LSB
