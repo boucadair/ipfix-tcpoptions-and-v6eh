@@ -553,7 +553,7 @@ MSB           LSB
 |0|0|0|0|0|0|0|1|
 +-+-+-+-+-+-+-+-+
 ~~~~
-{: #ex-eh1-wire title="A First Example of ipv6ExtensionHeadersFull IE" artwork-align="center"}
+{: #ex-eh1-wire title="A First Example of ipv6ExtensionHeadersFull IE with Reduced-size Encoding" artwork-align="center"}
 
 {{ex-eh2}} provides another example of reported values in an ipv6ExtensionHeadersFull IE for an IPv6 Flow in which
 the	Destination Options (0), IPv6 Hop-by-Hop Options (1), and Routing (5) headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23.
@@ -565,11 +565,11 @@ MSB           LSB
 |0|0|1|0|0|0|1|1|
 +-+-+-+-+-+-+-+-+
 ~~~~
-{: #ex-eh2 title="A Second Example of Extension Headers" artwork-align="center"}
+{: #ex-eh2 title="A Second Example of ipv6ExtensionHeadersFull IE with Reduced-size Encoding" artwork-align="center"}
 
 ## TCP Options
 
-### Reduce-size Encoding
+### Reduced-size Encoding
 
 Given TCP Kind allocation practices and the option mapping defined in {{sec-tcpfull}}, fewer octets are likely to be used for Flows with common TCP options.
 
@@ -583,9 +583,9 @@ MSB                                                      LSB
 |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|0|0|1|1|0|1|
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+-+
 ~~~~
-{: #ex-tcp1 title="An Example of TCP Options" artwork-align="center"}
+{: #ex-tcp1 title="An Example of TCP Options / Bit Mappings in a tcpOptionsFull IE" artwork-align="center"}
 
-One octet is sufficient to report these observed options on the wire. Concretely, the tcpOptionsFull IE will be set to 0x0D ({{ex-tcp1-wire}}).
+One octet is sufficient to report these observed options. Concretely, the tcpOptionsFull IE will be set to 0x0D ({{ex-tcp1-wire}}).
 
 ~~~~
 MSB           LSB
@@ -594,7 +594,7 @@ MSB           LSB
 |0|0|0|0|1|1|0|1|
 +-+-+-+-+-+-+-+-+
 ~~~~
-{: #ex-tcp1-wire title="An Example of TCP Options" artwork-align="center"}
+{: #ex-tcp1-wire title="An Example of tcpOptionsFull IE with Reduced-size Encdoing" artwork-align="center"}
 
 ### Shared Options
 
