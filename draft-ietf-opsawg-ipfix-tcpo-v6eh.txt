@@ -87,7 +87,7 @@ Table of Contents
    6.  Examples
      6.1.  IPv6 Extension Headers
      6.2.  TCP Options
-       6.2.1.  Reduce-size Encoding
+       6.2.1.  Reduced-size Encoding
        6.2.2.  Shared Options
    7.  Security Considerations
    8.  IANA Considerations
@@ -669,7 +669,8 @@ Table of Contents
                              |0|0|0|0|0|0|0|1|
                              +-+-+-+-+-+-+-+-+
 
-          Figure 2: A First Example of ipv6ExtensionHeadersFull IE
+       Figure 2: A First Example of ipv6ExtensionHeadersFull IE with
+                           Reduced-size Encoding
 
    Figure 3 provides another example of reported values in an
    ipv6ExtensionHeadersFull IE for an IPv6 Flow in which the Destination
@@ -683,11 +684,12 @@ Table of Contents
                              |0|0|1|0|0|0|1|1|
                              +-+-+-+-+-+-+-+-+
 
-              Figure 3: A Second Example of Extension Headers
+       Figure 3: A Second Example of ipv6ExtensionHeadersFull IE with
+                           Reduced-size Encoding
 
 6.2.  TCP Options
 
-6.2.1.  Reduce-size Encoding
+6.2.1.  Reduced-size Encoding
 
    Given TCP Kind allocation practices and the option mapping defined in
    Section 4.1, fewer octets are likely to be used for Flows with common
@@ -704,9 +706,10 @@ Table of Contents
        |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|0|0|1|1|0|1|
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+-+
 
-                    Figure 4: An Example of TCP Options
+          Figure 4: An Example of TCP Options / Bit Mappings in a
+                             tcpOptionsFull IE
 
-   One octet is sufficient to report these observed options on the wire.
+   One octet is sufficient to report these observed options.
    Concretely, the tcpOptionsFull IE will be set to 0x0D (Figure 5).
 
                              MSB           LSB
@@ -715,7 +718,7 @@ Table of Contents
                              |0|0|0|0|1|1|0|1|
                              +-+-+-+-+-+-+-+-+
 
-                    Figure 5: An Example of TCP Options
+    Figure 5: An Example of tcpOptionsFull IE with Reduced-size Encdoing
 
 6.2.2.  Shared Options
 

@@ -1199,7 +1199,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-tcp-options" class="internal xref">TCP Options</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.1">
-                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="auto internal xref">6.2.1</a>.  <a href="#name-reduce-size-encoding" class="internal xref">Reduce-size Encoding</a></p>
+                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="auto internal xref">6.2.1</a>.  <a href="#name-reduced-size-encoding" class="internal xref">Reduced-size Encoding</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.2">
                     <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="auto internal xref">6.2.2</a>.  <a href="#name-shared-options" class="internal xref">Shared Options</a></p>
@@ -2220,12 +2220,12 @@ MSB           LSB
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-a-first-example-of-ipv6exte" class="selfRef">A First Example of ipv6ExtensionHeadersFull IE</a>
+<a href="#name-a-first-example-of-ipv6exte" class="selfRef">A First Example of ipv6ExtensionHeadersFull IE with Reduced-size Encoding</a>
           </figcaption></figure>
 </div>
 <p id="section-6.1-5"><a href="#ex-eh2" class="auto internal xref">Figure 3</a> provides another example of reported values in an ipv6ExtensionHeadersFull IE for an IPv6 Flow in which
 the     Destination Options (0), IPv6 Hop-by-Hop Options (1), and Routing (5) headers are observed. One octet is sufficient to report these observed options. Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23.<a href="#section-6.1-5" class="pilcrow">¶</a></p>
-<span id="name-a-second-example-of-extensi"></span><div id="ex-eh2">
+<span id="name-a-second-example-of-ipv6ext"></span><div id="ex-eh2">
 <figure id="figure-3">
           <div class="alignCenter art-text artwork" id="section-6.1-6.1">
 <pre>
@@ -2237,7 +2237,7 @@ MSB           LSB
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-a-second-example-of-extensi" class="selfRef">A Second Example of Extension Headers</a>
+<a href="#name-a-second-example-of-ipv6ext" class="selfRef">A Second Example of ipv6ExtensionHeadersFull IE with Reduced-size Encoding</a>
           </figcaption></figure>
 </div>
 </section>
@@ -2247,14 +2247,14 @@ MSB           LSB
         <h3 id="name-tcp-options">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-tcp-options" class="section-name selfRef">TCP Options</a>
         </h3>
-<div id="reduce-size-encoding">
+<div id="reduced-size-encoding">
 <section id="section-6.2.1">
-          <h4 id="name-reduce-size-encoding">
-<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-reduce-size-encoding" class="section-name selfRef">Reduce-size Encoding</a>
+          <h4 id="name-reduced-size-encoding">
+<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-reduced-size-encoding" class="section-name selfRef">Reduced-size Encoding</a>
           </h4>
 <p id="section-6.2.1-1">Given TCP Kind allocation practices and the option mapping defined in <a href="#sec-tcpfull" class="auto internal xref">Section 4.1</a>, fewer octets are likely to be used for Flows with common TCP options.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.2.1-2"><a href="#ex-tcp1" class="auto internal xref">Figure 4</a> shows an example of Kind/bit mappings in a tcpOptionsFull IE for a TCP Flow in which End of Option List (0), Maximum Segment Size (2), and Window Scale (3) options are observed.<a href="#section-6.2.1-2" class="pilcrow">¶</a></p>
-<span id="name-an-example-of-tcp-options"></span><div id="ex-tcp1">
+<span id="name-an-example-of-tcp-options-b"></span><div id="ex-tcp1">
 <figure id="figure-4">
             <div class="alignCenter art-text artwork" id="section-6.2.1-3.1">
 <pre>
@@ -2267,11 +2267,11 @@ MSB                                                      LSB
 </pre>
 </div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-an-example-of-tcp-options" class="selfRef">An Example of TCP Options</a>
+<a href="#name-an-example-of-tcp-options-b" class="selfRef">An Example of TCP Options / Bit Mappings in a tcpOptionsFull IE</a>
             </figcaption></figure>
 </div>
-<p id="section-6.2.1-4">One octet is sufficient to report these observed options on the wire. Concretely, the tcpOptionsFull IE will be set to 0x0D (<a href="#ex-tcp1-wire" class="auto internal xref">Figure 5</a>).<a href="#section-6.2.1-4" class="pilcrow">¶</a></p>
-<span id="name-an-example-of-tcp-options-2"></span><div id="ex-tcp1-wire">
+<p id="section-6.2.1-4">One octet is sufficient to report these observed options. Concretely, the tcpOptionsFull IE will be set to 0x0D (<a href="#ex-tcp1-wire" class="auto internal xref">Figure 5</a>).<a href="#section-6.2.1-4" class="pilcrow">¶</a></p>
+<span id="name-an-example-of-tcpoptionsful"></span><div id="ex-tcp1-wire">
 <figure id="figure-5">
             <div class="alignCenter art-text artwork" id="section-6.2.1-5.1">
 <pre>
@@ -2283,7 +2283,7 @@ MSB           LSB
 </pre>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
-<a href="#name-an-example-of-tcp-options-2" class="selfRef">An Example of TCP Options</a>
+<a href="#name-an-example-of-tcpoptionsful" class="selfRef">An Example of tcpOptionsFull IE with Reduced-size Encdoing</a>
             </figcaption></figure>
 </div>
 </section>
