@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 17 November 2024                                         Huawei
-                                                             16 May 2024
+Expires: 18 November 2024                                         Huawei
+                                                             17 May 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 November 2024.
+   This Internet-Draft will expire on 18 November 2024.
 
 Copyright Notice
 
@@ -84,11 +84,11 @@ Table of Contents
      4.4.  tcpSharedOptionExID16List Information Element
      4.5.  tcpSharedOptionExID32List Information Element
    5.  Operational Considerations
-     5.1.  IPv6 Extension Headers
-     5.2.  TCP Options
    6.  Examples
      6.1.  IPv6 Extension Headers
      6.2.  TCP Options
+       6.2.1.  Reduce-size Encoding
+       6.2.2.  Shared Options
    7.  Security Considerations
    8.  IANA Considerations
      8.1.  Deprecate ipv6ExtensionHeaders and tcpOptions Information
@@ -222,8 +222,8 @@ Table of Contents
 
    Data Type Semantics:  identifier
 
-   Additional Information:  See [IANA-EH] for assigned extension header
-      types.
+   Additional Information:  See the IPv6 Extension Header Types registry
+      at [IANA-EH].
 
       See Section 4 of [RFC8200] for the general definition of IPv6
       extension headers.
@@ -246,8 +246,8 @@ Table of Contents
 
    Data Type Semantics:  totalCounter
 
-   Additional Information:  See [IANA-EH] for assigned extension header
-      types.
+   Additional Information:  See the IPv6 Extension Header Types registry
+      at [IANA-EH].
 
       See Section 4 of [RFC8200] for the general definition of IPv6
       extension headers.
@@ -305,10 +305,10 @@ Table of Contents
 
    Data Type Semantics:  flags
 
-   Additional Information:  See the assigned bits to each IPv6 extension
-      header type in [NEW_IPFIX_IPv6EH_SUBREGISTRY].
+   Additional Information:  See the ipv6ExtensionHeaders Bits registry
+      at [NEW_IPFIX_IPv6EH_SUBREGISTRY].
 
-      See [IANA-EH] for assigned extension header types.
+      See the IPv6 Extension Header Types registry at [IANA-EH].
 
       See Section 4 of [RFC8200] for the general definition of IPv6
       extension headers.
@@ -369,8 +369,8 @@ Table of Contents
 
    Data Type Semantics:  list
 
-   Additional Information:  See the assigned IPv6 extension header types
-      in [IANA-EH].
+   Additional Information:  See the IPv6 Extension Header Types registry
+      at [IANA-EH].
 
       See [RFC8200] for the general definition of IPv6 extension
       headers.
@@ -469,8 +469,8 @@ Table of Contents
 
    Data Type Semantics:  list
 
-   Additional Information:  See the assigned IPv6 extension header types
-      in [IANA-EH].
+   Additional Information:  See the IPv6 Extension Header Types registry
+      at [IANA-EH].
 
       See [RFC8200] for the general definition of IPv6 extension
       headers.
@@ -509,17 +509,18 @@ Table of Contents
       option (Kind=253 or 254) is observed in a Flow.  The presence of
       tcpSharedOptionExID16List or tcpSharedOptionExID32List IEs takes
       precedence over setting the corresponding bits in the
-      tcpOptionsFull IE for the same Flow.  In order to make use of the
-      reduced-size encoding in the presence of tcpSharedOptionExID16List
-      or tcpSharedOptionExID32List IEs, the Exporter MUST NOT set to 1
-      the shared TCP options (Kind=253 or 254) flags of the
-      tcpOptionsFull IE that is reported for the same Flow.
+      tcpOptionsFull IE for the same Flow.  In order to optimize the use
+      of the reduced-size encoding in the presence of
+      tcpSharedOptionExID16List or tcpSharedOptionExID32List IEs, the
+      Exporter MUST NOT set to 1 the shared TCP options (Kind=253 or
+      254) flags of the tcpOptionsFull IE that is reported for the same
+      Flow.
 
    Abstract Data Type:  unsigned256
 
    Data Type Semantics:  flags
 
-   Additional Information:  See the assigned TCP option Kinds at
+   Additional Information:  See the TCP Option Kind Numbers registry at
       [IANA-TCP].
 
       See [RFC9293] for the general definition of TCP options.
@@ -539,7 +540,8 @@ Table of Contents
 
    Data Type Semantics:  identifier
 
-   Additional Information:  See assigned ExIDs at [IANA-TCP-EXIDs].
+   Additional Information:  See the TCP Experimental Option Experiment
+      Identifiers (TCP ExIDs) registry at [IANA-TCP-EXIDs].
 
       See [RFC9293] for the general definition of TCP options.
 
@@ -560,7 +562,8 @@ Table of Contents
 
    Data Type Semantics:  identifier
 
-   Additional Information:  See assigned ExIDs at [IANA-TCP-EXIDs].
+   Additional Information:  See the TCP Experimental Option Experiment
+      Identifiers (TCP ExIDs) registry at [IANA-TCP-EXIDs].
 
       See [RFC9293] for the general definition of TCP options.
 
@@ -585,7 +588,8 @@ Table of Contents
 
    Data Type Semantics:  list
 
-   Additional Information:  See assigned ExIDs at [IANA-TCP-EXIDs].
+   Additional Information:  See the TCP Experimental Option Experiment
+      Identifiers (TCP ExIDs) registry at [IANA-TCP-EXIDs].
 
       See [RFC9293] for the general definition of TCP options.
 
@@ -610,7 +614,8 @@ Table of Contents
 
    Data Type Semantics:  list
 
-   Additional Information:  See assigned ExIDs at [IANA-TCP-EXIDs].
+   Additional Information:  See the TCP Experimental Option Experiment
+      Identifiers (TCP ExIDs) registry at [IANA-TCP-EXIDs].
 
       See [RFC9293] for the general definition of TCP options.
 
@@ -619,14 +624,6 @@ Table of Contents
    Reference:  This-Document
 
 5.  Operational Considerations
-
-5.1.  IPv6 Extension Headers
-
-   The ipv6ExtensionHeadersLimit IE may or may not be present when the
-   ipv6ExtensionHeadersChainLength IE is also present as these IEs are
-   targeting distinct properties of extension headers handling.
-
-5.2.  TCP Options
 
    Implementations of tcpSharedOptionExID16, tcpSharedOptionExID32,
    tcpSharedOptionExID16List, and tcpSharedOptionExID32List IEs are
@@ -646,11 +643,9 @@ Table of Contents
 
 6.1.  IPv6 Extension Headers
 
-   Figure 1 provides an example of reported values in an
+   Figure 1 provides an example of EH/bit mappings in an
    ipv6ExtensionHeadersFull IE for an IPv6 Flow in which only the IPv6
-   Destination Options (0) header is observed.  One octet is sufficient
-   to report these observed options.  Concretely, the
-   ipv6ExtensionHeadersFull IE will be set to 0x01.  The bits are set
+   Destination Options (0) header is observed.  The bits are set
    following the table provided in Section 8.4.1.
 
        MSB                                                      LSB
@@ -660,34 +655,47 @@ Table of Contents
        |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|0|0|0|0|0|1|
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+-+
 
-               Figure 1: A First Example of Extension Headers
+            Figure 1: A First Example of EH/Bit Mappings in the
+                        ipv6ExtensionHeadersFull IE
 
-   Figure 2 provides another example of reported values in an
+   The leading zeros are dropped per the reduced-size encoding guidance.
+   One octet is thus sufficient to send these observed options on the
+   wire.  Concretely, the ipv6ExtensionHeadersFull IE will be set to
+   0x01 (Figure 2).
+
+                             MSB           LSB
+                              0 1 2 3 4 5 6 7
+                             +-+-+-+-+-+-+-+-+
+                             |0|0|0|0|0|0|0|1|
+                             +-+-+-+-+-+-+-+-+
+
+          Figure 2: A First Example of ipv6ExtensionHeadersFull IE
+
+   Figure 3 provides another example of reported values in an
    ipv6ExtensionHeadersFull IE for an IPv6 Flow in which the Destination
    Options (0), IPv6 Hop-by-Hop Options (1), and Routing (5) headers are
    observed.  One octet is sufficient to report these observed options.
    Concretely, the ipv6ExtensionHeadersFull IE will be set to 0x23.
 
-       MSB                                                      LSB
-                            1                          25
-        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 ... 8 9 0 1 2 3 4 5
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+-+
-       |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|1|0|0|0|1|1|
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+-+
+                             MSB           LSB
+                              0 1 2 3 4 5 6 7
+                             +-+-+-+-+-+-+-+-+
+                             |0|0|1|0|0|0|1|1|
+                             +-+-+-+-+-+-+-+-+
 
-              Figure 2: A Second Example of Extension Headers
+              Figure 3: A Second Example of Extension Headers
 
 6.2.  TCP Options
+
+6.2.1.  Reduce-size Encoding
 
    Given TCP Kind allocation practices and the option mapping defined in
    Section 4.1, fewer octets are likely to be used for Flows with common
    TCP options.
 
-   Figure 3 shows an example of reported values in a tcpOptionsFull IE
+   Figure 4 shows an example of Kind/bit mappings in a tcpOptionsFull IE
    for a TCP Flow in which End of Option List (0), Maximum Segment Size
-   (2), and Window Scale (3) options are observed.  One octet is
-   sufficient to report these observed options.  Concretely, the
-   tcpOptionsFull IE will be set to 0x0D.
+   (2), and Window Scale (3) options are observed.
 
        MSB                                                      LSB
                             1                          25
@@ -696,12 +704,25 @@ Table of Contents
        |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|0|0|1|1|0|1|
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+-+
 
-                    Figure 3: An Example of TCP Options
+                    Figure 4: An Example of TCP Options
+
+   One octet is sufficient to report these observed options on the wire.
+   Concretely, the tcpOptionsFull IE will be set to 0x0D (Figure 5).
+
+                             MSB           LSB
+                              0 1 2 3 4 5 6 7
+                             +-+-+-+-+-+-+-+-+
+                             |0|0|0|0|1|1|0|1|
+                             +-+-+-+-+-+-+-+-+
+
+                    Figure 5: An Example of TCP Options
+
+6.2.2.  Shared Options
 
    Let us consider a TCP Flow in which shared options with ExIDs 0x0348
    (HOST_ID) [RFC7974], 0x454E (TCP-ENO) [RFC8547], and 0xE2D4C3D9
    (Shared Memory communications over RMDA protocol) [RFC7609] are
-   observed.  Figure 4 shows an excerpt of the Data Set encoding with a
+   observed.  Figure 6 shows an excerpt of the Data Set encoding with a
    focus on the tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs.
    The meaning of the fields is defined in [RFC6313].
 
@@ -724,7 +745,7 @@ Table of Contents
      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      :                           ...                                 :
 
-                    Figure 4: Example of TCP Shared IEs
+                    Figure 6: Example of TCP Shared IEs
 
 7.  Security Considerations
 
