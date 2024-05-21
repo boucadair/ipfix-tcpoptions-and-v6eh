@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 18 November 2024                                         Huawei
-                                                             17 May 2024
+Expires: 22 November 2024                                         Huawei
+                                                             21 May 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 November 2024.
+   This Internet-Draft will expire on 22 November 2024.
 
 Copyright Notice
 
@@ -917,30 +917,24 @@ Table of Contents
    | 6   | FRA1  | 44       | Fragmentation header -  | This-Document |
    |     |       |          | not first fragment      |               |
    +-----+-------+----------+-------------------------+---------------+
-   | 7   |       |          | Unassigned              |               |
-   | to  |       |          |                         |               |
-   | 11  |       |          |                         |               |
+   | 7   | MOB   | 135      | Mobility Header         | This-Document |
    +-----+-------+----------+-------------------------+---------------+
-   | 12  | MOB   | 135      | Mobility Header         | This-Document |
-   +-----+-------+----------+-------------------------+---------------+
-   | 13  | ESP   | 50       | Encapsulating Security  | This-Document |
+   | 8   | ESP   | 50       | Encapsulating Security  | This-Document |
    |     |       |          | Payload                 |               |
    +-----+-------+----------+-------------------------+---------------+
-   | 14  | AH    | 51       | Authentication Header   | This-Document |
+   | 9   | AH    | 51       | Authentication Header   | This-Document |
    +-----+-------+----------+-------------------------+---------------+
-   | 15  |       |          | Unassigned              |               |
+   | 10  | HIP   | 139      | Host Identity Protocol  | This-Document |
    +-----+-------+----------+-------------------------+---------------+
-   | 16  | HIP   | 139      | Host Identity Protocol  | This-Document |
+   | 11  | SHIM6 | 140      | Shim6 Protocol          | This-Document |
    +-----+-------+----------+-------------------------+---------------+
-   | 17  | SHIM6 | 140      | Shim6 Protocol          | This-Document |
-   +-----+-------+----------+-------------------------+---------------+
-   | 18  |       | 253      | Use for experimentation | This-Document |
+   | 12  |       | 253      | Use for experimentation | This-Document |
    |     |       |          | and testing             |               |
    +-----+-------+----------+-------------------------+---------------+
-   | 19  |       | 254      | Use for experimentation | This-Document |
+   | 13  |       | 254      | Use for experimentation | This-Document |
    |     |       |          | and testing             |               |
    +-----+-------+----------+-------------------------+---------------+
-   | 20  |       |          | Unassigned              |               |
+   | 14  |       |          | Unassigned              |               |
    | to  |       |          |                         |               |
    | 255 |       |          |                         |               |
    +-----+-------+----------+-------------------------+---------------+
@@ -953,10 +947,16 @@ Table of Contents
    It is suggested that multiple designated experts be appointed for
    registry change requests.
 
+   Designated experts are solicited only for changes that are not
+   covered by the automatic mirroring described above.  For example, a
+   registration may request two bits for a new EH to cover specific
+   behaviors or uses of that EH.
+
    Criteria that should be applied by the designated experts include
    determining whether the proposed registration duplicates existing
-   entries and whether the registration description is clear and fits
-   the purpose of this registry.
+   entries, whether the exception to the automatic mirroring procedure
+   is justified, and whether the registration description is clear and
+   fits the purpose of this registry.
 
    Within the review period, the designated experts will either approve
    or deny the registration request, communicating this decision to the
