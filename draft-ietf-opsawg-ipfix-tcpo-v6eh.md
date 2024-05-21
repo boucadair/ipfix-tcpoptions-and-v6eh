@@ -79,7 +79,7 @@ This document specifies new IP Flow Information Export (IPFIX) {{!RFC7011}} Info
 
 The specification of the ipv6ExtensionHeaders IPFIX IE (64) does not:
 
-- Cover the full extension headers' range ({{Section 4 of !RFC8200}}).
+- Cover the full extension headers' range defined in the IPv6 specification ({{Section 4 of !RFC8200}}).
 - Specify the procedure to follow when all bits are exhausted.
 - Specify a means to export the order and the number of occurrences of a given extension header.
 - Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in the IPv6 Extension Header Types registry {{IANA-EH}}. Only a frozen set of extension headers can be exported using the ipv6ExtensionHeaders IE. For example, the ipv6ExtensionHeaders IE can't report some IPv6 EHs, specifically EHs for Host Identity Protocol (139), Shim6 Protocol (140) or extension headers for experimentation and testing.
@@ -111,7 +111,7 @@ This specification deprecates the tcpOptions IE in favor of the new IEs defined 
 
 This document uses the IPFIX-specific terminology (Information Element, Template Record,
    Flow, etc.) defined in
-   {{Section 2 of !RFC7011}}. As in {{!RFC7011}}, these IPFIX-specific terms
+   {{Section 2 of !RFC7011}}. As in the base IPFIX specification {{!RFC7011}}, these IPFIX-specific terms
    have the first letter of a word capitalized.
 
 Also, the document uses the terms defined in IPv6 {{!RFC8200}} and TCP {{!RFC9293}} specifications.
