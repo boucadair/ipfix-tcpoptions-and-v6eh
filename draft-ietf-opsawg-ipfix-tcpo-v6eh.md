@@ -696,7 +696,7 @@ The initial values of this registry are provided in {{iana-new-eh}}.
 |0  | DST  |60              |Destination Options for IPv6|This-Document|
 |1  |HOP   |0               |IPv6 Hop-by-Hop Options      |This-Document|
 |2  | NoNxt|59              |No Next Header for IPv6     |This-Document|
-|3  |UNK   |                |Unknown Layer 4 header (compressed, encrypted, not supported)|This-Document|
+|3  |UNK   |                |Unknown extension header |This-Document|
 |4  | FRA0 |44              |Fragment header - first fragment    |This-Document|
 |5  |RH    |43              |Routing header                      |This-Document|
 |6  |FRA1  |44              |Fragmentation header - not first fragment|This-Document|
