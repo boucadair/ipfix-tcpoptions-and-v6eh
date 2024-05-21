@@ -118,7 +118,8 @@ Table of Contents
 
    The specification of the ipv6ExtensionHeaders IPFIX IE (64) does not:
 
-   *  Cover the full extension headers' range (Section 4 of [RFC8200]).
+   *  Cover the full extension headers' range defined in the IPv6
+      specification (Section 4 of [RFC8200]).
 
    *  Specify the procedure to follow when all bits are exhausted.
 
@@ -187,8 +188,8 @@ Table of Contents
 
    This document uses the IPFIX-specific terminology (Information
    Element, Template Record, Flow, etc.) defined in Section 2 of
-   [RFC7011].  As in [RFC7011], these IPFIX-specific terms have the
-   first letter of a word capitalized.
+   [RFC7011].  As in the base IPFIX specification [RFC7011], these
+   IPFIX-specific terms have the first letter of a word capitalized.
 
    Also, the document uses the terms defined in IPv6 [RFC8200] and TCP
    [RFC9293] specifications.
