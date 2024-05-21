@@ -905,9 +905,8 @@ Table of Contents
    +-----+-------+----------+-------------------------+---------------+
    | 2   | NoNxt | 59       | No Next Header for IPv6 | This-Document |
    +-----+-------+----------+-------------------------+---------------+
-   | 3   | UNK   |          | Unknown Layer 4 header  | This-Document |
-   |     |       |          | (compressed, encrypted, |               |
-   |     |       |          | not supported)          |               |
+   | 3   | UNK   |          | Unknown extension       | This-Document |
+   |     |       |          | header                  |               |
    +-----+-------+----------+-------------------------+---------------+
    | 4   | FRA0  | 44       | Fragment header - first | This-Document |
    |     |       |          | fragment                |               |
