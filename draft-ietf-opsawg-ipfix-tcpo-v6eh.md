@@ -700,23 +700,23 @@ The initial values of this registry are provided in {{iana-new-eh}}.
 |4  | FRA0 |44              |Fragment header - first fragment    |This-Document|
 |5  |RH    |43              |Routing header                      |This-Document|
 |6  |FRA1  |44              |Fragmentation header - not first fragment|This-Document|
-|7 to 11|  |                | Unassigned                         | |
-|12 |MOB   |135             |Mobility Header                     |This-Document|
-|13 |ESP   |50              |Encapsulating Security Payload      |This-Document|
-|14 |AH    |51              |Authentication Header               |This-Document|
-|15 |      |                | Unassigned                         |             |
-|16 |HIP   |139             |Host Identity Protocol              |This-Document|
-|17 |SHIM6 |140             |Shim6 Protocol                      |This-Document|
-|18 |      |253             | Use for experimentation and testing|This-Document|
-|19 |      |254             | Use for experimentation and testing|This-Document|
-|20 to 255|  |             | Unassigned                         | |
+|7 |MOB   |135             |Mobility Header                     |This-Document|
+|8 |ESP   |50              |Encapsulating Security Payload      |This-Document|
+|9 |AH    |51              |Authentication Header               |This-Document|
+|10 |HIP   |139             |Host Identity Protocol              |This-Document|
+|11 |SHIM6 |140             |Shim6 Protocol                      |This-Document|
+|12 |      |253             | Use for experimentation and testing|This-Document|
+|13 |      |254             | Use for experimentation and testing|This-Document|
+|14 to 255|  |             | Unassigned                         | |
 {: #iana-new-eh title="Initial Values of the IPv6 Extension Headers IPFIX Subregistry"}
 
 ### Guidelines for the Designated Experts {#sec-de}
 
 It is suggested that multiple designated experts be appointed for registry change requests.
 
-Criteria that should be applied by the designated experts include determining whether the proposed registration duplicates existing entries and whether the registration description is clear and fits the purpose of this registry.
+Designated experts are solicited only for changes that are not covered by the automatic mirroring described above. For example, a registration may request two bits for a new EH to cover specific behaviors or uses of that EH.
+
+Criteria that should be applied by the designated experts include determining whether the proposed registration duplicates existing entries, whether the exception to the automatic mirroring procedure is justified, and whether the registration description is clear and fits the purpose of this registry.
 
 Within the review period, the designated experts will either approve or deny the registration request, communicating this decision to the IANA. Denials should include an explanation and, if applicable, suggestions as to how to make the request successful.
 
