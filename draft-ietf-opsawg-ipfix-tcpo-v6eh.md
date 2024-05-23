@@ -211,7 +211,7 @@ Description:
 
 : The ipv6ExtensionHeadersFull Information Element MUST NOT be exported if ipv6ExtensionHeaderTypeCountList Information Element is also present because of the overlapping scopes between these two IEs.
 
-: The value of ipv6ExtensionHeadersFull IE is encoded in fewer octets per the guidelines in {{Section 6.2 of !RFC7011}}.
+: The value of ipv6ExtensionHeadersFull IE may be encoded in fewer octets per the guidelines in {{Section 6.2 of !RFC7011}}.
 
 
 Abstract Data Type:
@@ -394,7 +394,7 @@ Description:
   an observer to export any observed TCP option even if it does support
   that option and without requiring updating a mapping table.
 
-: The value of tcpOptionsFull IE is encoded in fewer octets per the guidelines in {{Section 6.2 of !RFC7011}}.
+: The value of tcpOptionsFull IE may be encoded in fewer octets per the guidelines in {{Section 6.2 of !RFC7011}}.
 
 : The presence of tcpSharedOptionExID16List or tcpSharedOptionExID32List IEs is an indication that  a shared TCP option (Kind=253 or 254) is observed in a Flow. The presence of tcpSharedOptionExID16List or tcpSharedOptionExID32List IEs takes precedence over setting the corresponding bits in the tcpOptionsFull IE for the same Flow. In order to optimize the use of the reduced-size encoding in the presence of tcpSharedOptionExID16List or tcpSharedOptionExID32List IEs, the Exporter MUST NOT set to 1 the shared TCP options (Kind=253 or 254) flags of the tcpOptionsFull IE that is reported for the same Flow.
 
