@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 22 November 2024                                         Huawei
-                                                             21 May 2024
+Expires: 24 November 2024                                         Huawei
+                                                             23 May 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 November 2024.
+   This Internet-Draft will expire on 24 November 2024.
 
 Copyright Notice
 
@@ -299,7 +299,7 @@ Table of Contents
       is also present because of the overlapping scopes between these
       two IEs.
 
-      The value of ipv6ExtensionHeadersFull IE is encoded in fewer
+      The value of ipv6ExtensionHeadersFull IE may be encoded in fewer
       octets per the guidelines in Section 6.2 of [RFC7011].
 
    Abstract Data Type:  unsigned256
@@ -502,8 +502,8 @@ Table of Contents
       export any observed TCP option even if it does support that option
       and without requiring updating a mapping table.
 
-      The value of tcpOptionsFull IE is encoded in fewer octets per the
-      guidelines in Section 6.2 of [RFC7011].
+      The value of tcpOptionsFull IE may be encoded in fewer octets per
+      the guidelines in Section 6.2 of [RFC7011].
 
       The presence of tcpSharedOptionExID16List or
       tcpSharedOptionExID32List IEs is an indication that a shared TCP
