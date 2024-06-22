@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 18 November 2024                                         Huawei
-                                                             17 May 2024
+Expires: 24 December 2024                                         Huawei
+                                                            22 June 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 November 2024.
+   This Internet-Draft will expire on 24 December 2024.
 
 Copyright Notice
 
@@ -118,7 +118,8 @@ Table of Contents
 
    The specification of the ipv6ExtensionHeaders IPFIX IE (64) does not:
 
-   *  Cover the full extension headers' range (Section 4 of [RFC8200]).
+   *  Cover the full extension headers' range defined in the IPv6
+      specification (Section 4 of [RFC8200]).
 
    *  Specify the procedure to follow when all bits are exhausted.
 
@@ -187,8 +188,8 @@ Table of Contents
 
    This document uses the IPFIX-specific terminology (Information
    Element, Template Record, Flow, etc.) defined in Section 2 of
-   [RFC7011].  As in [RFC7011], these IPFIX-specific terms have the
-   first letter of a word capitalized.
+   [RFC7011].  As in the base IPFIX specification [RFC7011], these
+   IPFIX-specific terms have the first letter of a word capitalized.
 
    Also, the document uses the terms defined in IPv6 [RFC8200] and TCP
    [RFC9293] specifications.
@@ -298,7 +299,7 @@ Table of Contents
       is also present because of the overlapping scopes between these
       two IEs.
 
-      The value of ipv6ExtensionHeadersFull IE is encoded in fewer
+      The value of ipv6ExtensionHeadersFull IE may be encoded in fewer
       octets per the guidelines in Section 6.2 of [RFC7011].
 
    Abstract Data Type:  unsigned256
@@ -501,8 +502,8 @@ Table of Contents
       export any observed TCP option even if it does support that option
       and without requiring updating a mapping table.
 
-      The value of tcpOptionsFull IE is encoded in fewer octets per the
-      guidelines in Section 6.2 of [RFC7011].
+      The value of tcpOptionsFull IE may be encoded in fewer octets per
+      the guidelines in Section 6.2 of [RFC7011].
 
       The presence of tcpSharedOptionExID16List or
       tcpSharedOptionExID32List IEs is an indication that a shared TCP
@@ -687,6 +688,21 @@ Table of Contents
        Figure 3: A Second Example of ipv6ExtensionHeadersFull IE with
                            Reduced-size Encoding
 
+   Let us now consider an IPv6 Flow in which the following EH chain is
+   observed: Routing (5), Mobility (7), and Authentication (9) header.
+   Figure 4 shows the ipv6ExtensionHeadersFull IE (0x02A0) to reprot
+   this individual chain.
+
+                     MSB                          LSB
+                                          1
+                      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
+                     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+                     |0|0|0|0|0|0|1|0|1|0|1|0|0|0|0|0|
+                     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+      Figure 4: An Example of ipv6ExtensionHeadersFull IE Reported for
+                         an Extension Header Chain
+
 6.2.  TCP Options
 
 6.2.1.  Reduced-size Encoding
@@ -695,7 +711,7 @@ Table of Contents
    Section 4.1, fewer octets are likely to be used for Flows with common
    TCP options.
 
-   Figure 4 shows an example of Kind/bit mappings in a tcpOptionsFull IE
+   Figure 5 shows an example of Kind/bit mappings in a tcpOptionsFull IE
    for a TCP Flow in which End of Option List (0), Maximum Segment Size
    (2), and Window Scale (3) options are observed.
 
@@ -706,11 +722,11 @@ Table of Contents
        |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|0|0|1|1|0|1|
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+-+
 
-          Figure 4: An Example of TCP Options / Bit Mappings in a
+          Figure 5: An Example of TCP Options / Bit Mappings in a
                              tcpOptionsFull IE
 
    One octet is sufficient to report these observed options.
-   Concretely, the tcpOptionsFull IE will be set to 0x0D (Figure 5).
+   Concretely, the tcpOptionsFull IE will be set to 0x0D (Figure 6).
 
                              MSB           LSB
                               0 1 2 3 4 5 6 7
@@ -718,14 +734,14 @@ Table of Contents
                              |0|0|0|0|1|1|0|1|
                              +-+-+-+-+-+-+-+-+
 
-    Figure 5: An Example of tcpOptionsFull IE with Reduced-size Encdoing
+    Figure 6: An Example of tcpOptionsFull IE with Reduced-size Encdoing
 
 6.2.2.  Shared Options
 
    Let us consider a TCP Flow in which shared options with ExIDs 0x0348
    (HOST_ID) [RFC7974], 0x454E (TCP-ENO) [RFC8547], and 0xE2D4C3D9
    (Shared Memory communications over RMDA protocol) [RFC7609] are
-   observed.  Figure 6 shows an excerpt of the Data Set encoding with a
+   observed.  Figure 7 shows an excerpt of the Data Set encoding with a
    focus on the tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs.
    The meaning of the fields is defined in [RFC6313].
 
@@ -748,7 +764,7 @@ Table of Contents
      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      :                           ...                                 :
 
-                    Figure 6: Example of TCP Shared IEs
+                    Figure 7: Example of TCP Shared IEs
 
 7.  Security Considerations
 
@@ -905,9 +921,8 @@ Table of Contents
    +-----+-------+----------+-------------------------+---------------+
    | 2   | NoNxt | 59       | No Next Header for IPv6 | This-Document |
    +-----+-------+----------+-------------------------+---------------+
-   | 3   | UNK   |          | Unknown Layer 4 header  | This-Document |
-   |     |       |          | (compressed, encrypted, |               |
-   |     |       |          | not supported)          |               |
+   | 3   | UNK   |          | Unknown extension       | This-Document |
+   |     |       |          | header                  |               |
    +-----+-------+----------+-------------------------+---------------+
    | 4   | FRA0  | 44       | Fragment header - first | This-Document |
    |     |       |          | fragment                |               |
@@ -917,30 +932,24 @@ Table of Contents
    | 6   | FRA1  | 44       | Fragmentation header -  | This-Document |
    |     |       |          | not first fragment      |               |
    +-----+-------+----------+-------------------------+---------------+
-   | 7   |       |          | Unassigned              |               |
-   | to  |       |          |                         |               |
-   | 11  |       |          |                         |               |
+   | 7   | MOB   | 135      | Mobility Header         | This-Document |
    +-----+-------+----------+-------------------------+---------------+
-   | 12  | MOB   | 135      | Mobility Header         | This-Document |
-   +-----+-------+----------+-------------------------+---------------+
-   | 13  | ESP   | 50       | Encapsulating Security  | This-Document |
+   | 8   | ESP   | 50       | Encapsulating Security  | This-Document |
    |     |       |          | Payload                 |               |
    +-----+-------+----------+-------------------------+---------------+
-   | 14  | AH    | 51       | Authentication Header   | This-Document |
+   | 9   | AH    | 51       | Authentication Header   | This-Document |
    +-----+-------+----------+-------------------------+---------------+
-   | 15  |       |          | Unassigned              |               |
+   | 10  | HIP   | 139      | Host Identity Protocol  | This-Document |
    +-----+-------+----------+-------------------------+---------------+
-   | 16  | HIP   | 139      | Host Identity Protocol  | This-Document |
+   | 11  | SHIM6 | 140      | Shim6 Protocol          | This-Document |
    +-----+-------+----------+-------------------------+---------------+
-   | 17  | SHIM6 | 140      | Shim6 Protocol          | This-Document |
-   +-----+-------+----------+-------------------------+---------------+
-   | 18  |       | 253      | Use for experimentation | This-Document |
+   | 12  |       | 253      | Use for experimentation | This-Document |
    |     |       |          | and testing             |               |
    +-----+-------+----------+-------------------------+---------------+
-   | 19  |       | 254      | Use for experimentation | This-Document |
+   | 13  |       | 254      | Use for experimentation | This-Document |
    |     |       |          | and testing             |               |
    +-----+-------+----------+-------------------------+---------------+
-   | 20  |       |          | Unassigned              |               |
+   | 14  |       |          | Unassigned              |               |
    | to  |       |          |                         |               |
    | 255 |       |          |                         |               |
    +-----+-------+----------+-------------------------+---------------+
@@ -953,10 +962,16 @@ Table of Contents
    It is suggested that multiple designated experts be appointed for
    registry change requests.
 
+   Designated experts are solicited only for changes that are not
+   covered by the automatic mirroring described above.  For example, a
+   registration may request two bits for a new EH to cover specific
+   behaviors or uses of that EH.
+
    Criteria that should be applied by the designated experts include
    determining whether the proposed registration duplicates existing
-   entries and whether the registration description is clear and fits
-   the purpose of this registry.
+   entries, whether the exception to the automatic mirroring procedure
+   is justified, and whether the registration description is clear and
+   fits the purpose of this registry.
 
    Within the review period, the designated experts will either approve
    or deny the registration request, communicating this decision to the
@@ -1039,9 +1054,9 @@ Table of Contents
    [I-D.ietf-6man-eh-limits]
               Herbert, T., "Limits on Sending and Processing IPv6
               Extension Headers", Work in Progress, Internet-Draft,
-              draft-ietf-6man-eh-limits-12, 18 December 2023,
+              draft-ietf-6man-eh-limits-13, 12 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-6man-eh-
-              limits-12>.
+              limits-13>.
 
    [RFC7609]  Fox, M., Kassimis, C., and J. Stevens, "IBM's Shared
               Memory Communications over RDMA (SMC-R) Protocol",
@@ -1069,9 +1084,9 @@ Table of Contents
 
 Acknowledgments
 
-   Thanks to Paul Aitken and Eric Vyncke for the reviews and comments.
-   Special thanks to Andrew Feren for sharing data about scans of IPFIX
-   data he collected.
+   Thanks to Paul Aitken, Eric Vyncke, and Joe Touch for the reviews and
+   comments.  Special thanks to Andrew Feren for sharing data about
+   scans of IPFIX data he collected.
 
    Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the
    opsdir review, Dirk Von Hugo for intdir review, Joel Halpern for the
