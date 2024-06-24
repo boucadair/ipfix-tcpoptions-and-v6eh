@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 24 November 2024                                         Huawei
-                                                             23 May 2024
+Expires: 26 December 2024                                         Huawei
+                                                            24 June 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 November 2024.
+   This Internet-Draft will expire on 26 December 2024.
 
 Copyright Notice
 
@@ -688,6 +688,21 @@ Table of Contents
        Figure 3: A Second Example of ipv6ExtensionHeadersFull IE with
                            Reduced-size Encoding
 
+   Let us now consider an IPv6 Flow in which the following EH chain is
+   observed: Routing (5), Mobility (7), and Authentication (9) header.
+   Figure 4 shows the ipv6ExtensionHeadersFull IE (0x02A0) to reprot
+   this individual chain.
+
+                     MSB                          LSB
+                                          1
+                      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
+                     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+                     |0|0|0|0|0|0|1|0|1|0|1|0|0|0|0|0|
+                     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+      Figure 4: An Example of ipv6ExtensionHeadersFull IE Reported for
+                         an Extension Header Chain
+
 6.2.  TCP Options
 
 6.2.1.  Reduced-size Encoding
@@ -696,7 +711,7 @@ Table of Contents
    Section 4.1, fewer octets are likely to be used for Flows with common
    TCP options.
 
-   Figure 4 shows an example of Kind/bit mappings in a tcpOptionsFull IE
+   Figure 5 shows an example of Kind/bit mappings in a tcpOptionsFull IE
    for a TCP Flow in which End of Option List (0), Maximum Segment Size
    (2), and Window Scale (3) options are observed.
 
@@ -707,11 +722,11 @@ Table of Contents
        |0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|   |0|0|0|0|1|1|0|1|
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+...+-+-+-+-+-+-+-+-+
 
-          Figure 4: An Example of TCP Options / Bit Mappings in a
+          Figure 5: An Example of TCP Options / Bit Mappings in a
                              tcpOptionsFull IE
 
    One octet is sufficient to report these observed options.
-   Concretely, the tcpOptionsFull IE will be set to 0x0D (Figure 5).
+   Concretely, the tcpOptionsFull IE will be set to 0x0D (Figure 6).
 
                              MSB           LSB
                               0 1 2 3 4 5 6 7
@@ -719,14 +734,14 @@ Table of Contents
                              |0|0|0|0|1|1|0|1|
                              +-+-+-+-+-+-+-+-+
 
-    Figure 5: An Example of tcpOptionsFull IE with Reduced-size Encdoing
+    Figure 6: An Example of tcpOptionsFull IE with Reduced-size Encdoing
 
 6.2.2.  Shared Options
 
    Let us consider a TCP Flow in which shared options with ExIDs 0x0348
    (HOST_ID) [RFC7974], 0x454E (TCP-ENO) [RFC8547], and 0xE2D4C3D9
    (Shared Memory communications over RMDA protocol) [RFC7609] are
-   observed.  Figure 6 shows an excerpt of the Data Set encoding with a
+   observed.  Figure 7 shows an excerpt of the Data Set encoding with a
    focus on the tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs.
    The meaning of the fields is defined in [RFC6313].
 
@@ -749,7 +764,7 @@ Table of Contents
      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
      :                           ...                                 :
 
-                    Figure 6: Example of TCP Shared IEs
+                    Figure 7: Example of TCP Shared IEs
 
 7.  Security Considerations
 
@@ -1039,9 +1054,9 @@ Table of Contents
    [I-D.ietf-6man-eh-limits]
               Herbert, T., "Limits on Sending and Processing IPv6
               Extension Headers", Work in Progress, Internet-Draft,
-              draft-ietf-6man-eh-limits-12, 18 December 2023,
+              draft-ietf-6man-eh-limits-13, 12 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-6man-eh-
-              limits-12>.
+              limits-13>.
 
    [RFC7609]  Fox, M., Kassimis, C., and J. Stevens, "IBM's Shared
               Memory Communications over RDMA (SMC-R) Protocol",
