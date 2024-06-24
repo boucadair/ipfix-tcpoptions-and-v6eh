@@ -567,6 +567,19 @@ MSB           LSB
 ~~~~
 {: #ex-eh2 title="A Second Example of ipv6ExtensionHeadersFull IE with Reduced-size Encoding" artwork-align="center"}
 
+Let us now consider an IPv6 Flow in which the following EH chain is observed: Routing (5), Mobility (7), and Authentication (9) header. {{ex-eh3}}
+shows the ipv6ExtensionHeadersFull IE (0x02A0) to reprot this individual chain.
+
+~~~~
+MSB                          LSB
+                     1
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|0|0|0|0|0|0|1|0|1|0|1|0|0|0|0|0|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~~
+{: #ex-eh3 title="An Example of ipv6ExtensionHeadersFull IE Reported for an Extension Header Chain" artwork-align="center"}
+
 ## TCP Options
 
 ### Reduced-size Encoding
