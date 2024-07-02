@@ -450,7 +450,7 @@ ElementID:
 Description:
 : Reports an observed 4-byte ExID in a shared
   TCP option (Kind=253 or 254) in a Flow.
-: A basicList of tcpSharedOptionExID32 is used to report tcpSharedOptionExID32List values.  
+: A basicList of tcpSharedOptionExID32 is used to report tcpSharedOptionExID32List values.
 
 Abstract Data Type:
 :  unsigned32
