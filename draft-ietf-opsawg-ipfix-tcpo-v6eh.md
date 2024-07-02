@@ -83,7 +83,7 @@ The specification of the ipv6ExtensionHeaders IPFIX IE (64) does not:
 - Specify the procedure to follow when all bits are exhausted.
 - Specify a means to export the order and the number of occurrences of a given extension header.
 - Specify how to automatically update the IANA IPFIX registry ({{IANA-IPFIX}}) when a new value is assigned in the IPv6 Extension Header Types registry {{IANA-EH}}. Only a frozen set of extension headers can be exported using the ipv6ExtensionHeaders IE. For example, the ipv6ExtensionHeaders IE can't report some IPv6 EHs, specifically EHs for Host Identity Protocol (139), Shim6 Protocol (140) or extension headers for experimentation and testing.
-- Specify whether the exported values match the full enclosed values or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}). Note that some implementations may not be able to export all observed extension headers in a Flow because of a hardware or software limit (see, e.g., {{?I-D.ietf-6man-eh-limits}}). The specification of the ipv6ExtensionHeaders Information Element does not discuss whether it covers all enclosed extension headers or only up to a limit.
+- Specify whether the exported values match the full enclosed values or only up to a limit imposed by hardware or software (e.g., {{Section 1.1 of ?RFC8883}}). Note that some implementations may not be able to export all observed extension headers in a Flow because of a hardware or software limit (see, e.g., {{?I-D.ietf-6man-eh-limits}}). The specification of the ipv6ExtensionHeaders IE does not discuss whether it covers all enclosed extension headers or only up to a limit.
 - Specify how to report the length of IPv6 extension headers.
 - Optimize the encoding.
 - Explain the reasoning for reporting values which do not correspond to extension headers (e.g., "Unknown Layer 4 header" or "Payload compression header").
@@ -138,7 +138,7 @@ ElementID:
 : TBD1
 
 Description:
-:  Type of an IPv6 extension header observed in packets of this Flow.
+:  Type of an IPv6 extension header observed in at least one packet of this Flow.
 
 Abstract Data Type:
 : unsigned8
@@ -163,7 +163,8 @@ ElementID:
 
 Description:
 : The number of consecutive occurrences of the same extension header type in a Flow.
-: The type of the extension header is provided in the ipv6ExtensionHeaderType Information Element.
+: This IE is reported, e.g., in the ipv6ExtensionHeaderTypeCountList IE.
+: The type of the extension header is provided in the ipv6ExtensionHeaderType IE.
 
 Abstract Data Type:
 : unsigned8
@@ -200,16 +201,16 @@ Description:
   in the ipv6ExtensionHeadersFull IE while bit 255 corresponds to the most-significant bit of the IE.
   In doing so, few octets will be needed to encode common IPv6 extension headers when observed in a Flow.
 
-: The "No Next Header" (59) value ({{Section 4.7 of !RFC8200}}) is used if there is no upper-layer header in an IPv6 packet.
+: The "No Next Header" (bit 2) value ({{Section 4.7 of !RFC8200}}) is used if there is no upper-layer header in an IPv6 packet.
   Even if the value is not considered as an extension header as such, the corresponding
   bit is set in the ipv6ExtensionHeadersFull IE whenever that value is encountered in the Flow.
 
-: Extension headers observed in a Flow with varying extension header chain MUST NOT be grouped in the ipv6ExtensionHeadersFull Information Element if the ipv6ExtensionHeaderChainLengthList Information Element is also present.
+: Extension headers observed in a Flow with varying extension header chain MUST NOT be grouped in the ipv6ExtensionHeadersFull IE if the ipv6ExtensionHeaderChainLengthList IE is also present.
 
-: If the ipv6ExtensionHeaderChainLengthList Information Element is not present, then extension headers observed in a Flow with varying extension header chain
-  MAY be grouped in one single ipv6ExtensionHeadersFull Information Element or be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.
+: If the ipv6ExtensionHeaderChainLengthList IE is not present, then extension headers observed in a Flow with varying extension header chain
+  MAY be grouped in one single ipv6ExtensionHeadersFull IE or be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.
 
-: The ipv6ExtensionHeadersFull Information Element MUST NOT be exported if ipv6ExtensionHeaderTypeCountList Information Element is also present because of the overlapping scopes between these two IEs.
+: The ipv6ExtensionHeadersFull IE MUST NOT be exported if ipv6ExtensionHeaderTypeCountList IE is also present because of the overlapping scopes between these two IEs.
 
 : The value of ipv6ExtensionHeadersFull IE may be encoded in fewer octets per the guidelines in {{Section 6.2 of !RFC7011}}.
 
@@ -240,22 +241,22 @@ ElementID:
 
 Description:
 : As per {{Section 4.1 of !RFC8200}}, IPv6 nodes must accept and attempt to process extension headers
-  occurring any number of times in the same packet. This Information Element echoes the
+  occurring any number of times in the same packet. This IE echoes the
   order of extension headers and number of consecutive occurrences of the same extension header type in a Flow.
 
-: This Information Element is a subTemplateList of ipv6ExtensionHeaderType and ipv6ExtensionHeaderCount Information Elements.
+: This IE is a subTemplateList of ipv6ExtensionHeaderType and ipv6ExtensionHeaderCount IEs.
 
 : Each header chain in Flow with varying extension header chain MUST be exported in a separate  IE.
 
 
-: The same extension header type may appear several times in an ipv6ExtensionHeaderTypeCountList Information Element.
+: The same extension header type may appear several times in an ipv6ExtensionHeaderTypeCountList IE.
   For example, if an IPv6 packet of a Flow includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
-  and Destination Options header, the ipv6ExtensionHeaderTypeCountList Information Element will report:
+  and Destination Options header, the ipv6ExtensionHeaderTypeCountList IE will report:
 
-  + the count of Hop-by-Hop Options header,
-  + the occurrences of the Destination Options header that are observed before the Fragment header,
-  + the occurrences of the Fragment header, and
-  + the occurrences of the Destination Options header that are observed right after the Fragment header.
+  + the count of Hop-by-Hop Options headers,
+  + the occurrences of the Destination Options headers that are observed before a Fragment header,
+  + the occurrences of the Fragment headers, and
+  + the occurrences of the Destination Options headers that are observed right after a Fragment header.
 
 : If an implementation determines that an observed packet of a Flow includes an extension header (including an extension header that it does not support), then the exact observed code of that extension header MUST be echoed in the ipv6ExtensionHeaderTypeCountList IE. How an implementation disambiguates between unknown upper-layer protocols vs. extension headers is not IPFIX-specific. Refer, for example, to {{Section 2.2 of ?RFC8883}} for a behavior of an intermediate node that encounters an unknown Next Header type.
 
@@ -281,12 +282,12 @@ ElementID:
 : TBD5
 
 Description:
-:  When set to "false", this Information Element indicates that the exported extension
+:  When set to "false", this IE indicates that the exported extension
    headers information (e.g., ipv6ExtensionHeadersFull or ipv6ExtensionHeaderTypeCountList) does
    not match the full enclosed extension headers, but only up to a
    limit that is typically set by hardware or software.
 
-:  When set to "true", this Information Element indicates that the exported extension
+:  When set to "true", this IE indicates that the exported extension
    header information matches the full enclosed extension headers.
 
 Abstract Data Type:
@@ -349,8 +350,8 @@ ElementID:
 : TBD7
 
 Description:
-: This Information Element is used to report the chains and their length as observed in a Flow with varying extension header chain.
-: This Information Element is a subTemplateList of ipv6ExtensionHeadersFull and ipv6ExtensionHeadersChainLength Information Elements.
+: This IE is used to report the chains and their length as observed in a Flow with varying extension header chain.
+: This IE is a subTemplateList of ipv6ExtensionHeadersFull and ipv6ExtensionHeadersChainLength IEs.
 
 : If several extension header chains are observed in a Flow, each header
   chain MUST be exported in a separate ipv6ExtensionHeaderChainLengthList IE.
@@ -422,6 +423,7 @@ ElementID:
 Description:
 : Reports an observed 2-byte ExID in a shared
   TCP option (Kind=253 or 254) in a Flow.
+: A basicList of tcpSharedOptionExID16 is used to report tcpSharedOptionExID16List values.
 
 Abstract Data Type:
 :  unsigned16
@@ -448,6 +450,7 @@ ElementID:
 Description:
 : Reports an observed 4-byte ExID in a shared
   TCP option (Kind=253 or 254) in a Flow.
+: A basicList of tcpSharedOptionExID32 is used to report tcpSharedOptionExID32List values.
 
 Abstract Data Type:
 :  unsigned32
@@ -474,7 +477,7 @@ ElementID:
 Description:
 : Reports observed 2-byte ExIDs in shared
   TCP options (Kind=253 or 254) in a Flow.
-: A basicList of tcpSharedOptionExID16 Information Elements in which each tcpSharedOptionExID16 Information Element carries an observed 2-byte ExID in a
+: A basicList of tcpSharedOptionExID16 IEs in which each tcpSharedOptionExID16 IE carries an observed 2-byte ExID in a
   shared option.
 
 Abstract Data Type:
@@ -502,7 +505,7 @@ ElementID:
 Description:
 : Reports observed 4-byte ExIDs in shared
   TCP options (Kind=253 or 254) in a Flow.
-: A basicList of tcpSharedOptionExID32 Information Elements in which each tcpSharedOptionExID32 Information Element carries an observed 4-byte ExID in a
+: A basicList of tcpSharedOptionExID32 IEs in which each tcpSharedOptionExID32 IE carries an observed 4-byte ExID in a
   shared option.
 
 Abstract Data Type:
@@ -519,7 +522,7 @@ Additional Information:
 Reference:
 : This-Document
 
-# Operational Considerations
+# Implementations and Operational Considerations
 
 Implementations of tcpSharedOptionExID16, tcpSharedOptionExID32, tcpSharedOptionExID16List, and tcpSharedOptionExID32List IEs are assumed to be provided with a list of valid ExIDs {{IANA-TCP-EXIDs}}. How that list is maintained is implementation-specific. Absent that list, an implementation can't autonomously determine whether an ExID is present and, if so, whether it is 2- or 4-byte length.
 
@@ -709,7 +712,7 @@ The initial values of this registry are provided in {{iana-new-eh}}.
 |0  | DST  |60              |Destination Options for IPv6|This-Document|
 |1  |HOP   |0               |IPv6 Hop-by-Hop Options      |This-Document|
 |2  | NoNxt|59              |No Next Header for IPv6     |This-Document|
-|3  |UNK   |                |Unknown extension header |This-Document|
+|3  |UNK   |                |Unknown extension or transport header |This-Document|
 |4  | FRA0 |44              |Fragment header - first fragment    |This-Document|
 |5  |RH    |43              |Routing header                      |This-Document|
 |6  |FRA1  |44              |Fragmentation header - not first fragment|This-Document|
@@ -738,10 +741,12 @@ Within the review period, the designated experts will either approve or deny the
 # Acknowledgments
 {:numbered="false"}
 
-Thanks to Paul Aitken, Eric Vyncke, and Joe Touch for the reviews and comments. Special thanks to Andrew Feren for sharing data about scans of IPFIX data he collected.
+Thanks to Paul Aitken, Éric Vyncke, and Joe Touch for the reviews and comments. Special thanks to Andrew Feren for sharing data about scans of IPFIX data he collected.
 
 Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review, Dirk Von Hugo for intdir review, Joel Halpern for the genart review, and Tero Kivinen for the secdir review.
 
 Thanks to Thomas Graf for the Shepherd review.
 
 Thanks to Mahesh Jethanandani for the AD review.
+
+Thanks to Éric Vyncke for the IESG review.
