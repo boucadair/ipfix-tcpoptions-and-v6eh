@@ -522,7 +522,7 @@ Additional Information:
 Reference:
 : This-Document
 
-# Implementations and Operational Considerations
+# Implementation and Operational Considerations
 
 Implementations of tcpSharedOptionExID16, tcpSharedOptionExID32, tcpSharedOptionExID16List, and tcpSharedOptionExID32List IEs are assumed to be provided with a list of valid ExIDs {{IANA-TCP-EXIDs}}. How that list is maintained is implementation-specific. Absent that list, an implementation can't autonomously determine whether an ExID is present and, if so, whether it is 2- or 4-byte length.
 
