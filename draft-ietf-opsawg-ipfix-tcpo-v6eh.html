@@ -10,11 +10,11 @@
 <meta content="
        This document specifies new IP Flow Information Export (IPFIX) Information Elements (IEs) to solve issues with existing ipv6ExtensionHeaders and tcpOptions IPFIX IEs, especially the ability to export any observed IPv6 extension headers or TCP options. 
     " name="description">
-<meta content="xml2rfc 3.21.0" name="generator">
+<meta content="xml2rfc 3.22.0" name="generator">
 <meta content="IPFIX" name="keyword">
 <meta content="draft-ietf-opsawg-ipfix-tcpo-v6eh-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.21.0
+  xml2rfc 3.22.0
     Python 3.12.3
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
@@ -24,9 +24,8 @@
     platformdirs 4.2.2
     pycountry 22.3.5
     PyYAML 6.0.1
-    requests 2.31.0
+    requests 2.32.3
     setuptools 69.5.1
-    six 1.16.0
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-opsawg-ipfix-tcpo-v6eh.xml" rel="alternate" type="application/rfc+xml">
@@ -1026,11 +1025,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">New TCP and IPv6 EH IPFIX IEs</td>
-<td class="right">June 2024</td>
+<td class="right">July 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Boucadair &amp; Claise</td>
-<td class="center">Expires 26 December 2024</td>
+<td class="center">Expires 6 January 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1043,12 +1042,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-opsawg-ipfix-tcpo-v6eh-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-06-24" class="published">24 June 2024</time>
+<time datetime="2024-07-05" class="published">5 July 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-12-26">26 December 2024</time></dd>
+<dd class="expires"><time datetime="2025-01-06">6 January 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1097,7 +1096,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1187,7 +1186,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-operational-considerations" class="internal xref">Operational Considerations</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-implementations-and-operati" class="internal xref">Implementations and Operational Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
@@ -1288,7 +1287,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-1.1-2.4.1">Specify how to automatically update the IANA IPFIX registry (<span>[<a href="#IANA-IPFIX" class="cite xref">IANA-IPFIX</a>]</span>) when a new value is assigned in the IPv6 Extension Header Types registry <span>[<a href="#IANA-EH" class="cite xref">IANA-EH</a>]</span>. Only a frozen set of extension headers can be exported using the ipv6ExtensionHeaders IE. For example, the ipv6ExtensionHeaders IE can't report some IPv6 EHs, specifically EHs for Host Identity Protocol (139), Shim6 Protocol (140) or extension headers for experimentation and testing.<a href="#section-1.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-2.5">
-            <p id="section-1.1-2.5.1">Specify whether the exported values match the full enclosed values or only up to a limit imposed by hardware or software (e.g., <span><a href="https://rfc-editor.org/rfc/rfc8883#section-1.1" class="relref">Section 1.1</a> of [<a href="#RFC8883" class="cite xref">RFC8883</a>]</span>). Note that some implementations may not be able to export all observed extension headers in a Flow because of a hardware or software limit (see, e.g., <span>[<a href="#I-D.ietf-6man-eh-limits" class="cite xref">I-D.ietf-6man-eh-limits</a>]</span>). The specification of the ipv6ExtensionHeaders Information Element does not discuss whether it covers all enclosed extension headers or only up to a limit.<a href="#section-1.1-2.5.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-2.5.1">Specify whether the exported values match the full enclosed values or only up to a limit imposed by hardware or software (e.g., <span><a href="https://rfc-editor.org/rfc/rfc8883#section-1.1" class="relref">Section 1.1</a> of [<a href="#RFC8883" class="cite xref">RFC8883</a>]</span>). Note that some implementations may not be able to export all observed extension headers in a Flow because of a hardware or software limit (see, e.g., <span>[<a href="#I-D.ietf-6man-eh-limits" class="cite xref">I-D.ietf-6man-eh-limits</a>]</span>). The specification of the ipv6ExtensionHeaders IE does not discuss whether it covers all enclosed extension headers or only up to a limit.<a href="#section-1.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-2.6">
             <p id="section-1.1-2.6.1">Specify how to report the length of IPv6 extension headers.<a href="#section-1.1-2.6.1" class="pilcrow">¶</a></p>
@@ -1389,7 +1388,7 @@ and zero or a single Upper-Layer Header.<a href="#section-2-5.4.1" class="pilcro
           <dd class="break"></dd>
 <dt id="section-3.1-1.5">Description:</dt>
           <dd style="margin-left: 1.5em" id="section-3.1-1.6">
-            <p id="section-3.1-1.6.1">Type of an IPv6 extension header observed in packets of this Flow.<a href="#section-3.1-1.6.1" class="pilcrow">¶</a></p>
+            <p id="section-3.1-1.6.1">Type of an IPv6 extension header observed in at least one packet of this Flow.<a href="#section-3.1-1.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.1-1.7">Abstract Data Type:</dt>
@@ -1443,32 +1442,37 @@ and zero or a single Upper-Layer Header.<a href="#section-2-5.4.1" class="pilcro
           <dd class="break"></dd>
 <dt id="section-3.2-1.7"></dt>
           <dd style="margin-left: 1.5em" id="section-3.2-1.8">
-            <p id="section-3.2-1.8.1">The type of the extension header is provided in the ipv6ExtensionHeaderType Information Element.<a href="#section-3.2-1.8.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-1.8.1">This IE is reported, e.g., in the ipv6ExtensionHeaderTypeCountList IE.<a href="#section-3.2-1.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.2-1.9">Abstract Data Type:</dt>
+<dt id="section-3.2-1.9"></dt>
           <dd style="margin-left: 1.5em" id="section-3.2-1.10">
-            <p id="section-3.2-1.10.1">unsigned8<a href="#section-3.2-1.10.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-1.10.1">The type of the extension header is provided in the ipv6ExtensionHeaderType IE.<a href="#section-3.2-1.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.2-1.11">Data Type Semantics:</dt>
+<dt id="section-3.2-1.11">Abstract Data Type:</dt>
           <dd style="margin-left: 1.5em" id="section-3.2-1.12">
-            <p id="section-3.2-1.12.1">totalCounter<a href="#section-3.2-1.12.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-1.12.1">unsigned8<a href="#section-3.2-1.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.2-1.13">Additional Information:</dt>
+<dt id="section-3.2-1.13">Data Type Semantics:</dt>
           <dd style="margin-left: 1.5em" id="section-3.2-1.14">
-            <p id="section-3.2-1.14.1">See the IPv6 Extension Header Types registry at <span>[<a href="#IANA-EH" class="cite xref">IANA-EH</a>]</span>.<a href="#section-3.2-1.14.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-1.14.1">totalCounter<a href="#section-3.2-1.14.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.2-1.15"></dt>
+<dt id="section-3.2-1.15">Additional Information:</dt>
           <dd style="margin-left: 1.5em" id="section-3.2-1.16">
-            <p id="section-3.2-1.16.1">See <span><a href="https://rfc-editor.org/rfc/rfc8200#section-4" class="relref">Section 4</a> of [<a href="#RFC8200" class="cite xref">RFC8200</a>]</span> for the general definition of IPv6 extension headers.<a href="#section-3.2-1.16.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-1.16.1">See the IPv6 Extension Header Types registry at <span>[<a href="#IANA-EH" class="cite xref">IANA-EH</a>]</span>.<a href="#section-3.2-1.16.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-3.2-1.17">Reference:</dt>
+<dt id="section-3.2-1.17"></dt>
           <dd style="margin-left: 1.5em" id="section-3.2-1.18">
-            <p id="section-3.2-1.18.1">This-Document<a href="#section-3.2-1.18.1" class="pilcrow">¶</a></p>
+            <p id="section-3.2-1.18.1">See <span><a href="https://rfc-editor.org/rfc/rfc8200#section-4" class="relref">Section 4</a> of [<a href="#RFC8200" class="cite xref">RFC8200</a>]</span> for the general definition of IPv6 extension headers.<a href="#section-3.2-1.18.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-3.2-1.19">Reference:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.2-1.20">
+            <p id="section-3.2-1.20.1">This-Document<a href="#section-3.2-1.20.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -1511,25 +1515,25 @@ In doing so, few octets will be needed to encode common IPv6 extension headers w
           <dd class="break"></dd>
 <dt id="section-3.3-1.9"></dt>
           <dd style="margin-left: 1.5em" id="section-3.3-1.10">
-            <p id="section-3.3-1.10.1">The "No Next Header" (59) value (<span><a href="https://rfc-editor.org/rfc/rfc8200#section-4.7" class="relref">Section 4.7</a> of [<a href="#RFC8200" class="cite xref">RFC8200</a>]</span>) is used if there is no upper-layer header in an IPv6 packet.
+            <p id="section-3.3-1.10.1">The "No Next Header" (bit 2) value (<span><a href="https://rfc-editor.org/rfc/rfc8200#section-4.7" class="relref">Section 4.7</a> of [<a href="#RFC8200" class="cite xref">RFC8200</a>]</span>) is used if there is no upper-layer header in an IPv6 packet.
 Even if the value is not considered as an extension header as such, the corresponding
 bit is set in the ipv6ExtensionHeadersFull IE whenever that value is encountered in the Flow.<a href="#section-3.3-1.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.3-1.11"></dt>
           <dd style="margin-left: 1.5em" id="section-3.3-1.12">
-            <p id="section-3.3-1.12.1">Extension headers observed in a Flow with varying extension header chain <span class="bcp14">MUST NOT</span> be grouped in the ipv6ExtensionHeadersFull Information Element if the ipv6ExtensionHeaderChainLengthList Information Element is also present.<a href="#section-3.3-1.12.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-1.12.1">Extension headers observed in a Flow with varying extension header chain <span class="bcp14">MUST NOT</span> be grouped in the ipv6ExtensionHeadersFull IE if the ipv6ExtensionHeaderChainLengthList IE is also present.<a href="#section-3.3-1.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.3-1.13"></dt>
           <dd style="margin-left: 1.5em" id="section-3.3-1.14">
-            <p id="section-3.3-1.14.1">If the ipv6ExtensionHeaderChainLengthList Information Element is not present, then extension headers observed in a Flow with varying extension header chain
-<span class="bcp14">MAY</span> be grouped in one single ipv6ExtensionHeadersFull Information Element or be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.<a href="#section-3.3-1.14.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-1.14.1">If the ipv6ExtensionHeaderChainLengthList IE is not present, then extension headers observed in a Flow with varying extension header chain
+<span class="bcp14">MAY</span> be grouped in one single ipv6ExtensionHeadersFull IE or be exported in separate ipv6ExtensionHeadersFull IEs, one for each extension header chain.<a href="#section-3.3-1.14.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.3-1.15"></dt>
           <dd style="margin-left: 1.5em" id="section-3.3-1.16">
-            <p id="section-3.3-1.16.1">The ipv6ExtensionHeadersFull Information Element <span class="bcp14">MUST NOT</span> be exported if ipv6ExtensionHeaderTypeCountList Information Element is also present because of the overlapping scopes between these two IEs.<a href="#section-3.3-1.16.1" class="pilcrow">¶</a></p>
+            <p id="section-3.3-1.16.1">The ipv6ExtensionHeadersFull IE <span class="bcp14">MUST NOT</span> be exported if ipv6ExtensionHeaderTypeCountList IE is also present because of the overlapping scopes between these two IEs.<a href="#section-3.3-1.16.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.3-1.17"></dt>
@@ -1594,13 +1598,13 @@ bit is set in the ipv6ExtensionHeadersFull IE whenever that value is encountered
 <dt id="section-3.4-1.5">Description:</dt>
           <dd style="margin-left: 1.5em" id="section-3.4-1.6">
             <p id="section-3.4-1.6.1">As per <span><a href="https://rfc-editor.org/rfc/rfc8200#section-4.1" class="relref">Section 4.1</a> of [<a href="#RFC8200" class="cite xref">RFC8200</a>]</span>, IPv6 nodes must accept and attempt to process extension headers
-occurring any number of times in the same packet. This Information Element echoes the
+occurring any number of times in the same packet. This IE echoes the
 order of extension headers and number of consecutive occurrences of the same extension header type in a Flow.<a href="#section-3.4-1.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.4-1.7"></dt>
           <dd style="margin-left: 1.5em" id="section-3.4-1.8">
-            <p id="section-3.4-1.8.1">This Information Element is a subTemplateList of ipv6ExtensionHeaderType and ipv6ExtensionHeaderCount Information Elements.<a href="#section-3.4-1.8.1" class="pilcrow">¶</a></p>
+            <p id="section-3.4-1.8.1">This IE is a subTemplateList of ipv6ExtensionHeaderType and ipv6ExtensionHeaderCount IEs.<a href="#section-3.4-1.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.4-1.9"></dt>
@@ -1610,21 +1614,21 @@ order of extension headers and number of consecutive occurrences of the same ext
           <dd class="break"></dd>
 <dt id="section-3.4-1.11"></dt>
           <dd style="margin-left: 1.5em" id="section-3.4-1.12">
-            <p id="section-3.4-1.12.1">The same extension header type may appear several times in an ipv6ExtensionHeaderTypeCountList Information Element.
+            <p id="section-3.4-1.12.1">The same extension header type may appear several times in an ipv6ExtensionHeaderTypeCountList IE.
 For example, if an IPv6 packet of a Flow includes a Hop-by-Hop Options header, a Destination Options header, a Fragment header,
-and Destination Options header, the ipv6ExtensionHeaderTypeCountList Information Element will report:<a href="#section-3.4-1.12.1" class="pilcrow">¶</a></p>
+and Destination Options header, the ipv6ExtensionHeaderTypeCountList IE will report:<a href="#section-3.4-1.12.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.4-1.12.2.1">
-                <p id="section-3.4-1.12.2.1.1">the count of Hop-by-Hop Options header,<a href="#section-3.4-1.12.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-3.4-1.12.2.1.1">the count of Hop-by-Hop Options headers,<a href="#section-3.4-1.12.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-3.4-1.12.2.2">
-                <p id="section-3.4-1.12.2.2.1">the occurrences of the Destination Options header that are observed before the Fragment header,<a href="#section-3.4-1.12.2.2.1" class="pilcrow">¶</a></p>
+                <p id="section-3.4-1.12.2.2.1">the occurrences of the Destination Options headers that are observed before a Fragment header,<a href="#section-3.4-1.12.2.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-3.4-1.12.2.3">
-                <p id="section-3.4-1.12.2.3.1">the occurrences of the Fragment header, and<a href="#section-3.4-1.12.2.3.1" class="pilcrow">¶</a></p>
+                <p id="section-3.4-1.12.2.3.1">the occurrences of the Fragment headers, and<a href="#section-3.4-1.12.2.3.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-3.4-1.12.2.4">
-                <p id="section-3.4-1.12.2.4.1">the occurrences of the Destination Options header that are observed right after the Fragment header.<a href="#section-3.4-1.12.2.4.1" class="pilcrow">¶</a></p>
+                <p id="section-3.4-1.12.2.4.1">the occurrences of the Destination Options headers that are observed right after a Fragment header.<a href="#section-3.4-1.12.2.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </dd>
@@ -1680,7 +1684,7 @@ and Destination Options header, the ipv6ExtensionHeaderTypeCountList Information
           <dd class="break"></dd>
 <dt id="section-3.5-1.5">Description:</dt>
           <dd style="margin-left: 1.5em" id="section-3.5-1.6">
-            <p id="section-3.5-1.6.1">When set to "false", this Information Element indicates that the exported extension
+            <p id="section-3.5-1.6.1">When set to "false", this IE indicates that the exported extension
 headers information (e.g., ipv6ExtensionHeadersFull or ipv6ExtensionHeaderTypeCountList) does
 not match the full enclosed extension headers, but only up to a
 limit that is typically set by hardware or software.<a href="#section-3.5-1.6.1" class="pilcrow">¶</a></p>
@@ -1688,7 +1692,7 @@ limit that is typically set by hardware or software.<a href="#section-3.5-1.6.1"
           <dd class="break"></dd>
 <dt id="section-3.5-1.7"></dt>
           <dd style="margin-left: 1.5em" id="section-3.5-1.8">
-            <p id="section-3.5-1.8.1">When set to "true", this Information Element indicates that the exported extension
+            <p id="section-3.5-1.8.1">When set to "true", this IE indicates that the exported extension
 header information matches the full enclosed extension headers.<a href="#section-3.5-1.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
@@ -1812,12 +1816,12 @@ an extension header chain observed in a Flow.  The length is the sum of the leng
           <dd class="break"></dd>
 <dt id="section-3.7-1.5">Description:</dt>
           <dd style="margin-left: 1.5em" id="section-3.7-1.6">
-            <p id="section-3.7-1.6.1">This Information Element is used to report the chains and their length as observed in a Flow with varying extension header chain.<a href="#section-3.7-1.6.1" class="pilcrow">¶</a></p>
+            <p id="section-3.7-1.6.1">This IE is used to report the chains and their length as observed in a Flow with varying extension header chain.<a href="#section-3.7-1.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.7-1.7"></dt>
           <dd style="margin-left: 1.5em" id="section-3.7-1.8">
-            <p id="section-3.7-1.8.1">This Information Element is a subTemplateList of ipv6ExtensionHeadersFull and ipv6ExtensionHeadersChainLength Information Elements.<a href="#section-3.7-1.8.1" class="pilcrow">¶</a></p>
+            <p id="section-3.7-1.8.1">This IE is a subTemplateList of ipv6ExtensionHeadersFull and ipv6ExtensionHeadersChainLength IEs.<a href="#section-3.7-1.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-3.7-1.9"></dt>
@@ -1957,34 +1961,39 @@ that option and without requiring updating a mapping table.<a href="#section-4.1
 TCP option (Kind=253 or 254) in a Flow.<a href="#section-4.2-1.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.2-1.7">Abstract Data Type:</dt>
+<dt id="section-4.2-1.7"></dt>
           <dd style="margin-left: 1.5em" id="section-4.2-1.8">
-            <p id="section-4.2-1.8.1">unsigned16<a href="#section-4.2-1.8.1" class="pilcrow">¶</a></p>
+            <p id="section-4.2-1.8.1">A basicList of tcpSharedOptionExID16 is used to report tcpSharedOptionExID16List values.<a href="#section-4.2-1.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.2-1.9">Data Type Semantics:</dt>
+<dt id="section-4.2-1.9">Abstract Data Type:</dt>
           <dd style="margin-left: 1.5em" id="section-4.2-1.10">
-            <p id="section-4.2-1.10.1">identifier<a href="#section-4.2-1.10.1" class="pilcrow">¶</a></p>
+            <p id="section-4.2-1.10.1">unsigned16<a href="#section-4.2-1.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.2-1.11">Additional Information:</dt>
+<dt id="section-4.2-1.11">Data Type Semantics:</dt>
           <dd style="margin-left: 1.5em" id="section-4.2-1.12">
-            <p id="section-4.2-1.12.1">See the TCP Experimental Option Experiment Identifiers (TCP ExIDs) registry at <span>[<a href="#IANA-TCP-EXIDs" class="cite xref">IANA-TCP-EXIDs</a>]</span>.<a href="#section-4.2-1.12.1" class="pilcrow">¶</a></p>
+            <p id="section-4.2-1.12.1">identifier<a href="#section-4.2-1.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.2-1.13"></dt>
+<dt id="section-4.2-1.13">Additional Information:</dt>
           <dd style="margin-left: 1.5em" id="section-4.2-1.14">
-            <p id="section-4.2-1.14.1">See <span>[<a href="#RFC9293" class="cite xref">RFC9293</a>]</span> for the general definition of TCP options.<a href="#section-4.2-1.14.1" class="pilcrow">¶</a></p>
+            <p id="section-4.2-1.14.1">See the TCP Experimental Option Experiment Identifiers (TCP ExIDs) registry at <span>[<a href="#IANA-TCP-EXIDs" class="cite xref">IANA-TCP-EXIDs</a>]</span>.<a href="#section-4.2-1.14.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.2-1.15"></dt>
           <dd style="margin-left: 1.5em" id="section-4.2-1.16">
-            <p id="section-4.2-1.16.1">See <span>[<a href="#RFC6994" class="cite xref">RFC6994</a>]</span> for the shared use of experimental TCP Options.<a href="#section-4.2-1.16.1" class="pilcrow">¶</a></p>
+            <p id="section-4.2-1.16.1">See <span>[<a href="#RFC9293" class="cite xref">RFC9293</a>]</span> for the general definition of TCP options.<a href="#section-4.2-1.16.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.2-1.17">Reference:</dt>
+<dt id="section-4.2-1.17"></dt>
           <dd style="margin-left: 1.5em" id="section-4.2-1.18">
-            <p id="section-4.2-1.18.1">This-Document<a href="#section-4.2-1.18.1" class="pilcrow">¶</a></p>
+            <p id="section-4.2-1.18.1">See <span>[<a href="#RFC6994" class="cite xref">RFC6994</a>]</span> for the shared use of experimental TCP Options.<a href="#section-4.2-1.18.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.2-1.19">Reference:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.2-1.20">
+            <p id="section-4.2-1.20.1">This-Document<a href="#section-4.2-1.20.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -2012,34 +2021,39 @@ TCP option (Kind=253 or 254) in a Flow.<a href="#section-4.2-1.6.1" class="pilcr
 TCP option (Kind=253 or 254) in a Flow.<a href="#section-4.3-1.6.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.3-1.7">Abstract Data Type:</dt>
+<dt id="section-4.3-1.7"></dt>
           <dd style="margin-left: 1.5em" id="section-4.3-1.8">
-            <p id="section-4.3-1.8.1">unsigned32<a href="#section-4.3-1.8.1" class="pilcrow">¶</a></p>
+            <p id="section-4.3-1.8.1">A basicList of tcpSharedOptionExID32 is used to report tcpSharedOptionExID32List values.<a href="#section-4.3-1.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.3-1.9">Data Type Semantics:</dt>
+<dt id="section-4.3-1.9">Abstract Data Type:</dt>
           <dd style="margin-left: 1.5em" id="section-4.3-1.10">
-            <p id="section-4.3-1.10.1">identifier<a href="#section-4.3-1.10.1" class="pilcrow">¶</a></p>
+            <p id="section-4.3-1.10.1">unsigned32<a href="#section-4.3-1.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.3-1.11">Additional Information:</dt>
+<dt id="section-4.3-1.11">Data Type Semantics:</dt>
           <dd style="margin-left: 1.5em" id="section-4.3-1.12">
-            <p id="section-4.3-1.12.1">See the TCP Experimental Option Experiment Identifiers (TCP ExIDs) registry at <span>[<a href="#IANA-TCP-EXIDs" class="cite xref">IANA-TCP-EXIDs</a>]</span>.<a href="#section-4.3-1.12.1" class="pilcrow">¶</a></p>
+            <p id="section-4.3-1.12.1">identifier<a href="#section-4.3-1.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.3-1.13"></dt>
+<dt id="section-4.3-1.13">Additional Information:</dt>
           <dd style="margin-left: 1.5em" id="section-4.3-1.14">
-            <p id="section-4.3-1.14.1">See <span>[<a href="#RFC9293" class="cite xref">RFC9293</a>]</span> for the general definition of TCP options.<a href="#section-4.3-1.14.1" class="pilcrow">¶</a></p>
+            <p id="section-4.3-1.14.1">See the TCP Experimental Option Experiment Identifiers (TCP ExIDs) registry at <span>[<a href="#IANA-TCP-EXIDs" class="cite xref">IANA-TCP-EXIDs</a>]</span>.<a href="#section-4.3-1.14.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.3-1.15"></dt>
           <dd style="margin-left: 1.5em" id="section-4.3-1.16">
-            <p id="section-4.3-1.16.1">See <span>[<a href="#RFC6994" class="cite xref">RFC6994</a>]</span> for the shared use of experimental TCP Options.<a href="#section-4.3-1.16.1" class="pilcrow">¶</a></p>
+            <p id="section-4.3-1.16.1">See <span>[<a href="#RFC9293" class="cite xref">RFC9293</a>]</span> for the general definition of TCP options.<a href="#section-4.3-1.16.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
-<dt id="section-4.3-1.17">Reference:</dt>
+<dt id="section-4.3-1.17"></dt>
           <dd style="margin-left: 1.5em" id="section-4.3-1.18">
-            <p id="section-4.3-1.18.1">This-Document<a href="#section-4.3-1.18.1" class="pilcrow">¶</a></p>
+            <p id="section-4.3-1.18.1">See <span>[<a href="#RFC6994" class="cite xref">RFC6994</a>]</span> for the shared use of experimental TCP Options.<a href="#section-4.3-1.18.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-4.3-1.19">Reference:</dt>
+          <dd style="margin-left: 1.5em" id="section-4.3-1.20">
+            <p id="section-4.3-1.20.1">This-Document<a href="#section-4.3-1.20.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 </dl>
@@ -2069,7 +2083,7 @@ TCP options (Kind=253 or 254) in a Flow.<a href="#section-4.4-1.6.1" class="pilc
           <dd class="break"></dd>
 <dt id="section-4.4-1.7"></dt>
           <dd style="margin-left: 1.5em" id="section-4.4-1.8">
-            <p id="section-4.4-1.8.1">A basicList of tcpSharedOptionExID16 Information Elements in which each tcpSharedOptionExID16 Information Element carries an observed 2-byte ExID in a
+            <p id="section-4.4-1.8.1">A basicList of tcpSharedOptionExID16 IEs in which each tcpSharedOptionExID16 IE carries an observed 2-byte ExID in a
 shared option.<a href="#section-4.4-1.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
@@ -2130,7 +2144,7 @@ TCP options (Kind=253 or 254) in a Flow.<a href="#section-4.5-1.6.1" class="pilc
           <dd class="break"></dd>
 <dt id="section-4.5-1.7"></dt>
           <dd style="margin-left: 1.5em" id="section-4.5-1.8">
-            <p id="section-4.5-1.8.1">A basicList of tcpSharedOptionExID32 Information Elements in which each tcpSharedOptionExID32 Information Element carries an observed 4-byte ExID in a
+            <p id="section-4.5-1.8.1">A basicList of tcpSharedOptionExID32 IEs in which each tcpSharedOptionExID32 IE carries an observed 4-byte ExID in a
 shared option.<a href="#section-4.5-1.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
@@ -2169,10 +2183,10 @@ shared option.<a href="#section-4.5-1.8.1" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="operational-considerations">
+<div id="implementations-and-operational-considerations">
 <section id="section-5">
-      <h2 id="name-operational-considerations">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
+      <h2 id="name-implementations-and-operati">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-implementations-and-operati" class="section-name selfRef">Implementations and Operational Considerations</a>
       </h2>
 <p id="section-5-1">Implementations of tcpSharedOptionExID16, tcpSharedOptionExID32, tcpSharedOptionExID16List, and tcpSharedOptionExID32List IEs are assumed to be provided with a list of valid ExIDs <span>[<a href="#IANA-TCP-EXIDs" class="cite xref">IANA-TCP-EXIDs</a>]</span>. How that list is maintained is implementation-specific. Absent that list, an implementation can't autonomously determine whether an ExID is present and, if so, whether it is 2- or 4-byte length.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">If a TCP Flow contains packets with a mix of 2-byte and 4-byte ExIDs, the same Template Record is used with both tcpSharedOptionExID16 and tcpSharedOptionExID32 IEs.<a href="#section-5-2" class="pilcrow">¶</a></p>
@@ -2586,7 +2600,7 @@ range of '0' to '2^256 - 1'. Similar to <span><a href="https://rfc-editor.org/rf
                 <td class="text-left" rowspan="1" colspan="1">3</td>
                 <td class="text-left" rowspan="1" colspan="1">UNK</td>
                 <td class="text-left" rowspan="1" colspan="1"> </td>
-                <td class="text-left" rowspan="1" colspan="1">Unknown extension header</td>
+                <td class="text-left" rowspan="1" colspan="1">Unknown extension or transport header</td>
                 <td class="text-left" rowspan="1" colspan="1">This-Document</td>
               </tr>
               <tr>
@@ -2794,10 +2808,11 @@ range of '0' to '2^256 - 1'. Similar to <span><a href="https://rfc-editor.org/rf
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">Thanks to Paul Aitken, Eric Vyncke, and Joe Touch for the reviews and comments. Special thanks to Andrew Feren for sharing data about scans of IPFIX data he collected.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">Thanks to Paul Aitken, Éric Vyncke, and Joe Touch for the reviews and comments. Special thanks to Andrew Feren for sharing data about scans of IPFIX data he collected.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-A-2">Thanks to Wesley Eddy for the tsvart review, Yingzhen Qu for the opsdir review, Dirk Von Hugo for intdir review, Joel Halpern for the genart review, and Tero Kivinen for the secdir review.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 <p id="appendix-A-3">Thanks to Thomas Graf for the Shepherd review.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 <p id="appendix-A-4">Thanks to Mahesh Jethanandani for the AD review.<a href="#appendix-A-4" class="pilcrow">¶</a></p>
+<p id="appendix-A-5">Thanks to Éric Vyncke for the IESG review.<a href="#appendix-A-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
