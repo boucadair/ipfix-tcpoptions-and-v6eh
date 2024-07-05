@@ -83,7 +83,7 @@ Table of Contents
      4.3.  tcpSharedOptionExID32 Information Element
      4.4.  tcpSharedOptionExID16List Information Element
      4.5.  tcpSharedOptionExID32List Information Element
-   5.  Implementations and Operational Considerations
+   5.  Implementation and Operational Considerations
    6.  Examples
      6.1.  IPv6 Extension Headers
      6.2.  TCP Options
@@ -626,7 +626,7 @@ Table of Contents
 
    Reference:  This-Document
 
-5.  Implementations and Operational Considerations
+5.  Implementation and Operational Considerations
 
    Implementations of tcpSharedOptionExID16, tcpSharedOptionExID32,
    tcpSharedOptionExID16List, and tcpSharedOptionExID32List IEs are
