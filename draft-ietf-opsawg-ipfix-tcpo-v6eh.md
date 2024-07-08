@@ -314,7 +314,7 @@ ElementID:
 Description:
 : In theory, there are no limits on the number of IPv6 extension headers that may
   be present in a packet other than the path MTU. However, it was regularly
-  reported that IPv6 packets with extension headers are often dropped in the Internet.
+  reported that IPv6 packets with extension headers are often dropped in the Internet (e.g., {{?RFC7872}}).
 
 : As discussed in {{Section 1.2 of ?RFC8883}}, some hardware devices implement
   a parsing buffer of a fixed size to process packets, including all the headers.
@@ -749,4 +749,4 @@ Thanks to Thomas Graf for the Shepherd review.
 
 Thanks to Mahesh Jethanandani for the AD review.
 
-Thanks to Éric Vyncke for the IESG review.
+Thanks to Éric Vyncke and Erik Kline for the IESG review.
