@@ -661,7 +661,7 @@ IANA is also requested to update the reference of ipv6ExtensionHeaders IE (64) a
 
 This document requests IANA to add the following new IPFIX IEs to the "IPFIX Information Elements" registry under the "IP Flow Information Export (IPFIX) Entities" registry group {{IANA-IPFIX}}:
 
-|Value|	Name|	Reference|
+|ElementID|	Name|	Specification|
 |TBD1| ipv6ExtensionHeader|{{sec-v6ehtype}} of This-Document|
 |TBD2|ipv6ExtensionHeaderCount|{{sec-v6ehcount}} of This-Document|
 |TBD3| ipv6ExtensionHeadersFull|{{sec-v6full}} of This-Document|
@@ -675,6 +675,12 @@ This document requests IANA to add the following new IPFIX IEs to the "IPFIX Inf
 |TBD11| tcpSharedOptionExID16List|{{sec-ex}} of This-Document|
 |TBD12| tcpSharedOptionExID32List|{{sec-ex32}} of This-Document|
 {: #iana-new-ies title="New IPFIX Information Elements"}
+
+> Note to IANA:
+> : The "Specification" column points to the section with the required information to register each IE.
+>
+> Note to the RFC Editor:
+> : Please remove the IANA note once IANA actions are implemented.
 
 ## IPFIX Information Element Data Type
 
@@ -749,4 +755,4 @@ Thanks to Thomas Graf for the Shepherd review.
 
 Thanks to Mahesh Jethanandani for the AD review.
 
-Thanks to Éric Vyncke and Erik Kline for the IESG review.
+Thanks to Éric Vyncke, Erik Kline, and Roman Danyliw for the IESG review.
