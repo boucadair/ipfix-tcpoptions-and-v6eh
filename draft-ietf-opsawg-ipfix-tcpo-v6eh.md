@@ -392,7 +392,7 @@ Description:
 : Options are mapped to bits according to their option numbers.
   TCP option Kind 0 corresponds to the least-significant bit
   in the tcpOptionsFull IE while Kind 255 corresponds to the most-significant bit of the IE. This approach allows
-  an observer to export any observed TCP option even if it does support
+  an observer to export any observed TCP option even if it does not support
   that option and without requiring updating a mapping table.
 
 : The value of tcpOptionsFull IE may be encoded in fewer octets per the guidelines in {{Section 6.2 of !RFC7011}}.
@@ -755,4 +755,4 @@ Thanks to Thomas Graf for the Shepherd review.
 
 Thanks to Mahesh Jethanandani for the AD review.
 
-Thanks to Éric Vyncke, Erik Kline, and Roman Danyliw for the IESG review.
+Thanks to Éric Vyncke, Erik Kline, Roman Danyliw, and Zaheduzzaman Sarker for the IESG review.
