@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 11 January 2025                                          Huawei
-                                                            10 July 2024
+Expires: 12 January 2025                                          Huawei
+                                                            11 July 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 January 2025.
+   This Internet-Draft will expire on 12 January 2025.
 
 Copyright Notice
 
@@ -496,8 +496,8 @@ Table of Contents
       option Kind 0 corresponds to the least-significant bit in the
       tcpOptionsFull IE while Kind 255 corresponds to the most-
       significant bit of the IE.  This approach allows an observer to
-      export any observed TCP option even if it does support that option
-      and without requiring updating a mapping table.
+      export any observed TCP option even if it does not support that
+      option and without requiring updating a mapping table.
 
       The value of tcpOptionsFull IE may be encoded in fewer octets per
       the guidelines in Section 6.2 of [RFC7011].
@@ -1111,8 +1111,8 @@ Acknowledgments
 
    Thanks to Mahesh Jethanandani for the AD review.
 
-   Thanks to Éric Vyncke, Erik Kline, and Roman Danyliw for the IESG
-   review.
+   Thanks to Éric Vyncke, Erik Kline, Roman Danyliw, and Zaheduzzaman
+   Sarker for the IESG review.
 
 Authors' Addresses
 
