@@ -5,8 +5,8 @@
 OPSAWG                                                      M. Boucadair
 Internet-Draft                                                    Orange
 Intended status: Standards Track                               B. Claise
-Expires: 12 January 2025                                          Huawei
-                                                            11 July 2024
+Expires: 23 January 2025                                          Huawei
+                                                            22 July 2024
 
 
    Extended TCP Options and IPv6 Extension Headers IPFIX Information
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 January 2025.
+   This Internet-Draft will expire on 23 January 2025.
 
 Copyright Notice
 
@@ -314,6 +314,10 @@ Table of Contents
       See Section 4 of [RFC8200] for the general definition of IPv6
       extension headers.
 
+      The ipv6ExtensionHeadersFull IE deprecates the
+      ipv6ExtensionHeaders IE (64) that was initially defined in
+      [RFC5102].
+
    Reference:  This-Document
 
       Note to the RFC Editor: Please replace
@@ -522,6 +526,9 @@ Table of Contents
       [IANA-TCP].
 
       See [RFC9293] for the general definition of TCP options.
+
+      The tcpOptionsFull IE deprecates the tcpOptions IE (209) that was
+      initially defined in [RFC5102].
 
    Reference:  This-Document
 
@@ -1066,6 +1073,11 @@ Table of Contents
               draft-ietf-6man-eh-limits-13, 12 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-6man-eh-
               limits-13>.
+
+   [RFC5102]  Quittek, J., Bryant, S., Claise, B., Aitken, P., and J.
+              Meyer, "Information Model for IP Flow Information Export",
+              RFC 5102, DOI 10.17487/RFC5102, January 2008,
+              <https://www.rfc-editor.org/rfc/rfc5102>.
 
    [RFC7609]  Fox, M., Kassimis, C., and J. Stevens, "IBM's Shared
               Memory Communications over RDMA (SMC-R) Protocol",
