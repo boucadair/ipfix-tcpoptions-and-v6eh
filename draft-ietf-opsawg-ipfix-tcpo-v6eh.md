@@ -77,7 +77,7 @@ This document specifies new IP Flow Information Export (IPFIX) {{!RFC7011}} Info
 
 This document deprecates the ipv6ExtensionHeaders and tcpOptions IPFIX IEs that were initially defined in {{?RFC5102}}.
 
-> Note that {{!RFC7012}} obsoletes {{?RFC5102}} and specifies that {{IANA-IPFIX}} is the normative reference for the IEs that were initially published in {{?RFC5102}}.
+> Note that {{!RFC7012}} obsoletes {{?RFC5102}} and specifies that {{IANA-IPFIX}} is the normative reference for these IEs.
 
 ## Issues with ipv6ExtensionHeaders Information Element {#sec-eh-issues}
 
@@ -230,6 +230,7 @@ Additional Information:
 : See the IPv6 Extension Header Types registry at {{IANA-EH}}.
 : See {{Section 4 of !RFC8200}} for the general definition of IPv6 extension headers.
 : The ipv6ExtensionHeadersFull IE deprecates the ipv6ExtensionHeaders IE (64) that was initially defined in {{?RFC5102}}.
+: {{!RFC7012}} obsoletes {{?RFC5102}} and specifies that {{IANA-IPFIX}} is the normative reference for the ipv6ExtensionHeaders IE (64).
 
 Reference:
 : This-Document
@@ -414,6 +415,7 @@ Additional Information:
 : See the TCP Option Kind Numbers registry at {{IANA-TCP}}.
 : See {{!RFC9293}} for the general definition of TCP options.
 : The tcpOptionsFull IE deprecates the tcpOptions IE (209) that was initially defined in {{?RFC5102}}.
+: {{!RFC7012}} obsoletes {{?RFC5102}} and specifies that {{IANA-IPFIX}} is the normative reference for the tcpOptions IE (209).
 
 Reference:
 : This-Document
@@ -660,6 +662,10 @@ This document requests IANA to update the "IPFIX Information Elements" registry 
 
 * Update the ipv6ExtensionHeaders IE (64) entry by marking it as deprecated in favor of the ipv6ExtensionHeadersFull IE defined in this document. This note should also be echoed in the "Additional Information" of the ipv6ExtensionHeaders IE.
 * Update the tcpOptions IE (209) entry by marking it as deprecated in favor of the tcpOptionsFull IE defined in this document. This note should also be echoed in the "Additional Information" of the tcpOptions IE.
+* Add the following to the "Additional Information" of both the ipv6ExtensionHeaders and tcpOptions IEs:
+
+    + This Information Element was initially specified in {{?RFC5102}}.
+    + {{!RFC7012}} has obsoleted {{?RFC5102}} and specifies that {{IANA-IPFIX}} is the normative reference for this Information Element.
 
 IANA is also requested to update the reference of ipv6ExtensionHeaders IE (64) and tcpOptions IE (209) to point to this document.
 
