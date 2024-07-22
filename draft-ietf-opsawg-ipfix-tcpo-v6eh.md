@@ -225,6 +225,7 @@ Additional Information:
 : See the ipv6ExtensionHeaders Bits registry at [NEW_IPFIX_IPv6EH_SUBREGISTRY].
 : See the IPv6 Extension Header Types registry at {{IANA-EH}}.
 : See {{Section 4 of !RFC8200}} for the general definition of IPv6 extension headers.
+: The ipv6ExtensionHeadersFull IE deprecates the ipv6ExtensionHeaders IE (64) that was initially defined in {{?RFC5102}}.
 
 Reference:
 : This-Document
@@ -408,6 +409,7 @@ Data Type Semantics:
 Additional Information:
 : See the TCP Option Kind Numbers registry at {{IANA-TCP}}.
 : See {{!RFC9293}} for the general definition of TCP options.
+: The tcpOptionsFull IE deprecates the tcpOptions IE (209) that was initially defined in {{?RFC5102}}.
 
 Reference:
 : This-Document
