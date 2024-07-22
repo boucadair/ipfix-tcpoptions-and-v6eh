@@ -75,7 +75,9 @@ This document specifies new IP Flow Information Export (IPFIX) Information Eleme
 
 This document specifies new IP Flow Information Export (IPFIX) {{!RFC7011}} Information Elements (IEs) to solve a set of issues encountered with the specifications of ipv6ExtensionHeaders (to export IPv6 extension headers) and tcpOptions (to export TCP options) IEs {{IANA-IPFIX}}. More details about these issues are provided in the following sub-sections.
 
-This document deprecates the ipv6ExtensionHeaders and tcpOptions IPFIX IEs that were initially defined in {{?RFC5102}}. Per {{Section 5 of !RFC7012}}, {{IANA-IPFIX}} is the normative reference for the IEs that were initially published in {{?RFC5102}}.
+This document deprecates the ipv6ExtensionHeaders and tcpOptions IPFIX IEs that were initially defined in {{?RFC5102}}.
+
+> Note that {{!RFC7012}} obsoletes {{?RFC5102}} and specifies that {{IANA-IPFIX}} is the normative reference for the IEs that were initially published in {{?RFC5102}}.
 
 ## Issues with ipv6ExtensionHeaders Information Element {#sec-eh-issues}
 
