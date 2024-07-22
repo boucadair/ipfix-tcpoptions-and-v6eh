@@ -115,9 +115,11 @@ Table of Contents
    the following sub-sections.
 
    This document deprecates the ipv6ExtensionHeaders and tcpOptions
-   IPFIX IEs that were initially defined in [RFC5102].  Per Section 5 of
-   [RFC7012], [IANA-IPFIX] is the normative reference for the IEs that
-   were initially published in [RFC5102].
+   IPFIX IEs that were initially defined in [RFC5102].
+
+      Note that [RFC7012] obsoletes [RFC5102] and specifies that
+      [IANA-IPFIX] is the normative reference for the IEs that were
+      initially published in [RFC5102].
 
 1.1.  Issues with ipv6ExtensionHeaders Information Element
 
